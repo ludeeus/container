@@ -1,0 +1,41 @@
+#!/bin/bash
+
+function StartHomeAssistant {
+  echo "Copy configuration.yaml"
+  cp -f .devcontainer/configuration.yaml /config || echo ".devcontainer/configuration.yaml are missing"
+
+  echo "Copy the custom component"
+  rm -R /config/custom_components/ || echo ""
+  cp -r custom_components /config/custom_components/ || echo "Could not copy the custom_component" exit 1
+
+  echo "Start Home Assistant"
+  hass -c /config
+}
+
+function UpdgradeHomeAssistantDev {
+  python3 -m pip install --upgrade git+git://github.com/home-assistant/home-assistant.git@dev
+}
+
+function SetHomeAssistantVersion {
+  read -p 'Set Home Asssitant version: ' version
+  python3 -m pip install --upgrade homeassistant==$version
+}
+
+function HomeAssistantConfigCheck {
+  hass -c /config --script check_config
+}
+
+case $1 in 
+    preview | run | start)
+        StartHomeAssistant
+        ;;
+    check | check-config | config)
+        HomeAssistantConfigCheck
+        ;;
+    set-version | version | set)
+        SetHomeAssistantVersion
+        ;;
+    upgrade | update | install | reinstall)
+        UpdgradeHomeAssistantDev
+        ;;
+esac
