@@ -1,0 +1,5 @@
+#!/bin/bash
+
+function HomeAssistantConfigCheck {
+  hass -c /config --script check_config
+}

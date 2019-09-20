@@ -1,0 +1,23 @@
+#!/bin/bash
+
+function StartHomeAssistant {
+  if test -f ".devcontainer/configuration.yaml"; then
+    echo "Copy configuration.yaml"
+    cp -f .devcontainer/configuration.yaml /config || echo ".devcontainer/configuration.yaml are missing"
+  fi
+
+  if test -d "custom_components"; then
+    echo "Copy the custom component"
+    rm -R /config/custom_components/ || echo ""
+    cp -r custom_components /config/custom_components/ || echo "Could not copy the custom_component" exit 1
+  elif  test -f "__init__.py"; then
+    echo "Having the component in the root are currently not supported"
+  fi
+
+  echo "Start Home Assistant"
+  if ! [ -x "$(command -v hass)" ]; then
+    echo "Home Assistant is not installed, running installation."
+    UpdgradeHomeAssistantDev
+  fi
+  hass -c /config
+}

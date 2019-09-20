@@ -1,3 +1,5 @@
+source /etc/bash_completion.d/dc_completion
+
 # Copy SSH keys if they exsist
 if test -d "/tmp/.ssh"; then
     cp -R /tmp/.ssh /root/.ssh

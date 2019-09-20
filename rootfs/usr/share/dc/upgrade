@@ -1,0 +1,5 @@
+#!/bin/bash
+
+function UpdgradeHomeAssistantDev {
+  python3 -m pip install --upgrade git+git://github.com/home-assistant/home-assistant.git@dev
+}

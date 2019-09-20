@@ -1,0 +1,6 @@
+#!/bin/bash
+
+function SetHomeAssistantVersion {
+  read -p 'Set Home Asssitant version: ' version
+  python3 -m pip install --upgrade homeassistant==$version
+}
