@@ -1,12 +1,16 @@
 // See https://aka.ms/vscode-remote/devcontainer.json for format details.
 {
-    "image": "ludeeus/devcontainer",
+	"image": "ludeeus/devcontainer",
 	"context": "..",
-    "appPort": ["9123:8123", "9000:9000", "8080:8080"],
-    "postCreateCommand": "dc install",
+	"appPort": [
+		"9123:8123",
+		"9000:9000",
+		"8080:8080"
+	],
+	"postCreateCommand": "dc install",
 	"runArgs": [
-		"-e",
-		"GIT_EDTIOR='code --wait'"
+		"-v",
+		"${env:HOME}${env:USERPROFILE}/.ssh:/tmp/.ssh"
 	],
 	"extensions": [
 		"ms-python.python",
@@ -16,6 +20,7 @@
 	"settings": {
 		"files.eol": "\n",
 		"editor.tabSize": 4,
+		"terminal.integrated.shell.linux": "/bin/bash",
 		"python.pythonPath": "/usr/local/bin/python",
 		"python.linting.pylintEnabled": true,
 		"python.linting.enabled": true,

@@ -14,7 +14,7 @@ In that directory you need a `devcontainer.json` file, [you can use this one.](/
 
 **All custom commands are prefixed with `dc`**
 
-```cmd
+```txt
 bash-5.0# dc help
 
   dc
