@@ -10,7 +10,7 @@ _Custom container used for development of integrations for Home Assistant._
 In your own repository create a new directory in the root called `.devcontainer`.
 In that directory you need a `devcontainer.json` file, [you can use this one.](/devcontainer_example.json)
 
-### Minimal example of `.devcontainer/devcontainer.json`
+## Minimal example of `.devcontainer/devcontainer.json`
 
 ```json
 {
@@ -22,6 +22,8 @@ In that directory you need a `devcontainer.json` file, [you can use this one.](/
 		"terminal.integrated.shell.linux": "/bin/bash",
 }
 ```
+
+If you need to add a something to `configuration.yaml` for your integration create a file in your repository here `.devcontainer/configuration.yaml`, this will be copied everytime you run `dc start`.
 
 # Custom commands included
 
@@ -43,3 +45,14 @@ bash-5.0# dc help
     upgrade          Upgrade the installed Home Assistant version to the latest dev branch.
     help             Shows this help
 ```
+
+# Tasks
+
+_If you don't want to rely on a CLI, but want to use VSCode tasks to execute them you can._
+
+There is an [](.vscode/tasks.json) here you can copy to `.vscode/tasks.json` in your repo.
+
+# General devcontainer documentation
+
+- [Developing inside a Container](https://code.visualstudio.com/docs/remote/containers)
+- [System requirements](https://code.visualstudio.com/docs/remote/containers#_system-requirements)
