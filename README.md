@@ -10,6 +10,19 @@ _Custom container used for development of integrations for Home Assistant._
 In your own repository create a new directory in the root called `.devcontainer`.
 In that directory you need a `devcontainer.json` file, [you can use this one.](/devcontainer_example.json)
 
+### Minimal example of `.devcontainer/devcontainer.json`
+
+```json
+{
+	"image": "ludeeus/devcontainer",
+	"context": "..",
+	"appPort": 	"9123:8123",
+	"postCreateCommand": "dc install",
+	"settings": {
+		"terminal.integrated.shell.linux": "/bin/bash",
+}
+```
+
 # Custom commands included
 
 **All custom commands are prefixed with `dc`**
