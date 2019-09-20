@@ -50,7 +50,7 @@ bash-5.0# dc help
 
 _If you don't want to rely on a CLI, but want to use VSCode tasks to execute them you can._
 
-There is an [](.vscode/tasks.json) here you can copy to `.vscode/tasks.json` in your repo.
+There is an [example here](.vscode/tasks.json) you can copy to `.vscode/tasks.json` in your repo.
 
 # General devcontainer documentation
 
