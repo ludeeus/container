@@ -9,7 +9,7 @@
 	],
 	"runArgs": [
 		"-v",
-		"${env:HOME}${env:USERPROFILE}/.ssh:/root/.ssh"
+		"${env:HOME}${env:USERPROFILE}/.ssh:/tmp/.ssh"
 	],
 	"extensions": [
 		"ms-python.python",
