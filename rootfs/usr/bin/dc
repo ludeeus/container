@@ -25,7 +25,7 @@ function HomeAssistantConfigCheck {
   hass -c /config --script check_config
 }
 
-case $1 in 
+case $1 in
     preview | run | start)
         StartHomeAssistant
         ;;
