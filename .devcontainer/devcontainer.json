@@ -13,8 +13,8 @@
 	],
 	"extensions": [
 		"ms-python.python",
-		"github.vscode-pull-request-github"
-		//"tabnine.tabnine-vscode"
+		"github.vscode-pull-request-github",
+		"tabnine.tabnine-vscode"
 	],
 	"settings": {
 		"files.eol": "\n",
