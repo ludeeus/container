@@ -3,7 +3,7 @@
 	"image": "ludeeus/devcontainer",
 	"context": "..",
 	"appPort": [
-		"9123:8123",
+		"9123:8123"
 	],
 	"postCreateCommand": "dc install",
 	"runArgs": [
@@ -19,7 +19,7 @@
 		"files.eol": "\n",
 		"editor.tabSize": 4,
 		"terminal.integrated.shell.linux": "/bin/bash",
-		"python.pythonPath": "/usr/local/bin/python",
+		"python.pythonPath": "/usr/bin/python3",
 		"python.linting.pylintEnabled": true,
 		"python.linting.enabled": true,
 		"python.formatting.provider": "black",

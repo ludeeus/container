@@ -14,7 +14,7 @@ In that directory you need a `devcontainer.json` file, [you can use this one.](/
 
 ```json
 {
-	"image": "ludeeus/devcontainer",
+	"image": "ludeeus/devcontainer:integration",
 	"context": "..",
 	"appPort": 	"9123:8123",
 	"postCreateCommand": "dc install",
@@ -24,6 +24,17 @@ In that directory you need a `devcontainer.json` file, [you can use this one.](/
 ```
 
 If you need to add a something to `configuration.yaml` for your integration create a file in your repository here `.devcontainer/configuration.yaml`, this will be copied everytime you run `dc start`.
+
+# image tags
+
+tag | description
+-- | --
+integration | This is intended to be used if you are developing a custom_component (integration) for Home Assistant.
+integration-stable | Same as `integration` but only pulls released versions (tags).
+integration-X.X.X | Same as `integration` but with a version number to lock it to a specific version.
+base | This serves as a base for the other tags.
+base-stable | Same as `base` but only pulls released versions (tags).
+base-X.X.X | Same as `base` but with a version number to lock it to a specific version.
 
 # Custom commands included
 
