@@ -15,6 +15,7 @@ RUN \
         openssl-dev=1.1.1d-r0 \
         python3-dev=3.7.3-r0 \
         nano=4.3-r0 \
+        make=4.2.1-r2 \
         openssh=8.0_p1-r0 \
         bash=5.0.0-r0 \
         git=2.22.0-r0 \
