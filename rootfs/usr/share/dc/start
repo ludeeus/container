@@ -7,9 +7,13 @@ function StartHomeAssistant {
   fi
 
   if test -d "custom_components"; then
-    echo "Copy the custom component"
-    rm -R /config/custom_components/ || echo ""
-    cp -r custom_components /config/custom_components/ || echo "Could not copy the custom_component" exit 1
+    echo "Symlink the custom component directory"
+
+    if test -d "custom_components"; then
+      rm -R /config/custom_components
+    fi
+
+    ln -sf "$(GetWorkspaceName)custom_components/" /config/custom_components || echo "Could not copy the custom_component" exit 1
   elif  test -f "__init__.py"; then
     echo "Having the component in the root are currently not supported"
   fi
@@ -20,4 +24,8 @@ function StartHomeAssistant {
     UpdgradeHomeAssistantDev
   fi
   hass -c /config
+}
+
+function GetWorkspaceName {
+  echo "$(find /workspaces -mindepth 1 -maxdepth 1 -type d)/"
 }
