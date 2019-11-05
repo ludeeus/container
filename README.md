@@ -29,12 +29,16 @@ If you need to add a something to `configuration.yaml` for your integration crea
 
 tag | description
 -- | --
-integration | This is intended to be used if you are developing a custom_component (integration) for Home Assistant.
-integration-stable | Same as `integration` but only pulls released versions (tags).
-integration-X.X.X | Same as `integration` but with a version number to lock it to a specific version.
 base | This serves as a base for the other tags.
 base-stable | Same as `base` but only pulls released versions (tags).
 base-X.X.X | Same as `base` but with a version number to lock it to a specific version.
+integration | This is intended to be used if you are developing a custom_component (integration) for Home Assistant.
+integration-stable | Same as `integration` but only pulls released versions (tags).
+integration-X.X.X | Same as `integration` but with a version number to lock it to a specific version.
+frontend | This is intended to be used if you are developing a custom_component (integration) for Home Assistant.
+frontend-stable | Same as `frontend` but only pulls released versions (tags).
+frontend-X.X.X | Same as `frontend` but with a version number to lock it to a specific version.
+
 
 # Custom commands included
 
