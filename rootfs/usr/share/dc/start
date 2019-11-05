@@ -6,6 +6,11 @@ function StartHomeAssistant {
     cp -f .devcontainer/configuration.yaml /config || echo ".devcontainer/configuration.yaml are missing"
   fi
 
+  if test -f ".devcontainer/ui-lovelace.yaml"; then
+    echo "Copy ui-lovelace.yaml"
+    cp -f .devcontainer/ui-lovelace.yaml /config || echo ""
+  fi
+
   if test -d "custom_components"; then
     echo "Symlink the custom component directory"
 
