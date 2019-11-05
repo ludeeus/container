@@ -9,10 +9,9 @@ RUN \
         gcc=8.3.0-r0 \
         libc-dev=0.7.1-r0 \
         libffi-dev=3.2.1-r6 \
-        openssl-dev=1.1.1d-r0 \
-        python3-dev=3.7.3-r0 \
+        python3-dev=3.7.5-r1 \
         make=4.2.1-r2 \
-        python3=3.7.3-r0 \
+        python3=3.7.5-r1 \
     \
     && mkdir -p /config/custom_components \
     \
