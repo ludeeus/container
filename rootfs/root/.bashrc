@@ -17,6 +17,8 @@ elif [[ "$DEVCONTAINER_TYPE" == "frontend" ]]; then
     element="custom frontend elements."
 elif [[ "$DEVCONTAINER_TYPE" == "base" ]]; then
     element="things."
+elif [[ "$DEVCONTAINER_TYPE" == "monster" ]]; then
+    element="custom frontend elements and custom integrations for Home Assistant."
 fi
 
 

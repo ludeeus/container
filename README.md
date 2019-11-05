@@ -23,7 +23,7 @@ In that directory you need a `devcontainer.json` file, [you can use this one.](/
 }
 ```
 
-If you need to add a something to `configuration.yaml` for your integration create a file in your repository here `.devcontainer/configuration.yaml`, this will be copied everytime you run `dc start`.
+If you need to add a something to `configuration.yaml` for your integration create a file in your repository here `.devcontainer/configuration.yaml`, this will be copied every time you run `dc start`.
 
 # image tags
 
@@ -35,9 +35,12 @@ base-X.X.X | Same as `base` but with a version number to lock it to a specific v
 integration | This is intended to be used if you are developing a custom_component (integration) for Home Assistant.
 integration-stable | Same as `integration` but only pulls released versions (tags).
 integration-X.X.X | Same as `integration` but with a version number to lock it to a specific version.
-frontend | This is intended to be used if you are developing a custom_component (integration) for Home Assistant.
+frontend | This is intended to be used if you are developing a frontend elements.
 frontend-stable | Same as `frontend` but only pulls released versions (tags).
 frontend-X.X.X | Same as `frontend` but with a version number to lock it to a specific version.
+monster | This is here to please @iantrich's crazy ideas, this combines the `integration` & `frontend` tags into one monster tag.
+monster-stable | Same as `monster` but only pulls released versions (tags).
+monster-X.X.X | Same as `monster` but with a version number to lock it to a specific version.
 
 
 # Custom commands included
