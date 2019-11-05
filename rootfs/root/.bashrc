@@ -1,4 +1,7 @@
+#!/bin/bash
 source /etc/bash_completion.d/dc_completion
+
+declare element
 
 # Copy SSH keys if they exsist
 if test -d "/tmp/.ssh"; then
@@ -8,7 +11,16 @@ if test -d "/tmp/.ssh"; then
     chmod 600 /root/.ssh/id_rsa
 fi
 
-echo Welcome to this custom devcontainer for developing/testing custom integrations for Home Assistant.
+if [[ "$DEVCONTAINER_TYPE" == "integration" ]]; then
+    element="custom integrations for Home Assistant."
+elif [[ "$DEVCONTAINER_TYPE" == "frontend" ]]; then
+    element="custom frontend elements."
+elif [[ "$DEVCONTAINER_TYPE" == "base" ]]; then
+    element="things."
+fi
+
+
+echo Welcome to this custom devcontainer for developing/testing "$element"
 echo
 echo For the documentation for this container have a look here:
 echo https://github.com/ludeeus/devcontainer
