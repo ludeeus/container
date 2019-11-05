@@ -11,7 +11,7 @@ RUN \
     apk add --no-cache \
         openssl-dev=1.1.1d-r0 \
         nano=4.3-r0 \
-        openssh=8.0_p1-r0 \
+        openssh=8.1_p1-r0 \
         bash=5.0.0-r0 \
         git=2.22.0-r0 \
     \
