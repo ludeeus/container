@@ -11,6 +11,11 @@ function StartHomeAssistant {
     ln -sf "$(GetWorkspaceName).devcontainer/ui-lovelace.yaml" /config/ui-lovelace.yaml || echo ""
   fi
 
+  if test -f ".devcontainer/secrets.yaml"; then
+    echo "Copy secrets.yaml"
+    ln -sf "$(GetWorkspaceName).devcontainer/secrets.yaml" /config/secrets.yaml || echo ""
+  fi
+
   if test -d "custom_components"; then
     echo "Symlink the custom component directory"
 
