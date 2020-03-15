@@ -83,7 +83,7 @@ There is an [example here](.vscode/tasks.json) you can copy to `.vscode/tasks.js
 
 ## Base
 
-_Based on apline-3.11_
+_Based on `apline:3.11`_
 
 _Included in all the container/tags_
 
@@ -98,7 +98,7 @@ openssl-dev | 1.1.1d-r3
 
 ## Python
 
-_Based on ludeeus/devcontainer:base_
+_Based on `ludeeus/devcontainer:base`_
 
 _Included in the container/tags starting with `python`_
 
@@ -125,7 +125,7 @@ python-language-server | 0.28.3
 
 ## Integration
 
-_Based on ludeeus/devcontainer:python_
+_Based on `ludeeus/devcontainer:python`_
 
 _Included in the container/tags starting with `integration`_
 
@@ -133,7 +133,7 @@ _These container/tags does not have additional software_
 
 ## Frontend
 
-_Based on ludeeus/devcontainer:base_
+_Based on `ludeeus/devcontainer:base`_
 
 _Included in the container/tags starting with `frontend`_
 
@@ -145,7 +145,7 @@ yarn | 1.19.2-r0
 
 ## Moster
 
-_Based on ludeeus/devcontainer:integration
+_Based on `ludeeus/devcontainer:integration`_
 
 _Included in the container/tags starting with `monster`_
 
