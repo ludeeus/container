@@ -15,6 +15,7 @@ function Help {
     dc [command]
 
   where [command] is one of:
+    init             This will give you a fresh development environment.
     start            This will start Home Assistant on port 9123.
     check            This will run Home Assistant config check.
     set-version      Install a spesific version of Home Assistant.
@@ -45,5 +46,8 @@ case $1 in
         ;;
     upgrade | update | install | reinstall)
         UpdgradeHomeAssistantDev
+        ;;
+    init)
+        InitDevEnv
         ;;
 esac

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+function GetWorkspaceDirectory() {
+    echo $(GetWorkspaceName)
+}
+
+function GetWorkspaceName {
+  echo "$(find /workspaces -mindepth 1 -maxdepth 1 -type d)/"
+}

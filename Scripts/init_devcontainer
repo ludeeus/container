@@ -1,0 +1,7 @@
+#!/bin/bash
+
+rm /usr/bin/dc
+rm -r /usr/share/dc
+
+ln -s /workspaces/devcontainer/rootfs/usr/bin/dc /usr/bin/dc
+ln -s /workspaces/devcontainer/rootfs/usr/share/dc /usr/share/dc

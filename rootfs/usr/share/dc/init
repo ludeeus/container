@@ -1,0 +1,36 @@
+#!/bin/bash
+
+function InitDevEnv {
+  if test -d "$(GetWorkspaceName).git"; then
+    echo ".git exsist in $(GetWorkspaceName), existing initializing"
+    exit 1
+  fi
+
+  if [[
+       "$DEVCONTAINER_TYPE" == "netdaemon"
+    || "$DEVCONTAINER_TYPE" == "integration"
+    || "$DEVCONTAINER_TYPE" == "frontend"
+    || "$DEVCONTAINER_TYPE" == "monster"
+    ]]; then
+    echo "Initializing dev env for $DEVCONTAINER_TYPE"
+    rm -R /tmp/init > /dev/null 2>&1
+
+    if [[ "$DEVCONTAINER_TYPE" == "netdaemon" ]]; then
+      git clone https://github.com/net-daemon/netdaemon-app-template.git /tmp/init
+      cp /tmp/init/_daemon_config.json /tmp/init/daemon_config.json
+    fi
+
+    if [[ "$DEVCONTAINER_TYPE" == "integration" ]]; then
+      git clone https://github.com/custom-components/blueprint.git /tmp/init
+    fi
+
+    if [[ "$DEVCONTAINER_TYPE" == "frontend" || "$DEVCONTAINER_TYPE" == "monster" ]]; then
+      git clone https://github.com/custom-cards/boilerplate-card.git /tmp/init
+    fi
+
+    rm -R /tmp/init/.git
+    cp -R /tmp/init/* $(GetWorkspaceName)
+    cd $(GetWorkspaceName) || exit 1
+    git init
+  fi
+}

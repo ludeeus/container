@@ -5,7 +5,7 @@ ENV DEVCONTAINER_TYPE base
 
 WORKDIR /workspace
 
-COPY rootfs /
+COPY ../rootfs /
 
 RUN \
     apk add --no-cache \
