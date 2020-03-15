@@ -1,6 +1,7 @@
 // See https://aka.ms/vscode-remote/devcontainer.json for format details.
 {
 	"dockerFile": "../Base.dockerfile",
+	"postCreateCommand": "bash Scripts/init_devcontainer",
 	"context": "..",
 	"runArgs": [
 		"-v",

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+function RunDevelopentInstance {
+  if [[ "$DEVCONTAINER_TYPE" == "netdaemon" ]]; then
+    dotnet restore
+    dotnet watch run
+  elif [[ "$DEVCONTAINER_TYPE" == "integration" ]]; then
+    dc start
+  else
+    echo "No run action found for '$DEVCONTAINER_TYPE'"
+  fi
+}
