@@ -1,9 +1,9 @@
 name: Deploy Stable to Docker Hub
 
-on: 
+on:
    push:
      tags:
-       - 'v*'
+       - '*'
 
 jobs:
   deploy:
@@ -79,25 +79,25 @@ jobs:
         if: success()
         uses: actions-hub/docker@master
         with:
-          args: push ${GITHUB_REPOSITORY}:python-${IMAGE_TAG} 
+          args: push ${GITHUB_REPOSITORY}:python-${IMAGE_TAG}
 
       - name: Push to docker registry [integration-version]
         if: success()
         uses: actions-hub/docker@master
         with:
-          args: push ${GITHUB_REPOSITORY}:integration-${IMAGE_TAG} 
+          args: push ${GITHUB_REPOSITORY}:integration-${IMAGE_TAG}
 
       - name: Push to docker registry [frontend-version]
         if: success()
         uses: actions-hub/docker@master
         with:
-          args: push ${GITHUB_REPOSITORY}:frontend-${IMAGE_TAG} 
+          args: push ${GITHUB_REPOSITORY}:frontend-${IMAGE_TAG}
 
       - name: Push to docker registry [monster-version]
         if: success()
         uses: actions-hub/docker@master
         with:
-          args: push ${GITHUB_REPOSITORY}:monster-${IMAGE_TAG} 
+          args: push ${GITHUB_REPOSITORY}:monster-${IMAGE_TAG}
 
       # Deploy stable
       - name: Push to docker registry [base-stable]
