@@ -24,6 +24,7 @@ jobs:
         run: |
           docker build \
             --compress \
+            -t ${GITHUB_REPOSITORY}:base \
             -t ${GITHUB_REPOSITORY}:base-stable \
             -t ${GITHUB_REPOSITORY}:base-${IMAGE_TAG} \
             .
@@ -34,6 +35,7 @@ jobs:
           cd Dockerfiles || exit 1
           docker build \
             --compress \
+            -t ${GITHUB_REPOSITORY}:python \
             -t ${GITHUB_REPOSITORY}:python-stable \
             -t ${GITHUB_REPOSITORY}:python-${IMAGE_TAG} \
             -f Python.dockerfile .
@@ -44,6 +46,7 @@ jobs:
           cd Dockerfiles || exit 1
           docker build \
             --compress \
+            -t ${GITHUB_REPOSITORY}:integration \
             -t ${GITHUB_REPOSITORY}:integration-stable \
             -t ${GITHUB_REPOSITORY}:integration-${IMAGE_TAG} \
             -f Integration.dockerfile .
@@ -54,6 +57,7 @@ jobs:
           cd Dockerfiles || exit 1
           docker build \
             --compress \
+            -t ${GITHUB_REPOSITORY}:frontend \
             -t ${GITHUB_REPOSITORY}:frontend-stable \
             -t ${GITHUB_REPOSITORY}:frontend-${IMAGE_TAG} \
             -f Frontend.dockerfile .
@@ -64,6 +68,7 @@ jobs:
           cd Dockerfiles || exit 1
           docker build \
             --compress \
+            -t ${GITHUB_REPOSITORY}:monster \
             -t ${GITHUB_REPOSITORY}:monster-stable \
             -t ${GITHUB_REPOSITORY}:monster-${IMAGE_TAG} \
             -f Monster.dockerfile .
