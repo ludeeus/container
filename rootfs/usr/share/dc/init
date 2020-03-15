@@ -29,7 +29,8 @@ function InitDevEnv {
     fi
 
     rm -R /tmp/init/.git
-    cp -R /tmp/init/* $(GetWorkspaceName)
+    rm -R /tmp/init/.devcontainer
+    cp -a /tmp/init/. $(GetWorkspaceName)
     cd $(GetWorkspaceName) || exit 1
     git init
   fi
