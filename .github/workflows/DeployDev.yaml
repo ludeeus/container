@@ -21,31 +21,31 @@ jobs:
       # Build
       - name: Build image [base]
         if: success()
-        run: docker build --compress -t ${GITHUB_REPOSITORY}:base -t ${GITHUB_REPOSITORY}:latest .
+        run: docker build --compress --no-cache -t ${GITHUB_REPOSITORY}:base -t ${GITHUB_REPOSITORY}:latest .
 
       - name: Build image [python]
         if: success()
         run: |
           cd Dockerfiles || exit 1
-          docker build --compress -t ${GITHUB_REPOSITORY}:python -f Python.dockerfile .
+          docker build --compress --no-cache -t ${GITHUB_REPOSITORY}:python -f Python.dockerfile .
 
       - name: Build image [integration]
         if: success()
         run: |
           cd Dockerfiles || exit 1
-          docker build --compress -t ${GITHUB_REPOSITORY}:integration -f Integration.dockerfile .
+          docker build --compress --no-cache -t ${GITHUB_REPOSITORY}:integration -f Integration.dockerfile .
 
       - name: Build image [frontend]
         if: success()
         run: |
           cd Dockerfiles || exit 1
-          docker build --compress -t ${GITHUB_REPOSITORY}:frontend -f Frontend.dockerfile .
+          docker build --compress --no-cache -t ${GITHUB_REPOSITORY}:frontend -f Frontend.dockerfile .
 
       - name: Build image [monster]
         if: success()
         run: |
           cd Dockerfiles || exit 1
-          docker build --compress -t ${GITHUB_REPOSITORY}:monster -f Monster.dockerfile .
+          docker build --compress --no-cache -t ${GITHUB_REPOSITORY}:monster -f Monster.dockerfile .
 
 
 
