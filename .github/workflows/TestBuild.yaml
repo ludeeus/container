@@ -1,4 +1,4 @@
-name: Deploy to Docker Hub
+name: Test images
 
 on:
    push:
@@ -6,7 +6,8 @@ on:
       - master
 
 jobs:
-  deploy:
+  test:
+    name: Test all images
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master

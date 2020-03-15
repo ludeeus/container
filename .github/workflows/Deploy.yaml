@@ -7,6 +7,7 @@ on:
 
 jobs:
   deploy:
+    name: Deploy all images
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
@@ -16,12 +17,65 @@ jobs:
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_TOKEN }}
-      - name: Build image [dev]
+
+      # Build
+      - name: Build image [base]
         if: success()
-        run: docker build -t ${GITHUB_REPOSITORY}:dev .
-      - name: Push to docker registry [dev]
+        run: docker build -t ${GITHUB_REPOSITORY}:base .
+
+      - name: Build image [python]
+        if: success()
+        run: |
+          cd Dockerfiles || exit 1
+          docker build -t ${GITHUB_REPOSITORY}:python -f Python.dockerfile .
+
+      - name: Build image [integration]
+        if: success()
+        run: |
+          cd Dockerfiles || exit 1
+          docker build -t ${GITHUB_REPOSITORY}:integration -f Integration.dockerfile .
+
+      - name: Build image [frontend]
+        if: success()
+        run: |
+          cd Dockerfiles || exit 1
+          docker build -t ${GITHUB_REPOSITORY}:frontend -f Frontend.dockerfile .
+
+      - name: Build image [monster]
+        if: success()
+        run: |
+          cd Dockerfiles || exit 1
+          docker build -t ${GITHUB_REPOSITORY}:frontend -f Monster.dockerfile .
+
+
+
+      # Deploy
+      - name: Push to docker registry [base]
         if: success()
         uses: actions-hub/docker@master
         with:
-          #args: push ${GITHUB_REPOSITORY}:${IMAGE_TAG}
-          args: push ${GITHUB_REPOSITORY}:dev
+          args: push ${GITHUB_REPOSITORY}:base
+
+      - name: Push to docker registry [python]
+        if: success()
+        uses: actions-hub/docker@master
+        with:
+          args: push ${GITHUB_REPOSITORY}:python
+
+      - name: Push to docker registry [integration]
+        if: success()
+        uses: actions-hub/docker@master
+        with:
+          args: push ${GITHUB_REPOSITORY}:integration
+
+      - name: Push to docker registry [frontend]
+        if: success()
+        uses: actions-hub/docker@master
+        with:
+          args: push ${GITHUB_REPOSITORY}:frontend
+
+      - name: Push to docker registry [monster]
+        if: success()
+        uses: actions-hub/docker@master
+        with:
+          args: push ${GITHUB_REPOSITORY}:monster

@@ -6,13 +6,13 @@ COPY requirements.txt /tmp/
 
 RUN \
     apk add --no-cache \
-        gcc=8.3.0-r0 \
-        libc-dev=0.7.1-r0 \
+        gcc=9.2.0-r3 \
+        libc-dev=0.7.2-r0 \
         libffi-dev=3.2.1-r6 \
-        ffmpeg-dev=4.1.4-r0 \
-        python3-dev=3.7.5-r1 \
+        ffmpeg-dev=4.2.1-r3 \
+        python3-dev=3.8.2-r0 \
         make=4.2.1-r2 \
-        python3=3.7.5-r1 \
+        python3=3.8.2-r0 \
     \
     && pip3 install --no-cache-dir -U -r /tmp/requirements.txt \
     \
