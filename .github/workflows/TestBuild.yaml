@@ -23,6 +23,12 @@ jobs:
           cd Dockerfiles || exit 1
           docker build -t ${GITHUB_REPOSITORY}:dotnet -f Dotnet.dockerfile .
 
+      - name: Build image [netdaemon]
+        if: success()
+        run: |
+          cd Dockerfiles || exit 1
+          docker build -t ${GITHUB_REPOSITORY}:netdaemon -f Netdaemon.dockerfile .
+
       - name: Build image [python]
         if: success()
         run: |

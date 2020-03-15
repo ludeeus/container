@@ -17,6 +17,10 @@ elif [[ "$DEVCONTAINER_TYPE" == "frontend" ]]; then
     element="custom frontend elements."
 elif [[ "$DEVCONTAINER_TYPE" == "monster" ]]; then
     element="custom frontend elements and custom integrations for Home Assistant."
+elif [[ "$DEVCONTAINER_TYPE" == "netdaemon" ]]; then
+    element="NetDaemon apps."
+elif [[ "$DEVCONTAINER_TYPE" == "dotnet" ]]; then
+    element="dotnet."
 else
     element="things."
 fi

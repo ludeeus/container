@@ -30,23 +30,12 @@ If you need to add a something to `configuration.yaml` for your integration crea
 tag | description
 -- | --
 base | This serves as a base for the other tags.
-base-stable | Same as `base` but only pulls released versions (tags).
-base-X.X.X | Same as `base` but with a version number to lock it to a specific version.
 python | This provides a minimalistic container for working with python.
-python-stable | Same as `base` but only pulls released versions (tags).
-python-X.X.X | Same as `base` but with a version number to lock it to a specific version.
 integration | This is intended to be used if you are developing a custom_component (integration) for Home Assistant.
-integration-stable | Same as `integration` but only pulls released versions (tags).
-integration-X.X.X | Same as `integration` but with a version number to lock it to a specific version.
 frontend | This is intended to be used if you are developing a frontend elements.
-frontend-stable | Same as `frontend` but only pulls released versions (tags).
-frontend-X.X.X | Same as `frontend` but with a version number to lock it to a specific version.
 monster | This is here to please @iantrich's crazy ideas, this combines the `integration` & `frontend` tags into one monster tag.
-monster-stable | Same as `monster` but only pulls released versions (tags).
-monster-X.X.X | Same as `monster` but with a version number to lock it to a specific version.
 dotnet | This provides a minimalistic container for working with dotnet core.
-dotnet-stable | Same as `base` but only pulls released versions (tags).
-dotnet-X.X.X | Same as `base` but with a version number to lock it to a specific version.
+netdaemon | This provides a minimalistic container for working with netdaemon apps core.
 
 
 # Custom commands included
@@ -172,3 +161,11 @@ icu-dev | 64.2-r0
 libcurl | 7.67.0-r0
 libintl | 0.20.1-r2
 zlib | 1.2.11-r3
+
+## NetDaemon
+
+_Based on `ludeeus/devcontainer:dotnet`_
+
+_Included in the container/tags starting with `netdaemon`_
+
+_These container/tags does not have additional software_

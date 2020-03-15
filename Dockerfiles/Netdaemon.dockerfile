@@ -1,0 +1,2 @@
+FROM ludeeus/devcontainer:netdaemon
+ENV DEVCONTAINER_TYPE netdaemon

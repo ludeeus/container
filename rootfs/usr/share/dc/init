@@ -7,7 +7,7 @@ function InitDevEnv {
   fi
 
   if [[
-       "$DEVCONTAINER_TYPE" == "dotnet"
+       "$DEVCONTAINER_TYPE" == "netdaemon"
     || "$DEVCONTAINER_TYPE" == "integration"
     || "$DEVCONTAINER_TYPE" == "frontend"
     || "$DEVCONTAINER_TYPE" == "monster"
@@ -15,7 +15,7 @@ function InitDevEnv {
     echo "Initializing dev env for $DEVCONTAINER_TYPE"
     rm -R /tmp/init > /dev/null 2>&1
 
-    if [[ "$DEVCONTAINER_TYPE" == "dotnet" ]]; then
+    if [[ "$DEVCONTAINER_TYPE" == "netdaemon" ]]; then
       git clone https://github.com/net-daemon/netdaemon-app-template.git /tmp/init
       cp /tmp/init/_daemon_config.json /tmp/init/daemon_config.json
     fi

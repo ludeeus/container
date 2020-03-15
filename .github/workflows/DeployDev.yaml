@@ -24,17 +24,23 @@ jobs:
         run: |
           docker build --compress --no-cache -t ${GITHUB_REPOSITORY}:base -t ${GITHUB_REPOSITORY}:latest -f Base.dockerfile .
 
-      - name: Build image [python]
-        if: success()
-        run: |
-          cd Dockerfiles || exit 1
-          docker build --compress --no-cache -t ${GITHUB_REPOSITORY}:python -f Python.dockerfile .
-
       - name: Build image [dotnet]
         if: success()
         run: |
           cd Dockerfiles || exit 1
           docker build --compress --no-cache -t ${GITHUB_REPOSITORY}:dotnet -f Dotnet.dockerfile .
+
+      - name: Build image [netdaemon]
+        if: success()
+        run: |
+          cd Dockerfiles || exit 1
+          docker build --compress --no-cache -t ${GITHUB_REPOSITORY}:netdaemon -f Netdaemon.dockerfile .
+
+      - name: Build image [python]
+        if: success()
+        run: |
+          cd Dockerfiles || exit 1
+          docker build --compress --no-cache -t ${GITHUB_REPOSITORY}:python -f Python.dockerfile .
 
       - name: Build image [integration]
         if: success()
@@ -69,17 +75,23 @@ jobs:
         with:
           args: push ${GITHUB_REPOSITORY}:base
 
-      - name: Push to docker registry [python]
-        if: success()
-        uses: actions-hub/docker@master
-        with:
-          args: push ${GITHUB_REPOSITORY}:python
-
       - name: Push to docker registry [dotnet]
         if: success()
         uses: actions-hub/docker@master
         with:
           args: push ${GITHUB_REPOSITORY}:dotnet
+
+      - name: Push to docker registry [netdaemon]
+        if: success()
+        uses: actions-hub/docker@master
+        with:
+          args: push ${GITHUB_REPOSITORY}:netdaemon
+
+      - name: Push to docker registry [python]
+        if: success()
+        uses: actions-hub/docker@master
+        with:
+          args: push ${GITHUB_REPOSITORY}:python
 
       - name: Push to docker registry [integration]
         if: success()

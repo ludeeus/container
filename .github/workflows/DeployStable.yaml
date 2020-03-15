@@ -42,6 +42,18 @@ jobs:
             -t ${GITHUB_REPOSITORY}:dotnet-${IMAGE_TAG} \
             -f Dotnet.dockerfile .
 
+      - name: Build image [netdaemon-stable]
+        if: success()
+        run: |
+          cd Dockerfiles || exit 1
+          docker build \
+            --compress \
+            --no-cache \
+            -t ${GITHUB_REPOSITORY}:netdaemon \
+            -t ${GITHUB_REPOSITORY}:netdaemon-stable \
+            -t ${GITHUB_REPOSITORY}:netdaemon-${IMAGE_TAG} \
+            -f Netdaemon.dockerfile .
+
       - name: Build image [python-stable]
         if: success()
         run: |
@@ -98,17 +110,23 @@ jobs:
         with:
           args: push ${GITHUB_REPOSITORY}:base-${IMAGE_TAG}
 
-      - name: Push to docker registry [python-version]
-        if: success()
-        uses: actions-hub/docker@master
-        with:
-          args: push ${GITHUB_REPOSITORY}:python-${IMAGE_TAG}
-
       - name: Push to docker registry [dotnet-version]
         if: success()
         uses: actions-hub/docker@master
         with:
           args: push ${GITHUB_REPOSITORY}:dotnet-${IMAGE_TAG}
+
+      - name: Push to docker registry [netdaemon-version]
+        if: success()
+        uses: actions-hub/docker@master
+        with:
+          args: push ${GITHUB_REPOSITORY}:netdaemon-${IMAGE_TAG}
+
+      - name: Push to docker registry [python-version]
+        if: success()
+        uses: actions-hub/docker@master
+        with:
+          args: push ${GITHUB_REPOSITORY}:python-${IMAGE_TAG}
 
       - name: Push to docker registry [integration-version]
         if: success()
@@ -135,17 +153,23 @@ jobs:
         with:
           args: push ${GITHUB_REPOSITORY}:base-stable
 
-      - name: Push to docker registry [python-stable]
-        if: success()
-        uses: actions-hub/docker@master
-        with:
-          args: push ${GITHUB_REPOSITORY}:python-stable
-
       - name: Push to docker registry [dotnet-stable]
         if: success()
         uses: actions-hub/docker@master
         with:
           args: push ${GITHUB_REPOSITORY}:dotnet-stable
+
+      - name: Push to docker registry [netdaemon-stable]
+        if: success()
+        uses: actions-hub/docker@master
+        with:
+          args: push ${GITHUB_REPOSITORY}:netdaemon-stable
+
+      - name: Push to docker registry [python-stable]
+        if: success()
+        uses: actions-hub/docker@master
+        with:
+          args: push ${GITHUB_REPOSITORY}:python-stable
 
       - name: Push to docker registry [integration-stable]
         if: success()
