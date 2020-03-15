@@ -31,6 +31,12 @@ jobs:
           cd Dockerfiles || exit 1
           docker build --compress --no-cache -t ${GITHUB_REPOSITORY}:python -f Python.dockerfile .
 
+      - name: Build image [dotnet]
+        if: success()
+        run: |
+          cd Dockerfiles || exit 1
+          docker build --compress --no-cache -t ${GITHUB_REPOSITORY}:dotnet -f Dotnet.dockerfile .
+
       - name: Build image [integration]
         if: success()
         run: |
@@ -69,6 +75,12 @@ jobs:
         uses: actions-hub/docker@master
         with:
           args: push ${GITHUB_REPOSITORY}:python
+
+      - name: Push to docker registry [dotnet]
+        if: success()
+        uses: actions-hub/docker@master
+        with:
+          args: push ${GITHUB_REPOSITORY}:dotnet
 
       - name: Push to docker registry [integration]
         if: success()
