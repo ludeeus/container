@@ -15,7 +15,6 @@ jobs:
       - name: Build image [base]
         if: success()
         run: |
-          cd Dockerfiles || exit 1
           docker build -t ${GITHUB_REPOSITORY}:base -f Base.dockerfile .
 
       - name: Build image [dotnet]

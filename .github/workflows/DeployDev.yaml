@@ -22,7 +22,6 @@ jobs:
       - name: Build image [base]
         if: success()
         run: |
-          cd Dockerfiles || exit 1
           docker build --compress --no-cache -t ${GITHUB_REPOSITORY}:base -t ${GITHUB_REPOSITORY}:latest -f Base.dockerfile .
 
       - name: Build image [python]
