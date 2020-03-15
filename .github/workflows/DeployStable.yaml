@@ -24,8 +24,9 @@ jobs:
         run: |
           docker build \
             --compress \
-            -t ${GITHUB_REPOSITORY}:base-stable .
-            -t ${GITHUB_REPOSITORY}:base-${IMAGE_TAG}
+            -t ${GITHUB_REPOSITORY}:base-stable \
+            -t ${GITHUB_REPOSITORY}:base-${IMAGE_TAG} \
+            .
 
       - name: Build image [python-stable]
         if: success()

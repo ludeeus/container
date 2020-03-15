@@ -21,7 +21,7 @@ jobs:
       # Build
       - name: Build image [base]
         if: success()
-        run: docker build --compress -t ${GITHUB_REPOSITORY}:base .
+        run: docker build --compress -t ${GITHUB_REPOSITORY}:base -t ${GITHUB_REPOSITORY}:latest .
 
       - name: Build image [python]
         if: success()
@@ -50,6 +50,12 @@ jobs:
 
 
       # Deploy
+      - name: Push to docker registry [base]
+        if: success()
+        uses: actions-hub/docker@master
+        with:
+          args: push ${GITHUB_REPOSITORY}:latest
+
       - name: Push to docker registry [base]
         if: success()
         uses: actions-hub/docker@master
