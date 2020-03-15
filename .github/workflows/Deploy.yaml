@@ -45,7 +45,7 @@ jobs:
         if: success()
         run: |
           cd Dockerfiles || exit 1
-          docker build -t ${GITHUB_REPOSITORY}:frontend -f Monster.dockerfile .
+          docker build -t ${GITHUB_REPOSITORY}:monster -f Monster.dockerfile .
 
 
 
