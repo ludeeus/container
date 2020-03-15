@@ -44,6 +44,9 @@ frontend-X.X.X | Same as `frontend` but with a version number to lock it to a sp
 monster | This is here to please @iantrich's crazy ideas, this combines the `integration` & `frontend` tags into one monster tag.
 monster-stable | Same as `monster` but only pulls released versions (tags).
 monster-X.X.X | Same as `monster` but with a version number to lock it to a specific version.
+dotnet | This provides a minimalistic container for working with dotnet core.
+dotnet-stable | Same as `base` but only pulls released versions (tags).
+dotnet-X.X.X | Same as `base` but with a version number to lock it to a specific version.
 
 
 # Custom commands included
@@ -60,6 +63,7 @@ bash-5.0# dc help
     dc [command]
 
   where [command] is one of:
+    init             This will give you a fresh development environment.
     start            This will start Home Assistant on port 9123.
     check            This will run Home Assistant config check.
     set-version      Install a spesific version of Home Assistant.
@@ -154,3 +158,17 @@ Description | version
 nodejs | 12.15.0-r1
 npm | 12.15.0-r1
 yarn | 1.19.2-r0
+
+## Dotnet
+
+_Based on `ludeeus/devcontainer:base`_
+
+_Included in the container/tags starting with `dotnet`_
+
+Description | version
+-- | --
+dotnet | 3.1.102
+icu-dev | 64.2-r0
+libcurl | 7.67.0-r0
+libintl | 0.20.1-r2
+zlib | 1.2.11-r3
