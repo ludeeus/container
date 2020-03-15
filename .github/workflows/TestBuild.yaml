@@ -14,7 +14,9 @@ jobs:
 
       - name: Build image [base]
         if: success()
-        run: docker build -t ${GITHUB_REPOSITORY}:base .
+        run: |
+        cd Dockerfiles || exit 1
+        docker build -t ${GITHUB_REPOSITORY}:base -f Base.dockerfile .
 
       - name: Build image [python]
         if: success()
