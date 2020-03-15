@@ -16,12 +16,12 @@ jobs:
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_TOKEN }}
-      - name: Build image [dev-latest]
+      - name: Build image [dev]
         if: success()
-        run: docker build -t ${GITHUB_REPOSITORY}:dev-latest .
-      - name: Push to docker registry [dev-latest]
+        run: docker build -t ${GITHUB_REPOSITORY}:dev .
+      - name: Push to docker registry [dev]
         if: success()
         uses: actions-hub/docker@master
         with:
           #args: push ${GITHUB_REPOSITORY}:${IMAGE_TAG}
-          args: push ${GITHUB_REPOSITORY}:dev-latest
+          args: push ${GITHUB_REPOSITORY}:dev

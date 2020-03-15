@@ -1,0 +1,40 @@
+name: Deploy to Docker Hub
+
+on:
+   push:
+     branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Build image [base]
+        if: success()
+        run: docker build -t ${GITHUB_REPOSITORY}:base .
+
+      - name: Build image [python]
+        if: success()
+        run: |
+          cd Dockerfiles || exit 1
+          docker build -t ${GITHUB_REPOSITORY}:python -f Python.dockerfile .
+
+      - name: Build image [integration]
+        if: success()
+        run: |
+          cd Dockerfiles || exit 1
+          docker build -t ${GITHUB_REPOSITORY}:integration -f Integration.dockerfile .
+
+      - name: Build image [frontend]
+        if: success()
+        run: |
+          cd Dockerfiles || exit 1
+          docker build -t ${GITHUB_REPOSITORY}:frontend -f Frontend.dockerfile .
+
+      - name: Build image [monster]
+        if: success()
+        run: |
+          cd Dockerfiles || exit 1
+          docker build -t ${GITHUB_REPOSITORY}:frontend -f Monster.dockerfile .
