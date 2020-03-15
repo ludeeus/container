@@ -26,7 +26,6 @@ jobs:
             --compress \
             --no-cache \
             -t ${GITHUB_REPOSITORY}:base \
-            -t ${GITHUB_REPOSITORY}:base-stable \
             -t ${GITHUB_REPOSITORY}:base-${IMAGE_TAG} \
             -f Base.dockerfile .
 
@@ -38,7 +37,6 @@ jobs:
             --compress \
             --no-cache \
             -t ${GITHUB_REPOSITORY}:dotnet \
-            -t ${GITHUB_REPOSITORY}:dotnet-stable \
             -t ${GITHUB_REPOSITORY}:dotnet-${IMAGE_TAG} \
             -f Dotnet.dockerfile .
 
@@ -49,8 +47,7 @@ jobs:
           docker build \
             --compress \
             --no-cache \
-            -t ${GITHUB_REPOSITORY}:netdaemon \
-            -t ${GITHUB_REPOSITORY}:netdaemon-stable \
+            -t ${GITHUB_REPOSITORY}:netdaemon 
             -t ${GITHUB_REPOSITORY}:netdaemon-${IMAGE_TAG} \
             -f Netdaemon.dockerfile .
 
@@ -62,7 +59,6 @@ jobs:
             --compress \
             --no-cache \
             -t ${GITHUB_REPOSITORY}:python \
-            -t ${GITHUB_REPOSITORY}:python-stable \
             -t ${GITHUB_REPOSITORY}:python-${IMAGE_TAG} \
             -f Python.dockerfile .
 
@@ -74,7 +70,6 @@ jobs:
             --compress \
             --no-cache \
             -t ${GITHUB_REPOSITORY}:integration \
-            -t ${GITHUB_REPOSITORY}:integration-stable \
             -t ${GITHUB_REPOSITORY}:integration-${IMAGE_TAG} \
             -f Integration.dockerfile .
 
@@ -86,7 +81,6 @@ jobs:
             --compress \
             --no-cache \
             -t ${GITHUB_REPOSITORY}:frontend \
-            -t ${GITHUB_REPOSITORY}:frontend-stable \
             -t ${GITHUB_REPOSITORY}:frontend-${IMAGE_TAG} \
             -f Frontend.dockerfile .
 
@@ -98,7 +92,6 @@ jobs:
             --compress \
             --no-cache \
             -t ${GITHUB_REPOSITORY}:monster \
-            -t ${GITHUB_REPOSITORY}:monster-stable \
             -t ${GITHUB_REPOSITORY}:monster-${IMAGE_TAG} \
             -f Monster.dockerfile .
 
@@ -145,46 +138,3 @@ jobs:
         uses: actions-hub/docker@master
         with:
           args: push ${GITHUB_REPOSITORY}:monster-${IMAGE_TAG}
-
-      # Deploy stable
-      - name: Push to docker registry [base-stable]
-        if: success()
-        uses: actions-hub/docker@master
-        with:
-          args: push ${GITHUB_REPOSITORY}:base-stable
-
-      - name: Push to docker registry [dotnet-stable]
-        if: success()
-        uses: actions-hub/docker@master
-        with:
-          args: push ${GITHUB_REPOSITORY}:dotnet-stable
-
-      - name: Push to docker registry [netdaemon-stable]
-        if: success()
-        uses: actions-hub/docker@master
-        with:
-          args: push ${GITHUB_REPOSITORY}:netdaemon-stable
-
-      - name: Push to docker registry [python-stable]
-        if: success()
-        uses: actions-hub/docker@master
-        with:
-          args: push ${GITHUB_REPOSITORY}:python-stable
-
-      - name: Push to docker registry [integration-stable]
-        if: success()
-        uses: actions-hub/docker@master
-        with:
-          args: push ${GITHUB_REPOSITORY}:integration-stable
-
-      - name: Push to docker registry [frontend-stable]
-        if: success()
-        uses: actions-hub/docker@master
-        with:
-          args: push ${GITHUB_REPOSITORY}:frontend-stable
-
-      - name: Push to docker registry [monster-stable]
-        if: success()
-        uses: actions-hub/docker@master
-        with:
-          args: push ${GITHUB_REPOSITORY}:monster-stable

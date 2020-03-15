@@ -37,6 +37,7 @@ monster | This is here to please @iantrich's crazy ideas, this combines the `int
 dotnet | This provides a minimalistic container for working with dotnet core.
 netdaemon | This provides a minimalistic container for working with netdaemon apps core.
 
+_You can add a `-x.x.x` postfix to each tag to specify the version._ 
 
 # Custom commands included
 
