@@ -1,4 +1,4 @@
-FROM alpine:3.10
+FROM alpine:3.11
 
 ENV DEVCONTAINER True
 ENV DEVCONTAINER_TYPE base
@@ -9,11 +9,12 @@ COPY rootfs /
 
 RUN \
     apk add --no-cache \
-        openssl-dev=1.1.1d-r2 \
-        nano=4.3-r0 \
+        openssl-dev=1.1.1d-r3 \
+        nano=4.6-r0 \
         openssh=8.1_p1-r0 \
-        bash=5.0.0-r0 \
-        git=2.22.2-r0 \
+        bash=5.0.11-r1 \
+        git=2.24.1-r0 \
+        go=1.13.4-r1 \
     \
     && find /usr/local \
         \( -type d -a -name test -o -name tests -o -name '__pycache__' \) \

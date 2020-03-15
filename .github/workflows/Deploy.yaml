@@ -1,0 +1,27 @@
+name: Deploy to Docker Hub
+
+on:
+   push:
+     branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Login to docker hub
+        if: success()
+        uses: actions-hub/docker/login@master
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_TOKEN }}
+      - name: Build image [dev-latest]
+        if: success()
+        run: docker build -t ${GITHUB_REPOSITORY}:dev-latest .
+      - name: Push to docker registry [dev-latest]
+        if: success()
+        uses: actions-hub/docker@master
+        with:
+          #args: push ${GITHUB_REPOSITORY}:${IMAGE_TAG}
+          args: push ${GITHUB_REPOSITORY}:dev-latest
