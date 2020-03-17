@@ -2,8 +2,6 @@ FROM debian:10.3-slim
 
 ENV \
     DEBIAN_FRONTEND="noninteractive" \
-    DEVCONTAINER="True" \
-    PS1="bash-5.0# " \
     DEVCONTAINER_TYPE="base-debian"
 
 WORKDIR /workspace

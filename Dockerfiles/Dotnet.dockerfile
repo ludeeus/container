@@ -7,8 +7,8 @@ ENV \
     DEVCONTAINER_TYPE="dotnet"
 
 RUN \
-    apt-get update \
-    && apt-get install -y --no-install-recommends \
+    apt update \
+    && apt install -y --no-install-recommends \
         libc6 \
         libgcc1 \
         libgssapi-krb5-2 \

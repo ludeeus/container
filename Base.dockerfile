@@ -1,7 +1,7 @@
 FROM alpine:3.11
 
-ENV DEVCONTAINER True
-ENV DEVCONTAINER_TYPE base
+ENV \
+    DEVCONTAINER_TYPE="base"
 
 WORKDIR /workspace
 

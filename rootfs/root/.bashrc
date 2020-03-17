@@ -1,6 +1,9 @@
 #!/bin/bash
 source /etc/bash_completion.d/dc_completion
 
+export PS1="devcontainer# "
+export DEVCONTAINER="True"
+
 declare element
 
 # Copy SSH keys if they exsist

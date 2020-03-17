@@ -54,4 +54,7 @@ case $1 in
     run)
         RunDevelopentInstance
         ;;
+    *)
+      Help
+      ;;
 esac
