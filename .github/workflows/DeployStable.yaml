@@ -29,6 +29,16 @@ jobs:
             -t ${GITHUB_REPOSITORY}:base-${IMAGE_TAG} \
             -f Base.dockerfile .
 
+      - name: Build image [base-debian-version]
+        if: success()
+        run: |
+          docker build \
+            --compress \
+            --no-cache \
+            -t ${GITHUB_REPOSITORY}:base-debian \
+            -t ${GITHUB_REPOSITORY}:base-debian-${IMAGE_TAG} \
+            -f BaseDebian.dockerfile .
+
       - name: Build image [dotnet-version]
         if: success()
         run: |
@@ -102,6 +112,12 @@ jobs:
         uses: actions-hub/docker@master
         with:
           args: push ${GITHUB_REPOSITORY}:base-${IMAGE_TAG}
+
+      - name: Push to docker registry [base-debian-version]
+        if: success()
+        uses: actions-hub/docker@master
+        with:
+          args: push ${GITHUB_REPOSITORY}:base-debian-${IMAGE_TAG}
 
       - name: Push to docker registry [dotnet-version]
         if: success()

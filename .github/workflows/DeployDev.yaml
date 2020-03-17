@@ -24,6 +24,11 @@ jobs:
         run: |
           docker build --compress --no-cache -t ${GITHUB_REPOSITORY}:base -t ${GITHUB_REPOSITORY}:latest -f Base.dockerfile .
 
+      - name: Build image [base-debian]
+        if: success()
+        run: |
+          docker build --compress --no-cache -t ${GITHUB_REPOSITORY}:base-debian -f BaseDebian.dockerfile .
+
       - name: Build image [dotnet]
         if: success()
         run: |
@@ -63,7 +68,7 @@ jobs:
 
 
       # Deploy
-      - name: Push to docker registry [base]
+      - name: Push to docker registry [latest]
         if: success()
         uses: actions-hub/docker@master
         with:
@@ -74,6 +79,12 @@ jobs:
         uses: actions-hub/docker@master
         with:
           args: push ${GITHUB_REPOSITORY}:base
+
+      - name: Push to docker registry [base-debian]
+        if: success()
+        uses: actions-hub/docker@master
+        with:
+          args: push ${GITHUB_REPOSITORY}:base-debian
 
       - name: Push to docker registry [dotnet]
         if: success()

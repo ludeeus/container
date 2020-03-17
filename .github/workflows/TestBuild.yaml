@@ -17,6 +17,11 @@ jobs:
         run: |
           docker build -t ${GITHUB_REPOSITORY}:base -f Base.dockerfile .
 
+      - name: Build image [base-debian]
+        if: success()
+        run: |
+          docker build -t ${GITHUB_REPOSITORY}:base -f BaseDebian.dockerfile .
+
       - name: Build image [dotnet]
         if: success()
         run: |

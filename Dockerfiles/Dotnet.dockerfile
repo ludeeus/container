@@ -1,15 +1,21 @@
-FROM ludeeus/devcontainer:base
+FROM ludeeus/devcontainer:base-debian
 
-ENV NETVERSION "3.1.102"
-
-ENV DEVCONTAINER_TYPE dotnet
+ENV \
+    NETVERSION="3.1.200" \
+    DOTNET_RUNNING_IN_CONTAINER="true" \
+    DOTNET_USE_POLLING_FILE_WATCHER="true" \
+    DEVCONTAINER_TYPE="dotnet"
 
 RUN \
-    apk add --no-cache \
-        libintl=0.20.1-r2 \
-        zlib=1.2.11-r3 \
-        icu-dev=64.2-r0 \
-        libcurl=7.67.0-r0 \
+    apt-get update \
+    && apt-get install -y --no-install-recommends \
+        libc6 \
+        libgcc1 \
+        libgssapi-krb5-2 \
+        libicu63 \
+        libssl1.1 \
+        libstdc++6 \
+        zlib1g \
     \
     && wget -O /tmp/dotnet-install.sh https://dot.net/v1/dotnet-install.sh \
     \
@@ -17,4 +23,6 @@ RUN \
     \
     && rm /tmp/dotnet-install.sh \
     \
-    && ln -s /root/.dotnet/dotnet /bin/dotnet
+    && ln -s /root/.dotnet/dotnet /bin/dotnet \
+    \
+    && dotnet help
