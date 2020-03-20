@@ -42,13 +42,14 @@ class Image:
                 "build",
                 "--compress",
                 "--no-cache",
-                f"-t {REPO}:{self.name}",
-                f"-f {self.dockerfile}",
+                "-t", f"{REPO}:{self.name}",
+                "-f", f"{self.dockerfile}",
                 "."
             ]
 
         if self.name == "base":
-            commands.append(f"-t {REPO}:latest")
+            commands.append("-t")
+            commands.append(f"{REPO}:latest")
 
         print(commands)
         build = subprocess.run(commands)
