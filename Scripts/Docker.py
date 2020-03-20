@@ -2,7 +2,7 @@ import os
 import sys
 import subprocess
 
-REPO = "test/devcontainer"
+REPO = "ludeeus/devcontainer"
 IMAGES = []
 
 def main(runtype):
