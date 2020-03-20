@@ -45,7 +45,7 @@ class Image:
     def publish_image(self):
         if self.name == "base":
             print("pushing latest")
-            run_command(f'docker push ludeeus/devcontainer:latest')
+            #run_command(f'docker push ludeeus/devcontainer:latest')
         print(f"pushing {self.name}")
         run_command(f'docker push ludeeus/devcontainer:{self.name}')
         if EVENT == "release":
