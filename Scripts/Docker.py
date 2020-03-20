@@ -5,44 +5,6 @@ import subprocess
 REPO = "ludeeus/devcontainer"
 IMAGES = []
 
-class Image:
-    def __init__(self, name, dockerfile, needs):
-        self.name = name
-        self.dockerfile = dockerfile
-        self.needs = needs
-        self.build = False
-        self.published = False
-
-    def build_image(self):
-        tags = f"{REPO}:{self.name}"
-        if self.name == "base":
-            tags += f" -t {REPO}:latest"
-        build = subprocess.run([
-                "docker",
-                "build",
-                "--compress",
-                "--no-cache",
-                f"-t {tags}",
-                f"-f {self.dockerfile}",
-                "."
-            ])
-        print(build.stdout)
-        if build.returncode != 0:
-            exit(1)
-        self.build = True
-
-    def publish_image(self):
-        if self.name == "base":
-            print(f'docker push {REPO}:latest')
-        print(f'docker push {REPO}:{self.name}')
-        self.published = True
-
-def get_next(sortkey):
-    if sortkey == "build":
-        return sorted([x for x in IMAGES if not x.build], key=lambda x: x.needs, reverse=False)
-    return sorted([x for x in IMAGES if not x.published], key=lambda x: x.needs, reverse=False)
-
-
 def main(runtype):
     if len(runtype) == 1:
         print("Runtype is missing")
@@ -65,6 +27,44 @@ def main(runtype):
     if "publish" in runtype:
         print("")
         publish_all()
+
+class Image:
+    def __init__(self, name, dockerfile, needs):
+        self.name = name
+        self.dockerfile = dockerfile
+        self.needs = needs
+        self.build = False
+        self.published = False
+
+    def build_image(self):
+        tags = f"-t {REPO}:{self.name}"
+        if self.name == "base":
+            tags += f" -t {REPO}:latest"
+
+        build = subprocess.run([
+                "docker",
+                "build",
+                "--compress",
+                "--no-cache",
+                tags,
+                f"-f {self.dockerfile}",
+                "."
+            ])
+        print(build.stdout)
+        if build.returncode != 0:
+            exit(1)
+        self.build = True
+
+    def publish_image(self):
+        if self.name == "base":
+            print(f'docker push {REPO}:latest')
+        print(f'docker push {REPO}:{self.name}')
+        self.published = True
+
+def get_next(sortkey):
+    if sortkey == "build":
+        return sorted([x for x in IMAGES if not x.build], key=lambda x: x.needs, reverse=False)
+    return sorted([x for x in IMAGES if not x.published], key=lambda x: x.needs, reverse=False)
 
 
 def build_all():
