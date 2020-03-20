@@ -13,14 +13,14 @@ def main(runtype):
         exit(1)
 
     IMAGES.append(Image("base", "Base.dockerfile", []))
-    #IMAGES.append(Image("base-debian", "BaseDebian.dockerfile", []))
+    IMAGES.append(Image("base-debian", "BaseDebian.dockerfile", []))
 
-    #IMAGES.append(Image("python", "Dockerfiles/Python.dockerfile", ["base"]))
-    #IMAGES.append(Image("dotnet", "Dockerfiles/Dotnet.dockerfile", ["base-debian"]))
-    #IMAGES.append(Image("netdaemon", "Dockerfiles/Netdaemon.dockerfile", ["dotnet", "base-debian"]))
-    #IMAGES.append(Image("integration", "Dockerfiles/Integration.dockerfile", ["python"]))
-    #IMAGES.append(Image("frontend", "Dockerfiles/Frontend.dockerfile", ["base"]))
-    #IMAGES.append(Image("monster", "Dockerfiles/Monster.dockerfile", ["python", "integration"]))
+    IMAGES.append(Image("python", "Dockerfiles/Python.dockerfile", ["base"]))
+    IMAGES.append(Image("dotnet", "Dockerfiles/Dotnet.dockerfile", ["base-debian"]))
+    IMAGES.append(Image("netdaemon", "Dockerfiles/Netdaemon.dockerfile", ["dotnet", "base-debian"]))
+    IMAGES.append(Image("integration", "Dockerfiles/Integration.dockerfile", ["python"]))
+    IMAGES.append(Image("frontend", "Dockerfiles/Frontend.dockerfile", ["base"]))
+    IMAGES.append(Image("monster", "Dockerfiles/Monster.dockerfile", ["python", "integration"]))
 
     if "build" in runtype:
         build_all()
@@ -44,9 +44,7 @@ class Image:
 
     def publish_image(self):
         if self.name == "base":
-            print("pushing latest")
-            #run_command(f'docker push ludeeus/devcontainer:latest')
-        print(f"pushing {self.name}")
+            run_command(f'docker push ludeeus/devcontainer:latest')
         run_command(f'docker push ludeeus/devcontainer:{self.name}')
         if EVENT == "release":
             run_command(f'docker push ludeeus/devcontainer:{self.name}-{REF}')
