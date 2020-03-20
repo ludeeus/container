@@ -5,6 +5,9 @@ import subprocess
 REPO = "ludeeus/devcontainer"
 IMAGES = []
 
+REF = os.getenv("GITHUB_REF").split("/")[-1]
+EVENT = os.getenv("GITHUB_EVENT_NAME")
+
 def main(runtype):
     if len(runtype) == 1:
         print("Runtype is missing")
@@ -47,6 +50,8 @@ class Image:
         if self.name == "base":
             run_command(f'docker push {REPO}:latest')
         run_command(f'docker push {REPO}:{self.name}')
+        if EVENT == "release":
+            run_command(f'docker push {REPO}:{self.name}-{REF}')
         self.published = True
 
 def get_next(sortkey):
