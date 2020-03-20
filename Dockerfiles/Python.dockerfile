@@ -12,7 +12,7 @@ RUN \
         ffmpeg-dev=4.2.1-r3 \
         python3-dev=3.8.2-r0 \
         make=4.2.1-r2 \
-        python3=3.8.2-r0 \
+        python3=4.8.2-r0 \
     \
     && pip3 install --no-cache-dir -U -r /tmp/requirements.txt \
     \
