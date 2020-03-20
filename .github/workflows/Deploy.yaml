@@ -27,5 +27,4 @@ jobs:
 
       # Deploy versions
       - name: Push to docker registry
-        uses: actions-hub/docker@master
         run: python3 Scripts/Docker.py publish

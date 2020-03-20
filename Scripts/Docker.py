@@ -2,7 +2,6 @@ import os
 import sys
 import subprocess
 
-REPO = "ludeeus/devcontainer"
 IMAGES = []
 
 REF = os.getenv("GITHUB_REF").split("/")[-1]
@@ -37,18 +36,18 @@ class Image:
         self.published = False
 
     def build_image(self):
-        command = f"docker build --compress --no-cache -t {REPO}:{self.name} -f {self.dockerfile} ."
+        command = f"docker build --compress --no-cache -t ludeeus/devcontainer:{self.name} -f {self.dockerfile} ."
         if self.name == "base":
-            command += f" -t {REPO}:latest"
+            command += f" -t ludeeus/devcontainer:latest"
         run_command(command)
         self.build = True
 
     def publish_image(self):
         if self.name == "base":
-            run_command(f'docker push {REPO}:latest')
-        run_command(f'docker push {REPO}:{self.name}')
+            run_command(f'docker push ludeeus/devcontainer:latest')
+        run_command(f'docker push ludeeus/devcontainer:{self.name}')
         if EVENT == "release":
-            run_command(f'docker push {REPO}:{self.name}-{REF}')
+            run_command(f'docker push ludeeus/devcontainer:{self.name}-{REF}')
         self.published = True
 
 def get_next(sortkey):
