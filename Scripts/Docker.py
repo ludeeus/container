@@ -13,7 +13,6 @@ def main(runtype):
         print("Runtype is missing")
         exit(1)
 
-    print("Adding images")
     IMAGES.append(Image("base", "Base.dockerfile", []))
     IMAGES.append(Image("base-debian", "BaseDebian.dockerfile", []))
 
@@ -25,10 +24,8 @@ def main(runtype):
     IMAGES.append(Image("monster", "Dockerfiles/Monster.dockerfile", ["python", "integration"]))
 
     if "build" in runtype:
-        print("")
         build_all()
     if "publish" in runtype:
-        print("")
         publish_all()
 
 class Image:
@@ -65,11 +62,9 @@ def run_command(command):
         exit(1)
 
 def build_all():
-    print("Starting build")
     while True:
         image = get_next("build")
         if not image:
-            print("Build is done")
             break
         image = image[0]
         if [x for x in IMAGES if x.name in image.needs and not x.build]:
@@ -79,11 +74,9 @@ def build_all():
 
 
 def publish_all():
-    print("Starting publish")
     while True:
         image = get_next("published")
         if not image:
-            print("Publish is done")
             break
         image = image[0]
         image.publish_image()
