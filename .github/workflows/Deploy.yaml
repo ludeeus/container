@@ -15,16 +15,8 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - name: Login to docker hub
-        if: success()
-        uses: actions-hub/docker/login@master
-        env:
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_TOKEN }}
-
-      # Build
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_TOKEN }}
       - name: Build images
         run: python3 Scripts/Docker.py build
-
-      # Deploy versions
       - name: Push to docker registry
         run: python3 Scripts/Docker.py publish
