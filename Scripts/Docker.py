@@ -40,13 +40,13 @@ def main(runtype):
     print("Adding images")
     IMAGES.append(Image("base", "Base.dockerfile", []))
     IMAGES.append(Image("base-debian", "BaseDebian.dockerfile", []))
-    IMAGES.append(Image("python", "Dockerfiles/Python.dockerfile", ["base"]))
 
-    IMAGES.append(Image("dotnet", "Dockerfiles/Dotnet.dockerfile", ["xxx"]))
-    IMAGES.append(Image("netdaemon", "Dockerfiles/Netdaemon.dockerfile", ["xxx"]))
-    IMAGES.append(Image("integration", "Dockerfiles/Integration.dockerfile", ["xxx"]))
-    IMAGES.append(Image("frontend", "Dockerfiles/Frontend.dockerfile", ["xxx"]))
-    IMAGES.append(Image("monster", "Dockerfiles/Monster.dockerfile", ["xxx"]))
+    IMAGES.append(Image("python", "Dockerfiles/Python.dockerfile", ["base"]))
+    IMAGES.append(Image("dotnet", "Dockerfiles/Dotnet.dockerfile", ["base-debian"]))
+    IMAGES.append(Image("netdaemon", "Dockerfiles/Netdaemon.dockerfile", ["dotnet", "base-debian"]))
+    IMAGES.append(Image("integration", "Dockerfiles/Integration.dockerfile", ["python"]))
+    IMAGES.append(Image("frontend", "Dockerfiles/Frontend.dockerfile", ["base"]))
+    IMAGES.append(Image("monster", "Dockerfiles/Monster.dockerfile", ["python", "integration"]))
 
     if "build" in runtype:
         print("")
