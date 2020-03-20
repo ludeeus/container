@@ -6,7 +6,7 @@ COPY requirements.txt /tmp/
 
 RUN \
     apk add --no-cache \
-        gcc=9.2.0-r3 \
+        gcc=9.2.0-r4 \
         libc-dev=0.7.2-r0 \
         libffi-dev=3.2.1-r6 \
         ffmpeg-dev=4.2.1-r3 \

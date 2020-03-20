@@ -1,5 +1,6 @@
 import os
 import sys
+import subprocess
 
 REPO = "ludeeus/devcontainer"
 IMAGES = []
@@ -16,8 +17,18 @@ class Image:
         tags = f"{REPO}:{self.name}"
         if self.name == "base":
             tags += f" -t {REPO}:latest"
-        #print(f'docker build --compress --no-cache -t {tags} -f {self.dockerfile} .')
-        os.system(f'docker build --compress --no-cache -t {tags} -f {self.dockerfile} .')
+        build = subprocess.run([
+                "docker",
+                "build",
+                "--compress",
+                "--no-cache",
+                f"-t {tags}",
+                f"-f {self.dockerfile}",
+                "."
+            ])
+        print(build.stdout)
+        if build.returncode != 0:
+            exit(1)
         self.build = True
 
     def publish_image(self):
