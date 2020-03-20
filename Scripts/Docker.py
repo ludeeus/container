@@ -37,19 +37,21 @@ class Image:
         self.published = False
 
     def build_image(self):
-        tags = f"-t {REPO}:{self.name}"
-        if self.name == "base":
-            tags += f" -t {REPO}:latest"
-
-        build = subprocess.run([
+        commands = [
                 "docker",
                 "build",
                 "--compress",
                 "--no-cache",
-                tags,
+                f"-t {REPO}:{self.name}",
                 f"-f {self.dockerfile}",
                 "."
-            ])
+            ]
+
+        if self.name == "base":
+            commands.append(f"-t {REPO}:latest")
+
+        print(commands)
+        build = subprocess.run(commands)
         print(build.stdout)
         if build.returncode != 0:
             exit(1)
