@@ -1,4 +1,4 @@
-name: Deploy Stable to Docker Hub
+name: Deploy to Docker Hub
 
 on:
   release:
@@ -10,7 +10,7 @@ on:
 
 jobs:
   deploy:
-    name: Deploy all stable images
+    name: Deploy all images
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
@@ -27,4 +27,5 @@ jobs:
 
       # Deploy versions
       - name: Push to docker registry
+        uses: actions-hub/docker@master
         run: python3 Scripts/Docker.py publish
