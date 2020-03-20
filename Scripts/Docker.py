@@ -37,31 +37,16 @@ class Image:
         self.published = False
 
     def build_image(self):
-        commands = [
-                "docker",
-                "build",
-                "--compress",
-                "--no-cache",
-                "-t", f"{REPO}:{self.name}",
-                "-f", f"{self.dockerfile}",
-                "."
-            ]
-
+        command = f"docker build --compress --no-cache -t {REPO}:{self.name} -f {self.dockerfile} ."
         if self.name == "base":
-            commands.append("-t")
-            commands.append(f"{REPO}:latest")
-
-        print(commands)
-        build = subprocess.run(commands)
-        print(build.stdout)
-        if build.returncode != 0:
-            exit(1)
+            command += f" -t {REPO}:latest"
+        run_command(command)
         self.build = True
 
     def publish_image(self):
         if self.name == "base":
-            print(f'docker push {REPO}:latest')
-        print(f'docker push {REPO}:{self.name}')
+            run_command(f'docker push {REPO}:latest')
+        run_command(f'docker push {REPO}:{self.name}')
         self.published = True
 
 def get_next(sortkey):
@@ -69,6 +54,11 @@ def get_next(sortkey):
         return sorted([x for x in IMAGES if not x.build], key=lambda x: x.needs, reverse=False)
     return sorted([x for x in IMAGES if not x.published], key=lambda x: x.needs, reverse=False)
 
+def run_command(command):
+    print(f"Running command ({command})")
+    build = subprocess.run([x for x in command.split(" ")])
+    if build.returncode != 0:
+        exit(1)
 
 def build_all():
     print("Starting build")
@@ -94,4 +84,5 @@ def publish_all():
         image = image[0]
         image.publish_image()
 
+print(os.environ)
 main(sys.argv)
