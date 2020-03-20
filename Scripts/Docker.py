@@ -16,7 +16,8 @@ class Image:
         tags = f"{REPO}:{self.name}"
         if self.name == "base":
             tags += f" -t {REPO}:latest"
-        print(f'docker build --compress --no-cache -t {tags} -f {self.dockerfile} .')
+        #print(f'docker build --compress --no-cache -t {tags} -f {self.dockerfile} .')
+        os.system(f'docker build --compress --no-cache -t {tags} -f {self.dockerfile} .')
         self.build = True
 
     def publish_image(self):
