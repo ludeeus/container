@@ -1,9 +1,6 @@
-# Devcontainer
+# Container
 
-_Custom container used for development of integrations for Home Assistant._
-
-**Base Image:** Alpine
-
+_Custom container images used for stuff._
 
 # How to use it
 
@@ -14,9 +11,9 @@ In that directory you need a `devcontainer.json` file, [you can use this one.](/
 
 ```json
 {
-	"image": "ludeeus/devcontainer:integration",
+	"image": "ludeeus/container:integration",
 	"context": "..",
-	"appPort": 	"9123:8123",
+	"appPort": 	"8123:8123",
 	"postCreateCommand": "dc install",
 	"settings": {
 		"terminal.integrated.shell.linux": "/bin/bash",
