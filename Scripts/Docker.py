@@ -42,6 +42,7 @@ class Image:
         command = f"docker build --compress --no-cache -t ludeeus/devcontainer:{self.name} -f {self.dockerfile} ."
         if self.name == "base":
             command += f" -t ludeeus/devcontainer:latest"
+            command += f" -t ludeeus/container:latest"
         command += f" -t ludeeus/container:{self.name}"
         run_command(command)
         self.build = True
