@@ -90,7 +90,7 @@ nano | 4.6-r0
 openssh | 8.1_p1-r0
 openssl-dev | 1.1.1d-r3
 
-## Base
+## Go
 
 _Based on `ludeeus/devcontainer:base`_
 
