@@ -16,8 +16,34 @@ function InitDevEnv {
     rm -R /tmp/init > /dev/null 2>&1
 
     if [[ "$DEVCONTAINER_TYPE" == "netdaemon" ]]; then
+      echo "Before you get started we need some information to set it up"
+      echo
+      read -p 'What IP is Home Assistant running on? ' HA_IP
+      read -p 'What is the LAT that Netdaemon should use? ' HA_LAT
+      read -p 'What is your GitHub username? ' GH_USER
+      read -p 'What should be the name of the project? ' PROJECT_NAME
+
+      if [ -z "$HA_IP" ];then HA_IP="127.0.0.1"; fi
+      if [ -z "$HA_LAT" ];then HA_LAT="XXXXXXXX"; fi
+      if [ -z "$GH_USER" ];then GH_USER="username"; fi
+      if [ -z "$PROJECT_NAME" ];then PROJECT_NAME="HelloWorld"; fi
+
       git clone https://github.com/net-daemon/netdaemon-app-template.git /tmp/init
       cp /tmp/init/_daemon_config.json /tmp/init/daemon_config.json
+
+      sed -i "s|ip/hostname|${HA_IP}|" /tmp/init/daemon_config.json
+      sed -i "s|enter_token_here|${HA_LAT}|" /tmp/init/daemon_config.json
+
+      sed -i "s|namespace HelloWorld|namespace ${GH_USER}|" /tmp/init/apps/HelloWorld/HelloWorld.cs
+      sed -i "s|class HelloWorldApp|class ${PROJECT_NAME}App|" /tmp/init/apps/HelloWorld/HelloWorld.cs
+      sed -i "s|hello_world_app|${PROJECT_NAME,,}_app|" /tmp/init/apps/HelloWorld/HelloWorld.yaml
+      sed -i "s|HelloWorld.HelloWorldApp|${GH_USER}.${PROJECT_NAME}App|" /tmp/init/apps/HelloWorld/HelloWorld.yaml
+
+      mv /tmp/init/apps /tmp/init/tmp
+      mkdir -p /tmp/init/apps/"${PROJECT_NAME}"
+      mv /tmp/init/tmp/HelloWorld/HelloWorld.cs /tmp/init/apps/"${PROJECT_NAME}"/"${PROJECT_NAME}".cs
+      mv /tmp/init/tmp/HelloWorld/HelloWorld.yaml /tmp/init/apps/"${PROJECT_NAME}"/"${PROJECT_NAME}".yaml
+      rm -R tmp
     fi
 
     if [[ "$DEVCONTAINER_TYPE" == "integration" ]]; then
