@@ -1,14 +1,14 @@
 #!/bin/bash
 
 function RunDevelopentInstance() {
-  if [[ "$DEVCONTAINER_TYPE" == "netdaemon" ]]; then
+  if [[ "$CONTAINER_TYPE" == "netdaemon" ]]; then
     dotnet add package JoySoftware.NetDaemon.App --version $(dotnet add package JoySoftware.NetDaemon.App | grep "Nearest version" | cut -d " " -f 13)
     dotnet add package JoySoftware.NetDaemon.DaemonRunner --version $(dotnet add package JoySoftware.NetDaemon.DaemonRunner | grep "Nearest version" | cut -d " " -f 13)
     dotnet restore
     dotnet watch run
-  elif [[ "$DEVCONTAINER_TYPE" == "integration" ]]; then
+  elif [[ "$CONTAINER_TYPE" == "integration" ]]; then
     dc start
   else
-    echo "No run action found for '$DEVCONTAINER_TYPE'"
+    echo "No run action found for '$CONTAINER_TYPE'"
   fi
 }

@@ -1,7 +1,7 @@
 FROM alpine:3.11
 
 ENV \
-    DEVCONTAINER_TYPE="base"
+    CONTAINER_TYPE="base"
 
 WORKDIR /workspace
 

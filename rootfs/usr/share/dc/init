@@ -7,15 +7,15 @@ function InitDevEnv {
   fi
 
   if [[
-       "$DEVCONTAINER_TYPE" == "netdaemon"
-    || "$DEVCONTAINER_TYPE" == "integration"
-    || "$DEVCONTAINER_TYPE" == "frontend"
-    || "$DEVCONTAINER_TYPE" == "monster"
+       "$CONTAINER_TYPE" == "netdaemon"
+    || "$CONTAINER_TYPE" == "integration"
+    || "$CONTAINER_TYPE" == "frontend"
+    || "$CONTAINER_TYPE" == "monster"
     ]]; then
-    echo "Initializing dev env for $DEVCONTAINER_TYPE"
+    echo "Initializing dev env for $CONTAINER_TYPE"
     rm -R /tmp/init > /dev/null 2>&1
 
-    if [[ "$DEVCONTAINER_TYPE" == "netdaemon" ]]; then
+    if [[ "$CONTAINER_TYPE" == "netdaemon" ]]; then
       echo "Before you get started we need some information to set it up"
       echo
       read -p 'What IP is Home Assistant running on? ' HA_IP
@@ -46,11 +46,11 @@ function InitDevEnv {
       rm -R /tmp/init/tmp
     fi
 
-    if [[ "$DEVCONTAINER_TYPE" == "integration" ]]; then
+    if [[ "$CONTAINER_TYPE" == "integration" ]]; then
       git clone https://github.com/custom-components/blueprint.git /tmp/init
     fi
 
-    if [[ "$DEVCONTAINER_TYPE" == "frontend" || "$DEVCONTAINER_TYPE" == "monster" ]]; then
+    if [[ "$CONTAINER_TYPE" == "frontend" || "$CONTAINER_TYPE" == "monster" ]]; then
       git clone https://github.com/custom-cards/boilerplate-card.git /tmp/init
     fi
 
