@@ -43,7 +43,7 @@ function InitDevEnv {
       mkdir -p /tmp/init/apps/"${PROJECT_NAME}"
       mv /tmp/init/tmp/HelloWorld/HelloWorld.cs /tmp/init/apps/"${PROJECT_NAME}"/"${PROJECT_NAME}".cs
       mv /tmp/init/tmp/HelloWorld/HelloWorld.yaml /tmp/init/apps/"${PROJECT_NAME}"/"${PROJECT_NAME}".yaml
-      rm -R tmp
+      rm -R /tmp/init/tmp
     fi
 
     if [[ "$DEVCONTAINER_TYPE" == "integration" ]]; then
