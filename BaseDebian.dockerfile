@@ -1,4 +1,4 @@
-FROM bitnami/minideb:buster
+FROM debian:10.3-slim
 
 ENV \
     DEBIAN_FRONTEND="noninteractive" \
@@ -9,7 +9,9 @@ WORKDIR /workspace
 COPY rootfs /
 
 RUN \
-    install_packages \
+    apt update \
+    \
+    && apt install -y --no-install-recommends  \
         ca-certificates \
         nano \
         bash \

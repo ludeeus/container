@@ -7,7 +7,8 @@ ENV \
     DEVCONTAINER_TYPE="dotnet"
 
 RUN \
-    install_packages \
+    apt update \
+    && apt install -y --no-install-recommends \
         libc6 \
         libgcc1 \
         libgssapi-krb5-2 \
@@ -24,4 +25,9 @@ RUN \
     \
     && ln -s /root/.dotnet/dotnet /bin/dotnet \
     \
-    && dotnet help
+    && dotnet help \
+    \
+    && rm -fr \
+        /tmp/* \
+        /var/{cache,log}/* \
+        /var/lib/apt/lists/* \
