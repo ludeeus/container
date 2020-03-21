@@ -1,6 +1,6 @@
-FROM ludeeus/devcontainer:base
+FROM ludeeus/container:base
 
-ENV DEVCONTAINER_TYPE python
+ENV CONTAINER_TYPE python
 
 COPY requirements.txt /tmp/
 

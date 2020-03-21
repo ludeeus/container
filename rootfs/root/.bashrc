@@ -15,15 +15,15 @@ if test -d "/tmp/.ssh"; then
     chmod 600 /root/.ssh/id_rsa > /dev/null 2>&1
 fi
 
-if [[ "$DEVCONTAINER_TYPE" == "integration" ]]; then
+if [[ "$CONTAINER_TYPE" == "integration" ]]; then
     element="custom integrations for Home Assistant."
-elif [[ "$DEVCONTAINER_TYPE" == "frontend" ]]; then
+elif [[ "$CONTAINER_TYPE" == "frontend" ]]; then
     element="custom frontend elements."
-elif [[ "$DEVCONTAINER_TYPE" == "monster" ]]; then
+elif [[ "$CONTAINER_TYPE" == "monster" ]]; then
     element="custom frontend elements and custom integrations for Home Assistant."
-elif [[ "$DEVCONTAINER_TYPE" == "netdaemon" ]]; then
+elif [[ "$CONTAINER_TYPE" == "netdaemon" ]]; then
     element="NetDaemon apps."
-elif [[ "$DEVCONTAINER_TYPE" == "dotnet" ]]; then
+elif [[ "$CONTAINER_TYPE" == "dotnet" ]]; then
     element="dotnet."
 else
     element="things."

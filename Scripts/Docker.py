@@ -4,8 +4,6 @@ import subprocess
 
 IMAGES = []
 
-MULTIARCH = ""
-
 REF = os.getenv("IMAGE_TAG")
 EVENT = os.getenv("GITHUB_EVENT_NAME")
 
@@ -14,16 +12,18 @@ def main(runtype):
         print("Runtype is missing")
         exit(1)
 
-    IMAGES.append(Image("base", "Base.dockerfile", []))
-    IMAGES.append(Image("base-debian", "BaseDebian.dockerfile", []))
+    IMAGES.append(Image("base", "Dockerfiles/Base.dockerfile", []))
+    IMAGES.append(Image("debian-base", "Dockerfiles/BaseDebian.dockerfile", []))
 
-    IMAGES.append(Image("go", "Dockerfiles/Go.dockerfile", ["base"]))
-    IMAGES.append(Image("python", "Dockerfiles/Python.dockerfile", ["base"]))
-    IMAGES.append(Image("dotnet", "Dockerfiles/Dotnet.dockerfile", ["base-debian"]))
-    IMAGES.append(Image("netdaemon", "Dockerfiles/Netdaemon.dockerfile", ["dotnet", "base-debian"]))
-    IMAGES.append(Image("integration", "Dockerfiles/Integration.dockerfile", ["python"]))
-    IMAGES.append(Image("frontend", "Dockerfiles/Frontend.dockerfile", ["base"]))
-    IMAGES.append(Image("monster", "Dockerfiles/Monster.dockerfile", ["python", "integration"]))
+    IMAGES.append(Image("go-base", "Dockerfiles/BaseGo.dockerfile", ["base"]))
+    IMAGES.append(Image("python-base", "Dockerfiles/BasePython.dockerfile", ["base"]))
+    IMAGES.append(Image("dotnet-base", "Dockerfiles/BaseDotnet.dockerfile", ["debian-base"]))
+    IMAGES.append(Image("nodejs-base", "Dockerfiles/BaseNodejs.dockerfile", ["base"]))
+
+    IMAGES.append(Image("frontend", "Dockerfiles/Frontend.dockerfile", ["nodejs-base"]))
+    IMAGES.append(Image("netdaemon", "Dockerfiles/Netdaemon.dockerfile", ["dotnet-base", "debian-base"]))
+    IMAGES.append(Image("integration", "Dockerfiles/Integration.dockerfile", ["python-base"]))
+    IMAGES.append(Image("monster", "Dockerfiles/Monster.dockerfile", ["python-base", "integration"]))
 
     if "build" in runtype:
         build_all()
@@ -39,9 +39,7 @@ class Image:
         self.published = False
 
     def build_image(self):
-        command = f"docker buildx build --compress --no-cache -t ludeeus/devcontainer:{self.name} -f {self.dockerfile} ."
-        command += " --platform linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64"
-        command += ' --output "type=image,push=false"'
+        command = f"docker build --compress --no-cache -t ludeeus/devcontainer:{self.name} -f {self.dockerfile} ."
         if self.name == "base":
             command += f" -t ludeeus/devcontainer:latest"
         command += f" -t ludeeus/container:{self.name}"
@@ -51,11 +49,11 @@ class Image:
     def publish_image(self):
         if self.name == "base":
             run_command(f'docker push ludeeus/devcontainer:latest')
+            run_command(f'docker push ludeeus/container:latest')
         run_command(f'docker push ludeeus/devcontainer:{self.name}')
         run_command(f'docker push ludeeus/container:{self.name}')
         if EVENT == "release":
             run_command(f'docker push ludeeus/devcontainer:{self.name}-{REF}')
-            run_command(f'docker push ludeeus/container:{self.name}-{REF}')
         self.published = True
 
 def get_next(sortkey):

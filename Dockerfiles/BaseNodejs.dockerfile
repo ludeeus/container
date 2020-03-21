@@ -1,5 +1,6 @@
-FROM ludeeus/container:integration
-ENV CONTAINER_TYPE monster
+FROM ludeeus/container:base
+
+ENV CONTAINER_TYPE nodejs
 
 RUN \
     apk add --no-cache \

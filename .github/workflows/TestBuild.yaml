@@ -3,7 +3,7 @@ name: Test images
 on:
   pull_request:
     branches:
-      - dev
+      - master
 
 jobs:
   test:

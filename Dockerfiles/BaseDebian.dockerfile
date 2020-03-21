@@ -2,7 +2,7 @@ FROM debian:10.3-slim
 
 ENV \
     DEBIAN_FRONTEND="noninteractive" \
-    DEVCONTAINER_TYPE="base-debian"
+    CONTAINER_TYPE="base-debian"
 
 WORKDIR /workspace
 

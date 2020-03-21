@@ -1,10 +1,10 @@
-FROM ludeeus/devcontainer:base-debian
+FROM ludeeus/container:debian-base
 
 ENV \
     NETVERSION="3.1.200" \
     DOTNET_RUNNING_IN_CONTAINER="true" \
     DOTNET_USE_POLLING_FILE_WATCHER="true" \
-    DEVCONTAINER_TYPE="dotnet"
+    CONTAINER_TYPE="dotnet"
 
 RUN \
     apt update \

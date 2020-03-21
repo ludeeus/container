@@ -1,2 +1,2 @@
-FROM ludeeus/devcontainer:dotnet
-ENV DEVCONTAINER_TYPE netdaemon
+FROM ludeeus/container:dotnet-base
+ENV CONTAINER_TYPE netdaemon

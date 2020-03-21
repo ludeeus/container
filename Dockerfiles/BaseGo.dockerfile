@@ -1,6 +1,6 @@
-FROM ludeeus/devcontainer:base
+FROM ludeeus/container:base
 
-ENV DEVCONTAINER_TYPE go
+ENV CONTAINER_TYPE go
 
 RUN \
     apk add --no-cache \
