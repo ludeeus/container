@@ -1,5 +1,6 @@
 #!/bin/bash
 source /etc/bash_completion.d/dc_completion
+git config --global core.autocrlf input > /dev/null 2>&1
 
 export PS1="devcontainer# "
 export DEVCONTAINER="True"

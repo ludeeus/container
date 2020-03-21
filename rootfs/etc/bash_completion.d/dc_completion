@@ -4,7 +4,7 @@ _dc()
     COMPREPLY=()
     cur="${COMP_WORDS[COMP_CWORD]}"
     prev="${COMP_WORDS[COMP_CWORD-1]}"
-    opts="start version upgrade check help"
+    opts="start version upgrade check help init set-version"
     altopts="--help"
 
     if [[ ${cur} == -* ]] ; then
