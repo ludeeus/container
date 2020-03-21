@@ -14,11 +14,7 @@ RUN \
         openssh=8.1_p1-r0 \
         bash=5.0.11-r1 \
         git=2.24.1-r0 \
-        go=1.13.4-r1 \
     \
-    && find /usr/local \
-        \( -type d -a -name test -o -name tests -o -name '__pycache__' \) \
-        -o \( -type f -a -name '*.pyc' -o -name '*.pyo' \) \
-        -exec rm -rf '{}' + \
+    && rm -rf /var/cache/apk/* \
     \
     && chmod +x /usr/bin/dc

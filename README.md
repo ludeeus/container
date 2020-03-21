@@ -36,6 +36,7 @@ frontend | This is intended to be used if you are developing a frontend elements
 monster | This is here to please @iantrich's crazy ideas, this combines the `integration` & `frontend` tags into one monster tag.
 dotnet | This provides a minimalistic container for working with dotnet core.
 netdaemon | This provides a minimalistic container for working with netdaemon apps core.
+go | This provices a minimalistic container for working with go.
 
 _You can add a `-x.x.x` postfix to each tag to specify the version._ 
 
@@ -85,10 +86,19 @@ Description | version
 -- | --
 bash | 5.0.11-r1
 git | 2.24.1-r0
-go | 1.13.4-r1
 nano | 4.6-r0
 openssh | 8.1_p1-r0
 openssl-dev | 1.1.1d-r3
+
+## Base
+
+_Based on `ludeeus/devcontainer:base`_
+
+_Included in the container/tags starting with `go`_
+
+Description | version
+-- | --
+go | 1.13.4-r1
 
 ## Python
 

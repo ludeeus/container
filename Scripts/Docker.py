@@ -15,6 +15,7 @@ def main(runtype):
     IMAGES.append(Image("base", "Base.dockerfile", []))
     IMAGES.append(Image("base-debian", "BaseDebian.dockerfile", []))
 
+    IMAGES.append(Image("go", "Dockerfiles/Go.dockerfile", ["base"]))
     IMAGES.append(Image("python", "Dockerfiles/Python.dockerfile", ["base"]))
     IMAGES.append(Image("dotnet", "Dockerfiles/Dotnet.dockerfile", ["base-debian"]))
     IMAGES.append(Image("netdaemon", "Dockerfiles/Netdaemon.dockerfile", ["dotnet", "base-debian"]))
