@@ -40,7 +40,7 @@ class Image:
 
     def build_image(self):
         command = f"docker buildx build --compress --no-cache -t ludeeus/devcontainer:{self.name} -f {self.dockerfile} ."
-        command = " --load --platform linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64"
+        command = " --output 'type=image,push=false' --platform linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64"
         if self.name == "alpine-base":
             command += f" -t ludeeus/devcontainer:latest"
             command += f" -t ludeeus/container:latest"
