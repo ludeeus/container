@@ -1,4 +1,4 @@
-FROM ludeeus/container:base
+FROM ludeeus/container:alpine-base
 
 ENV CONTAINER_TYPE go
 

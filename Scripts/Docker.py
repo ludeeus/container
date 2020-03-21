@@ -12,18 +12,18 @@ def main(runtype):
         print("Runtype is missing")
         exit(1)
 
-    IMAGES.append(Image("base", "Dockerfiles/Base.dockerfile", []))
+    IMAGES.append(Image("alpine-base", "Dockerfiles/BaseAlpine.dockerfile", []))
     IMAGES.append(Image("debian-base", "Dockerfiles/BaseDebian.dockerfile", []))
 
-    IMAGES.append(Image("go-base", "Dockerfiles/BaseGo.dockerfile", ["base"]))
-    IMAGES.append(Image("python-base", "Dockerfiles/BasePython.dockerfile", ["base"]))
+    IMAGES.append(Image("go-base", "Dockerfiles/BaseGo.dockerfile", ["alpine-base"]))
+    IMAGES.append(Image("python-base", "Dockerfiles/BasePython.dockerfile", ["alpine-base"]))
     IMAGES.append(Image("dotnet-base", "Dockerfiles/BaseDotnet.dockerfile", ["debian-base"]))
-    IMAGES.append(Image("nodejs-base", "Dockerfiles/BaseNodejs.dockerfile", ["base"]))
+    IMAGES.append(Image("nodejs-base", "Dockerfiles/BaseNodejs.dockerfile", ["alpine-base"]))
 
-    IMAGES.append(Image("frontend", "Dockerfiles/Frontend.dockerfile", ["nodejs-base"]))
+    IMAGES.append(Image("frontend", "Dockerfiles/Frontend.dockerfile", ["alpine-base", "nodejs-base"]))
     IMAGES.append(Image("netdaemon", "Dockerfiles/Netdaemon.dockerfile", ["dotnet-base", "debian-base"]))
-    IMAGES.append(Image("integration", "Dockerfiles/Integration.dockerfile", ["python-base"]))
-    IMAGES.append(Image("monster", "Dockerfiles/Monster.dockerfile", ["python-base", "integration"]))
+    IMAGES.append(Image("integration", "Dockerfiles/Integration.dockerfile", ["alpine-base", "python-base"]))
+    IMAGES.append(Image("monster", "Dockerfiles/Monster.dockerfile", ["alpine-base", "python-base", "integration"]))
 
     if "build" in runtype:
         build_all()
@@ -40,7 +40,7 @@ class Image:
 
     def build_image(self):
         command = f"docker build --compress --no-cache -t ludeeus/devcontainer:{self.name} -f {self.dockerfile} ."
-        if self.name == "base":
+        if self.name == "alpine-base":
             command += f" -t ludeeus/devcontainer:latest"
             command += f" -t ludeeus/container:latest"
         command += f" -t ludeeus/container:{self.name}"
@@ -48,7 +48,7 @@ class Image:
         self.build = True
 
     def publish_image(self):
-        if self.name == "base":
+        if self.name == "alpine-base":
             run_command(f'docker push ludeeus/devcontainer:latest')
             run_command(f'docker push ludeeus/container:latest')
         run_command(f'docker push ludeeus/devcontainer:{self.name}')
