@@ -17,8 +17,9 @@ def main(runtype):
 
     #IMAGES.append(Image("go-base", "DockerFiles/BaseImages/Go.dockerfile", ["alpine-base"]))
     #IMAGES.append(Image("python-base", "DockerFiles/BaseImages/Python.dockerfile", ["alpine-base"]))
-    #IMAGES.append(Image("dotnet-base", "DockerFiles/BaseImages/Dotnet.dockerfile", ["alpine-base"]))
-    IMAGES.append(Image("dotnet-debian-base", "DockerFiles/BaseImages/DotnetDebian.dockerfile", ["debian-base"]))
+    IMAGES.append(Image("dotnet-base", "DockerFiles/BaseImages/Dotnet/Alpine.dockerfile", []))
+    IMAGES.append(Image("dotnet-arm32-base", "DockerFiles/BaseImages/Dotnet/ARM32.dockerfile", []))
+    IMAGES.append(Image("dotnet-arm64-base", "DockerFiles/BaseImages/Dotnet/ARM64.dockerfile", []))
     #IMAGES.append(Image("nodejs-base", "DockerFiles/BaseImages/Nodejs.dockerfile", ["alpine-base"]))
 
     #IMAGES.append(Image("frontend", "DockerFiles/Frontend.dockerfile", ["alpine-base", "nodejs-base"]))
@@ -48,9 +49,11 @@ class Image:
             args = " --output=type=image,push=false"
         if self.multi:
             if self.name == "dotnet-base":
+                args += " --platform linux/amd64"
+            elif self.name == "dotnet-arm32-base":
                 args += " --platform linux/arm"
-            elif self.name == "dotnet-debian-base":
-                args += " --platform linux/arm,linux/arm64,linux/amd64"
+            elif self.name == "dotnet-arm64-base":
+                args += " --platform linux/arm64"
             else:
                 args += " --platform linux/arm,linux/arm64,linux/amd64"
         else:
