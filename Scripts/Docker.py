@@ -26,9 +26,9 @@ def main(runtype):
     #IMAGES.append(Image("monster", "DockerFiles/Monster.dockerfile", ["alpine-base", "python-base", "integration"]))
 
     if "build" in runtype:
-        build_all(runtype)
+        build_all()
     if "publish" in runtype:
-        publish_all(runtype)
+        publish_all()
 
 class Image:
     def __init__(self, name, dockerfile, needs, multi=True):
