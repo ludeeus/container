@@ -1,8 +1,8 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1.200
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1.200-alpine
 
 ENV \
     CONTAINER_TYPE="dotnet"
-    
+
 COPY rootfs /
 
 RUN \
