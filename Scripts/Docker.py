@@ -49,11 +49,11 @@ class Image:
             args += f" -t temp/{self.name}:{arch}"
             if self.name == "dotnet-base":
                 if arch == "arm":
-                    args += f" -f DockerFiles/BaseFiles/DotNet/ARM32.dockerfile"
+                    args += f" -f DockerFiles/BaseImages/DotNet/ARM32.dockerfile"
                 elif arch == "arm64":
-                    args += f" -f DockerFiles/BaseFiles/DotNet/ARM32.dockerfile"
+                    args += f" -f DockerFiles/BaseImages/DotNet/ARM32.dockerfile"
                 else:
-                    args += f" -f DockerFiles/BaseFiles/DotNet/Alpine.dockerfile"
+                    args += f" -f DockerFiles/BaseImages/DotNet/Alpine.dockerfile"
             else:
                 args += f" -f {self.dockerfile}"
             args += " ."
@@ -65,6 +65,7 @@ class Image:
             command += f" temp/{self.name}:arm64"
             command += f" temp/{self.name}:amd64"
             run_command(command)
+            run_command(f"docker manifest inspect ludeeus/container:{self.name}")
             run_command(f"docker manifest annotate ludeeus/container:{self.name} temp/{self.name}:arm --arch arm --os linux")
             run_command(f"docker manifest annotate ludeeus/container:{self.name} temp/{self.name}:arm64 --arch arm64 --os linux")
             run_command(f"docker manifest annotate ludeeus/container:{self.name} temp/{self.name}:amd64 --arch amd64 --os linux")
