@@ -44,8 +44,24 @@ class Image:
             command += f" -t ludeeus/devcontainer:latest"
             command += f" -t ludeeus/container:latest"
         command += f" -t ludeeus/container:{self.name}"
-        run_command(command)
-        run_command(f"docker buildx imagetools inspect ludeeus/container:{self.name}")
+        #run_command(command)
+
+
+        docker = "docker build"
+        buildx = "docker buildx build"
+        buildx += " --output=type=image,push=false"
+        buildx += " --platform linux/arm,linux/arm64,linux/amd64"
+        args = " --no-cache"
+        args += " --compress"
+        args += f" -t ludeeus/devcontainer:{self.name}"
+        args += f" -t ludeeus/container:{self.name}"
+        args += " -t ludeeus/devcontainer:latest"
+        args += " -t ludeeus/container:latest"
+        args += " -f DockerFiles/BaseImages/OS/Alpine.dockerfile "
+        args += " ."
+        run_command(docker + args)
+        run_command(buildx + args)
+
         self.build = True
 
     def publish_image(self):
