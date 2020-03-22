@@ -36,7 +36,7 @@ RUN \
     \
     && ln -s /dotnet/dotnet /bin/dotnet \
     \
-    && ls -la /dotnet/host/fxr \
+    && ls -la /dotnet/host/fxr/3.1.2/ \
     \
     && dotnet help \
     \
