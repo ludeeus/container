@@ -40,10 +40,9 @@ class Image:
         self.multi = multi
 
     def constructCmd(self, publish=False):
-        buildx = "docker buildx build"
-        args = " --load"
-
         for arch in ["arm", "arm64", "amd64"]:
+            buildx = "docker buildx build"
+            args = " --load"
             args += f" --platform linux/{arch}"
             args += " --no-cache"
             args += " --compress"
@@ -66,7 +65,6 @@ class Image:
             command += f" temp/{self.name}:arm64"
             command += f" temp/{self.name}:amd64"
             run_command(command)
-
             run_command(f"docker manifest annotate ludeeus/container:{self.name} temp/{self.name}:arm --arch arm --os linux")
             run_command(f"docker manifest annotate ludeeus/container:{self.name} temp/{self.name}:arm64 --arch arm64 --os linux")
             run_command(f"docker manifest annotate ludeeus/container:{self.name} temp/{self.name}:amd64 --arch amd64 --os linux")
