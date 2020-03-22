@@ -21,7 +21,7 @@ RUN \
     \
     && if [ "$(uname -m)" != "x86_64" ]; then export ARCH="arm"; else export ARCH="auto"; fi \
     \
-    && bash /tmp/dotnet-install.sh --version ${NETVERSION} --install-dir "/root/.dotnet" --architecture $(ARCH) \
+    && bash /tmp/dotnet-install.sh --version ${NETVERSION} --install-dir "/root/.dotnet" --architecture ${ARCH} \
     \
     && rm /tmp/dotnet-install.sh \
     \
