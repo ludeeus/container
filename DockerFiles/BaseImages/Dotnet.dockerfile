@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1.200-alpine
 
 ENV \
     CONTAINER_TYPE="dotnet"
@@ -6,6 +6,8 @@ ENV \
 COPY rootfs /
 
 RUN \
-    dotnet help \
+    echo $(uname -a) \
+    \
+    && dotnet help \
     \
     && chmod +x /usr/bin/dc

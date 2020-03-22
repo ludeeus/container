@@ -43,7 +43,7 @@ class Image:
         buildx = "docker buildx build"
         args = " --output=type=image,push=false"
         if self.multi:
-            args += " --platform linux/arm,linux/arm64,linux/amd64"
+            args += " --platform linux/arm64,linux/amd64"
         else:
             args += " --platform linux/amd64"
         args += " --no-cache"
