@@ -15,9 +15,7 @@ jobs:
         uses: crazy-max/ghaction-docker-buildx@v1
         with:
           version: latest
-      - name: Login to docker hub
-        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_TOKEN }}
       - name: Push to docker registry
         run: | 
           docker version
-          python3 Scripts/Docker.py publish
+          python3 Scripts/Docker.py build
