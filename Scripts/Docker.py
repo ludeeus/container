@@ -25,14 +25,10 @@ def main(runtype):
     #IMAGES.append(Image("integration", "DockerFiles/Integration.dockerfile", ["alpine-base", "python-base"]))
     #IMAGES.append(Image("monster", "DockerFiles/Monster.dockerfile", ["alpine-base", "python-base", "integration"]))
 
-    if "image" in runtype:
-        image = runtype[-1]
-        IMAGES = [x for x in IMAGES if x.name == image]
-
     if "build" in runtype:
-        build_all()
+        build_all(runtype)
     if "publish" in runtype:
-        publish_all()
+        publish_all(runtype)
 
 class Image:
     def __init__(self, name, dockerfile, needs, multi=True):
@@ -85,9 +81,14 @@ class Image:
         self.published = True
 
 def get_next(sortkey):
+    if "image" in sys.argv:
+        image = sys.argv[-1]
+        images = [x for x in IMAGES if x.name == image]
+    else:
+        images = IMAGES
     if sortkey == "build":
-        return sorted([x for x in IMAGES if not x.build], key=lambda x: x.needs, reverse=False)
-    return sorted([x for x in IMAGES if not x.published], key=lambda x: x.needs, reverse=False)
+        return sorted([x for x in images if not x.build], key=lambda x: x.needs, reverse=False)
+    return sorted([x for x in images if not x.published], key=lambda x: x.needs, reverse=False)
 
 def run_command(command):
     print(command)
