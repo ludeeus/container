@@ -22,7 +22,7 @@ RUN \
     \
     && sed -i 's|-$osname-|-linux-|' /tmp/dotnet-install.sh \
     \
-    && bash /tmp/dotnet-install.sh --version ${NETVERSION} --install-dir "/root/.dotnet" \
+    && bash /tmp/dotnet-install.sh --version ${NETVERSION} --install-dir "/root/.dotnet" --architecture "arm" \
     \
     && rm /tmp/dotnet-install.sh \
     \
