@@ -19,5 +19,7 @@ jobs:
       - name: Test
         run: |
           docker buildx build --output "type=image,push=false" --platform linux/arm,linux/arm64,linux/amd64 --compress --no-cache -t ludeeus/devcontainer:alpine-base -f DockerFiles/BaseImages/OS/Alpine.dockerfile . -t ludeeus/devcontainer:latest -t ludeeus/container:latest -t ludeeus/container:alpine-base
+
+          docker push ludeeus/container:alpine-base
 #      - name: Build images
 #        run: python3 Scripts/Docker.py build
