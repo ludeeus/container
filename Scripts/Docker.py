@@ -46,8 +46,6 @@ class Image:
             args = " --output=type=image,push=true"
         else:
             args = " --output=type=image,push=false"
-        buildx = "docker buildx build"
-        args = " --load"
         args += " --platform linux/arm,linux/arm64,linux/amd64"
         args += " --no-cache"
         args += " --compress"
