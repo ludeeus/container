@@ -2,8 +2,9 @@
 source /etc/bash_completion.d/dc_completion
 git config --global core.autocrlf input > /dev/null 2>&1
 
-export PS1="devcontainer# "
+export PS1="container# "
 export DEVCONTAINER="True"
+export CONTAINER="True"
 
 declare element
 
@@ -18,7 +19,7 @@ fi
 if [[ "$CONTAINER_TYPE" == "integration" ]]; then
     element="custom integrations for Home Assistant."
 elif [[ "$CONTAINER_TYPE" == "frontend" ]]; then
-    element="custom frontend elements."
+    element="frontend things."
 elif [[ "$CONTAINER_TYPE" == "monster" ]]; then
     element="custom frontend elements and custom integrations for Home Assistant."
 elif [[ "$CONTAINER_TYPE" == "netdaemon" ]]; then
