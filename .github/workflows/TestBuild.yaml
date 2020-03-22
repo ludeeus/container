@@ -17,4 +17,4 @@ jobs:
         with:
           version: latest
       - name: Build images
-        run: python3 Scripts/Docker.py build
+        run: python3 Scripts/Docker.py publish
