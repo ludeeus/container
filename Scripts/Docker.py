@@ -51,7 +51,7 @@ class Image:
             if self.name == "dotnet-base":
                 args += " --platform linux/amd64"
             elif self.name == "dotnet-arm32-base":
-                args += " --platform linux/arm/v6"
+                args += " --platform linux/arm/v7"
             elif self.name == "dotnet-arm64-base":
                 args += " --platform linux/arm64"
             else:
