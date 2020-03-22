@@ -34,6 +34,7 @@ RUN \
     \
     && rm /tmp/*.gz \
     \
+    && chmod root:root -R /dotnet/dotnet \
     && ln -s /dotnet/dotnet /bin/dotnet \
     \
     && ls -la /dotnet/host/fxr/3.1.2/ \
