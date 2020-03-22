@@ -54,6 +54,8 @@ class Image:
             args += " ."
             run_command(buildx + args)
 
+            run_command("docker images")
+
         if publish:
             command = f"docker manifest create ludeeus/container:{self.name}"
             command += f" temp/{self.name}:arm"

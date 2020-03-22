@@ -18,9 +18,8 @@ jobs:
           version: latest
       - name: Login to docker hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_TOKEN }}
-      - name: Enable experimental Docker CLI
+      - name: Push to docker registry
         run: | 
           export DOCKER_CLI_EXPERIMENTAL=enabled
           docker version
-      - name: Push to docker registry
-        run: python3 Scripts/Docker.py publish
+          python3 Scripts/Docker.py publish
