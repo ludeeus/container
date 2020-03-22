@@ -44,7 +44,12 @@ class Image:
         buildx = "docker buildx build"
         args = " --output=type=image,push=false"
         if self.multi:
-            args += " --platform linux/arm,linux/arm64,linux/amd64"
+            if self.name == "dotnet-base":
+                args += " --platform linux/arm,linux/amd64"
+            elif self.name == "dotnet-debian-base":
+                args += " --platform linux/arm64,linux/amd64"
+            else:
+                args += " --platform linux/arm,linux/arm64,linux/amd64"
         else:
             args += " --platform linux/amd64"
         args += " --no-cache"
