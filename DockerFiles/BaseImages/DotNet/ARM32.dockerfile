@@ -36,7 +36,8 @@ RUN \
     \
     && ln -s /dotnet/dotnet /bin/dotnet \
     \
-    && find / -name ld-linux-armhf.so.3 \
+    && ls -la /dotnet/host/ \
+    \
     && dotnet help \
     \
     && chmod +x /usr/bin/dc
