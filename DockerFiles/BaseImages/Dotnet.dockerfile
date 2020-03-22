@@ -1,7 +1,7 @@
 FROM ludeeus/container:alpine-base
 
 ENV \
-    NETVERSION="3.1.200" \
+    NETVERSION="3.1.2" \
     DOTNET_RUNNING_IN_CONTAINER="true" \
     DOTNET_USE_POLLING_FILE_WATCHER="true" \
     CONTAINER_TYPE="dotnet"
