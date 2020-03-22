@@ -39,12 +39,13 @@ class Image:
         self.published = False
 
     def build_image(self):
-        command = f"docker buildx build --output 'type=image,push=false' --platform linux/arm,linux/arm64,linux/amd64 --compress --no-cache -t ludeeus/devcontainer:{self.name} -f {self.dockerfile} ."
+        command = f'docker buildx build --output "type=image,push=false" --platform linux/arm,linux/arm64,linux/amd64 --compress --no-cache -t ludeeus/devcontainer:{self.name} -f {self.dockerfile} .'
         if self.name == "alpine-base":
             command += f" -t ludeeus/devcontainer:latest"
             command += f" -t ludeeus/container:latest"
         command += f" -t ludeeus/container:{self.name}"
         run_command(command)
+        run_command(f"docker buildx imagetools inspect ludeeus/container:{self.name}")
         self.build = True
 
     def publish_image(self):
