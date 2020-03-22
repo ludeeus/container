@@ -57,6 +57,7 @@ class Image:
 
             run_command("docker images")
 
+        run_command(f"docker run --rm ludeeus/container:{self.name}-amd64")
         if publish:
             command = f"docker manifest create ludeeus/container:{self.name}"
             command += f" ludeeus/container:{self.name}-arm"
