@@ -12,18 +12,18 @@ def main(runtype):
         print("Runtype is missing")
         exit(1)
 
-    IMAGES.append(Image("alpine-base", "DockerFiles/BaseImages/OS/Alpine.dockerfile", []))
-    #IMAGES.append(Image("debian-base", "DockerFiles/BaseImages/OS/Debian.dockerfile", []))
+    IMAGES.append(Image("alpine-base", "BaseImages/OS/Alpine.dockerfile", []))
+    #IMAGES.append(Image("debian-base", "BaseImages/OS/Debian.dockerfile", []))
 
-    #IMAGES.append(Image("go-base", "DockerFiles/BaseImages/Go.dockerfile", ["alpine-base"]))
-    #IMAGES.append(Image("python-base", "DockerFiles/BaseImages/Python.dockerfile", ["alpine-base"]))
+    #IMAGES.append(Image("go-base", "BaseImages/Go.dockerfile", ["alpine-base"]))
+    #IMAGES.append(Image("python-base", "BaseImages/Python.dockerfile", ["alpine-base"]))
     #IMAGES.append(Image("dotnet-base", "", []))
-    #IMAGES.append(Image("nodejs-base", "DockerFiles/BaseImages/Nodejs.dockerfile", ["alpine-base"]))
+    #IMAGES.append(Image("nodejs-base", "BaseImages/Nodejs.dockerfile", ["alpine-base"]))
 
-    #IMAGES.append(Image("frontend", "DockerFiles/Frontend.dockerfile", ["alpine-base", "nodejs-base"]))
-    #IMAGES.append(Image("netdaemon", "DockerFiles/Netdaemon.dockerfile", ["dotnet-base", "debian-base"]))
-    #IMAGES.append(Image("integration", "DockerFiles/Integration.dockerfile", ["alpine-base", "python-base"]))
-    #IMAGES.append(Image("monster", "DockerFiles/Monster.dockerfile", ["alpine-base", "python-base", "integration"]))
+    #IMAGES.append(Image("frontend", "Frontend.dockerfile", ["alpine-base", "nodejs-base"]))
+    #IMAGES.append(Image("netdaemon", "Netdaemon.dockerfile", ["dotnet-base", "debian-base"]))
+    #IMAGES.append(Image("integration", "Integration.dockerfile", ["alpine-base", "python-base"]))
+    #IMAGES.append(Image("monster", "Monster.dockerfile", ["alpine-base", "python-base", "integration"]))
 
     if "build" in runtype:
         build_all()
@@ -46,11 +46,11 @@ class Image:
             args += f" --platform linux/{arch}"
             args += " --no-cache"
             args += " --compress"
-            args += f" -t temp/{self.name}:{arch}"
+            args += f" -t ludeeus/container:{self.name}-{arch}"
             if self.name == "dotnet-base":
-                args += f" -f DockerFiles/DotNet/{arch}.dockerfile"
+                args += f" -f $GITHUB_WORKSPACE/DockerFiles/DotNet/{arch}.dockerfile"
             else:
-                args += f" -f {self.dockerfile}"
+                args += f" -f $GITHUB_WORKSPACE/DockerFiles/{self.dockerfile}"
             args += " ."
             run_command(buildx + args)
 
@@ -58,14 +58,14 @@ class Image:
 
         if publish:
             command = f"docker manifest create ludeeus/container:{self.name}"
-            command += f" temp/{self.name}:arm"
-            command += f" temp/{self.name}:arm64"
-            command += f" temp/{self.name}:amd64"
+            command += f" ludeeus/container:{self.name}-arm"
+            command += f" ludeeus/container:{self.name}-arm64"
+            command += f" ludeeus/container:{self.name}-amd64"
             run_command(command)
             run_command(f"docker manifest inspect ludeeus/container:{self.name}")
-            run_command(f"docker manifest annotate ludeeus/container:{self.name} temp/{self.name}:arm --arch arm --os linux")
-            run_command(f"docker manifest annotate ludeeus/container:{self.name} temp/{self.name}:arm64 --arch arm64 --os linux")
-            run_command(f"docker manifest annotate ludeeus/container:{self.name} temp/{self.name}:amd64 --arch amd64 --os linux")
+            run_command(f"docker manifest annotate ludeeus/container:{self.name} ludeeus/container:{self.name}-arm --arch arm --os linux")
+            run_command(f"docker manifest annotate ludeeus/container:{self.name} ludeeus/container:{self.name}-arm64 --arch arm64 --os linux")
+            run_command(f"docker manifest annotate ludeeus/container:{self.name} ludeeus/container:{self.name}-amd64 --arch amd64 --os linux")
             run_command(f"docker manifest inspect ludeeus/container:{self.name}")
             run_command(f"docker manifest push --purge ludeeus/container:{self.name}")
 
