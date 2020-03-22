@@ -31,8 +31,8 @@ else
 fi
 
 
-echo Welcome to this custom devcontainer for developing/testing "$element"
+echo Welcome to this custom container for developing/testing "$element"
 echo
 echo For the documentation for this container have a look here:
-echo https://github.com/ludeeus/devcontainer
+echo https://github.com/ludeeus/container
 echo

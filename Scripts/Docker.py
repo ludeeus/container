@@ -12,18 +12,18 @@ def main(runtype):
         print("Runtype is missing")
         exit(1)
 
-    IMAGES.append(Image("alpine-base", "Dockerfiles/BaseAlpine.dockerfile", []))
-    IMAGES.append(Image("debian-base", "Dockerfiles/BaseDebian.dockerfile", []))
+    IMAGES.append(Image("alpine-base", "DockerFiles/BaseImages/OS/Alpine.dockerfile", []))
+    IMAGES.append(Image("debian-base", "DockerFiles/BaseImages/OS/Debian.dockerfile", []))
 
-    IMAGES.append(Image("go-base", "Dockerfiles/BaseGo.dockerfile", ["alpine-base"]))
-    IMAGES.append(Image("python-base", "Dockerfiles/BasePython.dockerfile", ["alpine-base"]))
-    IMAGES.append(Image("dotnet-base", "Dockerfiles/BaseDotnet.dockerfile", ["debian-base"]))
-    IMAGES.append(Image("nodejs-base", "Dockerfiles/BaseNodejs.dockerfile", ["alpine-base"]))
+    IMAGES.append(Image("go-base", "DockerFiles/BaseImages/Go.dockerfile", ["alpine-base"]))
+    IMAGES.append(Image("python-base", "DockerFiles/BaseImages/Python.dockerfile", ["alpine-base"]))
+    IMAGES.append(Image("dotnet-base", "DockerFiles/BaseImages/Dotnet.dockerfile", ["debian-base"]))
+    IMAGES.append(Image("nodejs-base", "DockerFiles/BaseImages/Nodejs.dockerfile", ["alpine-base"]))
 
-    IMAGES.append(Image("frontend", "Dockerfiles/Frontend.dockerfile", ["alpine-base", "nodejs-base"]))
-    IMAGES.append(Image("netdaemon", "Dockerfiles/Netdaemon.dockerfile", ["dotnet-base", "debian-base"]))
-    IMAGES.append(Image("integration", "Dockerfiles/Integration.dockerfile", ["alpine-base", "python-base"]))
-    IMAGES.append(Image("monster", "Dockerfiles/Monster.dockerfile", ["alpine-base", "python-base", "integration"]))
+    IMAGES.append(Image("frontend", "DockerFiles/Frontend.dockerfile", ["alpine-base", "nodejs-base"]))
+    IMAGES.append(Image("netdaemon", "DockerFiles/Netdaemon.dockerfile", ["dotnet-base", "debian-base"]))
+    IMAGES.append(Image("integration", "DockerFiles/Integration.dockerfile", ["alpine-base", "python-base"]))
+    IMAGES.append(Image("monster", "DockerFiles/Monster.dockerfile", ["alpine-base", "python-base", "integration"]))
 
     if "build" in runtype:
         build_all()
@@ -39,7 +39,7 @@ class Image:
         self.published = False
 
     def build_image(self):
-        command = f"docker build --compress --no-cache -t ludeeus/devcontainer:{self.name} -f {self.dockerfile} ."
+        command = f"docker buildx build --compress --no-cache -t ludeeus/devcontainer:{self.name} -f {self.dockerfile} ."
         if self.name == "alpine-base":
             command += f" -t ludeeus/devcontainer:latest"
             command += f" -t ludeeus/container:latest"
