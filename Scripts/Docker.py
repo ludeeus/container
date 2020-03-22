@@ -12,13 +12,13 @@ def main(runtype):
         print("Runtype is missing")
         exit(1)
 
-    IMAGES.append(Image("alpine-base", "DockerFiles/BaseImages/OS/Alpine.dockerfile", []))
-    IMAGES.append(Image("debian-base", "DockerFiles/BaseImages/OS/Debian.dockerfile", []))
+    #IMAGES.append(Image("alpine-base", "DockerFiles/BaseImages/OS/Alpine.dockerfile", []))
+    #IMAGES.append(Image("debian-base", "DockerFiles/BaseImages/OS/Debian.dockerfile", []))
 
-    IMAGES.append(Image("go-base", "DockerFiles/BaseImages/Go.dockerfile", ["alpine-base"]))
-    IMAGES.append(Image("python-base", "DockerFiles/BaseImages/Python.dockerfile", ["alpine-base"]))
+    #IMAGES.append(Image("go-base", "DockerFiles/BaseImages/Go.dockerfile", ["alpine-base"]))
+    #IMAGES.append(Image("python-base", "DockerFiles/BaseImages/Python.dockerfile", ["alpine-base"]))
     IMAGES.append(Image("dotnet-base", "DockerFiles/BaseImages/Dotnet.dockerfile", ["debian-base"]))
-    IMAGES.append(Image("nodejs-base", "DockerFiles/BaseImages/Nodejs.dockerfile", ["alpine-base"]))
+    #IMAGES.append(Image("nodejs-base", "DockerFiles/BaseImages/Nodejs.dockerfile", ["alpine-base"]))
 
     #IMAGES.append(Image("frontend", "DockerFiles/Frontend.dockerfile", ["alpine-base", "nodejs-base"]))
     #IMAGES.append(Image("netdaemon", "DockerFiles/Netdaemon.dockerfile", ["dotnet-base", "debian-base"]))
