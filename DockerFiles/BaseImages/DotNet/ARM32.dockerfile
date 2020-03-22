@@ -24,23 +24,16 @@ RUN \
     \
     && rm -rf /var/lib/apt/lists/* \
     \
-    && mkdir -p $HOME/dotnet \
+    && mkdir -p /dotnet \
     \
     && wget -q -nv -O /tmp/runtime.tar.gz ${RUNTIME_URL} \
     && wget -q -nv -O /tmp/sdk.tar.gz ${SDK_URL} \
     \
-    && tar zxf /tmp/runtime.tar.gz -C $HOME/dotnet \
-    && tar zxf /tmp/sdk.tar.gz -C $HOME/dotnet \
+    && tar zxf /tmp/runtime.tar.gz -C /dotnet \
+    && tar zxf /tmp/sdk.tar.gz -C /dotnet \
     \
     && rm /tmp/*.gz \
     \
-    #&& chmod root:root -R /dotnet/dotnet \
-    #&& ln -s /dotnet /bin/dotnet \
-    \
-    && ls -la $HOME/dotnet/host/fxr/3.1.2/ \
-    && export DOTNET_ROOT=$HOME/dotnet \
-    && export PATH=$PATH:$HOME/dotnet \
-    \
-    && dotnet help \
+    && ln -s /dotnet/dotnet /bin/dotnet \
     \
     && chmod +x /usr/bin/dc
