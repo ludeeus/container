@@ -4,7 +4,6 @@ on:
   pull_request:
     branches:
       - master
-
 jobs:
   test:
     name: Test all images
@@ -16,5 +15,7 @@ jobs:
         uses: crazy-max/ghaction-docker-buildx@v1
         with:
           version: latest
-      - name: Build images
-        run: python3 Scripts/Docker.py build
+      - name: Push to docker registry
+        run: | 
+          docker version
+          python3 Scripts/Docker.py build

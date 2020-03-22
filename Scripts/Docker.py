@@ -6,26 +6,25 @@ IMAGES = []
 
 REF = os.getenv("IMAGE_TAG")
 EVENT = os.getenv("GITHUB_EVENT_NAME")
+WORKSPACE = os.getenv("GITHUB_WORKSPACE")
 
 def main(runtype):
     if len(runtype) == 1:
         print("Runtype is missing")
         exit(1)
 
-    #IMAGES.append(Image("alpine-base", "DockerFiles/BaseImages/OS/Alpine.dockerfile", []))
-    #IMAGES.append(Image("debian-base", "DockerFiles/BaseImages/OS/Debian.dockerfile", []))
+    IMAGES.append(Image("alpine-base", "BaseImages/OS/Alpine.dockerfile", []))
+    IMAGES.append(Image("debian-base", "BaseImages/OS/Debian.dockerfile", []))
 
-    #IMAGES.append(Image("go-base", "DockerFiles/BaseImages/Go.dockerfile", ["alpine-base"]))
-    #IMAGES.append(Image("python-base", "DockerFiles/BaseImages/Python.dockerfile", ["alpine-base"]))
-    #IMAGES.append(Image("dotnet-base", "DockerFiles/BaseImages/DotNet/Alpine.dockerfile", []))
-    IMAGES.append(Image("dotnet-arm32-base", "DockerFiles/BaseImages/DotNet/ARM32.dockerfile", []))
-    #IMAGES.append(Image("dotnet-arm64-base", "DockerFiles/BaseImages/DotNet/ARM64.dockerfile", []))
-    #IMAGES.append(Image("nodejs-base", "DockerFiles/BaseImages/Nodejs.dockerfile", ["alpine-base"]))
+    IMAGES.append(Image("go-base", "BaseImages/Go.dockerfile", ["alpine-base"]))
+    IMAGES.append(Image("python-base", "BaseImages/Python.dockerfile", ["alpine-base"]))
+    IMAGES.append(Image("dotnet-base", "BaseImages/Dotnet.dockerfile", ["debian-base"]))
+    IMAGES.append(Image("nodejs-base", "BaseImages/Nodejs.dockerfile", ["alpine-base"]))
 
-    #IMAGES.append(Image("frontend", "DockerFiles/Frontend.dockerfile", ["alpine-base", "nodejs-base"]))
-    #IMAGES.append(Image("netdaemon", "DockerFiles/Netdaemon.dockerfile", ["dotnet-base", "debian-base"]))
-    #IMAGES.append(Image("integration", "DockerFiles/Integration.dockerfile", ["alpine-base", "python-base"]))
-    #IMAGES.append(Image("monster", "DockerFiles/Monster.dockerfile", ["alpine-base", "python-base", "integration"]))
+    #IMAGES.append(Image("frontend", "Frontend.dockerfile", ["alpine-base", "nodejs-base"]))
+    #IMAGES.append(Image("netdaemon", "Netdaemon.dockerfile", ["dotnet-base", "debian-base"]))
+    #IMAGES.append(Image("integration", "Integration.dockerfile", ["alpine-base", "python-base"]))
+    #IMAGES.append(Image("monster", "Monster.dockerfile", ["alpine-base", "python-base", "integration"]))
 
     if "build" in runtype:
         build_all()
@@ -47,27 +46,14 @@ class Image:
             args = " --output=type=image,push=true"
         else:
             args = " --output=type=image,push=false"
-        if self.multi:
-            if self.name == "dotnet-base":
-                args += " --platform linux/amd64"
-            elif self.name == "dotnet-arm32-base":
-                args += " --platform linux/arm/v7"
-            elif self.name == "dotnet-arm64-base":
-                args += " --platform linux/arm64"
-            else:
-                args += " --platform linux/arm,linux/arm64,linux/amd64"
-        else:
-            args += " --platform linux/amd64"
+        args += " --platform linux/arm,linux/arm64,linux/amd64"
         args += " --no-cache"
         args += " --compress"
-        args += f" -t ludeeus/devcontainer:{self.name}"
         args += f" -t ludeeus/container:{self.name}"
-        if self.name == "alpine-base":
-            args += " -t ludeeus/devcontainer:latest"
-            args += " -t ludeeus/container:latest"
-        args += f" -f {self.dockerfile}"
+        args += f" -f {WORKSPACE}/DockerFiles/{self.dockerfile}"
         args += " ."
         run_command(buildx + args)
+
 
     def build_image(self):
         self.constructCmd()

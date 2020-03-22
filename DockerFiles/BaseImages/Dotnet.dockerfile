@@ -1,16 +1,13 @@
 FROM ludeeus/container:debian-base
 
-# https://dotnet.microsoft.com/download/dotnet-core/3.1
-ARG SDK_URL="https://download.visualstudio.microsoft.com/download/pr/21a124fd-5bb7-403f-bdd2-489f9d21d695/b58fa90d19a5a5124d21dea94422868c/dotnet-sdk-3.1.200-linux-arm.tar.gz"
-ARG RUNTIME_URL="https://download.visualstudio.microsoft.com/download/pr/30ed47bb-c25b-431c-9cfd-7b942b07314f/5c92af345a5475ca58b6878dd974e1dc/dotnet-runtime-3.1.2-linux-arm.tar.gz"
+COPY tools/download_dotnet.sh /tmp/download_dotnet.sh
 
 ENV \
     DOTNET_RUNNING_IN_CONTAINER="true" \
     DOTNET_USE_POLLING_FILE_WATCHER="true" \
     DEVCONTAINER_TYPE="dotnet"
 
-RUN \
-    echo $(uname -a) \
+RUN echo $(uname -a) \
     \
     && apt update \
     && apt install -y --no-install-recommends \
@@ -26,13 +23,12 @@ RUN \
     \
     && mkdir -p /dotnet \
     \
-    && wget -q -nv -O /tmp/runtime.tar.gz ${RUNTIME_URL} \
-    && wget -q -nv -O /tmp/sdk.tar.gz ${SDK_URL} \
+    && bash /tmp/download_dotnet.sh \
     \
     && tar zxf /tmp/runtime.tar.gz -C /dotnet \
     && tar zxf /tmp/sdk.tar.gz -C /dotnet \
     \
-    && rm /tmp/*.gz \
+    && rm /tmp/*.gz && rm /tmp/download_dotnet.sh \
     \
     && ln -s /dotnet/dotnet /bin/dotnet \
     \
