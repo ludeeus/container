@@ -48,12 +48,7 @@ class Image:
             args += " --compress"
             args += f" -t temp/{self.name}:{arch}"
             if self.name == "dotnet-base":
-                if arch == "arm":
-                    args += f" -f DockerFiles/DotNet/ARM32.dockerfile"
-                elif arch == "arm64":
-                    args += f" -f DockerFiles/DotNet/ARM64.dockerfile"
-                else:
-                    args += f" -f DockerFiles/DotNet/Alpine.dockerfile"
+                args += f" -f DockerFiles/DotNet/{arch}.dockerfile"
             else:
                 args += f" -f {self.dockerfile}"
             args += " ."
