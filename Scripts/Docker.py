@@ -49,7 +49,7 @@ class Image:
         args += " --platform linux/arm,linux/arm64,linux/amd64"
         args += " --no-cache"
         args += " --compress"
-        args += f" -t ludeeus/devcontainer:{self.name}"
+        args += f" -t ludeeus/container:{self.name}"
         args += f" -f {WORKSPACE}/DockerFiles/{self.dockerfile}"
         args += " ."
         run_command(buildx + args)
