@@ -16,8 +16,11 @@ jobs:
         uses: crazy-max/ghaction-docker-buildx@v1
         with:
           version: latest
-      - name: Build images
+      - name: Login to docker hub
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_TOKEN }}
+      - name: Enable experimental Docker CLI
         run: | 
           export DOCKER_CLI_EXPERIMENTAL=enabled
           docker version
-
+      - name: Push to docker registry
+        run: python3 Scripts/Docker.py publish

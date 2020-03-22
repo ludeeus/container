@@ -43,31 +43,38 @@ class Image:
 
     def constructCmd(self, publish=False):
         buildx = "docker buildx build"
-        if publish:
-            args = " --output=type=image,push=true"
-        else:
-            args = " --output=type=image,push=false"
-        if self.multi:
-            if self.name == "dotnet-base":
-                args += " --platform linux/amd64"
-            elif self.name == "dotnet-arm32-base":
-                args += " --platform linux/arm/v7"
-            elif self.name == "dotnet-arm64-base":
-                args += " --platform linux/arm64"
-            else:
-                args += " --platform linux/arm,linux/arm64,linux/amd64"
-        else:
-            args += " --platform linux/amd64"
+        args = " --load"
+
+        for arch in ["arm", "arm64", "amd64"]:
+
+        args += f" --platform linux/{arch}"
         args += " --no-cache"
         args += " --compress"
-        args += f" -t ludeeus/devcontainer:{self.name}"
-        args += f" -t ludeeus/container:{self.name}"
-        if self.name == "alpine-base":
-            args += " -t ludeeus/devcontainer:latest"
-            args += " -t ludeeus/container:latest"
-        args += f" -f {self.dockerfile}"
+        args += f" -t temp/{self.name}:{arch}"
+        if self.name == "dotnet-base":
+            if arch == "arm":
+                args += f" -f DockerFiles/BaseFiles/DotNet/ARM32.dockerfile"
+            elif arch == "arm64":
+                args += f" -f DockerFiles/BaseFiles/DotNet/ARM32.dockerfile"
+            else:
+                args += f" -f DockerFiles/BaseFiles/DotNet/Alpine.dockerfile"
+        else:
+            args += f" -f {self.dockerfile}"
         args += " ."
         run_command(buildx + args)
+
+        if publish:
+            command = f"docker manifest create ludeeus/container:{self.name}"
+            command += f" temp/{self.name}:arm"
+            command += f" temp/{self.name}:arm64"
+            command += f" temp/{self.name}:amd64"
+            run_command(command)
+
+            run_command(f"docker manifest annotate ludeeus/container:{self.name} temp/{self.name}:arm --arch arm --os linux")
+            run_command(f"docker manifest annotate ludeeus/container:{self.name} temp/{self.name}:arm64 --arch arm64 --os linux")
+            run_command(f"docker manifest annotate ludeeus/container:{self.name} temp/{self.name}:amd64 --arch amd64 --os linux")
+            run_command(f"docker manifest inspect ludeeus/container:{self.name}")
+            run_command(f"docker manifest push --purge ludeeus/container:{self.name}")
 
     def build_image(self):
         self.constructCmd()
