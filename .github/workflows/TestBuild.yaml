@@ -19,4 +19,4 @@ jobs:
       - name: Build images
         run: | 
           docker version
-          
+          find / --name config.json
