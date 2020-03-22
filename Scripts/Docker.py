@@ -20,10 +20,10 @@ def main(runtype):
     IMAGES.append(Image("dotnet-base", "DockerFiles/BaseImages/Dotnet.dockerfile", ["debian-base"]))
     IMAGES.append(Image("nodejs-base", "DockerFiles/BaseImages/Nodejs.dockerfile", ["alpine-base"]))
 
-    IMAGES.append(Image("frontend", "DockerFiles/Frontend.dockerfile", ["alpine-base", "nodejs-base"]))
-    IMAGES.append(Image("netdaemon", "DockerFiles/Netdaemon.dockerfile", ["dotnet-base", "debian-base"]))
-    IMAGES.append(Image("integration", "DockerFiles/Integration.dockerfile", ["alpine-base", "python-base"]))
-    IMAGES.append(Image("monster", "DockerFiles/Monster.dockerfile", ["alpine-base", "python-base", "integration"]))
+    #IMAGES.append(Image("frontend", "DockerFiles/Frontend.dockerfile", ["alpine-base", "nodejs-base"]))
+    #IMAGES.append(Image("netdaemon", "DockerFiles/Netdaemon.dockerfile", ["dotnet-base", "debian-base"]))
+    #IMAGES.append(Image("integration", "DockerFiles/Integration.dockerfile", ["alpine-base", "python-base"]))
+    #IMAGES.append(Image("monster", "DockerFiles/Monster.dockerfile", ["alpine-base", "python-base", "integration"]))
 
     if "build" in runtype:
         build_all()
@@ -39,7 +39,7 @@ class Image:
         self.published = False
 
     def build_image(self):
-        command = f"docker buildx build --compress --no-cache -t ludeeus/devcontainer:{self.name} -f {self.dockerfile} ."
+        command = f"docker buildx build --load --platform linux/arm,linux/arm64,linux/amd64 --compress --no-cache -t ludeeus/devcontainer:{self.name} -f {self.dockerfile} ."
         if self.name == "alpine-base":
             command += f" -t ludeeus/devcontainer:latest"
             command += f" -t ludeeus/container:latest"
