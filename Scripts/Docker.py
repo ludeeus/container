@@ -17,7 +17,7 @@ def main(runtype):
 
     #IMAGES.append(Image("go-base", "DockerFiles/BaseImages/Go.dockerfile", ["alpine-base"]))
     #IMAGES.append(Image("python-base", "DockerFiles/BaseImages/Python.dockerfile", ["alpine-base"]))
-    IMAGES.append(Image("dotnet-base", "DockerFiles/BaseImages/DotNet/Alpine.dockerfile", []))
+    #IMAGES.append(Image("dotnet-base", "DockerFiles/BaseImages/DotNet/Alpine.dockerfile", []))
     IMAGES.append(Image("dotnet-arm32-base", "DockerFiles/BaseImages/DotNet/ARM32.dockerfile", []))
     IMAGES.append(Image("dotnet-arm64-base", "DockerFiles/BaseImages/DotNet/ARM64.dockerfile", []))
     #IMAGES.append(Image("nodejs-base", "DockerFiles/BaseImages/Nodejs.dockerfile", ["alpine-base"]))
@@ -51,7 +51,7 @@ class Image:
             if self.name == "dotnet-base":
                 args += " --platform linux/amd64"
             elif self.name == "dotnet-arm32-base":
-                args += " --platform linux/arm/v7"
+                args += " --platform linux/arm/v6"
             elif self.name == "dotnet-arm64-base":
                 args += " --platform linux/arm64"
             else:
