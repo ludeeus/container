@@ -6,6 +6,7 @@ IMAGES = []
 
 REF = os.getenv("IMAGE_TAG")
 EVENT = os.getenv("GITHUB_EVENT_NAME")
+WORKSPACE = os.getenv("GITHUB_WORKSPACE")
 
 def main(runtype):
     if len(runtype) == 1:
@@ -48,9 +49,9 @@ class Image:
             args += " --compress"
             args += f" -t ludeeus/container:{self.name}-{arch}"
             if self.name == "dotnet-base":
-                args += f" -f $GITHUB_WORKSPACE/DockerFiles/DotNet/{arch}.dockerfile"
+                args += f" -f {WORKSPACE}/DockerFiles/DotNet/{arch}.dockerfile"
             else:
-                args += f" -f $GITHUB_WORKSPACE/DockerFiles/{self.dockerfile}"
+                args += f" -f {WORKSPACE}/DockerFiles/{self.dockerfile}"
             args += " ."
             run_command(buildx + args)
 
