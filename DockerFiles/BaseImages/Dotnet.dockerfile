@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1.200-alpine
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1
 
 ENV \
     CONTAINER_TYPE="dotnet"
