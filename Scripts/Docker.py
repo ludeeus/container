@@ -12,18 +12,18 @@ def main(runtype):
         print("Runtype is missing")
         exit(1)
 
-    IMAGES.append(Image("alpine-base", "Dockerfiles/BaseAlpine.dockerfile", []))
-    IMAGES.append(Image("debian-base", "Dockerfiles/BaseDebian.dockerfile", []))
+    IMAGES.append(Image("alpine-base", "DockerFiles/BaseImages/OS/Alpine.dockerfile", []))
+    IMAGES.append(Image("debian-base", "DockerFiles/BaseImages/OS/Debian.dockerfile", []))
 
-    IMAGES.append(Image("go-base", "Dockerfiles/BaseGo.dockerfile", ["alpine-base"]))
-    IMAGES.append(Image("python-base", "Dockerfiles/BasePython.dockerfile", ["alpine-base"]))
-    IMAGES.append(Image("dotnet-base", "Dockerfiles/BaseDotnet.dockerfile", ["debian-base"]))
-    IMAGES.append(Image("nodejs-base", "Dockerfiles/BaseNodejs.dockerfile", ["alpine-base"]))
+    IMAGES.append(Image("go-base", "DockerFiles/BaseImages/Go.dockerfile", ["alpine-base"]))
+    IMAGES.append(Image("python-base", "DockerFiles/BaseImages/Python.dockerfile", ["alpine-base"]))
+    IMAGES.append(Image("dotnet-base", "DockerFiles/BaseImages/Dotnet.dockerfile", ["debian-base"]))
+    IMAGES.append(Image("nodejs-base", "DockerFiles/BaseImages/Nodejs.dockerfile", ["alpine-base"]))
 
-    IMAGES.append(Image("frontend", "Dockerfiles/Frontend.dockerfile", ["alpine-base", "nodejs-base"]))
-    IMAGES.append(Image("netdaemon", "Dockerfiles/Netdaemon.dockerfile", ["dotnet-base", "debian-base"]))
-    IMAGES.append(Image("integration", "Dockerfiles/Integration.dockerfile", ["alpine-base", "python-base"]))
-    IMAGES.append(Image("monster", "Dockerfiles/Monster.dockerfile", ["alpine-base", "python-base", "integration"]))
+    #IMAGES.append(Image("frontend", "DockerFiles/Frontend.dockerfile", ["alpine-base", "nodejs-base"]))
+    #IMAGES.append(Image("netdaemon", "DockerFiles/Netdaemon.dockerfile", ["dotnet-base", "debian-base"]))
+    #IMAGES.append(Image("integration", "DockerFiles/Integration.dockerfile", ["alpine-base", "python-base"]))
+    #IMAGES.append(Image("monster", "DockerFiles/Monster.dockerfile", ["alpine-base", "python-base", "integration"]))
 
     if "build" in runtype:
         build_all()
@@ -31,30 +31,53 @@ def main(runtype):
         publish_all()
 
 class Image:
-    def __init__(self, name, dockerfile, needs):
+    def __init__(self, name, dockerfile, needs, multi=True):
         self.name = name
         self.dockerfile = dockerfile
         self.needs = needs
         self.build = False
         self.published = False
+        self.multi = multi
 
     def build_image(self):
-        command = f"docker build --compress --no-cache -t ludeeus/devcontainer:{self.name} -f {self.dockerfile} ."
+        buildx = "docker buildx build"
+        args = " --output=type=image,push=false"
+        if self.multi:
+            args += " --platform linux/arm,linux/arm64,linux/amd64"
+        else:
+            args += " --platform linux/amd64"
+        args += " --no-cache"
+        args += " --compress"
+        args += f" -t ludeeus/devcontainer:{self.name}"
+        args += f" -t ludeeus/container:{self.name}"
         if self.name == "alpine-base":
-            command += f" -t ludeeus/devcontainer:latest"
-            command += f" -t ludeeus/container:latest"
-        command += f" -t ludeeus/container:{self.name}"
-        run_command(command)
+            args += " -t ludeeus/devcontainer:latest"
+            args += " -t ludeeus/container:latest"
+        args += f" -f {self.dockerfile}"
+        args += " ."
+        run_command(buildx + args)
+
         self.build = True
 
     def publish_image(self):
+        buildx = "docker buildx build"
+        args = " --output=type=image,push=true"
+        if self.multi:
+            args += " --platform linux/arm,linux/arm64,linux/amd64"
+        else:
+            args += " --platform linux/amd64"
+        args += " --no-cache"
+        args += " --compress"
+        args += f" -t ludeeus/devcontainer:{self.name}"
+        args += f" -t ludeeus/container:{self.name}"
         if self.name == "alpine-base":
-            run_command(f'docker push ludeeus/devcontainer:latest')
-            run_command(f'docker push ludeeus/container:latest')
-        run_command(f'docker push ludeeus/devcontainer:{self.name}')
-        run_command(f'docker push ludeeus/container:{self.name}')
+            args += " -t ludeeus/devcontainer:latest"
+            args += " -t ludeeus/container:latest"
         if EVENT == "release":
-            run_command(f'docker push ludeeus/devcontainer:{self.name}-{REF}')
+            args += f" -t ludeeus/devcontainer:{self.name}-{REF}"
+        args += f" -f {self.dockerfile}"
+        args += " ."
+        run_command(buildx + args)
         self.published = True
 
 def get_next(sortkey):
@@ -63,8 +86,9 @@ def get_next(sortkey):
     return sorted([x for x in IMAGES if not x.published], key=lambda x: x.needs, reverse=False)
 
 def run_command(command):
-    build = subprocess.run([x for x in command.split(" ")])
-    if build.returncode != 0:
+    print(command)
+    cmd = subprocess.run([x for x in command.split(" ")])
+    if cmd.returncode != 0:
         exit(1)
 
 def build_all():

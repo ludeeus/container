@@ -16,7 +16,5 @@ jobs:
       - uses: actions/checkout@master
       - name: Login to docker hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_TOKEN }}
-      - name: Build images
-        run: python3 Scripts/Docker.py build
       - name: Push to docker registry
         run: python3 Scripts/Docker.py publish
