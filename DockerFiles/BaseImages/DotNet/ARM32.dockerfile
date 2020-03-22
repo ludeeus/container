@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1.200-buster-arm32v7
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1.200-bionic-arm32v7
 
 ENV \
     CONTAINER_TYPE="dotnet"
