@@ -19,7 +19,7 @@ RUN \
     \
     && wget -O /tmp/dotnet-install.sh https://dot.net/v1/dotnet-install.sh \
     \
-    && sed -i 's|-$osname-|-linux-|' /tmp/dotnet-install.sh \
+    && if [ "$(uname -m)" != "x86_64" ]; then sed -i 's|-$osname-|-linux-|' /tmp/dotnet-install.sh; fi \
     \
     && bash /tmp/dotnet-install.sh --version ${NETVERSION} --install-dir "/root/.dotnet" \
     \
