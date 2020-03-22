@@ -64,8 +64,9 @@ def get_next(sortkey):
     return sorted([x for x in IMAGES if not x.published], key=lambda x: x.needs, reverse=False)
 
 def run_command(command):
-    build = subprocess.run([x for x in command.split(" ")])
-    if build.returncode != 0:
+    print(command)
+    cmd = subprocess.run([x for x in command.split(" ")])
+    if cmd.returncode != 0:
         exit(1)
 
 def build_all():
