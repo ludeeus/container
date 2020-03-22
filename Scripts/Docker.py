@@ -40,9 +40,12 @@ class Image:
         self.published = False
         self.multi = multi
 
-    def build_image(self):
+    def constructCmd(self, publish=False):
         buildx = "docker buildx build"
-        args = " --output=type=image,push=false"
+        if publish:
+            args = " --output=type=image,push=true"
+        else:
+            args = " --output=type=image,push=false"
         if self.multi:
             if self.name == "dotnet-base":
                 args += " --platform linux/arm,linux/amd64"
@@ -63,27 +66,12 @@ class Image:
         args += " ."
         run_command(buildx + args)
 
+    def build_image(self):
+        self.constructCmd()
         self.build = True
 
     def publish_image(self):
-        buildx = "docker buildx build"
-        args = " --output=type=image,push=true"
-        if self.multi:
-            args += " --platform linux/arm,linux/arm64,linux/amd64"
-        else:
-            args += " --platform linux/amd64"
-        args += " --no-cache"
-        args += " --compress"
-        args += f" -t ludeeus/devcontainer:{self.name}"
-        args += f" -t ludeeus/container:{self.name}"
-        if self.name == "alpine-base":
-            args += " -t ludeeus/devcontainer:latest"
-            args += " -t ludeeus/container:latest"
-        if EVENT == "release":
-            args += f" -t ludeeus/devcontainer:{self.name}-{REF}"
-        args += f" -f {self.dockerfile}"
-        args += " ."
-        run_command(buildx + args)
+        self.constructCmd(True)
         self.published = True
 
 def get_next(sortkey):
