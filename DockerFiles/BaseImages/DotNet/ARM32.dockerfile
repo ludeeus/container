@@ -1,4 +1,4 @@
-FROM ludeeus/container:base-debian
+FROM ludeeus/container:debian-base
 
 ENV \
     NETVERSION="3.1.200" \
