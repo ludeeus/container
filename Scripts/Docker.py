@@ -25,6 +25,10 @@ def main(runtype):
     #IMAGES.append(Image("integration", "DockerFiles/Integration.dockerfile", ["alpine-base", "python-base"]))
     #IMAGES.append(Image("monster", "DockerFiles/Monster.dockerfile", ["alpine-base", "python-base", "integration"]))
 
+    if "image" in runtype:
+        image = runtype[-1]
+        IMAGES = [x for x in IMAGES if x.name == image]
+
     if "build" in runtype:
         build_all()
     if "publish" in runtype:

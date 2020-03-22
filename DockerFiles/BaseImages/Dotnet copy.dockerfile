@@ -1,4 +1,4 @@
-FROM ludeeus/container:alpine-base
+FROM ludeeus/container:debian-base
 
 ENV \
     NETVERSION="3.1.200" \
@@ -7,15 +7,15 @@ ENV \
     CONTAINER_TYPE="dotnet"
 
 RUN \
-    apk add --no-cache \
-        icu-libs \
-        ca-certificates \
-        krb5-libs \
-        libgcc \
-        libintl \
+    apt update \
+    && apt install -y --no-install-recommends \
+        libc6 \
+        libgcc1 \
+        libgssapi-krb5-2 \
+        libicu63 \
         libssl1.1 \
-        libstdc++ \
-        zlib \
+        libstdc++6 \
+        zlib1g \
     \
     && wget -O /tmp/dotnet-install.sh https://dot.net/v1/dotnet-install.sh \
     \
@@ -27,4 +27,7 @@ RUN \
     \
     && dotnet help \
     \
-    && rm -rf /var/cache/apk/*
+    && rm -fr \
+        /tmp/* \
+        /var/{cache,log}/* \
+        /var/lib/apt/lists/* \
