@@ -46,22 +46,21 @@ class Image:
         args = " --load"
 
         for arch in ["arm", "arm64", "amd64"]:
-
-        args += f" --platform linux/{arch}"
-        args += " --no-cache"
-        args += " --compress"
-        args += f" -t temp/{self.name}:{arch}"
-        if self.name == "dotnet-base":
-            if arch == "arm":
-                args += f" -f DockerFiles/BaseFiles/DotNet/ARM32.dockerfile"
-            elif arch == "arm64":
-                args += f" -f DockerFiles/BaseFiles/DotNet/ARM32.dockerfile"
+            args += f" --platform linux/{arch}"
+            args += " --no-cache"
+            args += " --compress"
+            args += f" -t temp/{self.name}:{arch}"
+            if self.name == "dotnet-base":
+                if arch == "arm":
+                    args += f" -f DockerFiles/BaseFiles/DotNet/ARM32.dockerfile"
+                elif arch == "arm64":
+                    args += f" -f DockerFiles/BaseFiles/DotNet/ARM32.dockerfile"
+                else:
+                    args += f" -f DockerFiles/BaseFiles/DotNet/Alpine.dockerfile"
             else:
-                args += f" -f DockerFiles/BaseFiles/DotNet/Alpine.dockerfile"
-        else:
-            args += f" -f {self.dockerfile}"
-        args += " ."
-        run_command(buildx + args)
+                args += f" -f {self.dockerfile}"
+            args += " ."
+            run_command(buildx + args)
 
         if publish:
             command = f"docker manifest create ludeeus/container:{self.name}"
