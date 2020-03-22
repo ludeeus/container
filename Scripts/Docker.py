@@ -31,12 +31,13 @@ def main(runtype):
         publish_all()
 
 class Image:
-    def __init__(self, name, dockerfile, needs):
+    def __init__(self, name, dockerfile, needs, multi=False):
         self.name = name
         self.dockerfile = dockerfile
         self.needs = needs
         self.build = False
         self.published = False
+        self.multi = multi
 
     def build_image(self):
         command = f'docker buildx build --output "type=image,push=false" --platform linux/arm,linux/arm64,linux/amd64 --compress --no-cache -t ludeeus/devcontainer:{self.name} -f {self.dockerfile} .'
@@ -47,19 +48,17 @@ class Image:
         #run_command(command)
 
 
-        docker = "docker build"
         buildx = "docker buildx build"
-        buildx += " --output=type=image,push=false"
-        buildx += " --platform linux/arm,linux/arm64,linux/amd64"
-        args = " --no-cache"
+        args = " --output=type=image,push=false"
+        args += " --platform linux/arm,linux/arm64,linux/amd64"
+        args += " --no-cache"
         args += " --compress"
         args += f" -t ludeeus/devcontainer:{self.name}"
         args += f" -t ludeeus/container:{self.name}"
         args += " -t ludeeus/devcontainer:latest"
         args += " -t ludeeus/container:latest"
-        args += " -f DockerFiles/BaseImages/OS/Alpine.dockerfile "
+        args += f" -f {self.dockerfile}"
         args += " ."
-        run_command(docker + args)
         run_command(buildx + args)
 
         self.build = True
