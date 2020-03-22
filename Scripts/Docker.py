@@ -48,9 +48,9 @@ class Image:
             args = " --output=type=image,push=false"
         if self.multi:
             if self.name == "dotnet-base":
-                args += " --platform linux/arm,linux/amd64"
+                args += " --platform linux/arm/v6,linux/amd64"
             elif self.name == "dotnet-debian-base":
-                args += " --platform linux/arm64"
+                args += " --platform linux/arm/v7,linux/arm64"
             else:
                 args += " --platform linux/arm,linux/arm64,linux/amd64"
         else:
