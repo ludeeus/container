@@ -22,4 +22,5 @@ jobs:
         run: | 
           export DOCKER_CLI_EXPERIMENTAL=enabled
           docker version
+          curl localhost:5000
           python3 Scripts/Docker.py publish

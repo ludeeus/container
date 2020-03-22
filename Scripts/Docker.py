@@ -60,14 +60,10 @@ class Image:
         run_command(f"docker run --rm ludeeus/container:{self.name}-amd64")
         if publish:
             command = f"docker manifest create ludeeus/container:{self.name}"
-            command += f" ludeeus/container:{self.name}-arm"
-            command += f" ludeeus/container:{self.name}-arm64"
-            command += f" ludeeus/container:{self.name}-amd64"
+            command += f" -a ludeeus/container:{self.name}-arm"
+            command += f" -a ludeeus/container:{self.name}-arm64"
+            command += f" -a ludeeus/container:{self.name}-amd64"
             run_command(command)
-            run_command(f"docker manifest inspect ludeeus/container:{self.name}")
-            run_command(f"docker manifest annotate ludeeus/container:{self.name} ludeeus/container:{self.name}-arm --arch arm --os linux")
-            run_command(f"docker manifest annotate ludeeus/container:{self.name} ludeeus/container:{self.name}-arm64 --arch arm64 --os linux")
-            run_command(f"docker manifest annotate ludeeus/container:{self.name} ludeeus/container:{self.name}-amd64 --arch amd64 --os linux")
             run_command(f"docker manifest inspect ludeeus/container:{self.name}")
             run_command(f"docker manifest push --purge ludeeus/container:{self.name}")
 
