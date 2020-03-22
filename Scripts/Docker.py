@@ -31,7 +31,7 @@ def main(runtype):
         publish_all()
 
 class Image:
-    def __init__(self, name, dockerfile, needs, multi=False):
+    def __init__(self, name, dockerfile, needs, multi=True):
         self.name = name
         self.dockerfile = dockerfile
         self.needs = needs
@@ -40,23 +40,19 @@ class Image:
         self.multi = multi
 
     def build_image(self):
-        command = f'docker buildx build --output "type=image,push=false" --platform linux/arm,linux/arm64,linux/amd64 --compress --no-cache -t ludeeus/devcontainer:{self.name} -f {self.dockerfile} .'
-        if self.name == "alpine-base":
-            command += f" -t ludeeus/devcontainer:latest"
-            command += f" -t ludeeus/container:latest"
-        command += f" -t ludeeus/container:{self.name}"
-        #run_command(command)
-
-
         buildx = "docker buildx build"
         args = " --output=type=image,push=false"
-        args += " --platform linux/arm,linux/arm64,linux/amd64"
+        if self.multi:
+            args += " --platform linux/arm,linux/arm64,linux/amd64"
+        else:
+            args += " --platform linux/amd64"
         args += " --no-cache"
         args += " --compress"
         args += f" -t ludeeus/devcontainer:{self.name}"
         args += f" -t ludeeus/container:{self.name}"
-        args += " -t ludeeus/devcontainer:latest"
-        args += " -t ludeeus/container:latest"
+        if self.name == "alpine-base":
+            args += " -t ludeeus/devcontainer:latest"
+            args += " -t ludeeus/container:latest"
         args += f" -f {self.dockerfile}"
         args += " ."
         run_command(buildx + args)
@@ -64,13 +60,24 @@ class Image:
         self.build = True
 
     def publish_image(self):
+        buildx = "docker buildx build"
+        args = " --output=type=image,push=true"
+        if self.multi:
+            args += " --platform linux/arm,linux/arm64,linux/amd64"
+        else:
+            args += " --platform linux/amd64"
+        args += " --no-cache"
+        args += " --compress"
+        args += f" -t ludeeus/devcontainer:{self.name}"
+        args += f" -t ludeeus/container:{self.name}"
         if self.name == "alpine-base":
-            run_command(f'docker push ludeeus/devcontainer:latest')
-            run_command(f'docker push ludeeus/container:latest')
-        run_command(f'docker push ludeeus/devcontainer:{self.name}')
-        run_command(f'docker push ludeeus/container:{self.name}')
+            args += " -t ludeeus/devcontainer:latest"
+            args += " -t ludeeus/container:latest"
         if EVENT == "release":
-            run_command(f'docker push ludeeus/devcontainer:{self.name}-{REF}')
+            args += f" -t ludeeus/devcontainer:{self.name}-{REF}"
+        args += f" -f {self.dockerfile}"
+        args += " ."
+        run_command(buildx + args)
         self.published = True
 
 def get_next(sortkey):
