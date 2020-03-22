@@ -1,4 +1,4 @@
-FROM ludeeus/devcontainer:base-debian
+FROM ludeeus/container:base-debian
 
 ENV \
     NETVERSION="3.1.200" \
@@ -12,6 +12,9 @@ RUN \
     && apt update \
     && apt install -y --no-install-recommends \
         libc6 \
+        gcc \
+        g++ \
+        build-essential \
         libgcc1 \
         libgssapi-krb5-2 \
         libicu63 \
