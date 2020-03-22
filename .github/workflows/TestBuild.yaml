@@ -4,8 +4,6 @@ on:
   pull_request:
     branches:
       - master
-env:
-  DOCKER_CLI_EXPERIMENTAL: enabled
 jobs:
   test:
     name: Test all images

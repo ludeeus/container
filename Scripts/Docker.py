@@ -13,12 +13,12 @@ def main(runtype):
         print("Runtype is missing")
         exit(1)
 
-    IMAGES.append(Image("alpine-base", "BaseImages/OS/Alpine.dockerfile", []))
+    #IMAGES.append(Image("alpine-base", "BaseImages/OS/Alpine.dockerfile", []))
     #IMAGES.append(Image("debian-base", "BaseImages/OS/Debian.dockerfile", []))
 
     #IMAGES.append(Image("go-base", "BaseImages/Go.dockerfile", ["alpine-base"]))
     #IMAGES.append(Image("python-base", "BaseImages/Python.dockerfile", ["alpine-base"]))
-    #IMAGES.append(Image("dotnet-base", "", []))
+    IMAGES.append(Image("dotnet-base", "BaseImages/Dotnet.dockerfile", []))
     #IMAGES.append(Image("nodejs-base", "BaseImages/Nodejs.dockerfile", ["alpine-base"]))
 
     #IMAGES.append(Image("frontend", "Frontend.dockerfile", ["alpine-base", "nodejs-base"]))
@@ -41,31 +41,21 @@ class Image:
         self.multi = multi
 
     def constructCmd(self, publish=False):
-        for arch in ["arm", "arm64", "amd64"]:
-            buildx = "docker buildx build"
-            args = " --load"
-            args += f" --platform linux/{arch}"
-            args += " --no-cache"
-            args += " --compress"
-            args += f" -t ludeeus/container:{self.name}-{arch}"
-            if self.name == "dotnet-base":
-                args += f" -f {WORKSPACE}/DockerFiles/DotNet/{arch}.dockerfile"
-            else:
-                args += f" -f {WORKSPACE}/DockerFiles/{self.dockerfile}"
-            args += " ."
-            run_command(buildx + args)
-
-            run_command("docker images")
-
-        run_command(f"docker run --rm ludeeus/container:{self.name}-amd64")
+        buildx = "docker buildx build"
         if publish:
-            command = f"docker manifest create ludeeus/container:{self.name}"
-            command += f" -a ludeeus/container:{self.name}-arm"
-            command += f" -a ludeeus/container:{self.name}-arm64"
-            command += f" -a ludeeus/container:{self.name}-amd64"
-            run_command(command)
-            run_command(f"docker manifest inspect ludeeus/container:{self.name}")
-            run_command(f"docker manifest push --purge ludeeus/container:{self.name}")
+            args = " --output=type=image,push=true"
+        else:
+            args = " --output=type=image,push=false"
+        buildx = "docker buildx build"
+        args = " --load"
+        args += " --platform linux/arm,linux/arm64,linux/amd64"
+        args += " --no-cache"
+        args += " --compress"
+        args += f" -t ludeeus/devcontainer:{self.name}"
+        args += f" -f {WORKSPACE}/DockerFiles/{self.dockerfile}"
+        args += " ."
+        run_command(buildx + args)
+
 
     def build_image(self):
         self.constructCmd()
