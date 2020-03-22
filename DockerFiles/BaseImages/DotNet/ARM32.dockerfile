@@ -19,6 +19,8 @@ RUN \
         libstdc++6 \
         zlib1g \
     \
+    && rm -rf /var/lib/apt/lists/* \
+    \
     && wget -O /tmp/dotnet-install.sh https://dot.net/v1/dotnet-install.sh \
     \
     && bash /tmp/dotnet-install.sh --version ${NETVERSION} --install-dir "/root/.dotnet" --architecture "arm" \
