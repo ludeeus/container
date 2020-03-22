@@ -19,7 +19,7 @@ RUN \
     \
     && wget -O /tmp/dotnet-install.sh https://dot.net/v1/dotnet-install.sh \
     \
-    && if [ "$(uname -m)" != "x86_64" ]; then export ARCH="arm"; else export ARCH="auto"; fi \
+    && if [ "$(uname -m)" != "x86_64" ]; then export ARCH="arm"; else export ARCH="amd64"; fi \
     \
     && bash /tmp/dotnet-install.sh --version ${NETVERSION} --install-dir "/root/.dotnet" --architecture ${ARCH} \
     \
