@@ -90,7 +90,12 @@ class Image:
     def is_build_needed(self):
         if self.dockerfile in CHANGED:
             return True
-
+        if self.needs:
+            for name in self.needs:
+                if get_dockerfile_from_name(name) in CHANGED:
+                    return True
+        if "rootfs" in CHANGED:
+            return True
         return False
 
 def get_next(sortkey):
@@ -107,6 +112,8 @@ def get_next(sortkey):
         [x for x in images if not x.published], key=lambda x: x.needs, reverse=False
     )
 
+def get_dockerfile_from_name(name):
+    return [x.dockerfile for x in images if x.name == name][0]
 
 def run_command(command):
     print(command)
