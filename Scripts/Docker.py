@@ -9,7 +9,7 @@ REF = os.getenv("IMAGE_TAG")
 EVENT = os.getenv("GITHUB_EVENT_NAME")
 WORKSPACE = os.getenv("GITHUB_WORKSPACE")
 SHA = os.getenv("GITHUB_SHA")
-CHANGED_FILES = os.getenv("CHANGED_FILES").split(" ")
+CHANGED_FILES = os.getenv("CHANGED_FILES")
 
 
 def append_docker_lables(dockerfile):
@@ -59,7 +59,7 @@ class Image:
 
     def constructCmd(self, publish=False):
         if not self.is_build_needed():
-            print(f"Skipping build for {self.name}")
+            print(f"Skipping build for {self.name}, the changed files is not used here.")
         buildx = "docker buildx build"
         if publish:
             append_docker_lables(f"./DockerFiles/{self.dockerfile}")
@@ -113,7 +113,7 @@ def get_next(sortkey):
     )
 
 def get_dockerfile_from_name(name):
-    return [x.dockerfile for x in images if x.name == name][0]
+    return [x.dockerfile for x in IMAGES if x.name == name][0]
 
 def run_command(command):
     print(command)
