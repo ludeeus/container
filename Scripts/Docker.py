@@ -14,7 +14,7 @@ SHA = os.getenv("GITHUB_SHA")
 def append_docker_lables(dockerfile):
     with open(dockerfile, "a") as df:
         date = datetime.now()
-        df.write("\n\nMAINTAINER Joakim Sørensen <hi@ludeeus.dev>\n")
+        df.write("\n\nLABEL maintainer='hi@ludeeus.dev'\n")
         df.write(f"LABEL build.date='{date.year}-{date.month}-{date.day}'\n")
         df.write(f"LABEL build.sha='{SHA}'")
 
@@ -113,7 +113,7 @@ def build_all():
         if not image:
             break
         image = image[0]
-        if [x for x in IMAGES if x.name in image.needs and not x.build]:
+        if [x for x in IMAGES if x.name in image.needs and not x.build] and "image" not in sys.argv:
             print("Build strategy is not correct")
             exit(1)
         image.build_image()
