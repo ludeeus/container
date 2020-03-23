@@ -13,21 +13,25 @@ jobs:
     name: Deploy all images
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - name: Login to docker hub
-        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_TOKEN }}
-      - name: Get file changes
-        id: get_file_changes
-        uses: dorner/file-changes-action@v1.2.0
-        with:
-          githubToken: ${{ secrets.GITHUB_TOKEN }}
-          plaintext: true
-      - name: Set up Docker Buildx
-        id: buildx
-        uses: crazy-max/ghaction-docker-buildx@v1
-        with:
-          version: latest
-      - name: Push to docker registry
-        run: python3 Scripts/Docker.py publish
+      - name: Dump GitHub context
         env:
-          CHANGED_FILES: "${{ steps.get_file_changes.outputs.files }}"
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+#      - uses: actions/checkout@master
+#      - name: Login to docker hub
+#        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_TOKEN }}
+#      - name: Get file changes
+#        id: get_file_changes
+#        uses: dorner/file-changes-action@v1.2.0
+#        with:
+#          githubToken: ${{ secrets.GITHUB_TOKEN }}
+#          plaintext: true
+#      - name: Set up Docker Buildx
+#        id: buildx
+#        uses: crazy-max/ghaction-docker-buildx@v1
+#        with:
+#          version: latest
+#      - name: Push to docker registry
+#        run: python3 Scripts/Docker.py publish
+#        env:
+#          CHANGED_FILES: "${{ steps.get_file_changes.outputs.files }}"
