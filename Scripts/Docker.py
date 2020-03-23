@@ -88,13 +88,13 @@ class Image:
         self.published = True
 
     def is_build_needed(self):
-        if self.dockerfile in CHANGED:
+        if self.dockerfile in CHANGED_FILES:
             return True
         if self.needs:
             for name in self.needs:
-                if get_dockerfile_from_name(name) in CHANGED:
+                if get_dockerfile_from_name(name) in CHANGED_FILES:
                     return True
-        if "rootfs" in CHANGED:
+        if "rootfs" in CHANGED_FILES:
             return True
         return False
 
