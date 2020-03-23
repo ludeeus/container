@@ -22,8 +22,6 @@ jobs:
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           plaintext: true
-      - name: export file changes
-        run: export CHANGED_FILES="${{ steps.get_file_changes.outputs.files }}"
       - name: Set up Docker Buildx
         id: buildx
         uses: crazy-max/ghaction-docker-buildx@v1
@@ -31,3 +29,5 @@ jobs:
           version: latest
       - name: Push to docker registry
         run: python3 Scripts/Docker.py publish
+        env:
+          CHANGED_FILES: "${{ steps.get_file_changes.outputs.files }}"

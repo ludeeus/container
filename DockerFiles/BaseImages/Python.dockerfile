@@ -2,8 +2,6 @@ FROM ludeeus/container:alpine-base
 
 ENV CONTAINER_TYPE python
 
-COPY requirements.txt /tmp/
-
 RUN \
     apk add --no-cache \
         gcc=9.2.0-r4 \
@@ -16,7 +14,13 @@ RUN \
     \
     && rm -rf /var/cache/apk/* \
     \
-    && pip3 install --no-cache-dir -U -r /tmp/requirements.txt \
+    && pip3 install --no-cache-dir -U pip==20.0.2 \
+    && pip3 install --no-cache-dir -U \
+        pip==20.0.2 \
+        black==19.3b0 \
+        colorlog==4.0.2 \
+        pylint==2.3.1 \
+        python-language-server==0.28.3 \
     \
     && find /usr/local \
         \( -type d -a -name test -o -name tests -o -name '__pycache__' \) \

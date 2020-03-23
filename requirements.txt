@@ -1,5 +1,0 @@
-pip==20.0.2
-black==19.3b0
-colorlog==4.0.2
-pylint==2.3.1
-python-language-server==0.28.3
