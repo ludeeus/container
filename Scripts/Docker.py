@@ -91,6 +91,8 @@ class Image:
     def is_build_needed(self):
         if self.dockerfile in CHANGED_FILES:
             return True
+        if self.name in CHANGED_FILES:
+            return True
         if self.needs:
             for name in self.needs:
                 if get_dockerfile_from_name(name) in CHANGED_FILES:

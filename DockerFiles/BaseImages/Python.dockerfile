@@ -14,13 +14,12 @@ RUN \
     \
     && rm -rf /var/cache/apk/* \
     \
-    && pip3 install --no-cache-dir -U pip==20.0.2 \
-    && pip3 install --no-cache-dir -U \
-        pip==20.0.2 \
-        black==19.3b0 \
-        colorlog==4.0.2 \
-        pylint==2.3.1 \
-        python-language-server==0.28.3 \
+    && python3 -m pip install --no-cache-dir -U pip==20.0.2 \
+    && python3 -m pip install --no-cache-dir -U \
+        black==19.10b0 \
+        colorlog==4.1.0 \
+        pylint==2.4.4 \
+        python-language-server==0.31.9 \
     \
     && find /usr/local \
         \( -type d -a -name test -o -name tests -o -name '__pycache__' \) \
