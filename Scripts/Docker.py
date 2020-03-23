@@ -60,6 +60,7 @@ class Image:
     def constructCmd(self, publish=False):
         if not self.is_build_needed():
             print(f"Skipping build for {self.name}, the changed files is not used here.")
+            return
         buildx = "docker buildx build"
         if publish:
             append_docker_lables(f"./DockerFiles/{self.dockerfile}")
