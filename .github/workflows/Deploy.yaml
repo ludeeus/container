@@ -16,6 +16,12 @@ jobs:
       - uses: actions/checkout@master
       - name: Login to docker hub
         run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_TOKEN }}
+      - uses: lots0logs/gh-action-get-changed-files@2.0.6
+        name: Generate a list of changed files
+        with:
+          token: GITHUB_TOKEN
+      - name: Show a list of changed files
+        run: cat ${HOME}/files.json
       - name: Set up Docker Buildx
         id: buildx
         uses: crazy-max/ghaction-docker-buildx@v1
