@@ -101,7 +101,9 @@ class Image:
             for name in self.needs:
                 if get_dockerfile_from_name(name) in CHANGED_FILES:
                     return True
-        if "rootfs" in CHANGED_FILES:
+        if "rootfs/common" in CHANGED_FILES:
+            return True
+        if "rootfs/s6" in CHANGED_FILES and "s6" in self.name:
             return True
         return False
 
