@@ -14,9 +14,9 @@ SHA = os.getenv("GITHUB_SHA")
 def append_docker_lables(dockerfile):
     with open(dockerfile, "a") as df:
         date = datetime.now()
-        df.write("\n\nMAINTAINER Joakim Sørensen (@ludeeus) <hi@ludeeus.dev>\n")
-        df.write(f"LABEL build.date='{date.year}-{date.month}-{date.day}' \\\n")
-        df.write(f"    build.sha='{SHA}'")
+        df.write("\n\nMAINTAINER Joakim Sørensen <hi@ludeeus.dev>\n")
+        df.write(f"LABEL build.date='{date.year}-{date.month}-{date.day}'\n")
+        df.write(f"LABEL build.sha='{SHA}'")
 
 
 def main(runtype):
