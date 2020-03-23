@@ -1,6 +1,6 @@
 FROM ludeeus/container:debian-base
 
-COPY tools/download_dotnet.sh /tmp/download_dotnet.sh
+COPY build_scripts/download_dotnet.sh /build_scripts/download_dotnet.sh
 
 ENV \
     DOTNET_RUNNING_IN_CONTAINER="true" \
@@ -23,12 +23,13 @@ RUN echo $(uname -a) \
     \
     && mkdir -p /dotnet \
     \
-    && bash /tmp/download_dotnet.sh \
+    && bash /build_scripts/download_dotnet.sh \
     \
     && tar zxf /tmp/runtime.tar.gz -C /dotnet \
     && tar zxf /tmp/sdk.tar.gz -C /dotnet \
     \
-    && rm /tmp/*.gz && rm /tmp/download_dotnet.sh \
+    && rm /tmp/*.gz \
+    && rm -R /build_scripts \
     \
     && ln -s /dotnet/dotnet /bin/dotnet \
     \

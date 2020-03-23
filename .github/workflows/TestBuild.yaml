@@ -16,6 +16,6 @@ jobs:
         with:
           version: latest
       - name: Push to docker registry
-        run: | 
+        run: |
           docker version
           python3 Scripts/Docker.py build

@@ -1,59 +1,80 @@
 import os
 import sys
 import subprocess
+from datetime import datetime
 
 IMAGES = []
 
 REF = os.getenv("IMAGE_TAG")
 EVENT = os.getenv("GITHUB_EVENT_NAME")
 WORKSPACE = os.getenv("GITHUB_WORKSPACE")
+SHA = os.getenv("GITHUB_SHA")
+
+
+def append_docker_lables(dockerfile):
+    with open(dockerfile, "a") as df:
+        date = datetime.now()
+        df.write("\n\nMAINTAINER Joakim Sørensen (@ludeeus) <hi@ludeeus.dev>\n")
+        df.write(f"LABEL build.date='{date.year}-{date.month}-{date.day}' \\\n")
+        df.write(f"    build.sha='{SHA}'")
+
 
 def main(runtype):
     if len(runtype) == 1:
         print("Runtype is missing")
         exit(1)
 
+    # fmt: off
+    # OS Base
     IMAGES.append(Image("alpine-base", "BaseImages/OS/Alpine.dockerfile", []))
     IMAGES.append(Image("debian-base", "BaseImages/OS/Debian.dockerfile", []))
 
+    # Sorfware Base
     IMAGES.append(Image("go-base", "BaseImages/Go.dockerfile", ["alpine-base"]))
     IMAGES.append(Image("python-base", "BaseImages/Python.dockerfile", ["alpine-base"]))
     IMAGES.append(Image("dotnet-base", "BaseImages/Dotnet.dockerfile", ["debian-base"]))
     IMAGES.append(Image("nodejs-base", "BaseImages/Nodejs.dockerfile", ["alpine-base"]))
 
-    #IMAGES.append(Image("frontend", "Frontend.dockerfile", ["alpine-base", "nodejs-base"]))
-    #IMAGES.append(Image("netdaemon", "Netdaemon.dockerfile", ["dotnet-base", "debian-base"]))
-    #IMAGES.append(Image("integration", "Integration.dockerfile", ["alpine-base", "python-base"]))
-    #IMAGES.append(Image("monster", "Monster.dockerfile", ["alpine-base", "python-base", "integration"]))
+    # Reqular (amd64 only)
+    IMAGES.append(Image("frontend", "Frontend.dockerfile", ["alpine-base", "nodejs-base"]))
+    IMAGES.append(Image("netdaemon", "Netdaemon.dockerfile", ["dotnet-base", "debian-base"]))
+    IMAGES.append(Image("integration", "Integration.dockerfile", ["alpine-base", "python-base"]))
+    IMAGES.append(Image("monster", "Monster.dockerfile", ["alpine-base", "python-base", "integration"]))
+    # fmt: on
 
     if "build" in runtype:
         build_all()
     if "publish" in runtype:
         publish_all()
 
+
 class Image:
-    def __init__(self, name, dockerfile, needs, multi=True):
+    def __init__(self, name, dockerfile, needs):
         self.name = name
         self.dockerfile = dockerfile
         self.needs = needs
         self.build = False
         self.published = False
-        self.multi = multi
 
     def constructCmd(self, publish=False):
         buildx = "docker buildx build"
         if publish:
+            append_docker_lables(f"./DockerFiles/{self.dockerfile}")
             args = " --output=type=image,push=true"
+        elif "build" in sys.argv:
+            args = " --load"
         else:
             args = " --output=type=image,push=false"
-        args += " --platform linux/arm,linux/arm64,linux/amd64"
+        if self.name.endswith("-base") and "build" not in sys.argv:
+            args += " --platform linux/arm,linux/arm64,linux/amd64"
+        else:
+            args += " --platform linux/amd64"
         args += " --no-cache"
         args += " --compress"
         args += f" -t ludeeus/container:{self.name}"
         args += f" -f {WORKSPACE}/DockerFiles/{self.dockerfile}"
         args += " ."
         run_command(buildx + args)
-
 
     def build_image(self):
         self.constructCmd()
@@ -63,6 +84,7 @@ class Image:
         self.constructCmd(True)
         self.published = True
 
+
 def get_next(sortkey):
     if "image" in sys.argv:
         image = sys.argv[-1]
@@ -70,14 +92,20 @@ def get_next(sortkey):
     else:
         images = IMAGES
     if sortkey == "build":
-        return sorted([x for x in images if not x.build], key=lambda x: x.needs, reverse=False)
-    return sorted([x for x in images if not x.published], key=lambda x: x.needs, reverse=False)
+        return sorted(
+            [x for x in images if not x.build], key=lambda x: x.needs, reverse=False
+        )
+    return sorted(
+        [x for x in images if not x.published], key=lambda x: x.needs, reverse=False
+    )
+
 
 def run_command(command):
     print(command)
     cmd = subprocess.run([x for x in command.split(" ")])
     if cmd.returncode != 0:
         exit(1)
+
 
 def build_all():
     while True:
@@ -98,6 +126,7 @@ def publish_all():
             break
         image = image[0]
         image.publish_image()
+
 
 print(os.environ)
 main(sys.argv)
