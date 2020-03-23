@@ -3,8 +3,6 @@ FROM alpine:3.11
 ENV \
     CONTAINER_TYPE="base-alpine"
 
-WORKDIR /workspace
-
 COPY rootfs/common /
 
 RUN \

@@ -4,8 +4,6 @@ ENV \
     DEBIAN_FRONTEND="noninteractive" \
     CONTAINER_TYPE="base-debian"
 
-WORKDIR /workspace
-
 COPY rootfs/common /
 
 RUN \

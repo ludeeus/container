@@ -30,6 +30,10 @@ def main(runtype):
     IMAGES.append(Image("alpine-base", "BaseImages/OS/Alpine.dockerfile", []))
     IMAGES.append(Image("debian-base", "BaseImages/OS/Debian.dockerfile", []))
 
+    # OS Base With S6 overlay
+    IMAGES.append(Image("alpine-base-s6", "BaseImages/OS/AlpineS6.dockerfile", []))
+    IMAGES.append(Image("debian-base-s6", "BaseImages/OS/DebianS6.dockerfile", []))
+
     # Sorfware Base
     IMAGES.append(Image("go-base", "BaseImages/Go.dockerfile", ["alpine-base"]))
     IMAGES.append(Image("python-base", "BaseImages/Python.dockerfile", ["alpine-base"]))
@@ -69,7 +73,7 @@ class Image:
             args = " --load"
         else:
             args = " --output=type=image,push=false"
-        if self.name.endswith("-base") and "build" not in sys.argv:
+        if "-base" in self.name and "build" not in sys.argv:
             args += " --platform linux/arm,linux/arm64,linux/amd64"
         else:
             args += " --platform linux/amd64"
