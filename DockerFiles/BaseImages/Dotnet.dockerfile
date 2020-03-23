@@ -1,6 +1,6 @@
 FROM ludeeus/container:debian-base
 
-COPY build_scripts/dotnet-base/download_dotnet.sh /build_scripts/download_dotnet.sh
+COPY rootfs/dotnet-base /
 
 ENV \
     DOTNET_RUNNING_IN_CONTAINER="true" \

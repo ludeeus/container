@@ -5,7 +5,7 @@ ENV \
 
 WORKDIR /workspace
 
-COPY rootfs /
+COPY rootfs/common /
 
 RUN \
     apk add --no-cache \

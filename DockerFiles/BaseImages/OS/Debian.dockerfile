@@ -6,7 +6,7 @@ ENV \
 
 WORKDIR /workspace
 
-COPY rootfs /
+COPY rootfs/common /
 
 RUN \
     apt update \
