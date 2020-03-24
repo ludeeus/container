@@ -10,6 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
+      - name: Create git config
+        run: |
+          git config user.name 'GitHub Action'
+          git config user.email 'action@users.noreply.github.com'
       - name: Update everything
         run: |
             python3 -m pip install -U requests alpinepkgs
