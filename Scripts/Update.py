@@ -132,6 +132,4 @@ def update_all():
     update_s6()
 
 
-create_new_branch()
 update_all()
-push_branch()
