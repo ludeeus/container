@@ -1,5 +1,5 @@
 FROM ludeeus/container:integration
-ENV CONTAINER_TYPE monster
+ENV CONTAINER_TYPE?monster
 
 RUN \
     apk add --no-cache \

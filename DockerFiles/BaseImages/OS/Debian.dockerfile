@@ -2,7 +2,7 @@ FROM debian:10.3-slim
 
 ENV \
     DEBIAN_FRONTEND="noninteractive" \
-    CONTAINER_TYPE="base-debian"
+    CONTAINER_TYPE="debian-base"
 
 COPY rootfs/common /
 

@@ -1,7 +1,7 @@
 FROM alpine:3.11
 
 ENV \
-    CONTAINER_TYPE="base-alpine"
+    CONTAINER_TYPE="alpine-base"
 
 COPY rootfs/common /
 

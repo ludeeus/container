@@ -1,6 +1,6 @@
 FROM ludeeus/container:alpine-base
 
-ENV CONTAINER_TYPE go
+ENV CONTAINER_TYPE=go
 
 RUN \
     apk add --no-cache \
