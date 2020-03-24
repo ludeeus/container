@@ -6,8 +6,6 @@ from uuid import uuid4
 GITHUB_ACTOR = os.environ.get('GITHUB_ACTOR')
 GITHUB_TOKEN = os.environ.get('GITHUB_TOKEN')
 
-UPDATE = "git commit -m '[{}] Update {} from {} to {}'"
-
 UUID = str(uuid4()).replace("-", "")
 
 def get_tags_from_docker(image):
@@ -48,6 +46,11 @@ def run_command(command):
     if cmd.returncode != 0:
         exit(1)
 
+def commit(iamge, item, fromv, tov):
+    cmd = subprocess.run(["git", "commit", "-m", f'"[{image}] Update {item} from {fromv} to {tov}"'])
+    if cmd.returncode != 0:
+        exit(1)
+
 def update_base_images():
     with open("DockerFiles/BaseImages/OS/Alpine.dockerfile", "r") as alpine:
         current = None
@@ -63,7 +66,7 @@ def update_base_images():
             with open("DockerFiles/BaseImages/OS/Alpine.dockerfile", "w") as alpine:
                 alpine.write(content.replace(installed, current))
             run_command("git add DockerFiles/BaseImages/OS/Alpine.dockerfile")
-            run_command(UPDATE.format("alpine-base", "alpine", installed, current))
+            commit("alpine-base", "alpine", installed, current)
 
 
     with open("DockerFiles/BaseImages/OS/Debian.dockerfile", "r") as debian:
@@ -80,7 +83,7 @@ def update_base_images():
             with open("DockerFiles/BaseImages/OS/Debian.dockerfile", "w") as alpine:
                 alpine.write(content.replace(installed, current))
             run_command("git add DockerFiles/BaseImages/OS/Debian.dockerfile")
-            run_command(UPDATE.format("debian-base", "debian", installed, current))
+            commit("debian-base", "debian", installed, current)
 
 def update_s6():
     installfile = "rootfs/s6/install"
@@ -93,7 +96,7 @@ def update_s6():
         with open(installfile, "w") as install:
             install.write(content)
         run_command("git add rootfs/s6/install")
-        run_command(UPDATE.format("base-s6", "s6-overlay", installed, current))
+        commit("base-s6", "s6-overlay", installed, current)
 
 def update_apline_pkgs():
     dockerfiles = [f for f in glob.glob("DockerFiles/" + "**/*.dockerfile", recursive=True)]
@@ -124,7 +127,7 @@ def update_alpine_pkgs_in_dockerfile(path):
             with open(path, "w") as dockerfile:
                 dockerfile.write(content)
             run_command(f"git add {path}")
-            run_command(UPDATE.format(container, package, installed, current))
+            commit(container, package, installed, current)
 
 def update_all():
     update_base_images()
