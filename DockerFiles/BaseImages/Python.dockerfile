@@ -19,7 +19,7 @@ RUN \
         black=19.10b0 \
         colorlog=4.1.0 \
         pylint=2.4.4 \
-        python-language-server==0.31.9 \
+        python-language-server=0.31.9 \
     \
     && find /usr/local \
         \( -type d -a -name test -o -name tests -o -name '__pycache__' \) \
