@@ -25,4 +25,4 @@ jobs:
           branch-suffix: timestamp
           reviewers: ludeeus
           title: "Updates pending 🎉"
-          body: "<!-- hidden message -->"
+          body: "<!-- hidden message: Tagging @ludeeus so he get a notification -->"
