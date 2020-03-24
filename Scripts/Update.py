@@ -47,7 +47,7 @@ def run_command(command):
         exit(1)
 
 def commit(image, item, fromv, tov):
-    cmd = subprocess.run(["git", "commit", "-m", f'"[{image}] Update {item} from {fromv} to {tov}"'])
+    cmd = subprocess.run(["git", "commit", "-m", f'[{image}] Update {item} from {fromv} to {tov}'])
     if cmd.returncode != 0:
         exit(1)
 
