@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+
 jobs:
   deploy:
     name: Update everything
@@ -24,5 +25,5 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch-suffix: timestamp
           reviewers: ludeeus
-          title: ":tada: Updates are pending :tada:"
-          body: ""
+          title: ":Updates pending 🎉"
+          body: "<!-- hidden message -->"
