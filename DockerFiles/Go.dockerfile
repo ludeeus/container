@@ -4,6 +4,6 @@ ENV CONTAINER_TYPE=go
 
 RUN \
     apk add --no-cache \
-        go=1.13.4-r1 \
+        go=1.13.4-r0 \
     \
     && rm -rf /var/cache/apk/*

@@ -126,16 +126,6 @@ def update_alpine_pkgs_in_dockerfile(path):
             run_command(f"git add {path}")
             run_command(UPDATE.format(container, package, installed, current))
 
-def create_new_branch():
-    repo = f"https://{GITHUB_ACTOR}:{GITHUB_TOKEN}@github.com/ludeeus/container.git"
-    run_command(f"git checkout -b update-{UUID}")
-    run_command("git config user.name 'GitHub Action'")
-    run_command("git config user.email 'actions@users.noreply.github.com'")
-    run_command(f"git remote add update {repo}")
-
-def push_branch():
-    run_command(f"git push update update-{UUID}")
-
 def update_all():
     update_base_images()
     update_apline_pkgs()

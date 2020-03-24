@@ -14,5 +14,9 @@ jobs:
         run: |
             python3 -m pip install -U requests alpinepkgs
             python3 Scripts/Update.py
-        env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch-suffix: timestamp
+          reviewers: ludeeus
