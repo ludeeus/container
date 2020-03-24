@@ -5,6 +5,18 @@ import glob
 
 UPDATE = "git commit -m '[{}] Update {} from {} to {}'"
 
+def get_tags_from_docker(image):
+    import requests
+    if image != "debian":
+        url = f"https://registry.hub.docker.com/v2/repositories/library/{image}/tags"
+        response = requests.get(url).json()
+        return response["results"]
+
+    url = f"https://registry.hub.docker.com/v1/repositories/library/debian/tags"
+    response = requests.get(url).json()
+    tags = [x["name"] for x in response if x["name"][0].isdigit()]
+    return tags
+
 def get_release_from_github(repo):
     import requests
     url = f"https://api.github.com/repos/{repo}/releases/latest"
@@ -13,7 +25,7 @@ def get_release_from_github(repo):
 
 def get_alpine_pkg_version(pkg):
     from alpinepkgs.packages import get_package
-    return get_package(pkg, "v3.11")["x86_64"]["version"]
+    return get_package(pkg)["x86_64"]["version"]
 
 def get_debian_pkg_version(pkg):
     import requests
@@ -30,6 +42,41 @@ def run_command(command):
     cmd = subprocess.run([x for x in command.split(" ")])
     if cmd.returncode != 0:
         exit(1)
+
+def update_base_images():
+    with open("DockerFiles/BaseImages/OS/Alpine.dockerfile", "r") as alpine:
+        current = None
+        content = alpine.read()
+        installed = content.split("FROM ")[1].split("\n")[0].strip()
+
+    for tag in get_tags_from_docker("alpine"):
+        if len(tag["name"].split(".")) == 3:
+            current = f"alpine:{tag['name']}"
+            break
+    if current is not None:
+        if current != installed:
+            with open("DockerFiles/BaseImages/OS/Alpine.dockerfile", "w") as alpine:
+                alpine.write(content.replace(installed, current))
+            #run_command("git add DockerFiles/BaseImages/OS/Alpine.dockerfile")
+            #run_command(UPDATE.format("alpine-base", "alpine", installed, current))
+
+
+    with open("DockerFiles/BaseImages/OS/Debian.dockerfile", "r") as debian:
+        current = None
+        content = debian.read()
+        installed = content.split("FROM ")[1].split("\n")[0].strip()
+
+    for tag in sorted(get_tags_from_docker("debian"), reverse=True):
+        if len(tag.split(".")) == 2 and "-slim" in tag and int(tag.split(".")[0]) >= 10:
+            current = f"debian:{tag}"
+            break
+    if current is not None:
+        if current != installed:
+            with open("DockerFiles/BaseImages/OS/Debian.dockerfile", "w") as alpine:
+                alpine.write(content.replace(installed, current))
+            #run_command("git add DockerFiles/BaseImages/OS/Debian.dockerfile")
+            #run_command(UPDATE.format("debian-base", "debian", installed, current))
+
 
 def update_s6():
     installfile = "rootfs/s6/install"
@@ -79,6 +126,7 @@ def update_alpine_pkgs_in_dockerfile(path):
 
 def update_all():
     run_command("python3 -m pip install -U requests alpinepkgs")
+    update_base_images()
     update_apline_pkgs()
     update_s6()
 

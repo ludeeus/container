@@ -1,4 +1,4 @@
-FROM alpine:3.11
+FROM alpine:3.11.5
 
 ENV \
     CONTAINER_TYPE="alpine-base"
