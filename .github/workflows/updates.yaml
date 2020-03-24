@@ -24,3 +24,5 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch-suffix: timestamp
           reviewers: ludeeus
+          title: ":tada: Updates are pending :tada:"
+          body: ""
