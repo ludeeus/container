@@ -1,9 +1,15 @@
 import os
 import subprocess
 import glob
+from datetime import datetime
 
+GITHUB_ACTOR = os.environ.get('GITHUB_ACTOR')
+GITHUB_TOKEN = os.environ.get('GITHUB_TOKEN')
 
 UPDATE = "git commit -m '[{}] Update {} from {} to {}'"
+
+DATE = datetime.now()
+DATE = f"{DATE.year}-{DATE.month}-{DATE.day}"
 
 def get_tags_from_docker(image):
     import requests
@@ -57,8 +63,8 @@ def update_base_images():
         if current != installed:
             with open("DockerFiles/BaseImages/OS/Alpine.dockerfile", "w") as alpine:
                 alpine.write(content.replace(installed, current))
-            #run_command("git add DockerFiles/BaseImages/OS/Alpine.dockerfile")
-            #run_command(UPDATE.format("alpine-base", "alpine", installed, current))
+            run_command("git add DockerFiles/BaseImages/OS/Alpine.dockerfile")
+            run_command(UPDATE.format("alpine-base", "alpine", installed, current))
 
 
     with open("DockerFiles/BaseImages/OS/Debian.dockerfile", "r") as debian:
@@ -74,9 +80,8 @@ def update_base_images():
         if current != installed:
             with open("DockerFiles/BaseImages/OS/Debian.dockerfile", "w") as alpine:
                 alpine.write(content.replace(installed, current))
-            #run_command("git add DockerFiles/BaseImages/OS/Debian.dockerfile")
-            #run_command(UPDATE.format("debian-base", "debian", installed, current))
-
+            run_command("git add DockerFiles/BaseImages/OS/Debian.dockerfile")
+            run_command(UPDATE.format("debian-base", "debian", installed, current))
 
 def update_s6():
     installfile = "rootfs/s6/install"
@@ -122,7 +127,17 @@ def update_alpine_pkgs_in_dockerfile(path):
             run_command(f"git add {path}")
             run_command(UPDATE.format(container, package, installed, current))
 
+def create_new_branch():
+    repo = f"https://{GITHUB_ACTOR}:{GITHUB_TOKEN}@github.com/ludeeus/container.git"
+    run_command(f"git branch -d update-{DATE}")
+    run_command(f"git checkout -b update-{DATE}")
+    run_command("git config user.name 'GitHub Action'")
+    run_command("git config user.email 'actions@users.noreply.github.com'")
+    run_command(f"git remote remove update {DATE}")
+    run_command(f"git remote add update {DATE}")
 
+def push_branch_if_needed():
+    run_command(f"git diff master update-{DATE} > /tmp/diff")
 
 def update_all():
     run_command("python3 -m pip install -U requests alpinepkgs")
@@ -131,4 +146,6 @@ def update_all():
     update_s6()
 
 
-update_all()
+#update_all()
+#create_new_branch()
+push_branch_if_needed()
