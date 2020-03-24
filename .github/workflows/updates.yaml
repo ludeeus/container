@@ -1,9 +1,8 @@
 name: Update everything
 
 on:
-  push:
-    branches:
-      - master
+  schedule:
+    - cron:  '40 16 * * *'
 
 jobs:
   deploy:
