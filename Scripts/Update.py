@@ -2,7 +2,7 @@ import os
 import subprocess
 
 
-UPDATE = "echo git commit -m '[{}] Update {} from {} {}'"
+UPDATE = "echo git commit -m '[{}] Update {} from {} to {}'"
 
 def get_release_from_github(repo):
     import requests

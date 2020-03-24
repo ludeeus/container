@@ -35,12 +35,12 @@ def main(runtype):
     IMAGES.append(Image("debian-base-s6", "BaseImages/OS/DebianS6.dockerfile", []))
 
     # Sorfware Base
-    IMAGES.append(Image("go-base", "BaseImages/Go.dockerfile", ["alpine-base"]))
     IMAGES.append(Image("python-base", "BaseImages/Python.dockerfile", ["alpine-base"]))
     IMAGES.append(Image("dotnet-base", "BaseImages/Dotnet.dockerfile", ["debian-base"]))
     IMAGES.append(Image("nodejs-base", "BaseImages/Nodejs.dockerfile", ["alpine-base"]))
 
     # Reqular (amd64 only)
+    IMAGES.append(Image("go", "Go.dockerfile", ["alpine-base"]))
     IMAGES.append(Image("frontend", "Frontend.dockerfile", ["alpine-base", "nodejs-base"]))
     IMAGES.append(Image("netdaemon", "Netdaemon.dockerfile", ["dotnet-base", "debian-base"]))
     IMAGES.append(Image("integration", "Integration.dockerfile", ["alpine-base", "python-base"]))
