@@ -16,7 +16,7 @@ RUN \
     \
     && python3 -m pip install --no-cache-dir -U pip==20.0.2 \
     && python3 -m pip install --no-cache-dir -U \
-        black==19.10b0 \
+        black=19.10b0 \
         colorlog==4.1.0 \
         pylint==2.4.4 \
         python-language-server==0.31.9 \
