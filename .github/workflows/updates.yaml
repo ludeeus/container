@@ -1,0 +1,16 @@
+name: Update everything
+
+on:
+  push:
+    branches:
+      - master
+jobs:
+  deploy:
+    name: Update everything
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Update everything
+        run: python3 Scripts/Update.py
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

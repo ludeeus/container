@@ -1,15 +1,14 @@
 import os
 import subprocess
 import glob
-from datetime import datetime
+from uuid import uuid4
 
 GITHUB_ACTOR = os.environ.get('GITHUB_ACTOR')
 GITHUB_TOKEN = os.environ.get('GITHUB_TOKEN')
 
 UPDATE = "git commit -m '[{}] Update {} from {} to {}'"
 
-DATE = datetime.now()
-DATE = f"{DATE.year}-{DATE.month}-{DATE.day}"
+UUID = str(uuid4()).replace("-", "")
 
 def get_tags_from_docker(image):
     import requests
@@ -129,15 +128,13 @@ def update_alpine_pkgs_in_dockerfile(path):
 
 def create_new_branch():
     repo = f"https://{GITHUB_ACTOR}:{GITHUB_TOKEN}@github.com/ludeeus/container.git"
-    run_command(f"git branch -d update-{DATE}")
-    run_command(f"git checkout -b update-{DATE}")
+    run_command(f"git checkout -b update-{UUID}")
     run_command("git config user.name 'GitHub Action'")
     run_command("git config user.email 'actions@users.noreply.github.com'")
-    run_command(f"git remote remove update {DATE}")
-    run_command(f"git remote add update {DATE}")
+    run_command(f"git remote add update {repo}")
 
-def push_branch_if_needed():
-    run_command(f"git diff master update-{DATE} > /tmp/diff")
+def push_branch():
+    run_command(f"git push update update-{UUID}")
 
 def update_all():
     run_command("python3 -m pip install -U requests alpinepkgs")
@@ -146,6 +143,6 @@ def update_all():
     update_s6()
 
 
-#update_all()
-#create_new_branch()
-push_branch_if_needed()
+create_new_branch()
+update_all()
+push_branch()
