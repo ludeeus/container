@@ -40,6 +40,12 @@ def get_debian_pkg_version(pkg):
         if "buster" in version["suites"]:
             return version["version"]
 
+def get_version_from_pypi(pkg):
+    import requests
+    url = f"https://pypi.python.org/pypi/{pkg}/json"
+    response = requests.get(url).json()
+    return response["info"]["version"]
+
 def run_command(command):
     print(command)
     cmd = subprocess.run([x for x in command.split(" ")])
@@ -108,14 +114,19 @@ def update_alpine_pkgs_in_dockerfile(path):
         content = dockerfile.read()
     if "RUN" not in content:
         return
-    packages = [x.replace("\\", " ").strip() for x in content.split("RUN ")[1].split("\n") if "=" in x and "&&" not in x and "==" not in x]
+    packages = [x.replace("\\", " ").strip() for x in content.split("RUN ")[1].split("\n") if "=" in x and "&&" not in x]
     for pkg in packages:
-        package = pkg.split("=")[0]
-        installed = pkg.split("=")[1]
-        if "apk add" in content:
-            current = get_alpine_pkg_version(package)
+        if "==" not in pkg:
+            package = pkg.split("=")[0]
+            installed = pkg.split("=")[1]
+            if "apk add" in content:
+                current = get_alpine_pkg_version(package)
+            else:
+                current = get_debian_pkg_version(package)
         else:
-            current = get_debian_pkg_version(package)
+            package = pkg.split("==")[0]
+            installed = pkg.split("==")[1]
+            current = get_version_from_pypi(package)
         if current is None:
             return
         if installed != current:
