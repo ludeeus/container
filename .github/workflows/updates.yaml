@@ -11,6 +11,8 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - name: Update everything
-        run: python3 Scripts/Update.py
+        run: |
+            python3 -m pip install -U requests alpinepkgs
+            python3 Scripts/Update.py
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

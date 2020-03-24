@@ -137,7 +137,6 @@ def push_branch():
     run_command(f"git push update update-{UUID}")
 
 def update_all():
-    run_command("python3 -m pip install -U requests alpinepkgs")
     update_base_images()
     update_apline_pkgs()
     update_s6()
