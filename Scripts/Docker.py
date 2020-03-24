@@ -31,8 +31,8 @@ def main(runtype):
     IMAGES.append(Image("debian-base", "BaseImages/OS/Debian.dockerfile", []))
 
     # OS Base With S6 overlay
-    IMAGES.append(Image("alpine-base-s6", "BaseImages/OS/AlpineS6.dockerfile", []))
-    IMAGES.append(Image("debian-base-s6", "BaseImages/OS/DebianS6.dockerfile", []))
+    IMAGES.append(Image("alpine-base-s6", "BaseImages/OS/AlpineS6.dockerfile", ["alpine-base"]))
+    IMAGES.append(Image("debian-base-s6", "BaseImages/OS/DebianS6.dockerfile", ["debian-base"]))
 
     # Sorfware Base
     IMAGES.append(Image("python-base", "BaseImages/Python.dockerfile", ["alpine-base"]))
