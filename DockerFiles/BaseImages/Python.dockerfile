@@ -1,6 +1,6 @@
 FROM ludeeus/container:alpine-base
 
-ENV CONTAINER_TYPE=python
+ENV CONTAINER_TYPE=python-base
 
 RUN \
     apk add --no-cache \
