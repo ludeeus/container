@@ -197,28 +197,27 @@ def update_netcore():
                 dotnet[arch]['runtime'] = line.split('"')[1]
                 break
 
-
     with open("rootfs/dotnet-base/build_scripts/download_dotnet.sh", "r") as dnfile:
         content = dnfile.read()
-    new_content = content
-    for line in content.split("\n"):
-        if "arm.tar" in line and "sdk" in line:
-            print(line.split('"')[1], dotnet["arm"]["sdk"])
-            new_content.replace(line.split('"')[1], dotnet["arm"]["sdk"])
-        if "arm.tar" in line and "runtime" in line:
-            new_content.replace(line.split('"')[1], dotnet["arm"]["runtime"])
 
-        if "arm64" in line and "sdk" in line:
-            new_content.replace(line.split('"')[1], dotnet["arm64"]["sdk"])
-        if "arm64" in line and "runtime" in line:
-            new_content.replace(line.split('"')[1], dotnet["arm64"]["runtime"])
+    newcontent = f"""#!/bin/bash
+# https://dotnet.microsoft.com/download/dotnet-core/3.1
 
-        if "x64" in line and "sdk" in line:
-            new_content.replace(line.split('"')[1], dotnet["amd64"]["sdk"])
-        if "x64" in line and "runtime" in line:
-            new_content.replace(line.split('"')[1], dotnet["amd64"]["runtime"])
+ARCH=$(uname -m)
 
-    with open("rootfs/dotnet-base/build_scripts/download_dotnet.sh", "w") as dnfile:
-        dnfile.write(new_content)
+if [ "$ARCH" == "armv7l" ]; then
+    wget -q -nv -O /tmp/runtime.tar.gz "{dotnet["arm"]["runtime"]}";
+    wget -q -nv -O /tmp/sdk.tar.gz "{dotnet["arm"]["sdk"]}";
+elif [ "$ARCH" == "aarch64" ]; then
+    wget -q -nv -O /tmp/runtime.tar.gz "{dotnet["arm64"]["runtime"]}";
+    wget -q -nv -O /tmp/sdk.tar.gz "{dotnet["arm64"]["sdk"]}";
+elif [ "$ARCH" == "x86_64" ]; then
+    wget -q -nv -O /tmp/runtime.tar.gz "{dotnet["amd64"]["runtime"]}";
+    wget -q -nv -O /tmp/sdk.tar.gz "{dotnet["amd64"]["sdk"]}";
+fi
+"""
+    if newcontent != content:
+        with open("rootfs/dotnet-base/build_scripts/download_dotnet.sh", "w") as dnfile:
+            dnfile.write(newcontent)
 
 update_netcore()

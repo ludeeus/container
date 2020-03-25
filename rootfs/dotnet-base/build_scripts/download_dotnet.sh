@@ -4,12 +4,12 @@
 ARCH=$(uname -m)
 
 if [ "$ARCH" == "armv7l" ]; then
-    wget -q -nv -O /tmp/sdk.tar.gz "https://download.visualstudio.microsoft.com/download/pr/21a124fd-5bb7-403f-bdd2-489f9d21d695/b58fa90d19a5a5124d21dea94422868c/dotnet-sdk-3.1.200-linux-arm.tar.gz";
-    wget -q -nv -O /tmp/runtime.tar.gz "https://download.visualstudio.microsoft.com/download/pr/30ed47bb-c25b-431c-9cfd-7b942b07314f/5c92af345a5475ca58b6878dd974e1dc/dotnet-runtime-3.1.2-linux-arm.tar.gz";
+    wget -q -nv -O /tmp/runtime.tar.gz "https://download.visualstudio.microsoft.com/download/pr/b68cde83-05c7-4421-ad9a-3e6f2cc53824/876dbfc9b4521d3ca89a226c6438ffc1/aspnetcore-runtime-3.1.3-linux-arm.tar.gz";
+    wget -q -nv -O /tmp/sdk.tar.gz "https://download.visualstudio.microsoft.com/download/pr/ccbcbf70-9911-40b1-a8cf-e018a13e720e/03c0621c6510f9c6f4cca6951f2cc1a4/dotnet-sdk-3.1.201-linux-arm.tar.gz";
 elif [ "$ARCH" == "aarch64" ]; then
-    wget -q -nv -O /tmp/sdk.tar.gz "https://download.visualstudio.microsoft.com/download/pr/781cb53b-046c-45fb-b18e-97ad65ff61a0/5c6ce7f4e031dad7cca0fdd5bcf4335b/dotnet-sdk-3.1.200-linux-arm64.tar.gz";
-    wget -q -nv -O /tmp/runtime.tar.gz "https://download.visualstudio.microsoft.com/download/pr/ec985ae1-e15c-4858-b586-de5f78956573/f585f8ffc303bbca6a711ecd61417a40/aspnetcore-runtime-3.1.2-linux-arm64.tar.gz";
+    wget -q -nv -O /tmp/runtime.tar.gz "https://download.visualstudio.microsoft.com/download/pr/d5c6e9d7-25b9-47ac-9d67-35ac65211ad3/c8f4ccd0dc02ca8229ba43ecbe84294b/aspnetcore-runtime-3.1.3-linux-arm64.tar.gz";
+    wget -q -nv -O /tmp/sdk.tar.gz "https://download.visualstudio.microsoft.com/download/pr/98a2e556-bedd-46c8-b3fa-96a9f1eb9556/09f60d50e3cbba0aa16d48ceec9dcb0b/dotnet-sdk-3.1.201-linux-arm64.tar.gz";
 elif [ "$ARCH" == "x86_64" ]; then
-    wget -q -nv -O /tmp/runtime.tar.gz "https://download.visualstudio.microsoft.com/download/pr/2d72ee67-ac4d-42c6-97d9-a26a28201fc8/977ad14b99b6ed03dcefd6655789e43a/aspnetcore-runtime-3.1.2-linux-x64.tar.gz";
-    wget -q -nv -O /tmp/sdk.tar.gz "https://download.visualstudio.microsoft.com/download/pr/daec2daf-b458-4ae1-9046-b8ba09b5fb49/733e2d73b41640d6e6bdf1cc6b9ef03b/dotnet-sdk-3.1.200-linux-x64.tar.gz";
+    wget -q -nv -O /tmp/runtime.tar.gz "https://download.visualstudio.microsoft.com/download/pr/7faca87b-7526-4dcd-ae23-4559d2c51ce3/7db1f314c733191ea43e1757e3b2583d/aspnetcore-runtime-3.1.3-linux-x64.tar.gz";
+    wget -q -nv -O /tmp/sdk.tar.gz "https://download.visualstudio.microsoft.com/download/pr/f65a8eb0-4537-4e69-8ff3-1a80a80d9341/cc0ca9ff8b9634f3d9780ec5915c1c66/dotnet-sdk-3.1.201-linux-x64.tar.gz";
 fi
