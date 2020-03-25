@@ -42,7 +42,7 @@ def main(runtype):
     # Reqular (amd64 only)
     IMAGES.append(Image("go", "Go.dockerfile", ["alpine-base"]))
     IMAGES.append(Image("frontend", "Frontend.dockerfile", ["alpine-base", "nodejs-base"]))
-    IMAGES.append(Image("netdaemon", "Netdaemon.dockerfile", ["dotnet-base", "debian-base, dotnet-base"]))
+    IMAGES.append(Image("netdaemon", "Netdaemon.dockerfile", ["dotnet-base", "debian-base"]))
     IMAGES.append(Image("integration", "Integration.dockerfile", ["alpine-base", "python-base"]))
     IMAGES.append(Image("python", "Python.dockerfile", ["alpine-base", "python-base"]))
     IMAGES.append(Image("monster", "Monster.dockerfile", ["alpine-base", "python-base", "integration"]))
