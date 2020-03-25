@@ -57,6 +57,8 @@ def commit(image, item, fromv, tov):
     if cmd.returncode != 0:
         exit(1)
 
+
+
 def update_base_images():
     with open("DockerFiles/BaseImages/OS/Alpine.dockerfile", "r") as alpine:
         current = None
@@ -145,5 +147,78 @@ def update_all():
     update_apline_pkgs()
     update_s6()
 
+def update_netcore():
+    import requests
+    baseurl = "https://dotnet.microsoft.com"
+    dotnet = {
+        "arm": {
+            "sdk": None,
+            "runtime": None
+        },
+        "arm64": {
+            "sdk": None,
+            "runtime": None
+        },
+        "amd64": {
+            "sdk": None,
+            "runtime": None
+        },
+    }
 
-update_all()
+    url = f"{baseurl}/download/dotnet-core/3.1"
+    request = requests.get(url).text
+    for line in request.split("\n"):
+        if "ARM32" in line and "linux" in line and "sdk" in line and dotnet["arm"]["sdk"] is None:
+            dotnet["arm"]["sdk"] = line.split('"')[1]
+        if "ARM32" in line and "linux" in line and "runtime" in line and dotnet["arm"]["runtime"] is None:
+            dotnet["arm"]["runtime"] = line.split('"')[1]
+
+        if "ARM64" in line and "linux" in line and "sdk" in line and dotnet["arm64"]["sdk"] is None:
+            dotnet["arm64"]["sdk"] = line.split('"')[1]
+        if "ARM64" in line and "linux" in line and "runtime" in line and dotnet["arm64"]["runtime"] is None:
+            dotnet["arm64"]["runtime"] = line.split('"')[1]
+
+        if "x64" in line and "rhel" not in line and "alpine" not in line and "linux" in line and "sdk" in line and dotnet["amd64"]["sdk"] is None:
+            dotnet["amd64"]["sdk"] = line.split('"')[1]
+        if "x64" in line and "rhel" not in line and "alpine" not in line and "linux" in line and "runtime" in line and dotnet["amd64"]["runtime"] is None:
+            dotnet["amd64"]["runtime"] = line.split('"')[1]
+
+    for arch in dotnet:
+        if dotnet[arch]['sdk'] is None or dotnet[arch]['runtime'] is None:
+            continue
+        request = requests.get(f"{baseurl}{dotnet[arch]['sdk']}").text
+        for line in request.split("\n"):
+            if "window.open" in line:
+                dotnet[arch]['sdk'] = line.split('"')[1]
+                break
+        request = requests.get(f"{baseurl}{dotnet[arch]['runtime']}").text
+        for line in request.split("\n"):
+            if "window.open" in line:
+                dotnet[arch]['runtime'] = line.split('"')[1]
+                break
+
+
+    with open("rootfs/dotnet-base/build_scripts/download_dotnet.sh", "r") as dnfile:
+        content = dnfile.read()
+    new_content = content
+    for line in content.split("\n"):
+        if "arm.tar" in line and "sdk" in line:
+            print(line.split('"')[1], dotnet["arm"]["sdk"])
+            new_content.replace(line.split('"')[1], dotnet["arm"]["sdk"])
+        if "arm.tar" in line and "runtime" in line:
+            new_content.replace(line.split('"')[1], dotnet["arm"]["runtime"])
+
+        if "arm64" in line and "sdk" in line:
+            new_content.replace(line.split('"')[1], dotnet["arm64"]["sdk"])
+        if "arm64" in line and "runtime" in line:
+            new_content.replace(line.split('"')[1], dotnet["arm64"]["runtime"])
+
+        if "x64" in line and "sdk" in line:
+            new_content.replace(line.split('"')[1], dotnet["amd64"]["sdk"])
+        if "x64" in line and "runtime" in line:
+            new_content.replace(line.split('"')[1], dotnet["amd64"]["runtime"])
+
+    with open("rootfs/dotnet-base/build_scripts/download_dotnet.sh", "w") as dnfile:
+        dnfile.write(new_content)
+
+update_netcore()
