@@ -1,14 +1,10 @@
-// See https://aka.ms/vscode-remote/devcontainer.json for format details.
 {
-	"image": "ludeeus/devcontainer:integration-stable",
+	"image": "ludeeus/container:python",
 	"context": "..",
-	"appPort": [
-		"9123:8123"
-	],
-	"postCreateCommand": "dc install",
+	"postCreateCommand": "python3 -m install -r requirements.txt",
 	"runArgs": [
 		"-v",
-		"${env:HOME}${env:USERPROFILE}/.ssh:/tmp/.ssh" // This is added so you can push from inside the container
+		"${env:HOME}${env:USERPROFILE}/.ssh:/tmp/.ssh"
 	],
 	"extensions": [
 		"ms-python.python",

@@ -1,0 +1,12 @@
+{
+    "name": "Sample App development",
+    "image": "ludeeus/devcontainer:netdaemon",
+    "settings": {
+      "terminal.integrated.shell.linux": "/bin/bash"
+    },
+    "extensions": [
+      "ms-dotnettools.csharp",
+      "aaron-bond.better-comments",
+      "k--kato.docomment"
+    ]
+  }
