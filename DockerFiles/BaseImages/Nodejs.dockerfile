@@ -1,6 +1,6 @@
 FROM ludeeus/container:alpine-base
 
-ENV CONTAINER_TYPE=nodejs
+ENV CONTAINER_TYPE=nodejs-base
 
 RUN \
     apk add --no-cache \

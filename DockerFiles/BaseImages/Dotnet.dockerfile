@@ -5,7 +5,7 @@ COPY rootfs/dotnet-base /
 ENV \
     DOTNET_RUNNING_IN_CONTAINER="true" \
     DOTNET_USE_POLLING_FILE_WATCHER="true" \
-    CONTAINER_TYPE="dotnet"
+    CONTAINER_TYPE="dotnet-base"
 
 RUN echo $(uname -a) \
     \
