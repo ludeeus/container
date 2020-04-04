@@ -82,6 +82,8 @@ class Image:
         args += " --no-cache"
         args += " --compress"
         args += f" -t ludeeus/container:{self.name}"
+        if self.name == "alpine-base":
+            args += f" -t ludeeus/container:latest"
         args += f" -f {WORKSPACE}/DockerFiles/{self.dockerfile}"
         args += " ."
         run_command(buildx + args)
