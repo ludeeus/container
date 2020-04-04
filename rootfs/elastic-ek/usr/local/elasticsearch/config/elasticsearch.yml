@@ -1,0 +1,13 @@
+cluster:
+  initial_master_nodes: ["es-node-1"]
+  name: elastic-ek
+http:
+  port: 9200
+network:
+  host: 0.0.0.0
+node:
+  data: true
+  master: true
+  name: "es-node-1"
+path:
+  data: /data

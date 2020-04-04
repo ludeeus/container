@@ -41,6 +41,7 @@ def main(runtype):
 
     # Reqular (amd64 only)
     IMAGES.append(Image("go", "Go.dockerfile", ["alpine-base"]))
+    IMAGES.append(Image("elastic-ek", "ElasticEK.dockerfile", ["alpine-base", "alpine-base-s6"]))
     IMAGES.append(Image("frontend", "Frontend.dockerfile", ["alpine-base", "nodejs-base"]))
     IMAGES.append(Image("netdaemon", "Netdaemon.dockerfile", ["dotnet-base", "debian-base"]))
     IMAGES.append(Image("integration", "Integration.dockerfile", ["alpine-base", "python-base"]))
