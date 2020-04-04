@@ -9,7 +9,6 @@ RUN \
     apk add --no-cache \
         openjdk11=11.0.5_p10-r0 \
         nodejs=12.15.0-r1 \
-        curl=7.67.0-r0 \
     \
     && adduser -S ekuser \
     && mkdir -p /data /esdata \
