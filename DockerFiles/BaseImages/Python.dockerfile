@@ -22,6 +22,9 @@ RUN \
         pylint==2.4.4 \
         python-language-server==0.31.9 \
     \
+    # Symlink python -> python3
+    && ln -s /usr/bin/python3 /usr/bin/python \
+    \
     && find /usr/local \
         \( -type d -a -name test -o -name tests -o -name '__pycache__' \) \
         -o \( -type f -a -name '*.pyc' -o -name '*.pyo' \) \
