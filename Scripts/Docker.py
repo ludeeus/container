@@ -39,6 +39,11 @@ def main(runtype):
     IMAGES.append(Image("dotnet-base", "BaseImages/Dotnet.dockerfile", ["debian-base"]))
     IMAGES.append(Image("nodejs-base", "BaseImages/Nodejs.dockerfile", ["alpine-base"]))
 
+    # Sorfware Base with S6 overlay
+    IMAGES.append(Image("python-base-s6", "BaseImages/PythonS6.dockerfile", ["alpine-base","alpine-base-s6"]))
+    IMAGES.append(Image("dotnet-base-s6", "BaseImages/DotnetS6.dockerfile", ["debian-base","debian-base-s6"]))
+    IMAGES.append(Image("nodejs-base-s6", "BaseImages/NodejsS6.dockerfile", ["alpine-base","alpine-base-s6"]))
+
     # Reqular (amd64 only)
     IMAGES.append(Image("go", "Go.dockerfile", ["alpine-base"]))
     IMAGES.append(Image("elastic-ek", "ElasticEK.dockerfile", ["alpine-base", "alpine-base-s6"]))
