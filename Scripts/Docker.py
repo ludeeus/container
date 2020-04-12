@@ -3,6 +3,9 @@ import sys
 import subprocess
 from datetime import datetime
 
+import glob
+from ruamel.yaml import YAML
+
 IMAGES = []
 
 REF = os.getenv("IMAGE_TAG")
@@ -25,25 +28,26 @@ def main(runtype):
         print("Runtype is missing")
         exit(1)
 
-    # fmt: off
-    # OS Base
-    IMAGES.append(Image("alpine-base", "BaseImages/OS/Alpine.dockerfile", []))
-    IMAGES.append(Image("debian-base", "BaseImages/OS/Debian.dockerfile", []))
+    yaml = YAML()
+    docker = None
+    with open('docker.yaml') as file:
+        docker = yaml.load(file)
 
-    # OS Base With S6 overlay
-    IMAGES.append(Image("alpine-base-s6", "BaseImages/OS/AlpineS6.dockerfile", ["alpine-base"]))
-    IMAGES.append(Image("debian-base-s6", "BaseImages/OS/DebianS6.dockerfile", ["debian-base"]))
+    # fmt: off
+    for image in docker['OS']:
+        IMAGES.append(image['tag'], image['tag'], image.get("needs", []))
+    for image in docker['OS-S6']:
+        IMAGES.append(image['tag'], image['tag'], image.get("needs", []))
+
 
     # Sorfware Base
     IMAGES.append(Image("python-base", "BaseImages/Python.dockerfile", ["alpine-base"]))
     IMAGES.append(Image("dotnet-base", "BaseImages/Dotnet.dockerfile", ["debian-base"]))
-    IMAGES.append(Image("dotnet-runtime-base", "BaseImages/DotnetRuntime.dockerfile", ["debian-base"]))
     IMAGES.append(Image("nodejs-base", "BaseImages/Nodejs.dockerfile", ["alpine-base"]))
 
     # Sorfware Base with S6 overlay
     IMAGES.append(Image("python-base-s6", "BaseImages/PythonS6.dockerfile", ["alpine-base","python-base"]))
     IMAGES.append(Image("dotnet-base-s6", "BaseImages/DotnetS6.dockerfile", ["debian-base","dotnet-base"]))
-    IMAGES.append(Image("dotnet-runtime-base-s6", "BaseImages/DotnetRuntimeS6.dockerfile", ["debian-base","dotnet-runtime-base"]))
     IMAGES.append(Image("nodejs-base-s6", "BaseImages/NodejsS6.dockerfile", ["alpine-base","nodejs-base"]))
 
     # Reqular (amd64 only)
