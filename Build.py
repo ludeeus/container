@@ -12,7 +12,7 @@ REF = os.getenv("IMAGE_TAG")
 EVENT = os.getenv("GITHUB_EVENT_NAME")
 WORKSPACE = os.getenv("GITHUB_WORKSPACE")
 SHA = os.getenv("GITHUB_SHA")
-CHANGED_FILES = os.getenv("CHANGED_FILES")
+CHANGED_FILES = os.getenv("CHANGED_FILES").split(" ")
 
 INSTRUCTIONS = {}
 ROOTFS = []
