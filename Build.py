@@ -89,10 +89,13 @@ def needs_build(tag, instructions):
         for needs in instructions.get("needs", []):
             if needs.split(":")[-1] in changed_file:
                 return True
-    if "rootfs/common" in CHANGED_FILES:
-        return True
-    if "rootfs/s6" in CHANGED_FILES and instructions.get("S6"):
-        return True
+        if "rootfs/common" in changed_file:
+            return True
+        if "rootfs/s6" in changed_file and instructions.get("S6"):
+            return True
+        if "Build.py" in changed_file:
+            return True
+    return False
 
 
 def build_tag(tag, instructions, publish=False):
