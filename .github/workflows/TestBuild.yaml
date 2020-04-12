@@ -27,3 +27,5 @@ jobs:
       - name: Push to docker registry
         run: |
           python3 ./Build.py build
+        env:
+          CHANGED_FILES: "${{ steps.get_file_changes.outputs.files }}"
