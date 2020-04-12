@@ -1,0 +1,5 @@
+base: "ludeeus/container:alpine-base"
+S6: True
+needs:
+    - "ludeeus/container:alpine-base"
+    - "ludeeus/container:python-base"

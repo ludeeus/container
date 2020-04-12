@@ -23,7 +23,9 @@ jobs:
         uses: crazy-max/ghaction-docker-buildx@v1
         with:
           version: latest
+      - run: python3 -m pip install ruamel.yaml
       - name: Push to docker registry
         run: |
-          docker version
-          python3 Scripts/Docker.py build
+          python3 ./Build.py build
+        env:
+          CHANGED_FILES: "${{ steps.get_file_changes.outputs.files }}"

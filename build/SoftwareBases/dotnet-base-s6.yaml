@@ -1,0 +1,5 @@
+base: "ludeeus/container:debian-base"
+S6: True
+needs:
+    - "ludeeus/container:debian-base"
+    - "ludeeus/container:dotnet-base"

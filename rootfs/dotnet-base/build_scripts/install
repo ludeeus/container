@@ -1,0 +1,8 @@
+#!/bin/bash
+
+mkdir -p /dotnet
+bash /build_scripts/download_dotnet.sh
+tar zxf /tmp/runtime.tar.gz -C /dotnet
+tar zxf /tmp/sdk.tar.gz -C /dotnet
+rm /tmp/*.gz
+ln -s /dotnet/dotnet /bin/dotnet

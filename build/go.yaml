@@ -1,0 +1,5 @@
+base: "ludeeus/container:python-base"
+needs:
+    - "ludeeus/container:alpine-base"
+alpine-packages:
+    - "go=1.13.4-r1"
