@@ -1,11 +1,12 @@
-FROM ludeeus/container:alpine-base-s6
+FROM ludeeus/container:nodejs-base
 
-ENV CONTAINER_TYPE=nodejs-base-s6
+ENV CONTAINER_TYPE="nodejs-base-s6" \
+    S6_BEHAVIOUR_IF_STAGE2_FAILS=2 \
+    S6_CMD_WAIT_FOR_SERVICES=1
+
+COPY rootfs/s6/install /s6/install
 
 RUN \
-    apk add --no-cache \
-        nodejs=12.15.0-r1 \
-        npm=12.15.0-r1 \
-        yarn=1.19.2-r0 \
+    bash /s6/install \
     \
-    && rm -rf /var/cache/apk/*
+    && rm -R /s6
