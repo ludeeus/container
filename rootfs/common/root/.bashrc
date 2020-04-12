@@ -20,8 +20,6 @@ if [[ "$CONTAINER_TYPE" == "integration" ]]; then
     element="custom integrations for Home Assistant."
 elif [[ "$CONTAINER_TYPE" == "frontend" ]]; then
     element="frontend things."
-elif [[ "$CONTAINER_TYPE" == "monster" ]]; then
-    element="custom frontend elements and custom integrations for Home Assistant."
 elif [[ "$CONTAINER_TYPE" == "netdaemon" ]]; then
     element="NetDaemon apps."
 elif [[ "$CONTAINER_TYPE" == "dotnet" ]]; then

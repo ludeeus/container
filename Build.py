@@ -138,7 +138,7 @@ def main(runtype):
 
     load_instructions()
     for tag in sorted(INSTRUCTIONS, key=lambda x: len(INSTRUCTIONS[x].get("needs", []))):
-        build_tag(tag, INSTRUCTIONS[tag])
+        build_tag(tag, INSTRUCTIONS[tag], publish)
 
 
 print(os.environ)
