@@ -37,13 +37,13 @@ def main(runtype):
     # Sorfware Base
     IMAGES.append(Image("python-base", "BaseImages/Python.dockerfile", ["alpine-base"]))
     IMAGES.append(Image("dotnet-base", "BaseImages/Dotnet.dockerfile", ["debian-base"]))
-    IMAGES.append(Image("dotnet-runtime-base", "BaseImages/Dotnet.dockerfile", ["debian-base"]))
+    IMAGES.append(Image("dotnet-runtime-base", "BaseImages/DotnetRuntime.dockerfile", ["debian-base"]))
     IMAGES.append(Image("nodejs-base", "BaseImages/Nodejs.dockerfile", ["alpine-base"]))
 
     # Sorfware Base with S6 overlay
     IMAGES.append(Image("python-base-s6", "BaseImages/PythonS6.dockerfile", ["alpine-base","alpine-base-s6"]))
     IMAGES.append(Image("dotnet-base-s6", "BaseImages/DotnetS6.dockerfile", ["debian-base","debian-base-s6"]))
-    IMAGES.append(Image("dotnet-runtime-base-s6", "BaseImages/DotnetS6.dockerfile", ["debian-base","debian-base-s6"]))
+    IMAGES.append(Image("dotnet-runtime-base-s6", "BaseImages/DotnetRuntimeS6.dockerfile", ["debian-base","debian-base-s6"]))
     IMAGES.append(Image("nodejs-base-s6", "BaseImages/NodejsS6.dockerfile", ["alpine-base","alpine-base-s6"]))
 
     # Reqular (amd64 only)
