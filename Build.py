@@ -6,7 +6,7 @@ from datetime import datetime
 import glob
 from ruamel.yaml import YAML
 
-DOCKERFILE = "/tmp/Dockerfile"
+DOCKERFILE = "./Dockerfile"
 
 REF = os.getenv("IMAGE_TAG")
 EVENT = os.getenv("GITHUB_EVENT_NAME")
@@ -16,13 +16,6 @@ CHANGED_FILES = os.getenv("CHANGED_FILES").split(" ")
 
 INSTRUCTIONS = {}
 ROOTFS = []
-
-def append_docker_lables():
-    with open(DOCKERFILE, "a") as df:
-        date = datetime.now()
-        df.write("\n\nLABEL maintainer='hi@ludeeus.dev'\n")
-        df.write(f"LABEL build.date='{date.year}-{date.month}-{date.day}'\n")
-        df.write(f"LABEL build.sha='{SHA}'")
 
 def clear_dockerfile():
     with open(DOCKERFILE, "w") as df:
@@ -125,7 +118,7 @@ def build_tag(tag, instructions, publish=False):
     args += f" -t ludeeus/container:{tag}"
     if tag == "alpine-base":
         args += f" -t ludeeus/container:latest"
-    args += " -f /tmp/Dockerfile"
+    args += f" -f {DOCKERFILE}"
     args += " ."
     run_command(buildx + args)
 
