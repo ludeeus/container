@@ -2,7 +2,7 @@
 
 [Back to overview](../index.md)
 
-**Base image**: [ludeeus/container:alpine-base](./alpine-base)
+**Base image**: [ludeeus/container:nodejs-base](./nodejs-base)
 
 **Full name**: `ludeeus/container:nodejs-s6`
 

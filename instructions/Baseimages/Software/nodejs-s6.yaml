@@ -1,4 +1,4 @@
-base: "ludeeus/container:alpine-base"
+base: "ludeeus/container:nodejs-base"
 S6: True
 needs:
     - "alpine-base"

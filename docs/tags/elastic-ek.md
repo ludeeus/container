@@ -19,7 +19,7 @@ ELASTIC_VERSION | 7.6.2
 
 Feature | Enabled 
 -- | --
-S6 overlay | False
+S6 overlay | True
 
 ## Alpine packages
 

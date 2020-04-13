@@ -89,7 +89,7 @@ def create_dockerfile(tag, instructions):
         df.write("\n")
 
 def needs_build(tag, instructions):
-    for changed_file in CHANGED_FILES:
+    for changed_file in [x for x in CHANGED_FILES if not x.startswith("./docs")]:
         if tag in changed_file:
             return True
         for needs in instructions.get("needs", []):

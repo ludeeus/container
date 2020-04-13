@@ -2,7 +2,7 @@
 
 [Back to overview](../index.md)
 
-**Base image**: [ludeeus/container:alpine-base](./alpine-base)
+**Base image**: [ludeeus/container:python-base](./python-base)
 
 **Full name**: `ludeeus/container:python-base-s6`
 

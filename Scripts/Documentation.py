@@ -62,7 +62,7 @@ def generate_documentation():
         content.append("## Features")
         content.append(NEWLINE)
         content.append("Feature | Enabled \n-- | --")
-        content.append(f"S6 overlay | {INSTRUCTIONS[tag].get('S6', False)}")
+        content.append(f"S6 overlay | {INSTRUCTIONS[tag].get('S6', False) or len([x for x in INSTRUCTIONS[tag].get('needs', []) if 's6' in x]) != 0}")
 
         content.append(NEWLINE)
 

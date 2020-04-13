@@ -2,7 +2,7 @@
 
 [Back to overview](../index.md)
 
-**Base image**: [ludeeus/container:debian-base](./debian-base)
+**Base image**: [ludeeus/container:dotnet-base](./dotnet-base)
 
 **Full name**: `ludeeus/container:dotnet-base-s6`
 
