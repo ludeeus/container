@@ -74,7 +74,7 @@ def create_dockerfile(tag, instructions):
         content.append("COPY rootfs/s6/install /s6/install")
         run.append("bash /s6/install && rm -R /s6")
     
-    content.appen(f"RUN {' && '.join(run)}")
+    content.append(f"RUN {' && '.join(run)}")
 
     date = datetime.now()
     content.append("LABEL maintainer='hi@ludeeus.dev'")
