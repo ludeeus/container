@@ -37,6 +37,7 @@ def load_instructions():
 
 def create_dockerfile(tag, instructions):
     content = []
+    run = []
     content.append(f"FROM {instructions['base']}")
     content.append(f"ENV CONTAINER_TYPE='{tag}'")
     if instructions.get("S6"):
@@ -52,26 +53,28 @@ def create_dockerfile(tag, instructions):
 
     if len(instructions.get("needs", [])) == 0:
         content.append("COPY rootfs/common /")
-        content.append("RUN chmod +x /usr/bin/dc")
+        run.append("chmod +x /usr/bin/dc")
 
         if instructions.get("alpine-packages") is not None:
-            content.append("RUN echo '@edge http://dl-cdn.alpinelinux.org/alpine/edge/main' >> /etc/apk/repositories")
+            run.append("echo '@edge http://dl-cdn.alpinelinux.org/alpine/edge/main' >> /etc/apk/repositories")
 
     if instructions.get("alpine-packages") is not None:
-        content.append(f"RUN apk add --no-cache {' '.join(instructions['alpine-packages'])} && rm -rf /var/cache/apk/*")
+        run.append(f"apk add --no-cache {' '.join(instructions['alpine-packages'])} && rm -rf /var/cache/apk/*")
 
     if instructions.get("debian-packages") is not None:
-        content.append(f"RUN apt update && apt install -y --no-install-recommends {' '.join(instructions['debian-packages'])}" + " && rm -fr /tmp/* /var/{cache,log}/* /var/lib/apt/lists/*")
+        run.append(f"apt update && apt install -y --no-install-recommends {' '.join(instructions['debian-packages'])}" + " && rm -fr /tmp/* /var/{cache,log}/* /var/lib/apt/lists/*")
 
     if instructions.get("python-packages") is not None:
-        content.append(f"RUN python3 -m pip install --no-cache-dir -U pip && python3 -m pip install --no-cache-dir -U {' '.join(instructions['python-packages'])} && "+" find /usr/local \( -type d -a -name test -o -name tests -o -name '__pycache__' \) -o \( -type f -a -name '*.pyc' -o -name '*.pyo' \) -exec rm -rf '{}' \;")
+        run.append(f"python3 -m pip install --no-cache-dir -U pip && python3 -m pip install --no-cache-dir -U {' '.join(instructions['python-packages'])} && "+" find /usr/local \( -type d -a -name test -o -name tests -o -name '__pycache__' \) -o \( -type f -a -name '*.pyc' -o -name '*.pyo' \) -exec rm -rf '{}' \;")
 
     if len(instructions.get("run", [])) != 0:
-        content.append(f"RUN {' && '.join(instructions['run'])}")
+        run.append(' && '.join(instructions['run']))
 
     if instructions.get("S6"):
         content.append("COPY rootfs/s6/install /s6/install")
-        content.append("RUN bash /s6/install && rm -R /s6")
+        run.append("bash /s6/install && rm -R /s6")
+    
+    content.appen(f"RUN {' && '.join(run)}")
 
     date = datetime.now()
     content.append("LABEL maintainer='hi@ludeeus.dev'")
