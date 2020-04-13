@@ -1,8 +1,8 @@
 #!/bin/bash
 
 
-curl -L -s https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-oss-"${ELASTIC_VERSION}"-linux-x86_64.tar.gz | tar xvzf - -C /usr/local
-curl -L -s https://artifacts.elastic.co/downloads/kibana/kibana-oss-"${ELASTIC_VERSION}"-linux-x86_64.tar.gz | tar xvzf - -C /usr/local
+curl -L -s https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-oss-"${ELASTIC_VERSION}"-linux-x86_64.tar.gz | tar xzf - -C /usr/local
+curl -L -s https://artifacts.elastic.co/downloads/kibana/kibana-oss-"${ELASTIC_VERSION}"-linux-x86_64.tar.gz | tar xzf - -C /usr/local
 
 cp --verbose -R /usr/local/elasticsearch/* /usr/local/elasticsearch-"${ELASTIC_VERSION}"/
 rm -R /usr/local/elasticsearch
