@@ -1,6 +1,6 @@
 base: "ludeeus/container:alpine-base"
 needs:
-    - "ludeeus/container:alpine-base"
+    - "alpine-base"
 alpine-packages:
     - "gcc=9.2.0-r4"
     - "libc-dev=0.7.2-r0"

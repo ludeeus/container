@@ -1,6 +1,6 @@
 base: "ludeeus/container:debian-base"
 needs:
-    - "ludeeus/container:debian-base"
+    - "debian-base"
 env:
     DOTNET_RUNNING_IN_CONTAINER: "true"
     DOTNET_USE_POLLING_FILE_WATCHER: "true"

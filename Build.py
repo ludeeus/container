@@ -27,7 +27,7 @@ def load_instructions():
             ROOTFS.extend(d)
     yaml = YAML()
     files = [f for f in glob.glob("./" + "**/*.yaml", recursive=True)]
-    for f in [x for x in files if x.startswith("./build/")]:
+    for f in [x for x in files if x.startswith("./instructions/")]:
         with open(f) as file:
             tag = f.split("/")[-1].replace(".yaml", "")
             if INSTRUCTIONS.get(tag) is not None:
@@ -73,7 +73,7 @@ def create_dockerfile(tag, instructions):
     if instructions.get("S6"):
         content.append("COPY rootfs/s6/install /s6/install")
         run.append("bash /s6/install && rm -R /s6")
-    
+
     content.append(f"RUN {' && '.join(run)}")
 
     if instructions.get("entrypoint") is not None:
@@ -93,7 +93,7 @@ def needs_build(tag, instructions):
         if tag in changed_file:
             return True
         for needs in instructions.get("needs", []):
-            if needs.split(":")[-1] in changed_file:
+            if needs in changed_file:
                 return True
         if "rootfs/common" in changed_file:
             return True

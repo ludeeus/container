@@ -1,8 +1,0 @@
-base: "ludeeus/container:integration"
-needs:
-    - "ludeeus/container:alpine-base"
-    - "ludeeus/container:python-base"
-alpine-packages:
-    - "nodejs=12.15.0-r1"
-    - "npm=12.15.0-r1"
-    - "yarn=1.19.2-r0"

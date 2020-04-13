@@ -1,0 +1,4 @@
+base: "ludeeus/container:debian-base"
+needs:
+    - "debian-base"
+S6: True

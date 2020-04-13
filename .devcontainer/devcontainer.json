@@ -1,6 +1,6 @@
 // See https://aka.ms/vscode-remote/devcontainer.json for format details.
 {
-	"dockerFile": "../Dockerfiles/BaseImages/Python.dockerfile",
+	"image": "ludeeus/container:python",
 	"postCreateCommand": "bash Scripts/init_devcontainer",
 	"context": "..",
 	"runArgs": [

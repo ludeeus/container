@@ -1,0 +1,4 @@
+base: "ludeeus/container:alpine-base"
+needs:
+    - "alpine-base"
+S6: True
