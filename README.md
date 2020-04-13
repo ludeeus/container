@@ -1,43 +1,41 @@
-# Container
+# ludeeus/container
 
 _Custom container images used for stuff._
 
-# How to use it
+## Container definitions
 
-In your own repository create a new directory in the root called `.devcontainer`.
-In that directory you need a `devcontainer.json` file, [you can use this one.](/devcontainer_example.json)
+The container definitions are located under [./instructions/]()
+There are 3 categories of containers here:
 
-## Minimal example of `.devcontainer/devcontainer.json`
-
-```json
-{
-	"image": "ludeeus/container:integration",
-	"context": "..",
-	"appPort": 	"8123:8123",
-	"postCreateCommand": "dc install",
-	"settings": {
-		"terminal.integrated.shell.linux": "/bin/bash",
-}
-```
-
-If you need to add a something to `configuration.yaml` for your integration create a file in your repository here `.devcontainer/configuration.yaml`, this will be copied every time you run `dc start`.
-
-# image tags
-
-tag | description
+Category | Description
 -- | --
-base | This serves as a base for the other tags.
-python | This provides a minimalistic container for working with python.
-integration | This is intended to be used if you are developing a custom_component (integration) for Home Assistant.
-frontend | This is intended to be used if you are developing a frontend elements.
-monster | This is here to please @iantrich's crazy ideas, this combines the `integration` & `frontend` tags into one monster tag.
-dotnet | This provides a minimalistic container for working with dotnet core.
-netdaemon | This provides a minimalistic container for working with netdaemon apps core.
-go | This provices a minimalistic container for working with go.
+Baseimages | These are container bases that are used as a base for other containers, all base images have a `s6` variant, all base images have a `-base` postfix in the name, and all base images are multiarch.
+Containers | These are containers that are ready to be used.
+Development | These are containers that are perfect for development, preferably by using it as a [devcontainer](https://code.visualstudio.com/docs/remote/containers).
 
-_You can add a `-x.x.x` postfix to each tag to specify the version._ 
 
-# Custom commands included
+## Container instructions
+
+The container instructions are defined using `YAML`, this is a list of the supported YAML tags that can be used:
+The tag of the container will be the same as the filename of the instruction file (without the `.yaml` postfix).
+
+YAML tag | Optional | Type | Desctiption
+-- | -- | -- |--
+`base` | False | string | This is the base image
+`description` | True | string | A short description of the container (used for documentation).
+`needs` | True | list of string | A list of other tags this container relies on.
+`env` | True | map | A key-value map of environment variables.
+`S6` | True | boolean | A boolean to set if S6 overlay is added to the container (defaults to false).
+`alpine-packages` | True | list of string | A list of alpine packages to add to the container.
+`debian-packages` | True | list of string | A list of debian packages to add to the container.
+`pyhton-packages` | True | list of string | A list of python packages to add to the container.
+`run` | True | list of string  | Additional "RUN" stepes to add to the container.
+`entrypoint` | True | string | This will be used as the "ENTRYPOINT" in the images.
+`documentation` | True | string | Additional documentation for the container.
+
+If files/more complicated scripts are needed to build the container, these can be added to a tag spesific directory under [./rootfs/]().
+
+## Custom commands included in all containers
 
 **All custom commands are prefixed with `dc`**
 
@@ -59,121 +57,7 @@ bash-5.0# dc help
     help             Shows this help
 ```
 
-# Tasks
-
-_If you don't want to rely on a CLI, but want to use VSCode tasks to execute them you can._
-
-There is an [example here](.vscode/tasks.json) you can copy to `.vscode/tasks.json` in your repo.
-
-# General devcontainer documentation
+## General devcontainer documentation
 
 - [Developing inside a Container](https://code.visualstudio.com/docs/remote/containers)
 - [System requirements](https://code.visualstudio.com/docs/remote/containers#_system-requirements)
-
-
-# Provided software
-
-## Base
-
-_Based on `apline:3.11`_
-
-_Included in all the container/tags_
-
-Description | version
--- | --
-bash | 5.0.11-r1
-git | 2.24.1-r0
-nano | 4.6-r0
-openssh | 8.1_p1-r0
-openssl-dev | 1.1.1d-r3
-
-## Go
-
-_Based on `ludeeus/devcontainer:base`_
-
-_Included in the container/tags starting with `go`_
-
-Description | version
--- | --
-go | 1.13.4-r1
-
-## Python
-
-_Based on `ludeeus/devcontainer:base`_
-
-_Included in the container/tags starting with `python`_
-
-### APK Packages
-
-Description | version
--- | --
-ffmpeg-dev | 4.2.1-r3
-gcc | 9.2.0-r3
-libc-dev | 0.7.2-r0
-libffi-dev | 3.2.1-r6
-make |4.2.1-r2
-python3 | 3.8.2-r0
-python3-dev | 3.8.2-r0
-
-### Python Packages
-
-Description | version
--- | --
-black | 19.3b0
-colorlog | 4.0.2
-pylint | 2.3.1
-python-language-server | 0.28.3
-
-## Integration
-
-_Based on `ludeeus/devcontainer:python`_
-
-_Included in the container/tags starting with `integration`_
-
-_These container/tags does not have additional software_
-
-## Frontend
-
-_Based on `ludeeus/devcontainer:base`_
-
-_Included in the container/tags starting with `frontend`_
-
-Description | version
--- | --
-nodejs | 12.15.0-r1
-npm | 12.15.0-r1
-yarn | 1.19.2-r0
-
-## Moster
-
-_Based on `ludeeus/devcontainer:integration`_
-
-_Included in the container/tags starting with `monster`_
-
-Description | version
--- | --
-nodejs | 12.15.0-r1
-npm | 12.15.0-r1
-yarn | 1.19.2-r0
-
-## Dotnet
-
-_Based on `ludeeus/devcontainer:base`_
-
-_Included in the container/tags starting with `dotnet`_
-
-Description | version
--- | --
-dotnet | 3.1.102
-icu-dev | 64.2-r0
-libcurl | 7.67.0-r0
-libintl | 0.20.1-r2
-zlib | 1.2.11-r3
-
-## NetDaemon
-
-_Based on `ludeeus/devcontainer:dotnet`_
-
-_Included in the container/tags starting with `netdaemon`_
-
-_These container/tags does not have additional software_

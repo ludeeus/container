@@ -1,0 +1,25 @@
+base: "ludeeus/container:alpine-base"
+desctiption: "Elasticsearch and Kibana in the same container"
+needs:
+    - "alpine-base"
+    - "alpine-base-s6"
+env:
+    ELASTIC_VERSION: "7.6.2"
+alpine-packages:
+    - "openjdk11=11.0.5_p10-r0"
+    - "nodejs=12.15.0-r1"
+run:
+    - "adduser -S ekuser"
+    - "mkdir -p /data /esdata"
+    - "bash /build_scripts/install"
+    - "ln -sf /usr/bin/java /usr/local/elasticsearch/jdk/bin/java"
+entrypoint: "/init"
+documentation: |
+    This container can use 2 ports `9200` (for Elasticsearch) and `5601` for Kibana.
+    If you want to add local indices to elasticsearch, you can map that in with the `-v` option.
+
+    Example run:
+
+    ```bash
+    docker run --name elastic -d -p 9200:9200 -p 5601:5601 C:\es\:/data ludeeus/contianer:elastic-ek
+    ```
