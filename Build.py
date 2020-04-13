@@ -76,6 +76,9 @@ def create_dockerfile(tag, instructions):
     
     content.append(f"RUN {' && '.join(run)}")
 
+    if instructions.get("entrypoint") is not None:
+        content.append(f"ENTRYPOINT {instructions['entrypoint']}")
+
     date = datetime.now()
     content.append("LABEL maintainer='hi@ludeeus.dev'")
     content.append(f"LABEL build.date='{date.year}-{date.month}-{date.day}'")
@@ -95,8 +98,6 @@ def needs_build(tag, instructions):
         if "rootfs/common" in changed_file:
             return True
         if "rootfs/s6" in changed_file and instructions.get("S6"):
-            return True
-        if "Build.py" in changed_file:
             return True
     return False
 

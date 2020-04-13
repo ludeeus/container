@@ -12,3 +12,4 @@ run:
     - "mkdir -p /data /esdata"
     - "bash /build_scripts/install"
     - "ln -sf /usr/bin/java /usr/local/elasticsearch/jdk/bin/java"
+entrypoint: "/init"
