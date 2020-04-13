@@ -31,32 +31,60 @@ def generate_documentation():
 
     for tag in INSTRUCTIONS:
         filename = f"./docs/tags/{tag}.md"
+
         content = []
+        envs = {}
+        alpinepackages = []
+        debianpackages = []
+        pythonpackages = []
+        for needs in INSTRUCTIONS[tag].get('needs', []):
+            for env in INSTRUCTIONS[needs].get('env', []):
+                envs[env] = INSTRUCTIONS[needs]["env"][env]
+            for package in INSTRUCTIONS[needs].get('alpine-packages', []):
+                alpinepackages.append(package)
+            for package in INSTRUCTIONS[needs].get('debian-packages', []):
+                debianpackages.append(package)
+            for package in INSTRUCTIONS[needs].get('python-packages', []):
+                pythonpackages.append(package)
+
+        for env in INSTRUCTIONS[tag].get('env', []):
+            envs[env] = INSTRUCTIONS[tag]["env"][env]
+
+        for package in INSTRUCTIONS[tag].get('alpine-packages', []):
+            alpinepackages.append(package)
+
+        for package in INSTRUCTIONS[tag].get('debian-packages', []):
+            debianpackages.append(package)
+
+        for package in INSTRUCTIONS[tag].get('python-packages', []):
+            pythonpackages.append(package)
+
         content.append(f"# {tag}")
         content.append(NEWLINE)
 
         content.append("[Back to overview](../index.md)")
         content.append(NEWLINE)
 
+
         if INSTRUCTIONS[tag].get('description'):
             content.append(f"_{INSTRUCTIONS[tag]['description']}_")
             content.append(NEWLINE)
 
         if "ludeeus" in INSTRUCTIONS[tag]["base"]:
-            content.append(f"**Base image**: [{INSTRUCTIONS[tag]['base']}](./{INSTRUCTIONS[tag]['base'].split(':')[1]})")
+            content.append(f"**Base image**: [{INSTRUCTIONS[tag]['base']}](./{INSTRUCTIONS[tag]['base'].split(':')[1]})  ")
         else:
-            content.append(f"**Base image**: `{INSTRUCTIONS[tag]['base']}`")
+            content.append(f"**Base image**: `{INSTRUCTIONS[tag]['base']}`  ")
 
-        content.append(NEWLINE)
-        content.append(f"**Full name**: `ludeeus/container:{tag}`")
+        content.append(f"**Full name**: `ludeeus/container:{tag}`  ")
+        content.append(f"[View this on Docker Hub](https://hub.docker.com/r/ludeeus/container/tags?page=1&name={tag})")
         content.append(NEWLINE)
 
         content.append("## Environment variables")
         content.append(NEWLINE)
         content.append("Variable | Value \n-- | --")
         content.append(f"CONTAINER_TYPE | {tag}")
-        for env in INSTRUCTIONS[tag].get('env', []):
-            content.append(f"{env} | {INSTRUCTIONS[tag]['env'][env]}")
+        for env in sorted(envs):
+            content.append(f"{env} | {envs[env]}")
         content.append(NEWLINE)
 
         content.append("## Features")
@@ -66,27 +94,27 @@ def generate_documentation():
 
         content.append(NEWLINE)
 
-        if INSTRUCTIONS[tag].get('alpine-packages', []):
+        if alpinepackages:
             content.append("## Alpine packages")
             content.append(NEWLINE)
             content.append("Package | Version \n-- | --")
-            for package in INSTRUCTIONS[tag]["alpine-packages"]:
+            for package in sorted(alpinepackages):
                 content.append(f"`{package.split('=')[0]}` | {package.split('=')[1]}")
             content.append(NEWLINE)
 
-        if INSTRUCTIONS[tag].get('debian-packages', []):
+        if debianpackages:
             content.append("## Debian packages")
             content.append(NEWLINE)
             content.append("Package | Version \n-- | --")
-            for package in INSTRUCTIONS[tag]["debian-packages"]:
+            for package in sorted(debianpackages):
                 content.append(f"`{package.split('=')[0]}` | {package.split('=')[1]}")
             content.append(NEWLINE)
 
-        if INSTRUCTIONS[tag].get('python-packages', []):
+        if pythonpackages:
             content.append("## Pyhton packages")
             content.append(NEWLINE)
             content.append("Package | Version \n-- | --")
-            for package in INSTRUCTIONS[tag]["python-packages"]:
+            for package in sorted(pythonpackages):
                 content.append(f"`{package.split('==')[0]}` | {package.split('==')[1]}")
             content.append(NEWLINE)
 

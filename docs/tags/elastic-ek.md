@@ -4,9 +4,9 @@
 
 _Elasticsearch and Kibana in the same container_
 
-**Base image**: [ludeeus/container:alpine-base](./alpine-base)
-
-**Full name**: `ludeeus/container:elastic-ek`
+**Base image**: [ludeeus/container:alpine-base](./alpine-base)  
+**Full name**: `ludeeus/container:elastic-ek`  
+[View this on Docker Hub](https://hub.docker.com/r/ludeeus/container/tags?page=1&name=elastic-ek)
 
 ## Environment variables
 
@@ -25,8 +25,14 @@ S6 overlay | True
 
 Package | Version 
 -- | --
-`openjdk11` | 11.0.5_p10-r0
+`bash` | 5.0.11-r1
+`curl` | 7.67.0-r0
+`git` | 2.24.1-r0
+`nano` | 4.6-r0
 `nodejs` | 12.15.0-r1
+`openjdk11` | 11.0.5_p10-r0
+`openssh` | 8.1_p1-r0
+`openssl-dev` | 1.1.1d-r3
 
 ## Additional information
 

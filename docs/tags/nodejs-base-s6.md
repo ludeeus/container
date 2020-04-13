@@ -1,22 +1,22 @@
-# frontend
+# nodejs-base-s6
 
 [Back to overview](../index.md)
 
 **Base image**: [ludeeus/container:nodejs-base](./nodejs-base)  
-**Full name**: `ludeeus/container:frontend`  
-[View this on Docker Hub](https://hub.docker.com/r/ludeeus/container/tags?page=1&name=frontend)
+**Full name**: `ludeeus/container:nodejs-base-s6`  
+[View this on Docker Hub](https://hub.docker.com/r/ludeeus/container/tags?page=1&name=nodejs-base-s6)
 
 ## Environment variables
 
 Variable | Value 
 -- | --
-CONTAINER_TYPE | frontend
+CONTAINER_TYPE | nodejs-base-s6
 
 ## Features
 
 Feature | Enabled 
 -- | --
-S6 overlay | False
+S6 overlay | True
 
 ## Alpine packages
 
