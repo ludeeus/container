@@ -2,6 +2,8 @@
 
 [Back to overview](../index.md)
 
+_Elasticsearch and Kibana in the same container_
+
 **Base image**: [ludeeus/container:alpine-base](./alpine-base)
 
 **Full name**: `ludeeus/container:elastic-ek`

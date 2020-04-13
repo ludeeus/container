@@ -1,5 +1,5 @@
 base: "ludeeus/container:alpine-base"
-desctiption: "Elasticsearch and Kibana in the same container"
+description: "Elasticsearch and Kibana in the same container"
 needs:
     - "alpine-base"
     - "alpine-base-s6"
