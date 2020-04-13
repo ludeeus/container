@@ -4,10 +4,12 @@
 curl -L -s https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-oss-"${ELASTIC_VERSION}"-linux-x86_64.tar.gz | tar xvzf - -C /usr/local
 curl -L -s https://artifacts.elastic.co/downloads/kibana/kibana-oss-"${ELASTIC_VERSION}"-linux-x86_64.tar.gz | tar xvzf - -C /usr/local
 
-cp -R /usr/local/elasticsearch/* /usr/local/elasticsearch-"${ELASTIC_VERSION}"/
+cp --verbose -R /usr/local/elasticsearch/* /usr/local/elasticsearch-"${ELASTIC_VERSION}"/
+rm -R /usr/local/elasticsearch
 mv /usr/local/elasticsearch-"${ELASTIC_VERSION}" /usr/local/elasticsearch
 
-cp -R /usr/local/kibana/* /usr/local/kibana-"${ELASTIC_VERSION}"-linux-x86_64/
+cp --verbose -R /usr/local/kibana/* /usr/local/kibana-"${ELASTIC_VERSION}"-linux-x86_64/
+rm -R /usr/local/kibana
 mv /usr/local/kibana-"${ELASTIC_VERSION}"-linux-x86_64 /usr/local/kibana
 
 # fix node installation (https://github.com/elastic/kibana/issues/17015)
