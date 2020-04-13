@@ -2,9 +2,11 @@
 
 _Custom container images used for stuff._
 
+[The documentation for the container images can be found here](https://ludeeus.github.io/container/)
+
 ## Container definitions
 
-The container definitions are located under [./instructions/]()
+The container definitions are located under [./instructions/](https://github.com/ludeeus/container/tree/master/instructions)
 There are 3 categories of containers here:
 
 Category | Description
@@ -12,6 +14,8 @@ Category | Description
 Baseimages | These are container bases that are used as a base for other containers, all base images have a `s6` variant, all base images have a `-base` postfix in the name, and all base images are multiarch.
 Containers | These are containers that are ready to be used.
 Development | These are containers that are perfect for development, preferably by using it as a [devcontainer](https://code.visualstudio.com/docs/remote/containers).
+
+[Examples for devcontainer definitions can be found here](https://github.com/ludeeus/container/tree/master/devcontainer_samplefiles)
 
 
 ## Container instructions
@@ -33,7 +37,7 @@ YAML tag | Optional | Type | Desctiption
 `entrypoint` | True | string | This will be used as the "ENTRYPOINT" in the images.
 `documentation` | True | string | Additional documentation for the container.
 
-If files/more complicated scripts are needed to build the container, these can be added to a tag spesific directory under [./rootfs/]().
+If files/more complicated scripts are needed to build the container, these can be added to a tag spesific directory under [./rootfs/](https://github.com/ludeeus/container/tree/master/rootfs).
 
 ## Custom commands included in all containers
 
