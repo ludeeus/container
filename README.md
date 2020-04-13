@@ -27,14 +27,14 @@ YAML tag | Optional | Type | Desctiption
 -- | -- | -- |--
 `base` | False | string | This is the base image
 `description` | True | string | A short description of the container (used for documentation).
-`needs` | True | list of string | A list of other tags this container relies on.
+`needs` | True | list of strings | A list of other tags this container relies on.
 `env` | True | map | A key-value map of environment variables.
 `S6` | True | boolean | A boolean to set if S6 overlay is added to the container (defaults to false).
-`alpine-packages` | True | list of string | A list of alpine packages to add to the container.
-`debian-packages` | True | list of string | A list of debian packages to add to the container.
-`pyhton-packages` | True | list of string | A list of python packages to add to the container.
+`alpine-packages` | True | list of strings | A list of alpine packages to add to the container.
+`debian-packages` | True | list of strings | A list of debian packages to add to the container.
+`pyhton-packages` | True | list of strings | A list of python packages to add to the container.
 `run` | True | list of string  | Additional "RUN" stepes to add to the container.
-`entrypoint` | True | string | This will be used as the "ENTRYPOINT" in the images.
+`entrypoint` | True | list of strings | This will be used as the "ENTRYPOINT" in the images.
 `documentation` | True | string | Additional documentation for the container.
 
 If files/more complicated scripts are needed to build the container, these can be added to a tag spesific directory under [./rootfs/](https://github.com/ludeeus/container/tree/master/rootfs).

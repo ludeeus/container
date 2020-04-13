@@ -13,7 +13,8 @@ run:
     - "mkdir -p /data /esdata"
     - "bash /build_scripts/install"
     - "ln -sf /usr/bin/java /usr/local/elasticsearch/jdk/bin/java"
-entrypoint: "/init"
+entrypoint:
+    - "/init"
 documentation: |
     This container can use 2 ports `9200` (for Elasticsearch) and `5601` for Kibana.
     If you want to add local indices to elasticsearch, you can map that in with the `-v` option.
