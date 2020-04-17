@@ -7,7 +7,7 @@ function RunDevelopentInstance() {
     dotnet restore
     dotnet watch run
   elif [[ "$CONTAINER_TYPE" == "integration" ]]; then
-    dc start
+    container start
   else
     echo "No run action found for '$CONTAINER_TYPE'"
   fi

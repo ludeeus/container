@@ -41,19 +41,20 @@ If files/more complicated scripts are needed to build the container, these can b
 
 ## Custom commands included in all containers
 
-**All custom commands are prefixed with `dc`**
+**All custom commands are prefixed with `container`**
 
 ```txt
-bash-5.0# dc help
+bash-5.0# container help
 
-  dc
-    Custom CLI used in this devcontainer
+  container
+    Custom CLI used in this container
 
   usage:
-    dc [command]
+    container [command]
 
   where [command] is one of:
     init             This will give you a fresh development environment.
+    run              This will run the default action for the container you are using.
     start            This will start Home Assistant on port 9123.
     check            This will run Home Assistant config check.
     set-version      Install a spesific version of Home Assistant.

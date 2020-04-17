@@ -1,8 +1,0 @@
-#!/bin/bash
-
-rm /usr/bin/dc
-rm -r /usr/share/dc
-
-ln -s /workspaces/devcontainer/rootfs/common/usr/bin/dc /usr/bin/dc
-ln -s /workspaces/devcontainer/rootfs/common/usr/share/dc /usr/share/dc
-python3 -m pip install ruamel.yaml

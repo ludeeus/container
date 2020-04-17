@@ -1,0 +1,18 @@
+_container()
+{
+    local cur prev opts cmdopts
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    prev="${COMP_WORDS[COMP_CWORD-1]}"
+    opts="start run version upgrade check help init set-version"
+    altopts="--help"
+
+    if [[ ${cur} == -* ]] ; then
+      COMPREPLY=( $(compgen -W "${altopts}" -- ${cur}) )
+      return 0
+    fi
+
+    COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
+    return 0
+}
+complete -F _container container
