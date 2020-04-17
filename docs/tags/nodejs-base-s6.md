@@ -24,7 +24,7 @@ Package | Version
 -- | --
 `bash` | 5.0.11-r1
 `curl` | 7.67.0-r0
-`git` | 2.24.1-r0
+`git` | 2.24.2-r0
 `nano` | 4.6-r0
 `nodejs` | 12.15.0-r1
 `npm` | 12.15.0-r1

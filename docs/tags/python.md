@@ -28,7 +28,7 @@ Package | Version
 `curl` | 7.67.0-r0
 `ffmpeg-dev` | 4.2.1-r3
 `gcc` | 9.2.0-r4
-`git` | 2.24.1-r0
+`git` | 2.24.2-r0
 `libc-dev` | 0.7.2-r0
 `libffi-dev` | 3.2.1-r6
 `make` | 4.2.1-r2

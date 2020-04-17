@@ -24,7 +24,7 @@ Package | Version
 -- | --
 `bash` | 5.0.11-r1
 `curl` | 7.67.0-r0
-`git` | 2.24.1-r0
+`git` | 2.24.2-r0
 `go` | 1.13.4-r1
 `nano` | 4.6-r0
 `openssh` | 8.1_p1-r0

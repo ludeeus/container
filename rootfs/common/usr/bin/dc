@@ -16,7 +16,7 @@ function Help {
 
   where [command] is one of:
     init             This will give you a fresh development environment.
-    run              This will run the default action for the devcontainer you are using.
+    run              This will run the default action for the container you are using.
     start            This will start Home Assistant on port 9123.
     check            This will run Home Assistant config check.
     set-version      Install a spesific version of Home Assistant.

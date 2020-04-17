@@ -1,0 +1,4 @@
+#!/bin/bash
+echo "Generating documentation"
+python3 /workspaces/container/scripts/helpers/generate_documentation.py
+echo "Done"
