@@ -3,6 +3,7 @@
 rm /usr/bin/container
 rm -r /usr/share/container
 
+ln -sf /workspaces/container/rootfs/common/root/.bashrc /root/.bashrc
 ln -sf /workspaces/container/rootfs/common/usr/bin/dc /usr/bin/dc
 ln -sf /workspaces/container/rootfs/common/usr/share/container /usr/share/container
 ln -sf /workspaces/container/rootfs/common/usr/bin/container /usr/bin/container

@@ -1,5 +1,6 @@
 #!/bin/bash
 source /etc/bash_completion.d/dc_completion
+source /usr/share/container/tools
 git config --global core.autocrlf input > /dev/null 2>&1
 
 export PS1="container# "
@@ -16,6 +17,15 @@ if test -d "/tmp/.ssh"; then
     chmod 600 /root/.ssh/id_rsa > /dev/null 2>&1
 fi
 
+# Place node_modules inside the container
+if test -f "$(GetWorkspaceName)package.json"; then
+    if [ ! -d "$(GetWorkspaceName)node_modules" ]; then
+        mkdir -p /tmp/node_modules
+        ln -sf /tmp/node_modules "$(GetWorkspaceName)node_modules"
+    fi
+fi
+
+# Set element for MOTD
 if [[ "$CONTAINER_TYPE" == "integration" ]]; then
     element="custom integrations for Home Assistant."
 elif [[ "$CONTAINER_TYPE" == "frontend" ]]; then
