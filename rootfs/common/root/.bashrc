@@ -1,6 +1,6 @@
 #!/bin/bash
-source /etc/bash_completion.d/dc_completion
-source /usr/share/container/tools
+source /etc/bash_completion.d/cc_completion
+source /usr/share/cc/tools
 git config --global core.autocrlf input > /dev/null 2>&1
 
 export PS1="container# "

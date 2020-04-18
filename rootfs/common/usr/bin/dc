@@ -59,4 +59,4 @@ case $1 in
       ;;
 esac
 
-echo "the 'dc' CLI is deprecated, use 'container' instead"
+echo "the 'dc' CLI is deprecated and will be removed in a future version, use 'cc' instead"
