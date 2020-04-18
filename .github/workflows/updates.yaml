@@ -17,7 +17,7 @@ jobs:
       - name: Update everything
         run: |
             python3 -m pip install -U requests alpinepkgs
-            python3 Scripts/Update.py
+            python3 scripts/Update.py
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v2
         with:

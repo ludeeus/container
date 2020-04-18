@@ -138,14 +138,32 @@ def run_command(command):
 
 
 def main(runtype):
+    needs = None
     if len(runtype) == 1:
         print("Runtype is missing")
         exit(1)
     publish = "publish" in runtype
 
+    if "needs" in runtype:
+        if "0" in runtype:
+            needs = 0
+        if "1" in runtype:
+            needs = 1
+        if "2" in runtype:
+            needs = 2
+        if "3" in runtype:
+            needs = 3
+        if "4" in runtype:
+            needs = 4
+
+
     load_instructions()
     for tag in sorted(INSTRUCTIONS, key=lambda x: len(INSTRUCTIONS[x].get("needs", []))):
-        build_tag(tag, INSTRUCTIONS[tag], publish)
+        if needs is not None:
+            if len(INSTRUCTIONS[tag].get("needs", [])) == needs:
+                build_tag(tag, INSTRUCTIONS[tag], publish)
+        else:
+            build_tag(tag, INSTRUCTIONS[tag], publish)
 
 
 print(os.environ)
