@@ -1,4 +1,4 @@
-base: "alpine:3.11.5"
+base: "alpine:3.11.6"
 alpine-packages:
     - "openssl-dev=1.1.1d-r3"
     - "nano=4.6-r0"
