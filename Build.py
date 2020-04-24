@@ -53,7 +53,7 @@ def create_dockerfile(tag, instructions):
 
     if len(instructions.get("needs", [])) == 0:
         content.append("COPY rootfs/common /")
-        run.append("chmod +x /usr/bin/dc && chmod +x /usr/bin/container")
+        run.append("chmod +x /usr/bin/dc && chmod +x /usr/bin/cc")
 
         if instructions.get("alpine-packages") is not None:
             run.append("echo '@edge http://dl-cdn.alpinelinux.org/alpine/edge/main' >> /etc/apk/repositories")
