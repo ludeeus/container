@@ -1,8 +1,8 @@
 base: "alpine:3.11.6"
 alpine-packages:
-    - "openssl-dev-1.1.1g-r0"
+    - "openssl-dev=1.1.1g-r0"
     - "nano=4.6-r0"
     - "openssh=8.1_p1-r0"
     - "bash=5.0.11-r1"
-    - "git-2.24.3-r0"
+    - "git=2.24.3-r0"
     - "curl=7.67.0-r0"
