@@ -1,4 +1,4 @@
-_dc()
+_container()
 {
     local cur prev opts cmdopts
     COMPREPLY=()
@@ -15,4 +15,4 @@ _dc()
     COMPREPLY=($(compgen -W "${opts}" -- ${cur}))
     return 0
 }
-complete -F _dc dc
+complete -F _container container

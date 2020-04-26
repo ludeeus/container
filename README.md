@@ -41,17 +41,16 @@ If files/more complicated scripts are needed to build the container, these can b
 
 ## Custom commands included in all containers
 
-**All custom commands are prefixed with `cc`**
+**All custom commands are prefixed with `container`**
 
 ```txt
-bash-5.0# cc help
+bash-5.0# container help
 
-  cc
+  container
     Custom CLI used in this container
-    cc is short for custom container
 
   usage:
-    cc [command]
+    container [command]
 
   where [command] is one of:
     init             This will give you a fresh development environment.
