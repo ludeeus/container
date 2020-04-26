@@ -1,19 +1,18 @@
 #!/bin/bash
 
 # Import
-for f in /usr/share/cc/*
+for f in /usr/share/container/*
   do
     source $f
 done
 
 function Help {
   echo "
-  cc
+  container
     Custom CLI used in this container
-    cc is short for custom container
 
   usage:
-    cc [command]
+    container [command]
 
   where [command] is one of:
     init             This will give you a fresh development environment.
