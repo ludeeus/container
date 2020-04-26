@@ -62,7 +62,7 @@ def create_dockerfile(tag, instructions):
         run.append(f"apk add --no-cache {' '.join(instructions['alpine-packages'])} && rm -rf /var/cache/apk/*")
 
     if instructions.get("debian-packages") is not None:
-        run.append(f"apt update && apt install -y --no-install-recommends {' '.join(instructions['debian-packages'])}" + " && rm -fr /tmp/* /var/{cache,log}/* /var/lib/apt/lists/*")
+        run.append(f"apt update && apt install -y --no-install-recommends --allow-downgrades {' '.join(instructions['debian-packages'])}" + " && rm -fr /tmp/* /var/{cache,log}/* /var/lib/apt/lists/*")
 
     if instructions.get("python-packages") is not None:
         run.append(f"python3 -m pip install --no-cache-dir -U pip && python3 -m pip install --no-cache-dir -U {' '.join(instructions['python-packages'])} && "+" find /usr/local \( -type d -a -name test -o -name tests -o -name '__pycache__' \) -o \( -type f -a -name '*.pyc' -o -name '*.pyo' \) -exec rm -rf '{}' \;")

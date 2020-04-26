@@ -25,7 +25,6 @@ function Help {
   "
 }
 
-
 if [[ "$2" == "--help" ]]; then
   Help
   exit 0
