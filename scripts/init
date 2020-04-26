@@ -1,11 +1,10 @@
 #!/bin/bash
 
-rm /usr/bin/cc
-rm -r /usr/share/cc
+rm /usr/bin/container
+rm -r /usr/share/container
 
-ln -sf /workspaces/container/rootfs/common/etc/bash_completion.d/cc_completion /etc/bash_completion.d/cc_completion
+ln -sf /workspaces/container/rootfs/common/etc/bash_completion.d/container_completion /etc/bash_completion.d/container_completion
 ln -sf /workspaces/container/rootfs/common/root/.bashrc /root/.bashrc
-ln -sf /workspaces/container/rootfs/common/usr/bin/dc /usr/bin/dc
-ln -sf /workspaces/container/rootfs/common/usr/share/cc /usr/share/cc
-ln -sf /workspaces/container/rootfs/common/usr/bin/cc /usr/bin/cc
+ln -sf /workspaces/container/rootfs/common/usr/bin/container /usr/bin/container
+ln -sf /workspaces/container/rootfs/common/usr/share/container /usr/share/container
 python3 -m pip install ruamel.yaml
