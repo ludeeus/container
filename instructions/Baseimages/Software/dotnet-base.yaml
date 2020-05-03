@@ -12,5 +12,6 @@ debian-packages:
     - "libssl1.1=1.1.1d-0+deb10u2"
     - "libstdc++6=8.3.0-6"
     - "zlib1g=1:1.2.11.dfsg-1"
+    - "procps=2:3.3.15-2"
 run:
     - "bash /build_scripts/install && rm -R /build_scripts"
