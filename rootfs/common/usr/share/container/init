@@ -19,7 +19,7 @@ function InitDevEnv {
       echo "Before you get started we need some information to set it up"
       echo
       read -p 'What IP is Home Assistant running on? ' HA_IP
-      read -p 'What is the LAT that Netdaemon should use? ' HA_LAT
+      read -p 'What is the Home Assistant security token that Netdaemon should use? ' HA_LAT
       read -p 'What is your GitHub username? ' GH_USER
       read -p 'What should be the name of the project? ' PROJECT_NAME
 
