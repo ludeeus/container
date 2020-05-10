@@ -2,4 +2,4 @@ base: "ludeeus/container:python-base"
 needs:
     - "alpine-base"
 alpine-packages:
-    - "go-1.13.10-r0"
+    - "go=1.13.10-r0"

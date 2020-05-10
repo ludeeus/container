@@ -54,6 +54,6 @@ case $1 in
         RunDevelopentInstance
         ;;
     *)
-      Help
-      ;;
+        Help
+        ;;
 esac
