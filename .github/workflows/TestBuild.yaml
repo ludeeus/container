@@ -22,9 +22,9 @@ jobs:
         id: buildx
         uses: crazy-max/ghaction-docker-buildx@v1
         with:
-          version: latest
+          buildx-version: latest
       - run: python3 -m pip install ruamel.yaml
-      - name: Push to docker registry
+      - name: Test building the container
         run: |
           python3 ./Build.py build needs 0
         env:
@@ -48,9 +48,9 @@ jobs:
         id: buildx
         uses: crazy-max/ghaction-docker-buildx@v1
         with:
-          version: latest
+          buildx-version: latest
       - run: python3 -m pip install ruamel.yaml
-      - name: Push to docker registry
+      - name: Test building the container
         run: |
           python3 ./Build.py build needs 1
         env:
@@ -74,9 +74,9 @@ jobs:
         id: buildx
         uses: crazy-max/ghaction-docker-buildx@v1
         with:
-          version: latest
+          buildx-version: latest
       - run: python3 -m pip install ruamel.yaml
-      - name: Push to docker registry
+      - name: Test building the container
         run: |
           python3 ./Build.py build needs 2
         env:
@@ -100,9 +100,9 @@ jobs:
 #        id: buildx
 #        uses: crazy-max/ghaction-docker-buildx@v1
 #        with:
-#          version: latest
+#          buildx-version: latest
 #      - run: python3 -m pip install ruamel.yaml
-#      - name: Push to docker registry
+#      - name: Test building the container
 #        run: |
 #          python3 ./Build.py build needs 3
 #        env:
@@ -126,9 +126,9 @@ jobs:
 #        id: buildx
 #        uses: crazy-max/ghaction-docker-buildx@v1
 #        with:
-#          version: latest
+#          buildx-version: latest
 #      - run: python3 -m pip install ruamel.yaml
-#      - name: Push to docker registry
+#      - name: Test building the container
 #        run: |
 #          python3 ./Build.py build needs 1
 #        env:

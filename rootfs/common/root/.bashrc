@@ -27,15 +27,15 @@ fi
 
 # Set element for MOTD
 if [[ "$CONTAINER_TYPE" == "integration" ]]; then
-    element="custom integrations for Home Assistant."
+    element="custom integrations for Home Assistant"
 elif [[ "$CONTAINER_TYPE" == "frontend" ]]; then
-    element="frontend things."
+    element="frontend things"
 elif [[ "$CONTAINER_TYPE" == "netdaemon" ]]; then
-    element="NetDaemon apps."
+    element="NetDaemon apps"
 elif [[ "$CONTAINER_TYPE" == "dotnet" ]]; then
-    element="dotnet."
+    element="dotnet"
 else
-    element="things."
+    element="things"
 fi
 
 
