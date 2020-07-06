@@ -32,7 +32,6 @@ jobs:
           - python-base
           - python-base-s6
           - v
-          - v-base
 
     runs-on: ubuntu-latest
     steps:
