@@ -6,7 +6,7 @@ on:
       - master
 jobs:
   matrix:
-    name: Test build
+    name: Test build ${{matrix.tags}}
     strategy:
       matrix:
         tags:
@@ -47,6 +47,6 @@ jobs:
       - name: Install requirements
         run: make init
 
-      - name: Test building ${{tags}}
-        run: python3 ./Build.py ${{tags}}
+      - name: Test building ${{matrix.tags}}
+        run: python3 ./Build.py ${{matrix.tags}}
 
