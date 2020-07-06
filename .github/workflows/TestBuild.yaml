@@ -33,7 +33,7 @@ jobs:
   deploy1:
     name: Deploy images with 1 needs
     runs-on: ubuntu-latest
-    needs: [deploy0]
+    needs: [test0]
     steps:
       - uses: actions/checkout@master
       - name: Login to docker hub
@@ -58,7 +58,7 @@ jobs:
   deploy2:
     name: Deploy images with 2 needs
     runs-on: ubuntu-latest
-    needs: [deploy0, deploy1]
+    needs: [test0, deploy1]
     steps:
       - uses: actions/checkout@master
       - name: Login to docker hub
