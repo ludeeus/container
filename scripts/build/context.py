@@ -68,3 +68,10 @@ def create_context(tag, instructions):
     with open(DOCKERFILE, "w") as df:
         df.write("\n".join(content))
         df.write("\n")
+
+
+if __name__ == "__main__":
+    import sys
+    from scripts.build.instructions import load_instructions
+
+    create_context(sys.argv[1], load_instructions(sys.argv[1]))

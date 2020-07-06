@@ -2,4 +2,5 @@ base: "python-base"
 description: "This provides a container to run HACS actions inside."
 run:
     - "git clone https://github.com/hacs/integration.git /hacs"
+    - "cd /hacs"
     - "make init"
