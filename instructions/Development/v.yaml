@@ -1,0 +1,9 @@
+base: "ludeeus/container:python-base"
+description: "This provides a minimalistic container for working with V."
+needs:
+    - "alpine-base"
+alpine-packages:
+    - "git clone https://github.com/vlang/v /app/v"
+    - "cd /app/v && make"
+    - "ln -sf /usr/bin/v /app/v"
+
