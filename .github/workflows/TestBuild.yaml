@@ -45,7 +45,7 @@ jobs:
           buildx-version: latest
 
       - name: Install requirements
-        run: make init
+        run: make requirements
 
       - name: Test building ${{matrix.tags}}
         run: python3 ./Build.py ${{matrix.tags}}
