@@ -4,10 +4,10 @@ needs:
     - "alpine-base"
     - "alpine-base-s6"
 env:
-    ELASTIC_VERSION: "7.6.2"
+    ELASTIC_VERSION: "7.8.0"
 alpine-packages:
-    - "openjdk11=11.0.5_p10-r0"
-    - "nodejs=12.15.0-r1"
+    - "openjdk11=11.0.7_p10-r1"
+    - "nodejs=12.17.0-r0"
 run:
     - "adduser -S ekuser"
     - "mkdir -p /data /esdata"

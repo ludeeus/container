@@ -22,8 +22,6 @@ def update_s6():
         content = content.replace(installed, current)
         with open(installfile, "w") as install:
             install.write(content)
-        run_command("git add rootfs/s6/install")
-        commit("base-s6", "s6-overlay", installed, current)
 
 def update_all():
     update_netcore()
@@ -79,7 +77,7 @@ def update_netcore():
                 dotnet[arch]['runtime'] = line.split('"')[1]
                 break
 
-    with open("rootfs/dotnet-base/build_scripts/download_dotnet.sh", "r") as dnfile:
+    with open("rootfs/dotnet-base/build_scripts/install", "r") as dnfile:
         content = dnfile.read()
 
     newcontent = f"""#!/bin/bash
@@ -99,7 +97,7 @@ elif [ "$ARCH" == "x86_64" ]; then
 fi
 """
     if newcontent != content:
-        with open("rootfs/dotnet-base/build_scripts/download_dotnet.sh", "w") as dnfile:
+        with open("rootfs/dotnet-base/build_scripts/install", "w") as dnfile:
             dnfile.write(newcontent)
 
 update_all()

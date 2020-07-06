@@ -21,10 +21,8 @@ S6 overlay | True
 
 ## Debian packages
 
-Package | Version 
--- | --
-`bash` | 5.0-4
-`ca-certificates` | 20190110
-`git` | 1:2.20.1-2+deb10u1
-`nano` | 3.2-3
-`wget` | 1.20.1-1.1
+- `bash`
+- `ca-certificates`
+- `git`
+- `nano`
+- `wget`

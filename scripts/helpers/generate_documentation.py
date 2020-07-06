@@ -23,7 +23,7 @@ def generate_documentation():
     content.append("Click on the tag name below to see the documentation for a specific tag:")
     content.append(NEWLINE)
 
-    for tag in INSTRUCTIONS:
+    for tag in sorted(INSTRUCTIONS):
         content.append(f"[{tag}](./tags/{tag})  ")
 
     with open("./docs/index.md", "w") as fp:
@@ -105,9 +105,8 @@ def generate_documentation():
         if debianpackages:
             content.append("## Debian packages")
             content.append(NEWLINE)
-            content.append("Package | Version \n-- | --")
             for package in sorted(debianpackages):
-                content.append(f"`{package.split('=')[0]}` | {package.split('=')[1]}")
+                content.append(f"- `{package}`")
             content.append(NEWLINE)
 
         if pythonpackages:

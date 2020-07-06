@@ -5,5 +5,4 @@ needs:
     - "python-base"
 run:
     - "git clone https://github.com/hacs/integration.git /hacs"
-    - "python3 -m pip install homeassistant"
-    - "python3 -m pip install -r /hacs/requirements.txt"
+    - "make init"

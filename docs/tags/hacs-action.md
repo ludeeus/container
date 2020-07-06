@@ -1,22 +1,24 @@
-# python-base-s6
+# hacs-action
 
 [Back to overview](../index.md)
 
+_This provides a container to run HACS actions inside._
+
 **Base image**: [ludeeus/container:python-base](./python-base)  
-**Full name**: `ludeeus/container:python-base-s6`  
-[View this on Docker Hub](https://hub.docker.com/r/ludeeus/container/tags?page=1&name=python-base-s6)
+**Full name**: `ludeeus/container:hacs-action`  
+[View this on Docker Hub](https://hub.docker.com/r/ludeeus/container/tags?page=1&name=hacs-action)
 
 ## Environment variables
 
 Variable | Value 
 -- | --
-CONTAINER_TYPE | python-base-s6
+CONTAINER_TYPE | hacs-action
 
 ## Features
 
 Feature | Enabled 
 -- | --
-S6 overlay | True
+S6 overlay | False
 
 ## Alpine packages
 
