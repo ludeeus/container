@@ -13,12 +13,6 @@ Variable | Value
 CONTAINER_TYPE | debian-base
 DEBIAN_FRONTEND | noninteractive
 
-## Features
-
-Feature | Enabled 
--- | --
-S6 overlay | False
-
 ## Debian packages
 
 - `bash`

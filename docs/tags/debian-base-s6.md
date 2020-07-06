@@ -2,7 +2,7 @@
 
 [Back to overview](../index.md)
 
-**Base image**: [ludeeus/container:debian-base](./debian-base)  
+**Base image**: `debian:10.4-slim`  
 **Full name**: `ludeeus/container:debian-base-s6`  
 [View this on Docker Hub](https://hub.docker.com/r/ludeeus/container/tags?page=1&name=debian-base-s6)
 
@@ -15,9 +15,7 @@ DEBIAN_FRONTEND | noninteractive
 
 ## Features
 
-Feature | Enabled 
--- | --
-S6 overlay | True
+- `S6`
 
 ## Debian packages
 

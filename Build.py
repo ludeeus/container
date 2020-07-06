@@ -2,7 +2,9 @@ import os
 import sys
 import subprocess
 from datetime import datetime
-
+from scripts.build.files import get_instruction_files, get_rootfs_files
+from scripts.build.instructions import load_instructions
+from scripts.build.context import create_context
 import glob
 from ruamel.yaml import YAML
 
@@ -12,28 +14,12 @@ REF = os.getenv("IMAGE_TAG")
 EVENT = os.getenv("GITHUB_EVENT_NAME")
 WORKSPACE = os.getenv("GITHUB_WORKSPACE")
 SHA = os.getenv("GITHUB_SHA")
-CHANGED_FILES = os.getenv("CHANGED_FILES").split(" ")
+CHANGED_FILES = os.getenv("CHANGED_FILES", "instructions/Development/v.yaml").split(" ")
 
-INSTRUCTIONS = {}
-ROOTFS = []
+ALLINSTRUCTIONS = {}
+CONTAINERINSTRUCTIONS = {}
+ROOTFS = get_rootfs_files()
 
-def clear_dockerfile():
-    with open(DOCKERFILE, "w") as df:
-        df.write("")
-
-def load_instructions():
-    for r, d, f in os.walk("rootfs"):
-        if "common" in d and "s6" in d:
-            ROOTFS.extend(d)
-    yaml = YAML()
-    files = [f for f in glob.glob("./" + "**/*.yaml", recursive=True)]
-    for f in [x for x in files if x.startswith("./instructions/")]:
-        with open(f) as file:
-            tag = f.split("/")[-1].replace(".yaml", "")
-            if INSTRUCTIONS.get(tag) is not None:
-                print(f"Multiple files for tag ({tag}) found!")
-                exit(1)
-            INSTRUCTIONS[f.split("/")[-1].replace(".yaml", "")] = yaml.load(file)
 
 def create_dockerfile(tag, instructions):
     content = []
@@ -56,19 +42,29 @@ def create_dockerfile(tag, instructions):
         run.append("chmod +x /usr/bin/container")
 
         if instructions.get("alpine-packages") is not None:
-            run.append("echo '@edge http://dl-cdn.alpinelinux.org/alpine/edge/main' >> /etc/apk/repositories")
+            run.append(
+                "echo '@edge http://dl-cdn.alpinelinux.org/alpine/edge/main' >> /etc/apk/repositories"
+            )
 
     if instructions.get("alpine-packages") is not None:
-        run.append(f"apk add --no-cache {' '.join(instructions['alpine-packages'])} && rm -rf /var/cache/apk/*")
+        run.append(
+            f"apk add --no-cache {' '.join(instructions['alpine-packages'])} && rm -rf /var/cache/apk/*"
+        )
 
     if instructions.get("debian-packages") is not None:
-        run.append(f"apt update && apt install -y --no-install-recommends --allow-downgrades {' '.join(instructions['debian-packages'])}" + " && rm -fr /tmp/* /var/{cache,log}/* /var/lib/apt/lists/*")
+        run.append(
+            f"apt update && apt install -y --no-install-recommends --allow-downgrades {' '.join(instructions['debian-packages'])}"
+            + " && rm -fr /tmp/* /var/{cache,log}/* /var/lib/apt/lists/*"
+        )
 
     if instructions.get("python-packages") is not None:
-        run.append(f"python3 -m pip install --no-cache-dir -U pip && python3 -m pip install --no-cache-dir -U {' '.join(instructions['python-packages'])} && "+" find /usr/local \( -type d -a -name test -o -name tests -o -name '__pycache__' \) -o \( -type f -a -name '*.pyc' -o -name '*.pyo' \) -exec rm -rf '{}' \;")
+        run.append(
+            f"python3 -m pip install --no-cache-dir -U pip && python3 -m pip install --no-cache-dir -U {' '.join(instructions['python-packages'])} && "
+            + " find /usr/local \( -type d -a -name test -o -name tests -o -name '__pycache__' \) -o \( -type f -a -name '*.pyc' -o -name '*.pyo' \) -exec rm -rf '{}' \;"
+        )
 
     if len(instructions.get("run", [])) != 0:
-        run.append(' && '.join(instructions['run']))
+        run.append(" && ".join(instructions["run"]))
 
     if instructions.get("S6"):
         content.append("COPY rootfs/s6/install /s6/install")
@@ -88,6 +84,7 @@ def create_dockerfile(tag, instructions):
         df.write("\n".join(content))
         df.write("\n")
 
+
 def needs_build(tag, instructions):
     for changed_file in [x for x in CHANGED_FILES if not x.startswith("docs")]:
         if tag in changed_file:
@@ -102,28 +99,23 @@ def needs_build(tag, instructions):
     return False
 
 
-def build_tag(tag, instructions, publish=False):
-    if not needs_build(tag, instructions):
-        print(f"Skipping build for {tag}, the changed files is not used here.")
-        return
-
-    clear_dockerfile()
-    create_dockerfile(tag, instructions)
+def build_tag(CONTAINER):
+    create_context(CONTAINER, load_instructions(CONTAINER))
     buildx = "docker buildx build"
-    if publish:
+    if PUBLISH:
         args = " --output=type=image,push=true"
     elif "build" in sys.argv:
         args = " --load"
     else:
         args = " --output=type=image,push=false"
-    if "-base" in tag and "build" not in sys.argv:
+    if "-base" in CONTAINER and "build" not in sys.argv:
         args += " --platform linux/arm,linux/arm64,linux/amd64"
     else:
         args += " --platform linux/amd64"
     args += " --no-cache"
     args += " --compress"
-    args += f" -t ludeeus/container:{tag}"
-    if tag == "alpine-base":
+    args += f" -t ludeeus/container:{CONTAINER}"
+    if CONTAINER == "alpine-base":
         args += f" -t ludeeus/container:latest"
     args += f" -f {DOCKERFILE}"
     args += " ."
@@ -156,9 +148,11 @@ def main(runtype):
         if "4" in runtype:
             needs = 4
 
-
-    load_instructions()
-    for tag in sorted(INSTRUCTIONS, key=lambda x: len(INSTRUCTIONS[x].get("needs", []))):
+    build_tag(CONTAINER)
+    return
+    for tag in sorted(
+        INSTRUCTIONS, key=lambda x: len(INSTRUCTIONS[x].get("needs", []))
+    ):
         if needs is not None:
             if len(INSTRUCTIONS[tag].get("needs", [])) == needs:
                 build_tag(tag, INSTRUCTIONS[tag], publish)
@@ -166,5 +160,17 @@ def main(runtype):
             build_tag(tag, INSTRUCTIONS[tag], publish)
 
 
-print(os.environ)
-main(sys.argv)
+if len(sys.argv) < 2:
+    print(
+        """
+  usage builder.py [tag] options
+
+  options:
+    --publish       Publishes the tag to docker hub
+"""
+    )
+    exit()
+else:
+    CONTAINER = sys.argv[1]
+    PUBLISH = "--publish" in sys.argv
+    main(sys.argv)

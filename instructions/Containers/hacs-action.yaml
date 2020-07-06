@@ -1,8 +1,5 @@
-base: "ludeeus/container:python-base"
+base: "python-base"
 description: "This provides a container to run HACS actions inside."
-needs:
-    - "alpine-base"
-    - "python-base"
 run:
     - "git clone https://github.com/hacs/integration.git /hacs"
     - "make init"

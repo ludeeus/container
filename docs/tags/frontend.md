@@ -2,7 +2,7 @@
 
 [Back to overview](../index.md)
 
-**Base image**: [ludeeus/container:nodejs-base](./nodejs-base)  
+**Base image**: `alpine:3.12.0`  
 **Full name**: `ludeeus/container:frontend`  
 [View this on Docker Hub](https://hub.docker.com/r/ludeeus/container/tags?page=1&name=frontend)
 
@@ -11,12 +11,6 @@
 Variable | Value 
 -- | --
 CONTAINER_TYPE | frontend
-
-## Features
-
-Feature | Enabled 
--- | --
-S6 overlay | False
 
 ## Alpine packages
 

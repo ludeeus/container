@@ -2,7 +2,7 @@
 
 [Back to overview](../index.md)
 
-**Base image**: [ludeeus/container:nodejs-base](./nodejs-base)  
+**Base image**: `alpine:3.12.0`  
 **Full name**: `ludeeus/container:nodejs-base-s6`  
 [View this on Docker Hub](https://hub.docker.com/r/ludeeus/container/tags?page=1&name=nodejs-base-s6)
 
@@ -14,9 +14,7 @@ CONTAINER_TYPE | nodejs-base-s6
 
 ## Features
 
-Feature | Enabled 
--- | --
-S6 overlay | True
+- `S6`
 
 ## Alpine packages
 

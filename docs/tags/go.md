@@ -2,7 +2,7 @@
 
 [Back to overview](../index.md)
 
-**Base image**: [ludeeus/container:python-base](./python-base)  
+**Base image**: `alpine:3.12.0`  
 **Full name**: `ludeeus/container:go`  
 [View this on Docker Hub](https://hub.docker.com/r/ludeeus/container/tags?page=1&name=go)
 
@@ -11,12 +11,11 @@
 Variable | Value 
 -- | --
 CONTAINER_TYPE | go
+DEVCONTAINER | True
 
 ## Features
 
-Feature | Enabled 
--- | --
-S6 overlay | False
+- `devcontainer`
 
 ## Alpine packages
 

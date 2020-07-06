@@ -12,12 +12,6 @@ Variable | Value
 -- | --
 CONTAINER_TYPE | alpine-base
 
-## Features
-
-Feature | Enabled 
--- | --
-S6 overlay | False
-
 ## Alpine packages
 
 Package | Version 

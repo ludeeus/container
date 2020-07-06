@@ -1,6 +1,3 @@
-base: "ludeeus/container:python-base"
-needs:
-    - "alpine-base"
-    - "python-base"
+base: "python-base"
 run:
     - "mkdir -p /config/custom_components"

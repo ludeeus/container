@@ -2,7 +2,7 @@
 
 [Back to overview](../index.md)
 
-**Base image**: [ludeeus/container:integration](./integration)  
+**Base image**: `alpine:3.12.0`  
 **Full name**: `ludeeus/container:monster`  
 [View this on Docker Hub](https://hub.docker.com/r/ludeeus/container/tags?page=1&name=monster)
 
@@ -11,12 +11,6 @@
 Variable | Value 
 -- | --
 CONTAINER_TYPE | monster
-
-## Features
-
-Feature | Enabled 
--- | --
-S6 overlay | False
 
 ## Alpine packages
 
@@ -36,14 +30,5 @@ Package | Version
 `openssh` | 8.3_p1-r0
 `openssl-dev` | 1.1.1g-r0
 `python3-dev` | 3.8.3-r0
-`python3` | 33.8.3-r0
+`python3` | 3.8.3-r0
 `yarn` | 1.22.4-r0
-
-## Pyhton packages
-
-Package | Version 
--- | --
-`black` | 19.10b0
-`colorlog` | 4.1.0
-`pylint` | 2.5.3
-`python-language-server` | 0.34.1

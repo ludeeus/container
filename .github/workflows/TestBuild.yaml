@@ -5,129 +5,48 @@ on:
     branches:
       - master
 jobs:
-  test0:
-    name: Test images with 0 needs
+  matrix:
+    name: Test build ${{tags}}
+    strategy:
+      matrix:
+        tags:
+          - alpine-base
+          - alpine-base
+          - alpine-base-s6
+          - alpine-base-s6
+          - debian-base
+          - debian-base-s6
+          - dotnet-base
+          - dotnet-base-s6
+          - elastic-ek
+          - frontend
+          - go
+          - go-base
+          - hacs-action
+          - integration
+          - monster
+          - netdaemon
+          - nodejs-base
+          - nodejs-base-s6
+          - python
+          - python-base
+          - python-base-s6
+          - v
+          - v-base
+
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-      - name: Get file changes
-        id: get_file_changes
-        uses: dorner/file-changes-action@v1.2.0
-        with:
-          githubToken: ${{ secrets.GITHUB_TOKEN }}
-          plaintext: true
-      - name: export file changes
-        run: export CHANGED_FILES="${{ steps.get_file_changes.outputs.files }}"
+
       - name: Set up Docker Buildx
         id: buildx
         uses: crazy-max/ghaction-docker-buildx@v1
         with:
           buildx-version: latest
-      - run: python3 -m pip install ruamel.yaml
-      - name: Test building the container
-        run: |
-          python3 ./Build.py build needs 0
-        env:
-          CHANGED_FILES: "${{ steps.get_file_changes.outputs.files }}"
 
-  deploy1:
-    name: Deploy images with 1 needs
-    runs-on: ubuntu-latest
-    needs: [test0]
-    steps:
-      - uses: actions/checkout@master
-      - name: Login to docker hub
-        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_TOKEN }}
-      - name: Get file changes
-        id: get_file_changes
-        uses: dorner/file-changes-action@v1.2.0
-        with:
-          githubToken: ${{ secrets.GITHUB_TOKEN }}
-          plaintext: true
-      - name: Set up Docker Buildx
-        id: buildx
-        uses: crazy-max/ghaction-docker-buildx@v1
-        with:
-          buildx-version: latest
-      - run: python3 -m pip install ruamel.yaml
-      - name: Push to docker registry
-        run: python3 ./Build.py publish needs 1
-        env:
-          CHANGED_FILES: "${{ steps.get_file_changes.outputs.files }}"
+      - name: Install requirements
+        run: make init
 
-  deploy2:
-    name: Deploy images with 2 needs
-    runs-on: ubuntu-latest
-    needs: [test0, deploy1]
-    steps:
-      - uses: actions/checkout@master
-      - name: Login to docker hub
-        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_TOKEN }}
-      - name: Get file changes
-        id: get_file_changes
-        uses: dorner/file-changes-action@v1.2.0
-        with:
-          githubToken: ${{ secrets.GITHUB_TOKEN }}
-          plaintext: true
-      - name: Set up Docker Buildx
-        id: buildx
-        uses: crazy-max/ghaction-docker-buildx@v1
-        with:
-          buildx-version: latest
-      - run: python3 -m pip install ruamel.yaml
-      - name: Push to docker registry
-        run: python3 ./Build.py publish needs 2
-        env:
-          CHANGED_FILES: "${{ steps.get_file_changes.outputs.files }}"
+      - name: Test building ${{tags}}
+        run: python3 ./Build.py ${{tags}}
 
-#  test3:
-#    name: Test images with 3 needs
-#    runs-on: ubuntu-latest
-#    needs: [test0, test1, test2]
-#    steps:
-#      - uses: actions/checkout@master
-#      - name: Get file changes
-#        id: get_file_changes
-#        uses: dorner/file-changes-action@v1.2.0
-#        with:
-#          githubToken: ${{ secrets.GITHUB_TOKEN }}
-#          plaintext: true
-#      - name: export file changes
-#        run: export CHANGED_FILES="${{ steps.get_file_changes.outputs.files }}"
-#      - name: Set up Docker Buildx
-#        id: buildx
-#        uses: crazy-max/ghaction-docker-buildx@v1
-#        with:
-#          buildx-version: latest
-#      - run: python3 -m pip install ruamel.yaml
-#      - name: Test building the container
-#        run: |
-#          python3 ./Build.py build needs 3
-#        env:
-#          CHANGED_FILES: "${{ steps.get_file_changes.outputs.files }}"
-#
-#  test4:
-#    name: Test images with 4 needs
-#    runs-on: ubuntu-latest
-#    needs: [test0, test1, test2, test3]
-#    steps:
-#      - uses: actions/checkout@master
-#      - name: Get file changes
-#        id: get_file_changes
-#        uses: dorner/file-changes-action@v1.2.0
-#        with:
-#          githubToken: ${{ secrets.GITHUB_TOKEN }}
-#          plaintext: true
-#      - name: export file changes
-#        run: export CHANGED_FILES="${{ steps.get_file_changes.outputs.files }}"
-#      - name: Set up Docker Buildx
-#        id: buildx
-#        uses: crazy-max/ghaction-docker-buildx@v1
-#        with:
-#          buildx-version: latest
-#      - run: python3 -m pip install ruamel.yaml
-#      - name: Test building the container
-#        run: |
-#          python3 ./Build.py build needs 1
-#        env:
-#          CHANGED_FILES: "${{ steps.get_file_changes.outputs.files }}"

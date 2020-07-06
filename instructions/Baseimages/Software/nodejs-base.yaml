@@ -1,6 +1,4 @@
-base: "ludeeus/container:alpine-base"
-needs:
-    - "alpine-base"
+base: "alpine-base"
 alpine-packages:
     - "nodejs=12.17.0-r0"
     - "npm=12.17.0-r0"

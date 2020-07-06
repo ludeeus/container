@@ -1,7 +1,4 @@
-base: "ludeeus/container:integration"
-needs:
-    - "alpine-base"
-    - "python-base"
+base: "integration"
 alpine-packages:
     - "nodejs=12.17.0-r0"
     - "npm=12.17.0-r0"
