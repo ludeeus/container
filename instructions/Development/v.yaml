@@ -1,4 +1,4 @@
-base: "ludeeus/container:python-base"
+base: "ludeeus/container:alpine-base"
 description: "This provides a minimalistic container for working with V."
 needs:
     - "alpine-base"
