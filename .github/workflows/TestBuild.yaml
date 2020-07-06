@@ -26,7 +26,7 @@ jobs:
       - run: python3 -m pip install ruamel.yaml
       - name: Test building the container
         run: |
-          python3 ./Build.py build needs 0
+          python3 ./Build.py publish needs 0
         env:
           CHANGED_FILES: "${{ steps.get_file_changes.outputs.files }}"
 
