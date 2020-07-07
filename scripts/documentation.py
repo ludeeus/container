@@ -120,11 +120,11 @@ def generate_documentation():
             content.append(INSTRUCTIONS[tag]["documentation"])
 
         content.append(NEWLINE)
-        content.append(
-            DOCKERFILE.format(
-                generate_dockerfile(create_context(tag, load_instructions(tag)))
-            )
-        )
+        #        content.append(
+        #            DOCKERFILE.format(
+        #                generate_dockerfile(create_context(tag, load_instructions(tag)))
+        #            )
+        #        )
 
         with open(filename, "w") as fp:
             fp.write("\n".join(content))
