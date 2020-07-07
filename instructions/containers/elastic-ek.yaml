@@ -5,6 +5,7 @@ env:
 alpine-packages:
     - "openjdk11"
     - "nodejs"
+    - "curl"
 run:
     - "adduser -S ekuser"
     - "mkdir -p /data /esdata"
