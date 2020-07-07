@@ -15,4 +15,5 @@ debian-packages:
     - "zlib1g"
     - "procps"
 run:
-    - "bash /build_scripts/install && rm -R /build_scripts"
+    - "bash /build_scripts/install"
+    - "rm -R /build_scripts"

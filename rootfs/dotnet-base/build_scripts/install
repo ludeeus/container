@@ -13,3 +13,6 @@ elif [ "$ARCH" == "x86_64" ]; then
     wget -q -nv -O /tmp/runtime.tar.gz "https://download.visualstudio.microsoft.com/download/pr/6827d794-a218-4352-b3b3-a19ec773c975/e3e53bc2f20df220a29c6e09f74d8a00/aspnetcore-runtime-3.1.5-linux-x64.tar.gz";
     wget -q -nv -O /tmp/sdk.tar.gz "https://download.visualstudio.microsoft.com/download/pr/8db2b522-7fa2-4903-97ec-d6d04d297a01/f467006b9098c2de256e40d2e2f36fea/dotnet-sdk-3.1.301-linux-x64.tar.gz";
 fi
+
+tar zxf /tmp/runtime.tar.gz -C /dotnet
+tar zxf /tmp/sdk.tar.gz -C /dotnet
