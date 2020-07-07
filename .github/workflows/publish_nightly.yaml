@@ -1,0 +1,32 @@
+name: Publish images nightly
+
+on:
+  schedule:
+    - cron:  '0 3 * * *'
+
+jobs:
+  matrix:
+    name: Publish ${{matrix.tags}}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        tags:
+          - hacs-action
+          - v
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Login to docker hub
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_TOKEN }}
+
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: crazy-max/ghaction-docker-buildx@v1
+        with:
+          buildx-version: latest
+
+      - name: Install requirements
+        run: make requirements
+
+      - name: Publishing ${{matrix.tags}}
+        run: python3 -m scripts.builder ${{matrix.tags}} --publish
