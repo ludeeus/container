@@ -20,6 +20,7 @@ jobs:
         run: |
             make requirements
             make update
+            make documentation
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v2
