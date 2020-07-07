@@ -1,7 +1,12 @@
 base: "python-base"
 description: "This provides a container to run HACS actions inside."
+alpine-packages-build:
+    - "gcc"
+    - "libc-dev"
+    - "libffi-dev"
+    - "ffmpeg-dev"
+    - "python3-dev"
 run:
     - "git clone https://github.com/hacs/integration.git /hacs"
     - "cd /hacs"
-    - "python -m pip --disable-pip-version-check install -U setuptools wheel"
     - "python -m pip --disable-pip-version-check install -r requirements.txt"

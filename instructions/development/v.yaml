@@ -8,19 +8,18 @@ features:
 alpine-packages:
     - "gcc"
     - "upx"
+alpine-packages-build:
     - "musl-dev"
+    - "bash"
+    - "freetype-dev"
+    - "git"
+    - "glfw-dev"
+    - "libx11-dev"
+    - "nano"
+    - "make"
+    - "openssh"
     - "openssl-dev"
     - "sqlite-dev"
-    - "libx11-dev"
-    - "glfw-dev"
-    - "freetype-dev"
-    - "make"
-alpine-packages-build:
-    - "sdl2"
-    - "sdl2-dev"
-    - "sdl2_ttf-dev"
-    - "sdl2_mixer-dev"
-    - "sdl2_image-dev"
 run:
     - "mkdir -p /opt/vlang"
     - "ln -s /opt/vlang/v /usr/bin/v"

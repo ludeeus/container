@@ -1,8 +1,6 @@
 base: "alpine"
 alpine-packages:
     - "openssl-dev"
-    - "nano"
     - "openssh"
     - "bash"
     - "git"
-    - "curl"

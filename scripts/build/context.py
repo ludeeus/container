@@ -1,5 +1,5 @@
 from scripts.helpers.files import get_rootfs_files
-from scripts.helpers.add_packages import (
+from scripts.helpers.packages import (
     add_alpine_build_packages,
     add_alpine_packages,
     add_debian_packages,
@@ -8,6 +8,7 @@ from scripts.helpers.add_packages import (
     cleanup_alpine_packages,
     cleanup_debian_packages,
     cleanup_python_packages,
+    cleanup_general,
 )
 from scripts.helpers.add_features import add_features
 
@@ -52,6 +53,7 @@ def create_context(tag, instructions):
     context = cleanup_alpine_build_packages(context, instructions)
     context = cleanup_debian_packages(context, instructions)
     context = cleanup_python_packages(context, instructions)
+    context = cleanup_general(context, instructions)
 
     return context
 
