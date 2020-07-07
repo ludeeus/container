@@ -28,6 +28,7 @@ def update_netcore():
 
     url = f"{baseurl}/download/dotnet-core/3.1"
     request = requests.get(url).text
+
     for line in request.split("\n"):
         if (
             "ARM32" in line
@@ -41,6 +42,7 @@ def update_netcore():
             and "linux" in line
             and "runtime" in line
             and dotnet["arm"]["runtime"] is None
+            and "aspnetcore" not in line
         ):
             dotnet["arm"]["runtime"] = line.split('"')[1]
 
@@ -56,6 +58,7 @@ def update_netcore():
             and "linux" in line
             and "runtime" in line
             and dotnet["arm64"]["runtime"] is None
+            and "aspnetcore" not in line
         ):
             dotnet["arm64"]["runtime"] = line.split('"')[1]
 
@@ -66,6 +69,7 @@ def update_netcore():
             and "linux" in line
             and "sdk" in line
             and dotnet["amd64"]["sdk"] is None
+            and "aspnetcore" not in line
         ):
             dotnet["amd64"]["sdk"] = line.split('"')[1]
         if (
@@ -111,7 +115,7 @@ elif [ "$ARCH" == "x86_64" ]; then
     wget -q -nv -O /tmp/sdk.tar.gz "{dotnet["amd64"]["sdk"]}";
 fi
 """
-    if newcontent == content:
+    if newcontent != content:
         with open("rootfs/dotnet-base/build_scripts/install", "w") as dnfile:
             dnfile.write(newcontent)
         versions = get_versions()
