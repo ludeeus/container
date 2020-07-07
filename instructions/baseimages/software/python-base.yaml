@@ -11,5 +11,6 @@ alpine-packages:
 python-packages:
     - "setuptools"
     - "wheel"
+    - "pylint"    
 run:
     - "ln -s /usr/bin/python3 /usr/bin/python"

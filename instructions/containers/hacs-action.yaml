@@ -9,5 +9,4 @@ alpine-packages-build:
 run:
     - "git clone https://github.com/hacs/integration.git /hacs"
     - "cd /hacs"
-    - "python -m pip --disable-pip-version-check install -U homeassistant"
-    - "python -m pip --disable-pip-version-check install -r requirements.txt"
+    - "make init"
