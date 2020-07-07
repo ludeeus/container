@@ -26,7 +26,8 @@ RUN  \
         zlib1g \ 
         procps \ 
     && chmod +x /usr/bin/container \ 
-    && bash /build_scripts/install && rm -R /build_scripts \ 
+    && bash /build_scripts/install \ 
+    && rm -R /build_scripts \ 
     && rm -fr /tmp/* /var/{cache,log}/* /var/lib/apt/lists/*
 
 
