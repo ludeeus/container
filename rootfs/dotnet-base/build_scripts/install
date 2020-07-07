@@ -18,4 +18,4 @@ mkdir -p /dotnet
 tar zxf /tmp/runtime.tar.gz -C /dotnet
 tar zxf /tmp/sdk.tar.gz -C /dotnet
 ln -s /dotnet/dotnet /bin/dotnet
-dotnet --help
+dotnet --info
