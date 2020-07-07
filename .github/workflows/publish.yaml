@@ -11,6 +11,7 @@ on:
 jobs:
   matrix:
     name: Publish ${{matrix.tags}}
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         tags:
