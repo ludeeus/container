@@ -22,15 +22,23 @@ RUN  \
         nano=4.9.3-r0 \ 
         openssh=8.3_p1-r0 \ 
         openssl-dev=1.1.1g-r0 \ 
-        sdl2-dev=2.0.12-r1 \ 
-        sdl2=2.0.12-r1 \ 
-        sdl2_image-dev=2.0.5-r2 \ 
-        sdl2_mixer-dev=2.0.4-r1 \ 
-        sdl2_ttf-dev=2.0.15-r0 \ 
         sqlite-dev=3.32.1-r0 \ 
         upx=3.96-r0 \ 
+    && apk add --no-cache --virtual .build-deps  \ 
+        sdl2 \ 
+        sdl2-dev \ 
+        sdl2_image-dev \ 
+        sdl2_mixer-dev \ 
+        sdl2_ttf-dev \ 
+    && chmod +x /usr/bin/container \ 
+    && mkdir -p /opt/vlang \ 
+    && ln -s /opt/vlang/v /usr/bin/v \ 
+    && git clone https://github.com/vlang/v /opt/vlang \ 
+    && cd /opt/vlang \ 
+    && make \ 
+    && v -version \ 
     && rm -rf /var/cache/apk/* \ 
-    && chmod +x /usr/bin/container
+    && apk del .build-deps
 
 
 
