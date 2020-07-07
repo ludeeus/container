@@ -26,7 +26,7 @@ def create_container(container, context, publish):
     builder.append(f"-f {DOCKERFILE}")
     builder.append(".")
 
-    print(" ".join(builder))
+    run_command(builder)
 
 
 def run_command(commands):

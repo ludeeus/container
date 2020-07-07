@@ -17,6 +17,8 @@ def build():
     with open(DOCKERFILE, "w") as df:
         df.write(dockerfile)
 
+    print(dockerfile)
+
     return create_container(CONTAINER, context, PUBLISH)
 
 
