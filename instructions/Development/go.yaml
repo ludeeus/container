@@ -1,5 +1,3 @@
-base: "ludeeus/container:python-base"
-needs:
-    - "alpine-base"
-alpine-packages:
-    - "go=1.13.10-r0"
+base: "go-base"
+features:
+    - "devcontainer"

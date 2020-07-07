@@ -1,4 +1,4 @@
-base: "debian:10.3-slim"
+base: "debian"
 env:
     DEBIAN_FRONTEND: "noninteractive"
 debian-packages:

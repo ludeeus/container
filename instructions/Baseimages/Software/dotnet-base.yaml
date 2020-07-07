@@ -1,9 +1,10 @@
-base: "ludeeus/container:debian-base"
-needs:
-    - "debian-base"
+base: "debian-base"
 env:
     DOTNET_RUNNING_IN_CONTAINER: "true"
     DOTNET_USE_POLLING_FILE_WATCHER: "true"
+features:
+    - dotnetcore-runtime
+    - dotnetcore-sdk
 debian-packages:
     - "libc6"
     - "libgcc1"

@@ -1,0 +1,30 @@
+base: "alpine-base"
+description: "This provides a minimalistic container for working with V."
+env:
+    VVV: /opt/vlang
+    PATH: /opt/vlang:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+features:
+    - "devcontainer"
+alpine-packages:
+    - "gcc"
+    - "upx"
+    - "musl-dev"
+    - "openssl-dev"
+    - "sqlite-dev"
+    - "libx11-dev"
+    - "glfw-dev"
+    - "freetype-dev"
+    - "make"
+alpine-packages-build:
+    - "sdl2"
+    - "sdl2-dev"
+    - "sdl2_ttf-dev"
+    - "sdl2_mixer-dev"
+    - "sdl2_image-dev"
+run:
+    - "mkdir -p /opt/vlang"
+    - "ln -s /opt/vlang/v /usr/bin/v"
+    - "git clone https://github.com/vlang/v /opt/vlang"
+    - "cd /opt/vlang"
+    - "make"
+    - "v -version"

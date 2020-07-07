@@ -1,5 +1,3 @@
-base: "ludeeus/container:python-base"
-S6: True
-needs:
-    - "alpine-base"
-    - "python-base"
+base: "python-base"
+features:
+  - S6

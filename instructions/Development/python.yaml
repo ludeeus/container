@@ -1,5 +1,4 @@
-base: "ludeeus/container:python-base"
+base: "python-base"
 description: "This provides a minimalistic container for working with python."
-needs:
-    - "alpine-base"
-    - "python-base"
+features:
+    - "devcontainer"

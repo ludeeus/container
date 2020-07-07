@@ -1,0 +1,3 @@
+base: "alpine-base"
+alpine-packages:
+    - "go"

@@ -1,4 +1,3 @@
-base: "ludeeus/container:dotnet-base"
-needs:
-    - "debian-base"
-    - "dotnet-base"
+base: "dotnet-base"
+features:
+    - "devcontainer"

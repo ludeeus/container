@@ -1,0 +1,4 @@
+black: 19.10b0
+colorlog: 4.1.0
+pylint: 2.5.3
+python-language-server: 0.34.1

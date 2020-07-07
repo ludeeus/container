@@ -1,4 +1,3 @@
-base: "ludeeus/container:nodejs-base"
-needs:
-    - "alpine-base"
-    - "nodejs-base"
+base: "nodejs-base"
+features:
+    - "devcontainer"

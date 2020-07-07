@@ -2,7 +2,7 @@
 
 [Back to overview](../index.md)
 
-**Base image**: [ludeeus/container:dotnet-base](./dotnet-base)  
+**Base image**: `debian:10.4-slim`  
 **Full name**: `ludeeus/container:dotnet-base-s6`  
 [View this on Docker Hub](https://hub.docker.com/r/ludeeus/container/tags?page=1&name=dotnet-base-s6)
 
@@ -10,30 +10,79 @@
 
 Variable | Value 
 -- | --
-CONTAINER_TYPE | dotnet-base-s6
-DEBIAN_FRONTEND | noninteractive
-DOTNET_RUNNING_IN_CONTAINER | true
-DOTNET_USE_POLLING_FILE_WATCHER | true
+`CONTAINER_TYPE` | dotnet-base-s6
+`DEBIAN_FRONTEND` | noninteractive
+`DOTNET_RUNNING_IN_CONTAINER` | true
+`DOTNET_USE_POLLING_FILE_WATCHER` | true
+`S6_BEHAVIOUR_IF_STAGE2_FAILS` | 2
+`S6_CMD_WAIT_FOR_SERVICES` | 1
 
 ## Features
 
-Feature | Enabled 
--- | --
-S6 overlay | True
+- `S6 (v2.0.0.1)`
+- `dotnetcore-runtime (3.1.5)`
+- `dotnetcore-sdk (3.1.301)`
 
 ## Debian packages
 
-Package | Version 
--- | --
-`bash` | 5.0-4
-`ca-certificates` | 20190110
-`git` | 1:2.20.1-2+deb10u1
-`libc6` | 2.28-10
-`libgcc1` | 1:8.3.0-6
-`libgssapi-krb5-2` | 1.17-3
-`libicu63` | 63.1-6
-`libssl1.1` | 1.1.1d-0+deb10u2
-`libstdc++6` | 8.3.0-6
-`nano` | 3.2-3
-`wget` | 1.20.1-1.1
-`zlib1g` | 1:1.2.11.dfsg-1
+- `bash`
+- `ca-certificates`
+- `git`
+- `libc6`
+- `libgcc1`
+- `libgssapi-krb5-2`
+- `libicu63`
+- `libssl1.1`
+- `libstdc++6`
+- `nano`
+- `procps`
+- `wget`
+- `zlib1g`
+
+
+
+***
+<details>
+<summary>Dockerfile</summary>
+
+```dockerfile
+FROM debian:10.4-slim
+
+ENV DEBIAN_FRONTEND=noninteractive
+ENV DOTNET_RUNNING_IN_CONTAINER=true
+ENV DOTNET_USE_POLLING_FILE_WATCHER=true
+ENV CONTAINER_TYPE=dotnet-base-s6
+ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=2
+ENV S6_CMD_WAIT_FOR_SERVICES=1
+
+COPY rootfs/dotnet-base /
+COPY rootfs/s6/install /s6/install
+
+RUN  \ 
+    apt update \ 
+    && apt install -y --no-install-recommends --allow-downgrades  \ 
+        ca-certificates \ 
+        nano \ 
+        bash \ 
+        wget \ 
+        git \ 
+        libc6 \ 
+        libgcc1 \ 
+        libgssapi-krb5-2 \ 
+        libicu63 \ 
+        libssl1.1 \ 
+        libstdc++6 \ 
+        zlib1g \ 
+        procps \ 
+    && bash /s6/install \ 
+    && rm -R /s6 \ 
+    && bash /build_scripts/install && rm -R /build_scripts \ 
+    && rm -fr /tmp/* /var/{cache,log}/* /var/lib/apt/lists/*
+
+
+
+LABEL maintainer=hi@ludeeus.dev
+LABEL build.date=2020-7-7
+LABEL build.sha=None
+```
+</details>

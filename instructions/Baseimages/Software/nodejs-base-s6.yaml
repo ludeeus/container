@@ -1,5 +1,3 @@
-base: "ludeeus/container:nodejs-base"
-S6: True
-needs:
-    - "alpine-base"
-    - "nodejs-base"
+base: "nodejs-base"
+features:
+  - S6

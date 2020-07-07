@@ -1,0 +1,53 @@
+name: Publish images
+
+on:
+  release:
+    types:
+      - published
+  push:
+    branches:
+      - master
+
+jobs:
+  matrix:
+    name: Publish ${{matrix.tags}}
+    strategy:
+      matrix:
+        tags:
+          - alpine-base
+          - alpine-base-s6
+          - debian-base
+          - debian-base-s6
+          - dotnet-base
+          - dotnet-base-s6
+          - elastic-ek
+          - frontend
+          - go
+          - go-base
+          - hacs-action
+          - integration
+          - monster
+          - netdaemon
+          - nodejs-base
+          - nodejs-base-s6
+          - python
+          - python-base
+          - python-base-s6
+          - v
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Login to docker hub
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_TOKEN }}
+
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: crazy-max/ghaction-docker-buildx@v1
+        with:
+          buildx-version: latest
+
+      - name: Install requirements
+        run: make requirements
+
+      - name: Publishing ${{matrix.tags}}
+        run: python3 -m scripts.builder ${{matrix.tags}} --publish
