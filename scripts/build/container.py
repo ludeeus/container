@@ -4,7 +4,7 @@ DOCKERFILE = "./Dockerfile"
 
 
 def create_container(container, context, publish):
-    builder = ["docker buildx build"]
+    builder = ["docker", "buildx", "build"]
 
     builder.append("--no-cache")
     builder.append("--compress")
@@ -26,11 +26,6 @@ def create_container(container, context, publish):
     builder.append(f"-f {DOCKERFILE}")
     builder.append(".")
 
-    run_command(builder)
-
-
-def run_command(commands):
-    print(commands)
-    cmd = subprocess.run(commands)
+    cmd = subprocess.run(builder)
     if cmd.returncode != 0:
         exit(1)
