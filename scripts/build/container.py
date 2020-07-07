@@ -30,7 +30,7 @@ def create_container(container, context, publish):
 
 
 def run_command(commands):
-    print(" ".join(commands))
+    print(commands)
     cmd = subprocess.run(commands)
     if cmd.returncode != 0:
         exit(1)
