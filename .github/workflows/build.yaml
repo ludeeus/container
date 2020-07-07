@@ -11,8 +11,6 @@ jobs:
       matrix:
         tags:
           - alpine-base
-          - alpine-base
-          - alpine-base-s6
           - alpine-base-s6
           - debian-base
           - debian-base-s6
