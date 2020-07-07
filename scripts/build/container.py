@@ -19,7 +19,10 @@ def create_container(container, context, publish):
         builder.extend(["-t", "ludeeus/container:latest"])
 
     if "-base" in container and publish:
-        builder.extend(["--platform", "linux/arm,linux/arm64,linux/amd64"])
+        if "dotnet" in container:
+            builder.extend(["--platform", "linux/arm64,linux/amd64"])
+        else:
+            builder.extend(["--platform", "linux/arm,linux/arm64,linux/amd64"])
     else:
         builder.extend(["--platform", "linux/amd64"])
 
