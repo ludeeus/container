@@ -10,14 +10,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
+
       - name: Create git config
         run: |
           git config user.name 'GitHub Action'
           git config user.email 'actions@users.noreply.github.com'
+
       - name: Update everything
         run: |
-            python3 -m pip install -U requests alpinepkgs
-            python3 scripts/Update.py
+            make requirements
+            make update
+
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v2
         with:

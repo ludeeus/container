@@ -39,7 +39,7 @@ YAML tag | Optional | Type | Desctiption
 
 If files/more complicated scripts are needed to build the container, these can be added to a tag spesific directory under [./rootfs/](https://github.com/ludeeus/container/tree/master/rootfs).
 
-## Custom commands included in all containers
+## Custom commands included in all devcontainers
 
 **All custom commands are prefixed with `container`**
 

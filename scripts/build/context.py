@@ -1,77 +1,66 @@
-import os
-from datetime import datetime
-from scripts.build.files import get_rootfs_files
+from scripts.helpers.files import get_rootfs_files
+from scripts.helpers.add_packages import (
+    add_alpine_build_packages,
+    add_alpine_packages,
+    add_debian_packages,
+    add_python_packages,
+    cleanup_alpine_build_packages,
+    cleanup_alpine_packages,
+    cleanup_debian_packages,
+    cleanup_python_packages,
+)
+from scripts.helpers.add_features import add_features
 
-DOCKERFILE = "./Dockerfile"
-SHA = os.getenv("GITHUB_SHA")
+ROOTFS = get_rootfs_files()
 
 
 def create_context(tag, instructions):
-    content = []
-    run = []
-    content.append(f"FROM {instructions['base']}")
-    content.append(f"ENV CONTAINER_TYPE='{tag}'")
-    if "S6" in instructions.get("features", []):
-        content.append("ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=2")
-        content.append("ENV S6_CMD_WAIT_FOR_SERVICES=1")
+    context = {
+        "FROM": None,
+        "ENV": [],
+        "COPY": [],
+        "RUN": [],
+        "LABEL": [],
+        "ENTRYPOINT": None,
+    }
+    context["FROM"] = instructions["base"]
 
-    if len(instructions.get("env", [])) != 0:
-        for env in instructions["env"]:
-            content.append(f"ENV {env}={instructions['env'][env]}")
+    for env in instructions.get("env", []):
+        context["ENV"].append((env, instructions["env"][env]))
 
-    if tag in get_rootfs_files():
-        content.append(f"COPY rootfs/{tag} /")
+    for env in instructions.get("label", []):
+        context["LABEL"].append((env, instructions["label"][env]))
 
-    if len(instructions.get("needs", [])) == 0:
-        content.append("COPY rootfs/common /")
-        run.append("chmod +x /usr/bin/container")
+    for base in instructions.get("bases", []) + [tag]:
+        if base in ROOTFS:
+            context["COPY"].append((f"rootfs/{base}", "/"))
 
-        if instructions.get("alpine-packages") is not None:
-            run.append(
-                "echo '@edge http://dl-cdn.alpinelinux.org/alpine/edge/main' >> /etc/apk/repositories"
-            )
+    if instructions.get("entrypoint"):
+        context["ENTRYPOINT"] = instructions["entrypoint"]
 
-    if instructions.get("alpine-packages") is not None:
-        run.append(
-            f"apk add --no-cache {' '.join(instructions['alpine-packages'])} && rm -rf /var/cache/apk/*"
-        )
+    context = add_alpine_packages(context, instructions)
+    context = add_alpine_build_packages(context, instructions)
+    context = add_debian_packages(context, instructions)
+    context = add_python_packages(context, instructions)
 
-    if instructions.get("debian-packages") is not None:
-        run.append(
-            f"apt update && apt install -y --no-install-recommends --allow-downgrades {' '.join(instructions['debian-packages'])}"
-            + " && rm -fr /tmp/* /var/{cache,log}/* /var/lib/apt/lists/*"
-        )
+    context = add_features(context, instructions)
 
-    if instructions.get("python-packages") is not None:
-        run.append(
-            f"python3 -m pip install --no-cache-dir -U pip && python3 -m pip install --no-cache-dir -U {' '.join(instructions['python-packages'])} && "
-            + " find /usr/local \( -type d -a -name test -o -name tests -o -name '__pycache__' \) -o \( -type f -a -name '*.pyc' -o -name '*.pyo' \) -exec rm -rf '{}' \;"
-        )
+    for run in instructions.get("run", []):
+        context["RUN"].append(run)
 
-    if len(instructions.get("run", [])) != 0:
-        run.append(" && ".join(instructions["run"]))
+    context = cleanup_alpine_packages(context, instructions)
+    context = cleanup_alpine_build_packages(context, instructions)
+    context = cleanup_debian_packages(context, instructions)
+    context = cleanup_python_packages(context, instructions)
 
-    if instructions.get("S6"):
-        content.append("COPY rootfs/s6/install /s6/install")
-        run.append("bash /s6/install && rm -R /s6")
-
-    content.append(f"RUN {' && '.join(run)}")
-
-    if instructions.get("entrypoint") is not None:
-        content.append(f"ENTRYPOINT {instructions['entrypoint']}")
-
-    date = datetime.now()
-    content.append("LABEL maintainer='hi@ludeeus.dev'")
-    content.append(f"LABEL build.date='{date.year}-{date.month}-{date.day}'")
-    content.append(f"LABEL build.sha='{SHA}'")
-
-    with open(DOCKERFILE, "w") as df:
-        df.write("\n".join(content))
-        df.write("\n")
+    return context
 
 
 if __name__ == "__main__":
     import sys
     from scripts.build.instructions import load_instructions
+    from scripts.build.dockerfile import generate_dockerfile
 
-    create_context(sys.argv[1], load_instructions(sys.argv[1]))
+    print(
+        generate_dockerfile(create_context(sys.argv[1], load_instructions(sys.argv[1])))
+    )

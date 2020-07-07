@@ -19,14 +19,10 @@ symlink:
 	ln -sf /workspaces/container/rootfs/common/usr/bin/container /usr/bin/container
 	ln -sf /workspaces/container/rootfs/common/usr/share/container /usr/share/container
 
-generate-documentation: ## Generate documentation
-	python3 scripts/generate_documentation.py
+documentation: ## Generate documentation
+	python3 -m scripts.documentation
 
-build: ## Build containers
-	python3 scripts/builder.py
 
 update: ## Update files
-	python3 scripts/update.py
+	python3 -m scripts.update
 
-test:
-	python3 scripts/test.py

@@ -1,15 +1,26 @@
-import glob
-from ruamel.yaml import YAML
-
+from sys import version
 from scripts.build.instructions import load_instructions
-from scripts.build.files import get_instruction_files
+from scripts.build.context import create_context
+from scripts.helpers.files import get_instruction_files, get_versions
+from scripts.build.dockerfile import generate_dockerfile
 
 INSTRUCTIONS = {}
 NEWLINE = ""
 
+DOCKERFILE = """
+***
+<details>
+<summary>Dockerfile</summary>
+
+```dockerfile
+{}
+```
+</details>
+"""
+
 
 def generate_documentation():
-
+    versions = get_versions()
     content = []
     content.append("# ludeeus/container")
     content.append(NEWLINE)
@@ -66,18 +77,18 @@ def generate_documentation():
         content.append("## Environment variables")
         content.append(NEWLINE)
         content.append("Variable | Value \n-- | --")
-        content.append(f"CONTAINER_TYPE | {tag}")
-        if "devcontainer" in INSTRUCTIONS[tag].get("features", []):
-            content.append("DEVCONTAINER | True")
         for env in sorted(envs):
-            content.append(f"{env} | {envs[env]}")
+            content.append(f"`{env}` | {envs[env]}")
         content.append(NEWLINE)
 
         if INSTRUCTIONS[tag].get("features"):
             content.append("## Features")
             content.append(NEWLINE)
             for feature in sorted(INSTRUCTIONS[tag].get("features")):
-                content.append(f"- `{feature}`")
+                if feature in versions["special"]:
+                    content.append(f"- `{feature} ({versions['special'][feature]})`")
+                else:
+                    content.append(f"- `{feature}`")
             content.append(NEWLINE)
 
         if alpinepackages:
@@ -108,12 +119,18 @@ def generate_documentation():
             content.append(NEWLINE)
             content.append(INSTRUCTIONS[tag]["documentation"])
 
+        content.append(NEWLINE)
+        content.append(
+            DOCKERFILE.format(
+                generate_dockerfile(create_context(tag, load_instructions(tag)))
+            )
+        )
+
         with open(filename, "w") as fp:
             fp.write("\n".join(content))
 
 
 for filename in get_instruction_files():
     filename = filename[:-5].split("/")[-1]
-    print(filename)
     INSTRUCTIONS[filename] = load_instructions(filename)
 generate_documentation()

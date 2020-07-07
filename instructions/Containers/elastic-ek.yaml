@@ -3,8 +3,8 @@ description: "Elasticsearch and Kibana in the same container"
 env:
     ELASTIC_VERSION: "7.8.0"
 alpine-packages:
-    - "openjdk11=11.0.7_p10-r1"
-    - "nodejs=12.17.0-r0"
+    - "openjdk11"
+    - "nodejs"
 run:
     - "adduser -S ekuser"
     - "mkdir -p /data /esdata"

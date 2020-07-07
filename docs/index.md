@@ -22,4 +22,3 @@ Click on the tag name below to see the documentation for a specific tag:
 [python-base](./tags/python-base)  
 [python-base-s6](./tags/python-base-s6)  
 [v](./tags/v)  
-[v-base](./tags/v-base)  

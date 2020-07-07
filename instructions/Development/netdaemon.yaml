@@ -1,1 +1,3 @@
 base: "dotnet-base"
+features:
+    - "devcontainer"

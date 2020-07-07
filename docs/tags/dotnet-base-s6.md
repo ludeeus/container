@@ -10,19 +10,79 @@
 
 Variable | Value 
 -- | --
-CONTAINER_TYPE | dotnet-base-s6
-DEBIAN_FRONTEND | noninteractive
-DOTNET_RUNNING_IN_CONTAINER | true
-DOTNET_USE_POLLING_FILE_WATCHER | true
+`CONTAINER_TYPE` | dotnet-base-s6
+`DEBIAN_FRONTEND` | noninteractive
+`DOTNET_RUNNING_IN_CONTAINER` | true
+`DOTNET_USE_POLLING_FILE_WATCHER` | true
+`S6_BEHAVIOUR_IF_STAGE2_FAILS` | 2
+`S6_CMD_WAIT_FOR_SERVICES` | 1
 
 ## Features
 
-- `S6`
+- `S6 (v2.0.0.1)`
+- `dotnetcore-runtime (3.1.5)`
+- `dotnetcore-sdk (3.1.301)`
 
 ## Debian packages
 
 - `bash`
 - `ca-certificates`
 - `git`
+- `libc6`
+- `libgcc1`
+- `libgssapi-krb5-2`
+- `libicu63`
+- `libssl1.1`
+- `libstdc++6`
 - `nano`
+- `procps`
 - `wget`
+- `zlib1g`
+
+
+
+***
+<details>
+<summary>Dockerfile</summary>
+
+```dockerfile
+FROM debian:10.4-slim
+
+ENV DEBIAN_FRONTEND=noninteractive
+ENV DOTNET_RUNNING_IN_CONTAINER=true
+ENV DOTNET_USE_POLLING_FILE_WATCHER=true
+ENV CONTAINER_TYPE=dotnet-base-s6
+ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=2
+ENV S6_CMD_WAIT_FOR_SERVICES=1
+
+COPY rootfs/dotnet-base /
+COPY rootfs/s6/install /s6/install
+
+RUN  \ 
+    apt update \ 
+    && apt install -y --no-install-recommends --allow-downgrades  \ 
+        ca-certificates \ 
+        nano \ 
+        bash \ 
+        wget \ 
+        git \ 
+        libc6 \ 
+        libgcc1 \ 
+        libgssapi-krb5-2 \ 
+        libicu63 \ 
+        libssl1.1 \ 
+        libstdc++6 \ 
+        zlib1g \ 
+        procps \ 
+    && bash /s6/install \ 
+    && rm -R /s6 \ 
+    && bash /build_scripts/install && rm -R /build_scripts \ 
+    && rm -fr /tmp/* /var/{cache,log}/* /var/lib/apt/lists/*
+
+
+
+LABEL maintainer=hi@ludeeus.dev
+LABEL build.date=2020-7-7
+LABEL build.sha=None
+```
+</details>

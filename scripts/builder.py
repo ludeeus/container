@@ -1,31 +1,37 @@
-import os
 import sys
-import subprocess
-from datetime import datetime
 
-import glob
-from ruamel.yaml import YAML
+from scripts.build.context import create_context
+from scripts.build.instructions import load_instructions
+from scripts.build.dockerfile import generate_dockerfile
+from scripts.build.container import create_container
 
-REF = os.getenv("IMAGE_TAG")
-EVENT = os.getenv("GITHUB_EVENT_NAME")
-WORKSPACE = os.getenv("GITHUB_WORKSPACE")
-SHA = os.getenv("GITHUB_SHA")
-CHANGED_FILES = os.getenv("CHANGED_FILES").split(" ")
-
-INSTRUCTIONS = {}
-ROOTFS = []
+DOCKERFILE = "./Dockerfile"
 
 
-def load_instructions():
-    for _, directory, _ in os.walk("rootfs"):
-        if "common" in directory and "s6" in directory:
-            ROOTFS.extend(directory)
-    yaml = YAML()
-    files = [f for f in glob.glob("./" + "**/*.yaml", recursive=True)]
-    for f in [x for x in files if x.startswith("./instructions/")]:
-        with open(f) as file:
-            tag = f.split("/")[-1].replace(".yaml", "")
-            if INSTRUCTIONS.get(tag) is not None:
-                print(f"Multiple files for tag ({tag}) found!")
-                exit(1)
-            INSTRUCTIONS[f.split("/")[-1].replace(".yaml", "")] = yaml.load(file)
+def build():
+    instructions = load_instructions(CONTAINER)
+    context = create_context(CONTAINER, instructions)
+    dockerfile = generate_dockerfile(context)
+
+    ## Create a dummy dockerfile
+    with open(DOCKERFILE, "w") as df:
+        df.write(dockerfile)
+
+    return create_container(CONTAINER, context, PUBLISH)
+
+
+if len(sys.argv) < 2:
+    print(
+        """
+  usage:
+    python -m scripts.builder [tag] options
+
+  options:
+    --publish       Publishes the tag to docker hub
+"""
+    )
+    exit()
+else:
+    CONTAINER = sys.argv[1]
+    PUBLISH = "--publish" in sys.argv
+    exit(build())
