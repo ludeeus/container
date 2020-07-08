@@ -10,7 +10,6 @@ alpine-packages:
     - "py3-pip"
 python-packages:
     - "setuptools"
-    - "wheel"
-    - "pylint"    
+    - "wheel" 
 run:
     - "ln -s /usr/bin/python3 /usr/bin/python"
