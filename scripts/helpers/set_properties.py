@@ -40,10 +40,14 @@ def set_versions(tag):
         if package in versions["alpine"]:
             tag["alpine-packages"].remove(package)
             tag["alpine-packages"].append(f"{package}={versions['alpine'][package]}")
+        else:
+            exit(f"::error:: {package} not in versions file")
 
     for package in list(tag.get("python-packages", [])):
         if package in versions["python"]:
             tag["python-packages"].remove(package)
             tag["python-packages"].append(f"{package}=={versions['python'][package]}")
+        else:
+            exit(f"::error:: {package} not in versions file")
 
     return tag
