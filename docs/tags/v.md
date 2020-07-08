@@ -25,18 +25,6 @@ Variable | Value
 
 Package | Version 
 -- | --
-`bash` | 5.0.17-r0
-`curl` | 7.69.1-r0
-`freetype-dev` | 2.10.2-r0
 `gcc` | 9.3.0-r2
-`git` | 2.26.2-r0
-`glfw-dev` | 3.3.2-r1
-`libx11-dev` | 1.6.9-r0
-`make` | 4.3-r0
-`musl-dev` | 1.1.24-r9
-`nano` | 4.9.3-r0
-`openssh` | 8.3_p1-r0
-`openssl-dev` | 1.1.1g-r0
-`sqlite-dev` | 3.32.1-r0
 `upx` | 3.96-r0
 
