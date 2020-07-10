@@ -10,9 +10,6 @@ NEWPACKAGELINE = " \\ \n        "
 def add_alpine_packages(context, instructions):
     if instructions.get("alpine-packages"):
         context["RUN"].append(
-            "echo '@edge http://dl-cdn.alpinelinux.org/alpine/edge/main' >> /etc/apk/repositories"
-        )
-        context["RUN"].append(
             f"apk add --no-cache {NEWPACKAGELINE}{NEWPACKAGELINE.join(sorted(instructions['alpine-packages']))}"
         )
 

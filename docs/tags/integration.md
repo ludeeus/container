@@ -2,6 +2,8 @@
 
 [Back to overview](../index.md)
 
+_This provides a minimalistic container for working with python._
+
 **Base image**: `alpine:3.12.0`  
 **Full name**: `ludeeus/container:integration`  
 [View this on Docker Hub](https://hub.docker.com/r/ludeeus/container/tags?page=1&name=integration)
@@ -38,6 +40,8 @@ Package | Version
 
 Package | Version 
 -- | --
+`black` | 19.10b0
+`pylint` | 2.5.3
 `setuptools` | 49.1.0
 `wheel` | 0.34.2
 

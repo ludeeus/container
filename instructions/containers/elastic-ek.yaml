@@ -2,8 +2,6 @@ base: "alpine-base-s6"
 description: "Elasticsearch and Kibana in the same container"
 env:
     ELASTIC_VERSION: "7.8.0"
-features:
-    - S6
 alpine-packages:
     - "openjdk11"
     - "nodejs"

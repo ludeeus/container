@@ -12,6 +12,7 @@ Variable | Value
 -- | --
 `CONTAINER_TYPE` | dotnet-base
 `DEBIAN_FRONTEND` | noninteractive
+`DOTNET_CLI_TELEMETRY_OPTOUT` | 1
 `DOTNET_RUNNING_IN_CONTAINER` | true
 `DOTNET_USE_POLLING_FILE_WATCHER` | true
 

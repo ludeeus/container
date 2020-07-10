@@ -1,5 +1,3 @@
-base: "python-base"
-features:
-    - "devcontainer"
+base: "python"
 run:
     - "mkdir -p /config/custom_components"
