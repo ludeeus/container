@@ -13,6 +13,7 @@ Variable | Value
 `CONTAINER_TYPE` | netdaemon
 `DEBIAN_FRONTEND` | noninteractive
 `DEVCONTAINER` | True
+`DOTNET_CLI_TELEMETRY_OPTOUT` | 1
 `DOTNET_RUNNING_IN_CONTAINER` | true
 `DOTNET_USE_POLLING_FILE_WATCHER` | true
 
@@ -33,6 +34,7 @@ Variable | Value
 - `libicu63`
 - `libssl1.1`
 - `libstdc++6`
+- `make`
 - `nano`
 - `procps`
 - `wget`

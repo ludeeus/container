@@ -62,7 +62,11 @@ if __name__ == "__main__":
     import sys
     from scripts.build.instructions import load_instructions
     from scripts.build.dockerfile import generate_dockerfile
+    from scripts.build.container import DOCKERFILE
 
-    print(
-        generate_dockerfile(create_context(sys.argv[1], load_instructions(sys.argv[1])))
-    )
+    instructions = load_instructions(sys.argv[1])
+    dockerfile = generate_dockerfile(create_context(sys.argv[1], instructions))
+    with open(DOCKERFILE, "w") as df:
+        df.write(dockerfile)
+    print(instructions)
+    print(dockerfile)

@@ -6,6 +6,7 @@ def add_features(context, instructions):
 
     if "devcontainer" in instructions.get("features", []):
         context["COPY"].append(("rootfs/common", "/"))
+        context["COPY"].append(("--from=ludeeus/webhook /bin/binary", "/bin/webhook"))
         context["RUN"].append("chmod +x /usr/bin/container")
 
     return context

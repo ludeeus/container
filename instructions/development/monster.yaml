@@ -1,6 +1,4 @@
 base: "integration"
-features:
-    - "devcontainer"
 alpine-packages:
     - "nodejs"
     - "npm"

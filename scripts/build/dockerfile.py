@@ -14,7 +14,7 @@ RUN {NEWRUNITEM[:-3]}{NEWRUNITEM.join([run for run in context['RUN']])}
 
 {""if not context["ENTRYPOINT"] else f"ENTRYPOINT {context['ENTRYPOINT']}"}
 
-{NEWLINE.join([f"LABEL {label}={value}" for label, value in context.get("LABEL", [])])}
+{NEWLINE.join([f'LABEL {label}="{value}"' for label, value in context.get("LABEL", [])])}
 """[
         1:-1
     ]

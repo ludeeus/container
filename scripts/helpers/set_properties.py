@@ -26,9 +26,17 @@ def set_envs(container, tag):
 def set_labels(container):
     date = datetime.now()
     container["label"] = {
-        "maintainer": "hi@ludeeus.dev",
-        "build.date": f"{date.year}-{date.month}-{date.day}",
-        "build.sha": SHA,
+        "org.opencontainers.image.authors": "Ludeeus <hi@ludeeus.dev>",
+        "org.opencontainers.image.created": date.isoformat(),
+        "org.opencontainers.image.description": f"{container.get('description')}",
+        "org.opencontainers.image.documentation": f"https://ludeeus.github.io/container/tags/{container['name']}",
+        "org.opencontainers.image.licenses": "MIT",
+        "org.opencontainers.image.revision": SHA,
+        "org.opencontainers.image.source": "https://github.com/ludeeus/container",
+        "org.opencontainers.image.title": f"{container['name'].title()}",
+        "org.opencontainers.image.url": f"https://ludeeus.github.io/container/tags/{container['name']}",
+        "org.opencontainers.image.vendor": "Ludeeus",
+        "org.opencontainers.image.version": SHA
     }
     return container
 

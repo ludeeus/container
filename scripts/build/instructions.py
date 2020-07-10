@@ -27,14 +27,13 @@ def load_instructions(container):
             if base in versions["base"]:
                 break
             _bases.append(base)
-
         _container = _all[_bases.pop()]
         _container["bases"] = _bases
         _bases.reverse()
         _bases.append(container)
 
-        for base in _bases or []:
-            base = _all[base]
+        for baseimage in _bases or []:
+            base = _all[baseimage]
             if base["base"] in versions["base"]:
                 print(_container["base"])
                 _container["base"] = base["base"]
@@ -52,6 +51,9 @@ def load_instructions(container):
                         for item in base[element]:
                             if item not in _container[element]:
                                 _container[element].append(item)
+                            else:
+                                print(f"::error:: Issue with {baseimage}")
+                                exit(f"::error:: Useless definition of {item}, it's allready in the base")
 
                 elif isinstance(base.get(element), dict):
                     if _container.get(element) is None:
@@ -68,6 +70,7 @@ def load_instructions(container):
         if package in _container.get("alpine-packages", []):
             _container["alpine-packages"].remove(package)
 
+    _container["name"] = container
     _container = set_envs(_container, container)
     _container = set_labels(_container)
     return set_versions(_container)
