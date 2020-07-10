@@ -70,6 +70,7 @@ def load_instructions(container):
         if package in _container.get("alpine-packages", []):
             _container["alpine-packages"].remove(package)
 
+    _container["name"] = container
     _container = set_envs(_container, container)
     _container = set_labels(_container)
     return set_versions(_container)
