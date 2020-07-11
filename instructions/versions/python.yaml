@@ -3,5 +3,5 @@ colorlog: 4.1.0
 pip: 20.1.1
 pylint: 2.5.3
 python-language-server: 0.34.1
-setuptools: 49.1.0
+setuptools: 49.1.2
 wheel: 0.34.2
