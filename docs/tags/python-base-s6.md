@@ -39,6 +39,6 @@ Package | Version
 
 Package | Version 
 -- | --
-`setuptools` | 49.1.2
+`setuptools` | 49.2.0
 `wheel` | 0.34.2
 
