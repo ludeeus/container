@@ -87,7 +87,7 @@ def update_alpine_packages():
     alpine = f"v{versions['base']['alpine'][:-2]}"
     for package in versions["alpine"]:
         current = versions["alpine"][package]
-        new = get_package(package, alpine)["versions"].pop()
+        new = sorted(get_package(package, alpine)["versions"]).pop()
         if current != new:
             versions = get_versions()
             print(f"Updating {package} from {current} to {new}")
