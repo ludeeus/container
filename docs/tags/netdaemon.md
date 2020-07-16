@@ -43,7 +43,7 @@ Variable | Value
 <details>
 <summary>Dockerfile</summary>
 
-```
+<pre>
 FROM debian:10.4-slim
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -98,5 +98,6 @@ LABEL org.opencontainers.image.title="Netdaemon"
 LABEL org.opencontainers.image.url="https://ludeeus.github.io/container/tags/netdaemon"
 LABEL org.opencontainers.image.vendor="Ludeeus"
 LABEL org.opencontainers.image.version="None"
-```
+</pre>
+<i>This is a generated version of the context used while building the container</i>
 </details>
