@@ -24,7 +24,7 @@ Variable | Value
 Package | Version 
 -- | --
 `bash` | 5.0.17-r0
-`ffmpeg-dev` | 4.3-r0
+`ffmpeg-dev` | 4.3.1-r0
 `gcc` | 9.3.0-r2
 `git` | 2.26.2-r0
 `libc-dev` | 0.7.2-r3
