@@ -2,13 +2,13 @@
 
 [Back to overview](../index.md)
 
-**Base image**: `debian:10.4-slim`  
-**Full name**: `ludeeus/container:netdaemon`  
+**Base image**: `debian:10.4-slim`
+**Full name**: `ludeeus/container:netdaemon`
 [View this on Docker Hub](https://hub.docker.com/r/ludeeus/container/tags?page=1&name=netdaemon)
 
 ## Environment variables
 
-Variable | Value 
+Variable | Value
 -- | --
 `CONTAINER_TYPE` | netdaemon
 `DEBIAN_FRONTEND` | noninteractive
@@ -40,3 +40,63 @@ Variable | Value
 - `wget`
 - `zlib1g`
 
+<details>
+<summary>Dockerfile</summary>
+
+```dockerfile
+FROM debian:10.4-slim
+
+ENV DEBIAN_FRONTEND=noninteractive
+ENV DOTNET_RUNNING_IN_CONTAINER=true
+ENV DOTNET_USE_POLLING_FILE_WATCHER=true
+ENV DOTNET_CLI_TELEMETRY_OPTOUT=1
+ENV CONTAINER_TYPE=netdaemon
+ENV DEVCONTAINER=True
+
+COPY rootfs/dotnet-base /
+COPY rootfs/common /
+COPY --from=ludeeus/webhook /bin/binary /bin/webhook
+
+RUN  \
+    apt update \
+    && apt install -y --no-install-recommends --allow-downgrades  \
+        ca-certificates \
+        nano \
+        bash \
+        wget \
+        git \
+        libc6 \
+        libgcc1 \
+        libgssapi-krb5-2 \
+        libicu63 \
+        libssl1.1 \
+        libstdc++6 \
+        zlib1g \
+        procps \
+        make \
+    && chmod +x /usr/bin/container \
+    && bash /build_scripts/install \
+    && rm -R /build_scripts \
+    && mkdir -p /dotnet \
+    && tar zxf /tmp/runtime.tar.gz -C /dotnet \
+    && tar zxf /tmp/sdk.tar.gz -C /dotnet \
+    && ln -s /dotnet/dotnet /bin/dotnet \
+    && dotnet --info \
+    && rm -fr /var/lib/apt/lists/* \
+    && rm -fr /tmp/* /var/{cache,log}/*
+
+
+
+LABEL org.opencontainers.image.authors="Ludeeus <hi@ludeeus.dev>"
+LABEL org.opencontainers.image.created="2020-07-16T21:09:13.480317"
+LABEL org.opencontainers.image.description="None"
+LABEL org.opencontainers.image.documentation="https://ludeeus.github.io/container/tags/netdaemon"
+LABEL org.opencontainers.image.licenses="MIT"
+LABEL org.opencontainers.image.revision="None"
+LABEL org.opencontainers.image.source="https://github.com/ludeeus/container"
+LABEL org.opencontainers.image.title="Netdaemon"
+LABEL org.opencontainers.image.url="https://ludeeus.github.io/container/tags/netdaemon"
+LABEL org.opencontainers.image.vendor="Ludeeus"
+LABEL org.opencontainers.image.version="None"
+```
+</details>
