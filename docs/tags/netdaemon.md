@@ -43,7 +43,7 @@ Variable | Value
 <details>
 <summary>Dockerfile</summary>
 
-```dockerfile
+```
 FROM debian:10.4-slim
 
 ENV DEBIAN_FRONTEND=noninteractive
