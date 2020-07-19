@@ -55,7 +55,21 @@ RUN  \
 
 
 
+<<<<<<< HEAD
 
+=======
+LABEL org.opencontainers.image.authors="Ludeeus <hi@ludeeus.dev>"
+LABEL org.opencontainers.image.created="2020-07-17T16:44:39.648099"
+LABEL org.opencontainers.image.description="None"
+LABEL org.opencontainers.image.documentation="https://ludeeus.github.io/container/tags/alpine-base-s6"
+LABEL org.opencontainers.image.licenses="MIT"
+LABEL org.opencontainers.image.revision="93a0ea023913050ae699ec6c55be7deccd9e0732"
+LABEL org.opencontainers.image.source="https://github.com/ludeeus/container"
+LABEL org.opencontainers.image.title="Alpine-Base-S6"
+LABEL org.opencontainers.image.url="https://ludeeus.github.io/container/tags/alpine-base-s6"
+LABEL org.opencontainers.image.vendor="Ludeeus"
+LABEL org.opencontainers.image.version="93a0ea023913050ae699ec6c55be7deccd9e0732"
+>>>>>>> 589fbf4053c7812b821060e23794a83a031007b5
 </pre>
 
 <i>This is a generated version of the context used while building the container, some of the labels will not be correct since they use information in the action that publishes the container</i>
