@@ -90,17 +90,7 @@ RUN  \
 
 
 
-LABEL org.opencontainers.image.authors="Ludeeus <hi@ludeeus.dev>"
-LABEL org.opencontainers.image.created="2020-07-16T21:20:24.149210"
-LABEL org.opencontainers.image.description="This provides a minimalistic container for working with python."
-LABEL org.opencontainers.image.documentation="https://ludeeus.github.io/container/tags/integration"
-LABEL org.opencontainers.image.licenses="MIT"
-LABEL org.opencontainers.image.revision="None"
-LABEL org.opencontainers.image.source="https://github.com/ludeeus/container"
-LABEL org.opencontainers.image.title="Integration"
-LABEL org.opencontainers.image.url="https://ludeeus.github.io/container/tags/integration"
-LABEL org.opencontainers.image.vendor="Ludeeus"
-LABEL org.opencontainers.image.version="None"
+
 </pre>
 
 <i>This is a generated version of the context used while building the container, some of the labels will not be correct since they use information in the action that publishes the container</i>
