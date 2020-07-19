@@ -35,8 +35,8 @@ Package | Version
 `openssh` | 8.3_p1-r0
 `openssl-dev` | 1.1.1g-r0
 `py3-pip` | 20.1.1-r0
-`python3-dev` | 3.8.3-r0
-`python3` | 3.8.3-r0
+`python3-dev` | 3.8.4-r0
+`python3` | 3.8.4-r0
 `yarn` | 1.22.4-r0
 
 ## Pyhton packages
@@ -77,8 +77,8 @@ RUN  \
         openssh=8.3_p1-r0 \ 
         openssl-dev=1.1.1g-r0 \ 
         py3-pip=20.1.1-r0 \ 
-        python3-dev=3.8.3-r0 \ 
-        python3=3.8.3-r0 \ 
+        python3-dev=3.8.4-r0 \ 
+        python3=3.8.4-r0 \ 
         yarn=1.22.4-r0 \ 
     && python3 -m pip install --no-cache-dir -U  \ 
         pip \ 
