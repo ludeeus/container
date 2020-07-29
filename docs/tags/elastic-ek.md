@@ -28,7 +28,7 @@ Package | Version
 `bash` | 5.0.17-r0
 `curl` | 7.69.1-r0
 `git` | 2.26.2-r0
-`nodejs` | 12.17.0-r0
+`nodejs` | 12.18.3-r0
 `openjdk11` | 11.0.7_p10-r1
 `openssh` | 8.3_p1-r0
 `openssl-dev` | 1.1.1g-r0
@@ -66,7 +66,7 @@ RUN  \
         bash=5.0.17-r0 \ 
         curl=7.69.1-r0 \ 
         git=2.26.2-r0 \ 
-        nodejs=12.17.0-r0 \ 
+        nodejs=12.18.3-r0 \ 
         openjdk11=11.0.7_p10-r1 \ 
         openssh=8.3_p1-r0 \ 
         openssl-dev=1.1.1g-r0 \ 
