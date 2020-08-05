@@ -2,7 +2,7 @@
 
 [Back to overview](../index.md)
 
-**Base image**: `debian:10.4-slim`  
+**Base image**: `debian:10.5-slim`  
 **Full name**: `ludeeus/container:debian-base`  
 [View this on Docker Hub](https://hub.docker.com/r/ludeeus/container/tags?page=1&name=debian-base)
 
@@ -28,7 +28,7 @@ Variable | Value
 <summary>Generated dockerfile</summary>
 
 <pre>
-FROM debian:10.4-slim
+FROM debian:10.5-slim
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV CONTAINER_TYPE=debian-base
