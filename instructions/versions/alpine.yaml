@@ -9,7 +9,7 @@ glfw-dev: 3.3.2-r1
 go: 1.13.14-r0
 libc-dev: 0.7.2-r3
 libffi-dev: 3.3-r2
-libx11-dev: 1.6.9-r0
+libx11-dev: 1.6.11-r0
 make: 4.3-r0
 musl-dev: 1.1.24-r9
 nano: 4.9.3-r0
