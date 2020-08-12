@@ -21,8 +21,8 @@ Variable | Value
 ## Features
 
 - `S6 (v2.0.0.1)`
-- `dotnetcore-runtime (3.1.6)`
-- `dotnetcore-sdk (3.1.302)`
+- `dotnetcore-runtime (3.1.7)`
+- `dotnetcore-sdk (3.1.401)`
 
 ## Debian packages
 
