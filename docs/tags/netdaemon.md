@@ -20,8 +20,8 @@ Variable | Value
 ## Features
 
 - `devcontainer`
-- `dotnetcore-runtime (3.1.6)`
-- `dotnetcore-sdk (3.1.302)`
+- `dotnetcore-runtime (3.1.7)`
+- `dotnetcore-sdk (3.1.401)`
 
 ## Debian packages
 
