@@ -2,10 +2,6 @@
 	"image": "ludeeus/container:python",
 	"context": "..",
 	"postCreateCommand": "python3 -m install -r requirements.txt",
-	"runArgs": [
-		"-v",
-		"${env:HOME}${env:USERPROFILE}/.ssh:/tmp/.ssh"
-	],
 	"extensions": [
 		"ms-python.python",
 		"github.vscode-pull-request-github",
