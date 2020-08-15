@@ -46,7 +46,7 @@ Package | Version
 `black` | 19.10b0
 `pylint` | 2.5.3
 `setuptools` | 49.6.0
-`wheel` | 0.35.0
+`wheel` | 0.35.1
 
 
 
@@ -86,7 +86,7 @@ RUN  \
         black==19.10b0 \ 
         pylint==2.5.3 \ 
         setuptools==49.6.0 \ 
-        wheel==0.35.0 \ 
+        wheel==0.35.1 \ 
     && chmod +x /usr/bin/container \ 
     && ln -s /usr/bin/python3 /usr/bin/python \ 
     && mkdir -p /config/custom_components \ 
