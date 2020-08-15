@@ -34,7 +34,7 @@ Package | Version
 Package | Version 
 -- | --
 `setuptools` | 49.6.0
-`wheel` | 0.35.0
+`wheel` | 0.35.1
 
 
 
@@ -67,7 +67,7 @@ RUN  \
         pip \ 
     && python3 -m pip install --no-cache-dir -U  \ 
         setuptools==49.6.0 \ 
-        wheel==0.35.0 \ 
+        wheel==0.35.1 \ 
     && ln -s /usr/bin/python3 /usr/bin/python \ 
     && rm -rf /var/cache/apk/* \ 
     && find /usr/local \( -type d -a -name test -o -name tests -o -name '__pycache__' \) -o \( -type f -a -name '*.pyc' -o -name '*.pyo' \) -exec rm -rf '{}' \; \ 
