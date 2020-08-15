@@ -30,8 +30,8 @@ Package | Version
 
 Package | Version 
 -- | --
-`setuptools` | 49.4.0
-`wheel` | 0.34.2
+`setuptools` | 49.6.0
+`wheel` | 0.35.0
 
 
 
@@ -64,8 +64,8 @@ RUN  \
     && python3 -m pip install --no-cache-dir -U  \ 
         pip \ 
     && python3 -m pip install --no-cache-dir -U  \ 
-        setuptools==49.4.0 \ 
-        wheel==0.34.2 \ 
+        setuptools==49.6.0 \ 
+        wheel==0.35.0 \ 
     && ln -s /usr/bin/python3 /usr/bin/python \ 
     && git clone https://github.com/hacs/integration.git /hacs \ 
     && cd /hacs \ 

@@ -45,8 +45,8 @@ Package | Version
 -- | --
 `black` | 19.10b0
 `pylint` | 2.5.3
-`setuptools` | 49.4.0
-`wheel` | 0.34.2
+`setuptools` | 49.6.0
+`wheel` | 0.35.0
 
 
 
@@ -85,8 +85,8 @@ RUN  \
     && python3 -m pip install --no-cache-dir -U  \ 
         black==19.10b0 \ 
         pylint==2.5.3 \ 
-        setuptools==49.4.0 \ 
-        wheel==0.34.2 \ 
+        setuptools==49.6.0 \ 
+        wheel==0.35.0 \ 
     && chmod +x /usr/bin/container \ 
     && ln -s /usr/bin/python3 /usr/bin/python \ 
     && mkdir -p /config/custom_components \ 
