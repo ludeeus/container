@@ -27,6 +27,7 @@ Package | Version
 `ffmpeg-dev` | 4.3.1-r0
 `gcc` | 9.3.0-r2
 `git` | 2.26.2-r0
+`jpeg-dev` | 9d-r0
 `libc-dev` | 0.7.2-r3
 `libffi-dev` | 3.3-r2
 `make` | 4.3-r0
@@ -38,12 +39,13 @@ Package | Version
 `python3-dev` | 3.8.5-r0
 `python3` | 3.8.5-r0
 `yarn` | 1.22.4-r0
+`zlib-dev` | 1.2.11-r3
 
 ## Pyhton packages
 
 Package | Version 
 -- | --
-`black` | 19.10b0
+`black` | 20.8b1
 `pylint` | 2.6.0
 `setuptools` | 49.6.0
 `wheel` | 0.35.1
@@ -69,6 +71,7 @@ RUN  \
         ffmpeg-dev=4.3.1-r0 \ 
         gcc=9.3.0-r2 \ 
         git=2.26.2-r0 \ 
+        jpeg-dev=9d-r0 \ 
         libc-dev=0.7.2-r3 \ 
         libffi-dev=3.3-r2 \ 
         make=4.3-r0 \ 
@@ -80,10 +83,11 @@ RUN  \
         python3-dev=3.8.5-r0 \ 
         python3=3.8.5-r0 \ 
         yarn=1.22.4-r0 \ 
+        zlib-dev=1.2.11-r3 \ 
     && python3 -m pip install --no-cache-dir -U  \ 
         pip \ 
     && python3 -m pip install --no-cache-dir -U  \ 
-        black==19.10b0 \ 
+        black==20.8b1 \ 
         pylint==2.6.0 \ 
         setuptools==49.6.0 \ 
         wheel==0.35.1 \ 
