@@ -1,3 +1,6 @@
 base: "python"
+alpine-packages:
+    - "jpeg-dev"
+    - "zlib-dev"
 run:
     - "mkdir -p /config/custom_components"
