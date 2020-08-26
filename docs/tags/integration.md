@@ -41,7 +41,7 @@ Package | Version
 Package | Version 
 -- | --
 `black` | 19.10b0
-`pylint` | 2.5.3
+`pylint` | 2.6.0
 `setuptools` | 49.6.0
 `wheel` | 0.35.1
 
@@ -78,7 +78,7 @@ RUN  \
         pip \ 
     && python3 -m pip install --no-cache-dir -U  \ 
         black==19.10b0 \ 
-        pylint==2.5.3 \ 
+        pylint==2.6.0 \ 
         setuptools==49.6.0 \ 
         wheel==0.35.1 \ 
     && chmod +x /usr/bin/container \ 
