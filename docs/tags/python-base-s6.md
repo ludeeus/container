@@ -39,7 +39,7 @@ Package | Version
 
 Package | Version 
 -- | --
-`setuptools` | 50.0.0
+`setuptools` | 50.0.3
 `wheel` | 0.35.1
 
 
@@ -74,7 +74,7 @@ RUN  \
     && python3 -m pip install --no-cache-dir -U  \ 
         pip \ 
     && python3 -m pip install --no-cache-dir -U  \ 
-        setuptools==50.0.0 \ 
+        setuptools==50.0.3 \ 
         wheel==0.35.1 \ 
     && bash /s6/install \ 
     && rm -R /s6 \ 
