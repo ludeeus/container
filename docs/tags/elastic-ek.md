@@ -29,7 +29,7 @@ Package | Version
 `curl` | 7.69.1-r0
 `git` | 2.26.2-r0
 `nodejs` | 12.18.3-r0
-`openjdk11` | 11.0.7_p10-r1
+`openjdk11` | 11.0.8_p10-r0
 `openssh` | 8.3_p1-r0
 `openssl-dev` | 1.1.1g-r0
 
@@ -67,7 +67,7 @@ RUN  \
         curl=7.69.1-r0 \ 
         git=2.26.2-r0 \ 
         nodejs=12.18.3-r0 \ 
-        openjdk11=11.0.7_p10-r1 \ 
+        openjdk11=11.0.8_p10-r0 \ 
         openssh=8.3_p1-r0 \ 
         openssl-dev=1.1.1g-r0 \ 
     && bash /s6/install \ 
