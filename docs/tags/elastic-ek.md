@@ -19,7 +19,7 @@ Variable | Value
 
 ## Features
 
-- `S6 (v2.0.0.1)`
+- `S6 (v2.1.0.0)`
 
 ## Alpine packages
 
