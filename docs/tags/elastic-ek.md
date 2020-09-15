@@ -26,7 +26,7 @@ Variable | Value
 Package | Version 
 -- | --
 `bash` | 5.0.17-r0
-`curl` | 7.69.1-r0
+`curl` | 7.69.1-r1
 `git` | 2.26.2-r0
 `nodejs` | 12.18.3-r0
 `openjdk11` | 11.0.8_p10-r0
@@ -64,7 +64,7 @@ COPY rootfs/s6/install /s6/install
 RUN  \ 
     apk add --no-cache  \ 
         bash=5.0.17-r0 \ 
-        curl=7.69.1-r0 \ 
+        curl=7.69.1-r1 \ 
         git=2.26.2-r0 \ 
         nodejs=12.18.3-r0 \ 
         openjdk11=11.0.8_p10-r0 \ 
