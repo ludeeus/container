@@ -15,7 +15,7 @@ function InitDevEnv {
     echo "Initializing dev env for $CONTAINER_TYPE"
     rm -R /tmp/init > /dev/null 2>&1
 
-    if [[ "$CONTAINER_TYPE" == "netdaemon" ]]; then
+    if [[ "$CONTAINER_TYPE" == "netdaemon" ]] || [[ "$CONTAINER_TYPE" == "netdaemon-dotnet5" ]]; then
       echo "Before you get started we need some information to set it up"
       echo
       read -p 'What IP is Home Assistant running on? ' HA_IP
