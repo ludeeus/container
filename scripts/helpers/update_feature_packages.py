@@ -18,7 +18,7 @@ def update_s6():
         save_versions(versions)
 
 
-def update_netcore():
+def update_netcore(version):
     baseurl = "https://dotnet.microsoft.com"
     dotnet = {
         "arm": {"sdk": None, "runtime": None},
@@ -26,7 +26,7 @@ def update_netcore():
         "amd64": {"sdk": None, "runtime": None},
     }
 
-    url = f"{baseurl}/download/dotnet-core/3.1"
+    url = f"{baseurl}/download/dotnet-core/{version}"
     request = requests.get(url).text
 
     for line in request.split("\n"):
@@ -96,11 +96,17 @@ def update_netcore():
                 dotnet[arch]["runtime"] = line.split('"')[1]
                 break
 
-    with open("rootfs/dotnet-base/build_scripts/install", "r") as dnfile:
+    path = "rootfs/dotnet-base/build_scripts/install"
+    if version == "5.0":
+        path = "rootfs/dotnet5-base/build_scripts/install"
+    with open(
+        path,
+        "r",
+    ) as dnfile:
         content = dnfile.read()
 
     newcontent = f"""#!/bin/bash
-# https://dotnet.microsoft.com/download/dotnet-core/3.1
+# https://dotnet.microsoft.com/download/dotnet-core/{version}
 
 ARCH=$(uname -m)
 
@@ -116,13 +122,21 @@ elif [ "$ARCH" == "x86_64" ]; then
 fi
 """
     if newcontent != content:
-        with open("rootfs/dotnet-base/build_scripts/install", "w") as dnfile:
+        with open(path, "w") as dnfile:
             dnfile.write(newcontent)
         versions = get_versions()
-        versions["special"]["dotnetcore-runtime"] = (
-            dotnet["arm64"]["runtime"].split("-runtime-")[1].split("-linux")[0]
-        )
-        versions["special"]["dotnetcore-sdk"] = (
-            dotnet["arm64"]["sdk"].split("-sdk-")[1].split("-linux")[0]
-        )
+        if version == "5.0":
+            versions["special"]["dotnetcore5-runtime"] = (
+                dotnet["arm64"]["runtime"].split("-runtime-")[1].split("-linux")[0]
+            )
+            versions["special"]["dotnetcore5-sdk"] = (
+                dotnet["arm64"]["sdk"].split("-sdk-")[1].split("-linux")[0]
+            )
+        else:
+            versions["special"]["dotnetcore-runtime"] = (
+                dotnet["arm64"]["runtime"].split("-runtime-")[1].split("-linux")[0]
+            )
+            versions["special"]["dotnetcore-sdk"] = (
+                dotnet["arm64"]["sdk"].split("-sdk-")[1].split("-linux")[0]
+            )
         save_versions(versions)

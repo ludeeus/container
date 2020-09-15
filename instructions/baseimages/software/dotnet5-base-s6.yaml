@@ -1,0 +1,3 @@
+base: "dotnet5-base"
+features:
+  - S6

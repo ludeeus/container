@@ -1,0 +1,15 @@
+#!/bin/bash
+# https://dotnet.microsoft.com/download/dotnet-core/5.0
+
+ARCH=$(uname -m)
+
+if [ "$ARCH" == "armv7l" ]; then
+    wget -q -nv -O /tmp/runtime.tar.gz "https://download.visualstudio.microsoft.com/download/pr/de043fe1-1a5b-4d29-878c-87a99efcca8d/8c928e7725179e4707975a13fc01d8ed/dotnet-runtime-5.0.0-rc.1.20451.14-linux-arm.tar.gz";
+    wget -q -nv -O /tmp/sdk.tar.gz "https://download.visualstudio.microsoft.com/download/pr/e6456209-63c8-43fc-ba2d-11c43c9eacd5/3a12e6bae9ff57c1964eb83cb01604b6/dotnet-sdk-5.0.100-rc.1.20452.10-linux-arm.tar.gz";
+elif [ "$ARCH" == "aarch64" ]; then
+    wget -q -nv -O /tmp/runtime.tar.gz "https://download.visualstudio.microsoft.com/download/pr/367623bd-affb-47ea-af65-466d6c002537/bae126bda0f016d1284402e73ab7d333/dotnet-runtime-5.0.0-rc.1.20451.14-linux-arm64.tar.gz";
+    wget -q -nv -O /tmp/sdk.tar.gz "https://download.visualstudio.microsoft.com/download/pr/8f24c20f-cf36-44bb-9405-becc781e6a1c/b5d8a40cde8b4525ea65ac4e5c7250d5/dotnet-sdk-5.0.100-rc.1.20452.10-linux-arm64.tar.gz";
+elif [ "$ARCH" == "x86_64" ]; then
+    wget -q -nv -O /tmp/runtime.tar.gz "https://download.visualstudio.microsoft.com/download/pr/401a2d7e-e959-4517-93fb-94b9f3b43123/0eca99d7a04ecd47cc6ccfab78fcfdaa/aspnetcore-runtime-5.0.0-rc.1.20451.17-linux-x64.tar.gz";
+    wget -q -nv -O /tmp/sdk.tar.gz "https://download.visualstudio.microsoft.com/download/pr/e5536fae-e963-4fa6-a203-15604c7d703a/d0968c03feeeed41c2428854e13c0085/dotnet-sdk-5.0.100-rc.1.20452.10-linux-x64.tar.gz";
+fi

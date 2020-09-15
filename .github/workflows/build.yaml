@@ -16,6 +16,8 @@ jobs:
           - debian-base-s6
           - dotnet-base
           - dotnet-base-s6
+          - dotnet5-base
+          - dotnet5-base-s6
           - elastic-ek
           - frontend
           - go
@@ -24,6 +26,7 @@ jobs:
           - integration
           - monster
           - netdaemon
+          - netdaemon-dotnet5
           - nodejs-base
           - nodejs-base-s6
           - python
