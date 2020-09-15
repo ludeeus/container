@@ -87,6 +87,8 @@ def generate_documentation():
             content.append("## Features")
             content.append(NEWLINE)
             for feature in sorted(INSTRUCTIONS[tag].get("features")):
+                if "dotnet5" in tag and "dotnetcore" in feature and "5" not in feature:
+                    continue
                 if feature in versions["special"]:
                     content.append(f"- `{feature} ({versions['special'][feature]})`")
                 else:

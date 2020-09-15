@@ -18,8 +18,8 @@ Variable | Value
 
 ## Features
 
-- `dotnetcore-runtime (3.1.8)`
-- `dotnetcore-sdk (3.1.402)`
+- `dotnetcore5-runtime (5.0.0-rc.1.20451.14)`
+- `dotnetcore5-sdk (5.0.100-rc.1.20452.10)`
 
 ## Debian packages
 
