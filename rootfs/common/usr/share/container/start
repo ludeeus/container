@@ -25,7 +25,7 @@ function StartHomeAssistant {
 
     ln -sf "$(GetWorkspaceName)custom_components/" /config/custom_components || echo "Could not copy the custom_component" exit 1
   elif  test -f "__init__.py"; then
-    echo "Having the component in the root are currently not supported"
+    echo "Having the component in the root is currently not supported"
   fi
 
   echo "Start Home Assistant"

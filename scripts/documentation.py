@@ -111,7 +111,7 @@ def generate_documentation():
             content.append(NEWLINE)
 
         if pythonpackages:
-            content.append("## Pyhton packages")
+            content.append("## Python packages")
             content.append(NEWLINE)
             content.append("Package | Version \n-- | --")
             for package in sorted(pythonpackages):

@@ -38,7 +38,7 @@ Package | Version
 `python3` | 3.8.5-r0
 `zlib-dev` | 1.2.11-r3
 
-## Pyhton packages
+## Python packages
 
 Package | Version 
 -- | --

@@ -41,7 +41,7 @@ Package | Version
 `yarn` | 1.22.4-r0
 `zlib-dev` | 1.2.11-r3
 
-## Pyhton packages
+## Python packages
 
 Package | Version 
 -- | --
