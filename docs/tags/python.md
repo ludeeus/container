@@ -36,7 +36,7 @@ Package | Version
 `python3-dev` | 3.8.5-r0
 `python3` | 3.8.5-r0
 
-## Pyhton packages
+## Python packages
 
 Package | Version 
 -- | --
