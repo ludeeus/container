@@ -23,7 +23,7 @@ Package | Version
 -- | --
 `bash` | 5.0.17-r0
 `git` | 2.26.2-r0
-`go` | 1.13.14-r0
+`go` | 1.13.15-r0
 `openssh` | 8.3_p1-r0
 `openssl-dev` | 1.1.1g-r0
 
@@ -46,7 +46,7 @@ RUN  \
     apk add --no-cache  \ 
         bash=5.0.17-r0 \ 
         git=2.26.2-r0 \ 
-        go=1.13.14-r0 \ 
+        go=1.13.15-r0 \ 
         openssh=8.3_p1-r0 \ 
         openssl-dev=1.1.1g-r0 \ 
     && chmod +x /usr/bin/container \ 
