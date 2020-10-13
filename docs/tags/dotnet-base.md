@@ -2,7 +2,7 @@
 
 [Back to overview](../index.md)
 
-**Base image**: `debian:10.5-slim`  
+**Base image**: `debian:10.6-slim`  
 **Full name**: `ludeeus/container:dotnet-base`  
 [View this on Docker Hub](https://hub.docker.com/r/ludeeus/container/tags?page=1&name=dotnet-base)
 
@@ -44,7 +44,7 @@ Variable | Value
 <summary>Generated dockerfile</summary>
 
 <pre>
-FROM debian:10.5-slim
+FROM debian:10.6-slim
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV DOTNET_RUNNING_IN_CONTAINER=true
