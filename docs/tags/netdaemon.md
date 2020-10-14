@@ -2,7 +2,7 @@
 
 [Back to overview](../index.md)
 
-**Base image**: `debian:10.5-slim`  
+**Base image**: `debian:10.6-slim`  
 **Full name**: `ludeeus/container:netdaemon`  
 [View this on Docker Hub](https://hub.docker.com/r/ludeeus/container/tags?page=1&name=netdaemon)
 
@@ -20,8 +20,8 @@ Variable | Value
 ## Features
 
 - `devcontainer`
-- `dotnetcore-runtime (3.1.8)`
-- `dotnetcore-sdk (3.1.402)`
+- `dotnetcore-runtime (3.1.9)`
+- `dotnetcore-sdk (3.1.403)`
 
 ## Debian packages
 
@@ -47,7 +47,7 @@ Variable | Value
 <summary>Generated dockerfile</summary>
 
 <pre>
-FROM debian:10.5-slim
+FROM debian:10.6-slim
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV DOTNET_RUNNING_IN_CONTAINER=true

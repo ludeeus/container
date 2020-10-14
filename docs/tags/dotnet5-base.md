@@ -2,7 +2,7 @@
 
 [Back to overview](../index.md)
 
-**Base image**: `debian:10.5-slim`  
+**Base image**: `debian:10.6-slim`  
 **Full name**: `ludeeus/container:dotnet5-base`  
 [View this on Docker Hub](https://hub.docker.com/r/ludeeus/container/tags?page=1&name=dotnet5-base)
 
@@ -18,8 +18,8 @@ Variable | Value
 
 ## Features
 
-- `dotnetcore5-runtime (5.0.0-rc.1.20451.14)`
-- `dotnetcore5-sdk (5.0.100-rc.1.20452.10)`
+- `dotnetcore5-runtime (5.0.0-rc.2.20475.5)`
+- `dotnetcore5-sdk (5.0.100-rc.2.20479.15)`
 
 ## Debian packages
 
@@ -44,7 +44,7 @@ Variable | Value
 <summary>Generated dockerfile</summary>
 
 <pre>
-FROM debian:10.5-slim
+FROM debian:10.6-slim
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV DOTNET_RUNNING_IN_CONTAINER=true
