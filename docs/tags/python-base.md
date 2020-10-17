@@ -33,7 +33,7 @@ Package | Version
 
 Package | Version 
 -- | --
-`setuptools` | 50.3.0
+`setuptools` | 50.3.1
 `wheel` | 0.35.1
 
 
@@ -66,7 +66,7 @@ RUN  \
     && python3 -m pip install --no-cache-dir -U  \ 
         pip \ 
     && python3 -m pip install --no-cache-dir -U  \ 
-        setuptools==50.3.0 \ 
+        setuptools==50.3.1 \ 
         wheel==0.35.1 \ 
     && ln -s /usr/bin/python3 /usr/bin/python \ 
     && rm -rf /var/cache/apk/* \ 
