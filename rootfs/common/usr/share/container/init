@@ -29,10 +29,10 @@ function InitDevEnv {
       if [ -z "$PROJECT_NAME" ];then PROJECT_NAME="HelloWorld"; fi
 
       git clone https://github.com/net-daemon/netdaemon-app-template.git /tmp/init
-      cp /tmp/init/_daemon_config.json /tmp/init/daemon_config.json
+      cp /tmp/init/_appsettings.json /tmp/init/appsettings.json
 
-      sed -i "s|ip/hostname|${HA_IP}|" /tmp/init/daemon_config.json
-      sed -i "s|enter_token_here|${HA_LAT}|" /tmp/init/daemon_config.json
+      sed -i "s|localhost|${HA_IP}|" /tmp/init/appsettings.json
+      sed -i "s|enter_token_here|${HA_LAT}|" /tmp/init/appsettings.json
 
       sed -i "s|namespace HelloWorld|namespace ${GH_USER}|" /tmp/init/apps/HelloWorld/HelloWorld.cs
       sed -i "s|class HelloWorldApp|class ${PROJECT_NAME}App|" /tmp/init/apps/HelloWorld/HelloWorld.cs
