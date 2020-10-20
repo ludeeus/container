@@ -20,7 +20,7 @@ Variable | Value
 
 ## Features
 
-- `S6 (v2.1.0.0)`
+- `S6 (v2.1.0.2)`
 - `dotnetcore-runtime (3.1.9)`
 - `dotnetcore-sdk (3.1.403)`
 
