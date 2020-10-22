@@ -4,7 +4,7 @@
 
 _Elasticsearch and Kibana in the same container_
 
-**Base image**: `alpine:3.12.0`  
+**Base image**: `alpine:3.12.1`  
 **Full name**: `ludeeus/container:elastic-ek`  
 [View this on Docker Hub](https://hub.docker.com/r/ludeeus/container/tags?page=1&name=elastic-ek)
 
@@ -51,7 +51,7 @@ docker run --name elastic -d -p 9200:9200 -p 5601:5601 C:\es\:/data ludeeus/cont
 <summary>Generated dockerfile</summary>
 
 <pre>
-FROM alpine:3.12.0
+FROM alpine:3.12.1
 
 ENV ELASTIC_VERSION=7.8.0
 ENV CONTAINER_TYPE=elastic-ek

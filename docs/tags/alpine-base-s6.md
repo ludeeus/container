@@ -2,7 +2,7 @@
 
 [Back to overview](../index.md)
 
-**Base image**: `alpine:3.12.0`  
+**Base image**: `alpine:3.12.1`  
 **Full name**: `ludeeus/container:alpine-base-s6`  
 [View this on Docker Hub](https://hub.docker.com/r/ludeeus/container/tags?page=1&name=alpine-base-s6)
 
@@ -34,7 +34,7 @@ Package | Version
 <summary>Generated dockerfile</summary>
 
 <pre>
-FROM alpine:3.12.0
+FROM alpine:3.12.1
 
 ENV CONTAINER_TYPE=alpine-base-s6
 ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=2

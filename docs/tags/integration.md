@@ -4,7 +4,7 @@
 
 _This provides a minimalistic container for working with python._
 
-**Base image**: `alpine:3.12.0`  
+**Base image**: `alpine:3.12.1`  
 **Full name**: `ludeeus/container:integration`  
 [View this on Docker Hub](https://hub.docker.com/r/ludeeus/container/tags?page=1&name=integration)
 
@@ -54,7 +54,7 @@ Package | Version
 <summary>Generated dockerfile</summary>
 
 <pre>
-FROM alpine:3.12.0
+FROM alpine:3.12.1
 
 ENV CONTAINER_TYPE=integration
 ENV DEVCONTAINER=True

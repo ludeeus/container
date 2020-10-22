@@ -2,7 +2,7 @@
 
 [Back to overview](../index.md)
 
-**Base image**: `alpine:3.12.0`  
+**Base image**: `alpine:3.12.1`  
 **Full name**: `ludeeus/container:go`  
 [View this on Docker Hub](https://hub.docker.com/r/ludeeus/container/tags?page=1&name=go)
 
@@ -34,7 +34,7 @@ Package | Version
 <summary>Generated dockerfile</summary>
 
 <pre>
-FROM alpine:3.12.0
+FROM alpine:3.12.1
 
 ENV CONTAINER_TYPE=go
 ENV DEVCONTAINER=True
