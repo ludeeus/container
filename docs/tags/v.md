@@ -4,7 +4,7 @@
 
 _This provides a container for working with V._
 
-**Base image**: `alpine:3.12.0`  
+**Base image**: `alpine:3.12.1`  
 **Full name**: `ludeeus/container:v`  
 [View this on Docker Hub](https://hub.docker.com/r/ludeeus/container/tags?page=1&name=v)
 
@@ -45,7 +45,7 @@ Package | Version
 <summary>Generated dockerfile</summary>
 
 <pre>
-FROM alpine:3.12.0
+FROM alpine:3.12.1
 
 ENV VVV=/opt/vlang
 ENV PATH=/opt/vlang:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
