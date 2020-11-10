@@ -18,8 +18,8 @@ Variable | Value
 
 ## Features
 
-- `dotnetcore-runtime (3.1.9)`
-- `dotnetcore-sdk (3.1.403)`
+- `dotnetcore-runtime (3.1.10)`
+- `dotnetcore-sdk (3.1.404)`
 
 ## Debian packages
 

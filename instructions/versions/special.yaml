@@ -1,5 +1,5 @@
-dotnetcore-runtime: 3.1.9
-dotnetcore-sdk: 3.1.403
-dotnetcore5-runtime: 5.0.0-rc.2.20475.5
-dotnetcore5-sdk: 5.0.100-rc.2.20479.15
+dotnetcore-runtime: 3.1.10
+dotnetcore-sdk: 3.1.404
+dotnetcore5-runtime: 5.0.0
+dotnetcore5-sdk: 5.0.100
 S6: v2.1.0.2

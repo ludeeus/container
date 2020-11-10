@@ -21,8 +21,8 @@ Variable | Value
 ## Features
 
 - `S6 (v2.1.0.2)`
-- `dotnetcore5-runtime (5.0.0-rc.2.20475.5)`
-- `dotnetcore5-sdk (5.0.100-rc.2.20479.15)`
+- `dotnetcore5-runtime (5.0.0)`
+- `dotnetcore5-sdk (5.0.100)`
 
 ## Debian packages
 
