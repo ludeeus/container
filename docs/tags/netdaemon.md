@@ -36,6 +36,7 @@ Variable | Value
 - `libstdc++6`
 - `make`
 - `nano`
+- `openssh-client`
 - `procps`
 - `wget`
 - `zlib1g`
@@ -67,6 +68,7 @@ RUN  \
         bash \ 
         wget \ 
         git \ 
+        openssh-client \ 
         libc6 \ 
         libgcc1 \ 
         libgssapi-krb5-2 \ 

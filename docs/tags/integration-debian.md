@@ -32,6 +32,7 @@ Variable | Value
 - `libjpeg-dev`
 - `make`
 - `nano`
+- `openssh-client`
 - `python3`
 - `python3-dev`
 - `python3-pip`
@@ -73,6 +74,7 @@ RUN  \
         libffi-dev \ 
         make \ 
         nano \ 
+        openssh-client \ 
         python3-dev \ 
         python3-pip \ 
         python3 \ 

@@ -7,4 +7,5 @@ debian-packages:
     - "bash"
     - "wget"
     - "git"
+    - "openssh-client"
 

@@ -19,6 +19,7 @@ Variable | Value
 - `ca-certificates`
 - `git`
 - `nano`
+- `openssh-client`
 - `wget`
 
 
@@ -43,6 +44,7 @@ RUN  \
         bash \ 
         wget \ 
         git \ 
+        openssh-client \ 
     && rm -fr /var/lib/apt/lists/* \ 
     && rm -fr /tmp/* /var/{cache,log}/*
 
