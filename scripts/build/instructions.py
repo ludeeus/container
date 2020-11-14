@@ -23,7 +23,10 @@ def load_instructions(container):
     if _all[container]["base"] not in versions["base"]:
         _bases.append(_all[container]["base"])
         while True:
-            base = _all[_bases[-1]]["base"]
+            try:
+                base = _all[_bases[-1]]["base"]
+            except KeyError:
+                break
             if base in versions["base"]:
                 break
             _bases.append(base)
@@ -53,7 +56,9 @@ def load_instructions(container):
                                 _container[element].append(item)
                             else:
                                 print(f"::error:: Issue with {baseimage}")
-                                exit(f"::error:: Useless definition of {item}, it's allready in the base")
+                                exit(
+                                    f"::error:: Useless definition of {item}, it's allready in the base"
+                                )
 
                 elif isinstance(base.get(element), dict):
                     if _container.get(element) is None:

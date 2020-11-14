@@ -1,4 +1,4 @@
-base: "python"
+base: "python:3.9-slim-buster"
 debian-packages:
     - "bash"
     - "ca-certificates"
