@@ -35,13 +35,6 @@ Package | Version
 `python3-dev` | 3.8.5-r0
 `python3` | 3.8.5-r0
 
-## Python packages
-
-Package | Version 
--- | --
-`setuptools` | 50.3.2
-`wheel` | 0.35.1
-
 
 
 ***
@@ -71,16 +64,10 @@ RUN  \
         py3-pip=20.1.1-r0 \ 
         python3-dev=3.8.5-r0 \ 
         python3=3.8.5-r0 \ 
-    && python3 -m pip install --no-cache-dir -U  \ 
-        pip \ 
-    && python3 -m pip install --no-cache-dir -U  \ 
-        setuptools==50.3.2 \ 
-        wheel==0.35.1 \ 
     && bash /s6/install \ 
     && rm -R /s6 \ 
     && ln -s /usr/bin/python3 /usr/bin/python \ 
     && rm -rf /var/cache/apk/* \ 
-    && find /usr/local \( -type d -a -name test -o -name tests -o -name '__pycache__' \) -o \( -type f -a -name '*.pyc' -o -name '*.pyo' \) -exec rm -rf '{}' \; \ 
     && rm -fr /tmp/* /var/{cache,log}/*
 
 

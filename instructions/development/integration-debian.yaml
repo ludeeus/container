@@ -1,0 +1,6 @@
+base: "python-debian"
+debian-packages:
+    - "libjpeg-dev"
+    - "zlib1g-dev"
+run:
+    - "mkdir -p /config/custom_components"

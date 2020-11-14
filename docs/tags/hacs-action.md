@@ -26,13 +26,6 @@ Package | Version
 `py3-pip` | 20.1.1-r0
 `python3` | 3.8.5-r0
 
-## Python packages
-
-Package | Version 
--- | --
-`setuptools` | 50.3.2
-`wheel` | 0.35.1
-
 
 
 ***
@@ -61,18 +54,12 @@ RUN  \
         libc-dev \ 
         libffi-dev \ 
         python3-dev \ 
-    && python3 -m pip install --no-cache-dir -U  \ 
-        pip \ 
-    && python3 -m pip install --no-cache-dir -U  \ 
-        setuptools==50.3.2 \ 
-        wheel==0.35.1 \ 
     && ln -s /usr/bin/python3 /usr/bin/python \ 
     && git clone https://github.com/hacs/integration.git /hacs \ 
     && cd /hacs \ 
     && make init \ 
     && rm -rf /var/cache/apk/* \ 
     && apk del --no-cache .build-deps \ 
-    && find /usr/local \( -type d -a -name test -o -name tests -o -name '__pycache__' \) -o \( -type f -a -name '*.pyc' -o -name '*.pyo' \) -exec rm -rf '{}' \; \ 
     && rm -fr /tmp/* /var/{cache,log}/*
 
 

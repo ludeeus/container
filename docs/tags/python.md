@@ -42,8 +42,6 @@ Package | Version
 -- | --
 `black` | 20.8b1
 `pylint` | 2.6.0
-`setuptools` | 50.3.2
-`wheel` | 0.35.1
 
 
 
@@ -58,7 +56,6 @@ ENV CONTAINER_TYPE=python
 ENV DEVCONTAINER=True
 
 COPY rootfs/common /
-COPY --from=ludeeus/webhook /bin/binary /bin/webhook
 
 RUN  \ 
     apk add --no-cache  \ 
@@ -76,11 +73,11 @@ RUN  \
         python3=3.8.5-r0 \ 
     && python3 -m pip install --no-cache-dir -U  \ 
         pip \ 
+        setuptools \ 
+        wheel \ 
     && python3 -m pip install --no-cache-dir -U  \ 
         black==20.8b1 \ 
         pylint==2.6.0 \ 
-        setuptools==50.3.2 \ 
-        wheel==0.35.1 \ 
     && chmod +x /usr/bin/container \ 
     && ln -s /usr/bin/python3 /usr/bin/python \ 
     && rm -rf /var/cache/apk/* \ 

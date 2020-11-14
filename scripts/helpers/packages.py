@@ -59,7 +59,7 @@ def cleanup_debian_packages(context, instructions):
 def add_python_packages(context, instructions):
     if instructions.get("python-packages"):
         context["RUN"].append(
-            f"python3 -m pip install --no-cache-dir -U {NEWPACKAGELINE}pip"
+            f"python3 -m pip install --no-cache-dir -U {NEWPACKAGELINE}pip{NEWPACKAGELINE}setuptools{NEWPACKAGELINE}wheel"
         )
         context["RUN"].append(
             f"python3 -m pip install --no-cache-dir -U {NEWPACKAGELINE}{NEWPACKAGELINE.join(sorted(instructions['python-packages']))}"
