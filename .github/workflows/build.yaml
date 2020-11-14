@@ -24,6 +24,7 @@ jobs:
           - go-base
           - hacs-action
           - integration
+          - integration-debian
           - monster
           - netdaemon
           - netdaemon-dotnet5
@@ -31,7 +32,9 @@ jobs:
           - nodejs-base-s6
           - python
           - python-base
+          - python-base-debian
           - python-base-s6
+          - python-debian
           - v
 
     runs-on: ubuntu-latest
