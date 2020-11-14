@@ -36,13 +36,16 @@ def set_labels(container):
         "org.opencontainers.image.title": f"{container['name'].title()}",
         "org.opencontainers.image.url": f"https://ludeeus.github.io/container/tags/{container['name']}",
         "org.opencontainers.image.vendor": "Ludeeus",
-        "org.opencontainers.image.version": SHA
+        "org.opencontainers.image.version": SHA,
     }
     return container
 
 
 def set_versions(tag):
-    tag["base"] = f"{tag['base']}:{versions['base'][tag['base']]}"
+    if ":" in tag["base"]:
+        tag["base"] = f"{tag['base']}"
+    else:
+        tag["base"] = f"{tag['base']}:{versions['base'][tag['base']]}"
 
     for package in list(tag.get("alpine-packages", [])):
         if package in versions["alpine"]:

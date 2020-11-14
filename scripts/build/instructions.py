@@ -20,14 +20,17 @@ def load_instructions(container):
                 exit(1)
             _all[f.split("/")[-1].replace(".yaml", "")] = yamlloader.load(file)
 
-    if _all[container]["base"] not in versions["base"]:
+    bases = versions["base"]
+    bases["python:3.9-slim-buster"] = None
+
+    if _all[container]["base"] not in bases:
         _bases.append(_all[container]["base"])
         while True:
             try:
                 base = _all[_bases[-1]]["base"]
             except KeyError:
                 break
-            if base in versions["base"]:
+            if base in bases:
                 break
             _bases.append(base)
         _container = _all[_bases.pop()]
@@ -37,7 +40,7 @@ def load_instructions(container):
 
         for baseimage in _bases or []:
             base = _all[baseimage]
-            if base["base"] in versions["base"]:
+            if base["base"] in bases:
                 print(_container["base"])
                 _container["base"] = base["base"]
 
