@@ -40,7 +40,6 @@ ENV CONTAINER_TYPE=go
 ENV DEVCONTAINER=True
 
 COPY rootfs/common /
-COPY --from=ludeeus/webhook /bin/binary /bin/webhook
 
 RUN  \ 
     apk add --no-cache  \ 

@@ -58,7 +58,6 @@ ENV DEVCONTAINER=True
 
 COPY rootfs/dotnet-base /
 COPY rootfs/common /
-COPY --from=ludeeus/webhook /bin/binary /bin/webhook
 
 RUN  \ 
     apt update \ 
