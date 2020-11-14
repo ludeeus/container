@@ -13,6 +13,8 @@ debian-packages:
     - "python3-pip"
     - "python3"
     - "wget"
+python-packages:
+    - "colorlog"
 env:
     DEBIAN_FRONTEND: "noninteractive"
 run:

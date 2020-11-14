@@ -4,7 +4,7 @@
 
 _This provides a minimalistic container for working with python._
 
-**Base image**: `debian:10.6-slim`  
+**Base image**: `python:3.9-slim-buster`  
 **Full name**: `ludeeus/container:integration-debian`  
 [View this on Docker Hub](https://hub.docker.com/r/ludeeus/container/tags?page=1&name=integration-debian)
 
@@ -43,6 +43,7 @@ Variable | Value
 Package | Version 
 -- | --
 `black` | 20.8b1
+`colorlog` | 4.6.2
 `pylint` | 2.6.0
 
 
@@ -52,7 +53,7 @@ Package | Version
 <summary>Generated dockerfile</summary>
 
 <pre>
-FROM debian:10.6-slim
+FROM python:3.9-slim-buster
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV CONTAINER_TYPE=integration-debian
@@ -63,19 +64,19 @@ COPY rootfs/common /
 RUN  \ 
     apt update \ 
     && apt install -y --no-install-recommends --allow-downgrades  \ 
-        ca-certificates \ 
-        nano \ 
         bash \ 
-        wget \ 
-        git \ 
+        ca-certificates \ 
         gcc \ 
+        git \ 
+        libavcodec-dev \ 
         libc-dev \ 
         libffi-dev \ 
-        libavcodec-dev \ 
-        python3-dev \ 
         make \ 
-        python3 \ 
+        nano \ 
+        python3-dev \ 
         python3-pip \ 
+        python3 \ 
+        wget \ 
         libjpeg-dev \ 
         zlib1g-dev \ 
     && python3 -m pip install --no-cache-dir -U  \ 
@@ -84,6 +85,7 @@ RUN  \
         wheel \ 
     && python3 -m pip install --no-cache-dir -U  \ 
         black==20.8b1 \ 
+        colorlog==4.6.2 \ 
         pylint==2.6.0 \ 
     && chmod +x /usr/bin/container \ 
     && ln -s /usr/bin/python3 /usr/bin/python \ 
