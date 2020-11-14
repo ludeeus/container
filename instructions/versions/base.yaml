@@ -1,2 +1,3 @@
 alpine: 3.12.1
 debian: 10.6-slim
+python: 3.9-slim-buster
