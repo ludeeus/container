@@ -23,7 +23,7 @@ platforms=$(cat ./containerfiles/$container/config.json | jq -r -c '.platforms |
 
 docker buildx create --name builder --use
 docker buildx inspect --bootstrap
-
+cat "./containerfiles/$container/Dockerfile"
 docker \
     buildx \
     build \
