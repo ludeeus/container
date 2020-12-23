@@ -1,0 +1,21 @@
+name: Builder
+
+on:
+  pull_request:
+    branches:
+      - master
+jobs:
+  matrix:
+    name: Build ${{ matrix.tag }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        tag:
+          - base/devcontainer
+    steps:
+      - name: 📦 Checkout the repository
+        uses: actions/checkout@v2
+
+      - name: Build ${{ matrix.tag }}
+        run: bash ./scripts/build.sh ${{ matrix.tag }}
+
