@@ -1,6 +1,6 @@
 bash: 5.0.17-r0
 clang: 10.0.0-r2
-curl: 7.69.1-r1
+curl: 7.69.1-r3
 ffmpeg-dev: 4.3.1-r0
 freetype-dev: 2.10.4-r0
 gcc: 9.3.0-r2
@@ -12,13 +12,13 @@ libc-dev: 0.7.2-r3
 libffi-dev: 3.3-r2
 libx11-dev: 1.6.12-r0
 make: 4.3-r0
-musl-dev: 1.1.24-r9
+musl-dev: 1.1.24-r10
 nano: 4.9.3-r0
 nodejs: 12.18.4-r0
 npm: 12.18.4-r0
 openjdk11: 11.0.9_p11-r0
-openssh: 8.3_p1-r0
-openssl-dev: 1.1.1g-r0
+openssh: 8.3_p1-r1
+openssl-dev: 1.1.1i-r0
 py3-pip: 20.1.1-r0
 python3-dev: 3.8.5-r0
 python3: 3.8.5-r0

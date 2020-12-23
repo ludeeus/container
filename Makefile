@@ -22,7 +22,6 @@ symlink:
 documentation: ## Generate documentation
 	python3 -m scripts.documentation
 
-
 update: ## Update files
 	python3 -m scripts.update
 
