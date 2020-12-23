@@ -13,17 +13,17 @@ else
 fi
 
 
-config=$(jq . -r ./containerfiles/$container/config.json)
-
-for tag in $(cat ./containerfiles/$container/config.json | jq -c -r .tags[]); do
+for tag in $(jq -c -r .tags[] "./containerfiles/$container/config.json"); do
     dockerTags+=(" --tag $tag ")
 done
 
-platforms=$(cat ./containerfiles/$container/config.json | jq -r -c '.platforms | @csv' | tr -d '"')
+platforms=$(jq -r -c '.platforms | @csv' "./containerfiles/$container/config.json" | tr -d '"')
+
+cat "./containerfiles/$container/Dockerfile"
 
 docker buildx create --name builder --use
 docker buildx inspect --bootstrap
-cat "./containerfiles/$container/Dockerfile"
+
 docker \
     buildx \
     build \
