@@ -7,9 +7,9 @@ declare -a platforms
 container="$1"
 
 if [ "$2" == "--push" ]; then
-    runType="--push";
+    push="true";
 else
-    runType="--load";
+    push="false";
 fi
 
 
@@ -26,7 +26,7 @@ docker \
     buildx \
     build \
     --compress \
-    "$runType" \
+    --output=type=image,push="$push" \
     --file "./containerfiles/$container/Dockerfile" \
     --platform "$platforms" \
     . \
