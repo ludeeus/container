@@ -19,8 +19,6 @@ done
 
 platforms=$(jq -r -c '.platforms | @csv' "./containerfiles/$container/config.json" | tr -d '"')
 
-cat "./containerfiles/$container/Dockerfile"
-
 docker buildx create --name builder --use
 docker buildx inspect --bootstrap
 
