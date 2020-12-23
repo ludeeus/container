@@ -4,7 +4,7 @@ set -e
 declare -a dockerTags
 declare -a platforms
 
-dockerfile="$1"
+container="$1"
 
 if [ "$2" == "--push" ]; then
     runType="--push";
@@ -13,16 +13,15 @@ else
 fi
 
 
-config=$(jq . -r ./containerfiles/$dockerfile/config.json)
+config=$(jq . -r ./containerfiles/$container/config.json)
 
-for tag in $(cat ./containerfiles/$dockerfile/config.json | jq -c -r .tags[]); do
+for tag in $(cat ./containerfiles/$container/config.json | jq -c -r .tags[]); do
     dockerTags+=(" --tag $tag ")
 done
 
-platforms=$(cat ./containerfiles/$dockerfile/config.json | jq -r -c '.platforms | @csv' | tr -d '"')
+platforms=$(cat ./containerfiles/$container/config.json | jq -r -c '.platforms | @csv' | tr -d '"')
 
-docker buildx create --name builder
-docker buildx use builder
+docker buildx create --name builder --use
 docker buildx inspect --bootstrap
 
 docker \
@@ -30,7 +29,7 @@ docker \
     build \
     --compress \
     "$runType" \
-    --file "./containerfiles/$dockerfile/Dockerfile" \
+    --file "./containerfiles/$container/Dockerfile" \
     --platform "$platforms" \
     . \
     ${dockerTags[@]}
