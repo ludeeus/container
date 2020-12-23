@@ -19,3 +19,10 @@ jobs:
       - name: 🛠️ Build ${{ matrix.tag }}
         run: bash ./scripts/build.sh ${{ matrix.tag }}
 
+  test:
+    name: TEST
+    needs: matrix
+    runs-on: ubuntu-latest
+    steps:
+      - name: TEST
+        run: docker buildx ls
