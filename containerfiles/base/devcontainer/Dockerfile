@@ -14,9 +14,6 @@ RUN \
     && apt install -y gh \
     && bash /tmp/include/container.sh \
     \
-    && echo "\n\nVerify and cleanup:\n" \
-    && gh --version \
-    && container help \
     && rm -fr /tmp/include \
     && rm -fr /var/lib/apt/lists/* \
     && rm -fr /tmp/* /var/{cache,log}/*

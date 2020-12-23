@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -e
 
-declare -a dockerTags
-declare -a platforms
+declare -a containerTags
+declare -a containerLabels
 
 container="$1"
 
@@ -14,7 +14,7 @@ fi
 
 
 for tag in $(jq -c -r .tags[] "./containerfiles/$container/config.json"); do
-    dockerTags+=(" --tag $tag ")
+    containerTags+=(" --tag $tag ")
 done
 
 platforms=$(jq -r -c '.platforms | @csv' "./containerfiles/$container/config.json" | tr -d '"')
@@ -30,7 +30,7 @@ docker \
     --file "./containerfiles/$container/Dockerfile" \
     --platform "$platforms" \
     . \
-    ${dockerTags[@]}
+    ${containerTags[@]}
 
 
 docker buildx rm builder
