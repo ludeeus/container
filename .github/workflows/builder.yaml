@@ -16,6 +16,6 @@ jobs:
       - name: 📦 Checkout the repository
         uses: actions/checkout@v2
 
-      - name: Build ${{ matrix.tag }}
+      - name: 🛠️ Build ${{ matrix.tag }}
         run: bash ./scripts/build.sh ${{ matrix.tag }}
 

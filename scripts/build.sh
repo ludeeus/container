@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 
 declare -a dockerTags
 declare -a platforms
