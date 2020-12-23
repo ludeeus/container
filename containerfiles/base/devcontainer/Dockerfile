@@ -3,8 +3,6 @@ FROM mcr.microsoft.com/vscode/devcontainers/base:debian-10
 ENV DEBIAN_FRONTEND=noninteractive
 ENV DEVCONTAINER=true
 
-SHELL bash
-
 COPY ./include /tmp/include
 
 #RUN \
