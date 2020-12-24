@@ -7,12 +7,12 @@ on:
 jobs:
   lint:
     runs-on: ubuntu-latest
-    name: ✅ Lint repository files
+    name: 📝 Lint repository files
     steps:
-      - name: 📦 Checkout the repository
+      - name: 📥 Checkout the repository
         uses: actions/checkout@v2
 
-      - name: 📝 Run ShellCheck
+      - name: ✅ Run ShellCheck
         uses: ludeeus/action-shellcheck@master
         with:
           ignore: rootfs
@@ -23,7 +23,7 @@ jobs:
           cat **/*.json | jq '.'
 
   base:
-    name: 🔨 Build ${{ matrix.tag }}
+    name: 🧱 Build ${{ matrix.tag }}
     needs: lint
     runs-on: ubuntu-latest
     strategy:
@@ -32,7 +32,7 @@ jobs:
           - "base/debian"
           - "base/debian-s6"
     steps:
-      - name: 📦 Checkout the repository
+      - name: 📥 Checkout the repository
         uses: actions/checkout@v2
 
       - name: 📃 Get changed files
@@ -62,7 +62,7 @@ jobs:
         run: bash ./scripts/build.sh --container ${{ matrix.tag }} ${{ steps.arguments.outputs.arguments }}
 
   container:
-    name: 🔨 Build ${{ matrix.tag }}
+    name: 🚢 Build ${{ matrix.tag }}
     needs: base
     runs-on: ubuntu-latest
     strategy:
@@ -71,7 +71,7 @@ jobs:
           - "container/python-debian"
           - "container/python-debian-s6"
     steps:
-      - name: 📦 Checkout the repository
+      - name: 📥 Checkout the repository
         uses: actions/checkout@v2
 
       - name: 📃 Get changed files
@@ -101,7 +101,7 @@ jobs:
         run: bash ./scripts/build.sh --container ${{ matrix.tag }} ${{ steps.arguments.outputs.arguments }}
 
   devcontainer:
-    name: 🔨 Build ${{ matrix.tag }}
+    name:  🖥️ Build ${{ matrix.tag }}
     needs: base
     runs-on: ubuntu-latest
     strategy:
