@@ -27,8 +27,8 @@ jobs:
     strategy:
       matrix:
         tag:
-          - "container/python"
-          - "container/python-s6"
+          - "container/python-debian"
+          - "container/python-debian-s6"
     steps:
       - name: 📦 Checkout the repository
         uses: actions/checkout@v2
