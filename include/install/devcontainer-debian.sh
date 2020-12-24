@@ -8,7 +8,8 @@ apt-get update
 apt-get install -y --no-install-recommends \
     nano \
     openssh-client \
-    git
+    git \
+    shellcheck
 
 bash /include/install/ghcli-debian.sh
 bash /include/install/container.sh "${CONTAINER_TYPE}"
