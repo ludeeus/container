@@ -17,8 +17,17 @@ jobs:
       - name: 📦 Checkout the repository
         uses: actions/checkout@v2
 
+      - name: ❓ Should build ${{ matrix.tag }}?
+        id: should_build
+        run: echo "::set-output name=build::$(bash ./scripts/should_build.sh)"
+
+      - name: ➕ Additional arguments
+        id: arguments
+        run: echo "::set-output name=arguments::"
+
       - name: 🛠️ Build ${{ matrix.tag }}
-        run: bash ./scripts/build.sh --container ${{ matrix.tag }}
+        if: steps.should_build.outputs.build == 'true'
+        run: bash ./scripts/build.sh --container ${{ matrix.tag }} ${{ steps.arguments.outputs.arguments }}
 
   container:
     name: Build ${{ matrix.tag }}
@@ -33,8 +42,17 @@ jobs:
       - name: 📦 Checkout the repository
         uses: actions/checkout@v2
 
+      - name: ❓ Should build ${{ matrix.tag }}?
+        id: should_build
+        run: echo "::set-output name=build::$(bash ./scripts/should_build.sh)"
+
+      - name: ➕ Additional arguments
+        id: arguments
+        run: echo "::set-output name=arguments::"
+
       - name: 🛠️ Build ${{ matrix.tag }}
-        run: bash ./scripts/build.sh --container ${{ matrix.tag }}
+        if: steps.should_build.outputs.build == 'true'
+        run: bash ./scripts/build.sh --container ${{ matrix.tag }} ${{ steps.arguments.outputs.arguments }}
 
   devcontainer:
     name: Build ${{ matrix.tag }}
@@ -49,5 +67,14 @@ jobs:
       - name: 📦 Checkout the repository
         uses: actions/checkout@v2
 
+      - name: ❓ Should build ${{ matrix.tag }}?
+        id: should_build
+        run: echo "::set-output name=build::$(bash ./scripts/should_build.sh)"
+
+      - name: ➕ Additional arguments
+        id: arguments
+        run: echo "::set-output name=arguments::"
+
       - name: 🛠️ Build ${{ matrix.tag }}
-        run: bash ./scripts/build.sh --container ${{ matrix.tag }}
+        if: steps.should_build.outputs.build == 'true'
+        run: bash ./scripts/build.sh --container ${{ matrix.tag }} ${{ steps.arguments.outputs.arguments }}
