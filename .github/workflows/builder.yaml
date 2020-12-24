@@ -27,6 +27,7 @@ jobs:
 
       - name: ➕ Additional arguments
         id: arguments
+        if: steps.should_build.outputs.build == 'true'
         run: echo "::set-output name=arguments::"
 
       - name: 🛠️ Build ${{ matrix.tag }}
@@ -56,6 +57,7 @@ jobs:
 
       - name: ➕ Additional arguments
         id: arguments
+        if: steps.should_build.outputs.build == 'true'
         run: echo "::set-output name=arguments::"
 
       - name: 🛠️ Build ${{ matrix.tag }}
@@ -85,6 +87,7 @@ jobs:
 
       - name: ➕ Additional arguments
         id: arguments
+        if: steps.should_build.outputs.build == 'true'
         run: echo "::set-output name=arguments::"
 
       - name: 🛠️ Build ${{ matrix.tag }}
