@@ -2,7 +2,7 @@
 
 echo -e "\033[0;34mRunning script 'container.sh'\033[0m"
 
-if [ ! -z "$(command -v apk)" ]; then
+if [ -n "$(command -v apk)" ]; then
     apk add make
 else
     apt-get update

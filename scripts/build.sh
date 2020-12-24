@@ -74,16 +74,16 @@ else
 fi
 
 buildCommand+=("--output=type=image,push="${push:-"false"}"")
-buildCommand+=("--label "org.opencontainers.image.url=https://github.com/ludeeus/container/tree/master/containerfiles/$container"")
-buildCommand+=("--label "org.opencontainers.image.documentation=https://github.com/ludeeus/container/tree/master/containerfiles/$container"")
-buildCommand+=("--label "org.opencontainers.image.source=https://github.com/ludeeus/container"")
-buildCommand+=("--label "org.opencontainers.image.title=$container"")
-buildCommand+=("--label "org.opencontainers.image.ref.name=$(git rev-parse HEAD)"")
-buildCommand+=("--label "org.opencontainers.image.created=$(date --utc +%FT%H:%M:%SZ)"")
+buildCommand+=("--label org.opencontainers.image.url=https://github.com/ludeeus/container/tree/master/containerfiles/$container")
+buildCommand+=("--label org.opencontainers.image.documentation=https://github.com/ludeeus/container/tree/master/containerfiles/$container")
+buildCommand+=("--label org.opencontainers.image.source=https://github.com/ludeeus/container")
+buildCommand+=("--label org.opencontainers.image.title=$container")
+buildCommand+=("--label org.opencontainers.image.ref.name=$(git rev-parse HEAD)")
+buildCommand+=("--label org.opencontainers.image.created=$(date --utc +%FT%H:%M:%SZ)")
 echo "${buildCommand[@]}"
 
 if [ "$test" != "true" ]; then
-    buildCommand+=("--platform "${platforms:-$(jq -r -c '.platforms | @csv' "./containerfiles/$container/config.json" | tr -d '"')}"")
+    buildCommand+=("--platform ${platforms:-$(jq -r -c '.platforms | @csv' ./containerfiles/$container/config.json | tr -d '"')}")
     docker buildx create --name builder --use
     docker buildx inspect --bootstrap
     # shellcheck disable=SC2068
