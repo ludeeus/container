@@ -23,7 +23,7 @@ jobs:
 
       - name: ❓ Should build ${{ matrix.tag }}?
         id: should_build
-        run: echo "::set-output name=build::$(bash ./scripts/should_build.sh ${{ matrix.tag }} ${{ steps.changed_files.outputs.all }})"
+        run: echo "::set-output name=build::$(bash ./scripts/should_build.sh "${{ matrix.tag }}" "${{ steps.changed_files.outputs.all }}")"
 
       - name: ➕ Additional arguments
         id: arguments
@@ -52,7 +52,7 @@ jobs:
 
       - name: ❓ Should build ${{ matrix.tag }}?
         id: should_build
-        run: echo "::set-output name=build::$(bash ./scripts/should_build.sh ${{ matrix.tag }} ${{ steps.changed_files.outputs.all }})"
+        run: echo "::set-output name=build::$(bash ./scripts/should_build.sh "${{ matrix.tag }}" "${{ steps.changed_files.outputs.all }}")"
 
       - name: ➕ Additional arguments
         id: arguments
@@ -81,7 +81,7 @@ jobs:
 
       - name: ❓ Should build ${{ matrix.tag }}?
         id: should_build
-        run: echo "::set-output name=build::$(bash ./scripts/should_build.sh ${{ matrix.tag }} ${{ steps.changed_files.outputs.all }})"
+        run: echo "::set-output name=build::$(bash ./scripts/should_build.sh "${{ matrix.tag }}" "${{ steps.changed_files.outputs.all }}")"
 
       - name: ➕ Additional arguments
         id: arguments
