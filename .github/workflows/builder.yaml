@@ -23,7 +23,7 @@ jobs:
           cat **/*.json | jq '.'
 
   base:
-    name: 🧱 Build ${{ matrix.tag }}
+    name: 🔨 Build ${{ matrix.tag }}
     needs: lint
     runs-on: ubuntu-latest
     strategy:
@@ -62,7 +62,7 @@ jobs:
         run: bash ./scripts/build.sh --container ${{ matrix.tag }} ${{ steps.arguments.outputs.arguments }}
 
   container:
-    name: 🚢 Build ${{ matrix.tag }}
+    name: 🔨 Build ${{ matrix.tag }}
     needs: base
     runs-on: ubuntu-latest
     strategy:
@@ -101,7 +101,7 @@ jobs:
         run: bash ./scripts/build.sh --container ${{ matrix.tag }} ${{ steps.arguments.outputs.arguments }}
 
   devcontainer:
-    name:  🖥️ Build ${{ matrix.tag }}
+    name:  🔨 Build ${{ matrix.tag }}
     needs: base
     runs-on: ubuntu-latest
     strategy:
