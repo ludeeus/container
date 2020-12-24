@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+
+echo -e "\033[0;34mRunning script 'devcontainer-debian.sh'\033[0m"
+
 CONTAINER_TYPE="$1"
 
 apt-get update

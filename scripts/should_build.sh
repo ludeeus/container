@@ -44,4 +44,8 @@ if [[ "$changed" =~ include/install/cleanup- ]]; then
     echo "true"
     exit
 fi
+if [[ "$changed" =~ containerfiles/common ]]; then
+    echo "true"
+    exit
+fi
 echo "false"

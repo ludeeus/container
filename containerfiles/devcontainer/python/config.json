@@ -1,4 +1,5 @@
 {
+    "dockerfile": "DevcontainerPython.dockerfile",
     "args": {
         "BUILD_FROM": "mcr.microsoft.com/vscode/devcontainers/python:3.9",
         "CONTAINER_TYPE": "python",

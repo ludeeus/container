@@ -1,4 +1,5 @@
 {
+    "dockerfile": "ContainerPythonDebian.dockerfile",
     "args": {
         "BUILD_FROM": "ghcr.io/ludeeus/base/debian:latest",
         "OS_VARIANT": "debian",

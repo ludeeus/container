@@ -67,8 +67,13 @@ if [ "$(jq -c -r -e .labels "./containerfiles/$container/config.json")" != "null
     done
 fi
 
+if [ "$(jq -c -r .dockerfile "./containerfiles/$container/config.json")" != "null" ]; then
+    buildCommand+=("--file ./containerfiles/common/$(jq -c -r .dockerfile "./containerfiles/$container/config.json")")
+else
+    buildCommand+=("--file ./containerfiles/$container/Dockerfile")
+fi
+
 buildCommand+=("--output=type=image,push="${push:-"false"}"")
-buildCommand+=("--file ./containerfiles/$container/Dockerfile")
 buildCommand+=("--label "org.opencontainers.image.url=https://github.com/ludeeus/container/tree/master/containerfiles/$container"")
 buildCommand+=("--label "org.opencontainers.image.documentation=https://github.com/ludeeus/container/tree/master/containerfiles/$container"")
 buildCommand+=("--label "org.opencontainers.image.source=https://github.com/ludeeus/container"")
