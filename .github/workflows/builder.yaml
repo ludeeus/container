@@ -46,6 +46,10 @@ jobs:
       - name: 📦 Checkout the repository
         uses: actions/checkout@v2
 
+      - name: 📃 Get changed files
+        id: changed_files
+        uses: jitterbit/get-changed-files@v1
+
       - name: ❓ Should build ${{ matrix.tag }}?
         id: should_build
         run: echo "::set-output name=build::$(bash ./scripts/should_build.sh ${{ matrix.tag }} ${{ steps.changed_files.outputs.all }})"
@@ -70,6 +74,10 @@ jobs:
     steps:
       - name: 📦 Checkout the repository
         uses: actions/checkout@v2
+
+      - name: 📃 Get changed files
+        id: changed_files
+        uses: jitterbit/get-changed-files@v1
 
       - name: ❓ Should build ${{ matrix.tag }}?
         id: should_build
