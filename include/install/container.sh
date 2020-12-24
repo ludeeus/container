@@ -3,8 +3,8 @@
 if [ ! -z "$(command -v apk)" ]; then
     apk add make
 else
-    apt update
-    apt install -y make
+    apt-get update
+    apt-get install -y --no-install-recommends make
 fi
 
 mkdir -p /opt/container/makefiles

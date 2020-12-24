@@ -3,8 +3,9 @@ set -e
 
 declare container
 declare push
+declare test
 declare platforms
-declare -a buildCommand=("buildx build . --compress")
+declare -a buildCommand
 
 function error_handling() {
     docker buildx rm builder
@@ -33,6 +34,9 @@ while [[ $# -gt 0 ]]; do
             ;;
         --push)
             push="true"
+            ;;
+        --test)
+            test="true"
             ;;
         -p|--platfroms)
             platforms="$2"
@@ -63,7 +67,6 @@ if [ "$(jq -c -r -e .labels "./containerfiles/$container/config.json")" != "null
     done
 fi
 
-buildCommand+=("--platform "${platforms:-$(jq -r -c '.platforms | @csv' "./containerfiles/$container/config.json" | tr -d '"')}"")
 buildCommand+=("--output=type=image,push="${push:-"false"}"")
 buildCommand+=("--file ./containerfiles/$container/Dockerfile")
 buildCommand+=("--label "org.opencontainers.image.documentation=https://github.com/ludeeus/container/tree/master/containerfiles/$container"")
@@ -71,9 +74,14 @@ buildCommand+=("--label "org.opencontainers.image.source=https://github.com/lude
 buildCommand+=("--label "org.opencontainers.image.created=$(date --utc +%FT%H:%M:%SZ)"")
 echo "${buildCommand[@]}"
 
-docker buildx create --name builder --use
-docker buildx inspect --bootstrap
-
-# shellcheck disable=SC2068
-docker ${buildCommand[@]}
-docker buildx rm builder
+if [ "$test" != "true" ]; then
+    buildCommand+=("--platform "${platforms:-$(jq -r -c '.platforms | @csv' "./containerfiles/$container/config.json" | tr -d '"')}"")
+    docker buildx create --name builder --use
+    docker buildx inspect --bootstrap
+    # shellcheck disable=SC2068
+    docker buildx build . --compress ${buildCommand[@]}
+    docker buildx rm builder
+else
+    # shellcheck disable=SC2068
+    docker build . --compress ${buildCommand[@]}
+fi

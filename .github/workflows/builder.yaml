@@ -5,8 +5,23 @@ on:
     branches:
       - master
 jobs:
-  matrix:
+  base:
     name: Build ${{ matrix.tag }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        tag:
+          - "base/debian"
+    steps:
+      - name: 📦 Checkout the repository
+        uses: actions/checkout@v2
+
+      - name: 🛠️ Build ${{ matrix.tag }}
+        run: bash ./scripts/build.sh --container ${{ matrix.tag }}
+
+  devcontainer:
+    name: Build ${{ matrix.tag }}
+    needs: base
     runs-on: ubuntu-latest
     strategy:
       matrix:

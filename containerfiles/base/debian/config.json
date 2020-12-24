@@ -1,0 +1,16 @@
+{
+    "args": {
+        "BASE": "debian:10.6",
+        "CONTAINER_TYPE": "base-debian",
+        "OS_VARIANT": "debian"
+    },
+    "tags": [
+        "ghcr.io/ludeeus/base/debian:latest",
+        "ghcr.io/ludeeus/base/debian:10.6",
+        "ghcr.io/ludeeus/base/debian:10"
+    ],
+    "platforms": [
+        "linux/386",
+        "linux/amd64"
+    ]
+}
