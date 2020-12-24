@@ -12,6 +12,7 @@ jobs:
       matrix:
         tag:
           - "base/debian"
+          - "base/debian-s6"
     steps:
       - name: 📦 Checkout the repository
         uses: actions/checkout@v2
