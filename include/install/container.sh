@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if [ ! -z "$(which apk)" ]; then
+if [ ! -z "$(command -v apk)" ]; then
     apk add make
 else
     apt update

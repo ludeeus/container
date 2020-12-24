@@ -4,9 +4,7 @@ set -e
 declare container
 declare push
 declare platforms
-declare -a containerTags
-declare -a buildArgs
-declare -a containerLabels
+declare -a buildCommand=("buildx build . --compress")
 
 function error_handling() {
     docker buildx rm builder
@@ -22,15 +20,15 @@ while [[ $# -gt 0 ]]; do
             shift
             ;;
         -t|--tag)
-            containerTags+=(" --tag ghcr.io/ludeeus/$container:$2 ")
+            buildCommand+=(" --tag ghcr.io/ludeeus/$container:$2 ")
             shift
             ;;
         -l|--label)
-            containerLabels+=(" --label $2 ")
+            buildCommand+=(" --label $2 ")
             shift
             ;;
         -a|--arg)
-            buildArgs+=(" --build-arg $2 ")
+            buildCommand+=(" --build-arg $2 ")
             shift
             ;;
         --push)
@@ -49,41 +47,33 @@ done
 
 if [ "$(jq -c -r .tags "./containerfiles/$container/config.json")" != "null" ]; then
     for tag in $(jq -c -r '.tags? | .[]' "./containerfiles/$container/config.json"); do
-        containerTags+=(" --tag $tag ")
+        buildCommand+=(" --tag $tag ")
     done
 fi
 
 if [ "$(jq -c -r .args "./containerfiles/$container/config.json")" != "null" ]; then
     for arg in $(jq -c -r '.args? |  to_entries[] | "\(.key)=\(.value)"' "./containerfiles/$container/config.json"); do
-        buildArgs+=(" --build-arg $arg ")
+        buildCommand+=(" --build-arg $arg ")
     done
 fi
 
 if [ "$(jq -c -r -e .labels "./containerfiles/$container/config.json")" != "null" ]; then
     for label in $(jq -c -r '.labels? |  to_entries[] | "\(.key)=\(.value)"' "./containerfiles/$container/config.json"); do
-        containerLabels+=(" --label $label ")
+        buildCommand+=(" --label $label ")
     done
 fi
-echo ${buildArgs[@]}
-platforms=$(jq -r -c '.platforms | @csv' "./containerfiles/$container/config.json" | tr -d '"')
+
+buildCommand+=("--platform "${platforms:-$(jq -r -c '.platforms | @csv' "./containerfiles/$container/config.json" | tr -d '"')}"")
+buildCommand+=("--output=type=image,push="${push:-"false"}"")
+buildCommand+=("--file ./containerfiles/$container/Dockerfile")
+buildCommand+=("--label "org.opencontainers.image.documentation=https://github.com/ludeeus/container/tree/master/containerfiles/$container"")
+buildCommand+=("--label "org.opencontainers.image.source=https://github.com/ludeeus/container"")
+buildCommand+=("--label "org.opencontainers.image.created=$(date --utc +%FT%H:%M:%SZ)"")
+echo "${buildCommand[@]}"
 
 docker buildx create --name builder --use
 docker buildx inspect --bootstrap
 
-docker \
-    buildx \
-    build \
-    --compress \
-    --output=type=image,push="${push:-"false"}" \
-    --file "./containerfiles/$container/Dockerfile" \
-    --platform "${platforms:-$(jq -r -c '.platforms | @csv' "./containerfiles/$container/config.json" | tr -d '"')}" \
-    --label "org.opencontainers.image.source=https://github.com/ludeeus/container" \
-    --label "org.opencontainers.image.created=$(date --utc +%FT%H:%M:%SZ)" \
-    --label "org.opencontainers.image.documentation=https://github.com/ludeeus/container/tree/master/containerfiles/$container" \
-    ${containerLabels[@]} \
-    ${buildArgs[@]} \
-    . \
-    ${containerTags[@]}
-
-
+# shellcheck disable=SC2068
+docker ${buildCommand[@]}
 docker buildx rm builder
