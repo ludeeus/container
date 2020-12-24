@@ -1,11 +1,13 @@
-FROM mcr.microsoft.com/vscode/devcontainers/python:3.9
+ARG BASE
+FROM ${BASE}
 
 ENV DEVCONTAINER=true
 
 COPY ./container /container
 COPY ./include /include
 
+ARG CONTAINER_TYPE OS_VARIANT
 RUN \
-    bash /include/install/ghcli-debian.sh \
-    && bash /include/install/container.sh python \
-    && bash /include/cleanup-debian.sh
+    bash /include/install/ghcli-${OS_VARIANT}.sh \
+    && bash /include/install/container.sh ${CONTAINER_TYPE} \
+    && bash /include/cleanup-${OS_VARIANT}.sh

@@ -6,14 +6,16 @@ help: ## Shows help message.
 	@echo
 
 init: symlink requirements
+	apt update
+	apt install -y shellcheck
 
 requirements:
 	python3 -m pip install --upgrade setuptools wheel
 	python3 -m pip install -r requirements.txt
 
 symlink:
-	rm /usr/bin/container
-	rm -r /usr/share/container
+	rm -f /usr/bin/container
+	rm -rf /usr/share/container
 	ln -sf /workspaces/container/rootfs/common/etc/bash_completion.d/container_completion /etc/bash_completion.d/container_completion
 	ln -sf /workspaces/container/rootfs/common/root/.bashrc /root/.bashrc
 	ln -sf /workspaces/container/rootfs/common/usr/bin/container /usr/bin/container

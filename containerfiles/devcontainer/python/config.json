@@ -1,4 +1,9 @@
 {
+    "args": {
+        "BASE": "mcr.microsoft.com/vscode/devcontainers/python:3.9",
+        "CONTAINER_TYPE": "python",
+        "OS_VARIANT": "debian"
+    },
     "tags": [
         "ghcr.io/ludeeus/devcontainer/python:latest",
         "ghcr.io/ludeeus/devcontainer/python:3.9"

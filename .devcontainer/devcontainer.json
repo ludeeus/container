@@ -1,6 +1,6 @@
 // See https://aka.ms/vscode-remote/devcontainer.json for format details.
 {
-	"image": "ludeeus/container:python",
+	"image": "ghcr.io/ludeeus/devcontainer/python:latest",
 	"context": "..",
 	"postCreateCommand": "make init",
 	"extensions": [
