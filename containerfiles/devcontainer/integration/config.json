@@ -1,0 +1,8 @@
+{
+    "tags": [
+        "ghcr.io/ludeeus/devcontainer/integration:latest"
+    ],
+    "platforms": [
+        "linux/amd64"
+    ]
+}

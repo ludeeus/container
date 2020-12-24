@@ -1,9 +1,0 @@
-{
-    "tags": [
-        "ghcr.io/ludeeus/container/base/devcontainer:latest",
-        "ghcr.io/ludeeus/container/base/devcontainer:debian"
-    ],
-    "platforms": [
-        "linux/amd64"
-    ]
-}

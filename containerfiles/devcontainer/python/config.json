@@ -1,5 +1,9 @@
 {
     "tags": [
-        "ghcr.io/ludeeus/container/devcontainer/python:latest"
+        "ghcr.io/ludeeus/devcontainer/python:latest",
+        "ghcr.io/ludeeus/devcontainer/python:3.9"
+    ],
+    "platforms": [
+        "linux/amd64"
     ]
 }

@@ -11,7 +11,8 @@ jobs:
     strategy:
       matrix:
         tag:
-          - "base/devcontainer"
+          - "devcontainer/python"
+          - "devcontainer/integration"
     steps:
       - name: 📦 Checkout the repository
         uses: actions/checkout@v2
