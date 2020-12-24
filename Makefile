@@ -19,3 +19,14 @@ documentation: ## Generate documentation
 update: ## Update files
 	python3 -m scripts.update
 
+base-debian: ## Build base/debian
+	@bash scripts/build.sh --container base/debian --test
+
+base-debian-s6: ## Build base/debian-s6
+	@bash scripts/build.sh --container base/debian-s6 --test
+
+devcontainer-python: ## Build devcontainer/python
+	@bash scripts/build.sh --container devcontainer/python --test
+
+devcontainer-integration: ## Build devcontainer/integration
+	@bash scripts/build.sh --container devcontainer/integration --test

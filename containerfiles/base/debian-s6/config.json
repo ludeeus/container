@@ -4,9 +4,9 @@
         "OS_VARIANT": "debian"
     },
     "tags": [
-        "ghcr.io/ludeeus/base/debian:latest",
-        "ghcr.io/ludeeus/base/debian:10.6",
-        "ghcr.io/ludeeus/base/debian:10"
+        "ghcr.io/ludeeus/base/debian-s6:latest",
+        "ghcr.io/ludeeus/base/debian-s6:10.6",
+        "ghcr.io/ludeeus/base/debian-s6:10"
     ],
     "platforms": [
         "linux/386",
