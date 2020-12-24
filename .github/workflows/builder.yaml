@@ -25,10 +25,19 @@ jobs:
         id: should_build
         run: echo "::set-output name=build::$(bash ./scripts/should_build.sh "${{ matrix.tag }}" "${{ steps.changed_files.outputs.all }}")"
 
+      - name: ❔ Should publish ${{ matrix.tag }}?
+        id: should_publish
+        if: steps.should_build.outputs.build == 'true'
+        run: echo "::set-output name=publish::false"
+
       - name: ➕ Additional arguments
         id: arguments
         if: steps.should_build.outputs.build == 'true'
         run: echo "::set-output name=arguments::"
+
+      - name: 🔓 Registry login
+        if: steps.should_publish.outputs.publish == 'true'
+        run: echo ${{ secrets.GHCR_TOKEN }} | docker login ghcr.io -u ${{ secrets.GHCR_USER }} --password-stdin
 
       - name: 🛠️ Build ${{ matrix.tag }}
         if: steps.should_build.outputs.build == 'true'
@@ -55,10 +64,19 @@ jobs:
         id: should_build
         run: echo "::set-output name=build::$(bash ./scripts/should_build.sh "${{ matrix.tag }}" "${{ steps.changed_files.outputs.all }}")"
 
+      - name: ❔ Should publish ${{ matrix.tag }}?
+        id: should_publish
+        if: steps.should_build.outputs.build == 'true'
+        run: echo "::set-output name=publish::false"
+
       - name: ➕ Additional arguments
         id: arguments
         if: steps.should_build.outputs.build == 'true'
         run: echo "::set-output name=arguments::"
+
+      - name: 🔓 Registry login
+        if: steps.should_publish.outputs.publish == 'true'
+        run: echo ${{ secrets.GHCR_TOKEN }} | docker login ghcr.io -u ${{ secrets.GHCR_USER }} --password-stdin
 
       - name: 🛠️ Build ${{ matrix.tag }}
         if: steps.should_build.outputs.build == 'true'
@@ -85,10 +103,19 @@ jobs:
         id: should_build
         run: echo "::set-output name=build::$(bash ./scripts/should_build.sh "${{ matrix.tag }}" "${{ steps.changed_files.outputs.all }}")"
 
+      - name: ❔ Should publish ${{ matrix.tag }}?
+        id: should_publish
+        if: steps.should_build.outputs.build == 'true'
+        run: echo "::set-output name=publish::false"
+
       - name: ➕ Additional arguments
         id: arguments
         if: steps.should_build.outputs.build == 'true'
         run: echo "::set-output name=arguments::"
+
+      - name: 🔓 Registry login
+        if: steps.should_publish.outputs.publish == 'true'
+        run: echo ${{ secrets.GHCR_TOKEN }} | docker login ghcr.io -u ${{ secrets.GHCR_USER }} --password-stdin
 
       - name: 🛠️ Build ${{ matrix.tag }}
         if: steps.should_build.outputs.build == 'true'
