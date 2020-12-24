@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -e
-
+shopt -s extglob
 declare container
 declare push
 declare test
@@ -21,7 +21,7 @@ while [[ $# -gt 0 ]]; do
             shift
             ;;
         -t|--tag)
-            buildCommand+=(" --tag ghcr.io/ludeeus/$container:$2 ")
+            buildCommand+=(" --tag ghcr.io/ludeeus/${container//@(-debian|-alpine)}:$2 ")
             shift
             ;;
         -l|--label)

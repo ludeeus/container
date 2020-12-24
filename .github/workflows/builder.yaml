@@ -20,6 +20,22 @@ jobs:
       - name: 🛠️ Build ${{ matrix.tag }}
         run: bash ./scripts/build.sh --container ${{ matrix.tag }}
 
+  container:
+    name: Build ${{ matrix.tag }}
+    needs: base
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        tag:
+          - "container/python"
+          - "container/python-s6"
+    steps:
+      - name: 📦 Checkout the repository
+        uses: actions/checkout@v2
+
+      - name: 🛠️ Build ${{ matrix.tag }}
+        run: bash ./scripts/build.sh --container ${{ matrix.tag }}
+
   devcontainer:
     name: Build ${{ matrix.tag }}
     needs: base
