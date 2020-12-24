@@ -1,6 +1,6 @@
 {
     "args": {
-        "BASE": "debian:10.6-slim",
+        "BUILD_FROM": "debian:10.6-slim",
         "OS_VARIANT": "debian"
     },
     "tags": [

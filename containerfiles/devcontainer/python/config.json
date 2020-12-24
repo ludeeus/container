@@ -1,6 +1,6 @@
 {
     "args": {
-        "BASE": "mcr.microsoft.com/vscode/devcontainers/python:3.9",
+        "BUILD_FROM": "mcr.microsoft.com/vscode/devcontainers/python:3.9",
         "CONTAINER_TYPE": "python",
         "OS_VARIANT": "debian"
     },

@@ -1,6 +1,6 @@
 {
     "args": {
-        "BASE": "ghcr.io/ludeeus/base/debian:latest",
+        "BUILD_FROM": "ghcr.io/ludeeus/base/debian:latest",
         "OS_VARIANT": "debian",
         "PYTHON_VERSION": "3.9.1"
     },
