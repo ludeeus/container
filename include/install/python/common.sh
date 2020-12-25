@@ -24,6 +24,7 @@ cd "${PYTHON_INSTALL_PATH}/bin" || exit 1
 ln -s idle3 idle
 ln -s pydoc3 pydoc
 ln -s python3 python
+ln -s pip3 pip
 ln -s python3-config python-config
 
 ls -la
