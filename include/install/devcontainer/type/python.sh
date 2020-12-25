@@ -8,7 +8,6 @@ python3 -m pip --disable-pip-version-check install -U \
     pylint \
     black
 
-
 ln -sf /usr/local/python/bin/python3 /usr/bin/python3
 ln -sf /usr/local/python/bin/python3 /usr/bin/python
 ln -sf /usr/local/python/bin/pip3 /usr/bin/pip
