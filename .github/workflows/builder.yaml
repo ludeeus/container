@@ -65,10 +65,10 @@ jobs:
         if: steps.should_build.outputs.build == 'true'
         run: |
           declare -a args
-          if [ "${{ steps.should_publish.outputs.publish }}" == "true" ];
+          if [ "${{ steps.should_publish.outputs.publish }}" == "true" ]; then
             args+=(" --push ")
           fi
-          if [[ "${{ github.event_name }}" == "release" ]]
+          if [[ "${{ github.event_name }}" == "release" ]]; then
             args+=(" --tag stable ")
             args+=(" --tag $(echo ${{ github.ref }} | awk -F"/" '{print $NF}' ) ")
           fi
