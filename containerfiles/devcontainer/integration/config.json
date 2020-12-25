@@ -1,5 +1,5 @@
 {
-    "dockerfile": "devcontainer/Python.dockerfile",
+    "dockerfile": "Devcontainer.dockerfile",
     "description": "Devcontainer for developing custom integrations for Home Assistant",
     "args": {
         "BUILD_FROM": "mcr.microsoft.com/vscode/devcontainers/python:3.9",
