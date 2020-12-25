@@ -10,13 +10,10 @@
         "RUNTIME_PATH": "/usr/local/python/bin"
     },
     "tags": [
-        "ghcr.io/ludeeus/base/runtime/python:latest",
-        "ghcr.io/ludeeus/base/runtime/python:3.9.1-debian",
-        "ghcr.io/ludeeus/base/runtime/python:3.9-debian",
-        "ghcr.io/ludeeus/base/runtime/python:3-debian",
-        "ghcr.io/ludeeus/base/runtime/python:3.9.1",
-        "ghcr.io/ludeeus/base/runtime/python:3.9",
-        "ghcr.io/ludeeus/base/runtime/python:3"
+        "ghcr.io/ludeeus/base/runtime/python-debian:latest",
+        "ghcr.io/ludeeus/base/runtime/python-debian:3.9.1",
+        "ghcr.io/ludeeus/base/runtime/python-debian:3.9",
+        "ghcr.io/ludeeus/base/runtime/python-debian:3"
     ],
     "platforms": [
         "linux/386",

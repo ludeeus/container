@@ -6,13 +6,10 @@
         "BUILD_FROM_TAG": "3.9.1-debian"
     },
     "tags": [
-        "ghcr.io/ludeeus/base/runtime/python-s6:latest",
-        "ghcr.io/ludeeus/base/runtime/python-s6:3.9.1-debian",
-        "ghcr.io/ludeeus/base/runtime/python-s6:3.9-debian",
-        "ghcr.io/ludeeus/base/runtime/python-s6:3-debian",
-        "ghcr.io/ludeeus/base/runtime/python-s6:3.9.1",
-        "ghcr.io/ludeeus/base/runtime/python-s6:3.9",
-        "ghcr.io/ludeeus/base/runtime/python-s6:3"
+        "ghcr.io/ludeeus/base/runtime/python-debian-s6:latest",
+        "ghcr.io/ludeeus/base/runtime/python-debian-s6:3.9.1",
+        "ghcr.io/ludeeus/base/runtime/python-debian-s6:3.9",
+        "ghcr.io/ludeeus/base/runtime/python-debian-s6:3"
     ],
     "platforms": [
         "linux/386",

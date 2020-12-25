@@ -10,9 +10,10 @@
         "RUNTIME_PATH": "/usr/local/python/bin"
     },
     "tags": [
-        "ghcr.io/ludeeus/base/runtime/python:3.9.1-alpine",
-        "ghcr.io/ludeeus/base/runtime/python:3.9-alpine",
-        "ghcr.io/ludeeus/base/runtime/python:3-alpine"
+        "ghcr.io/ludeeus/base/runtime/python-alpine:latest",
+        "ghcr.io/ludeeus/base/runtime/python-alpine:3.9.1",
+        "ghcr.io/ludeeus/base/runtime/python-alpine:3.9",
+        "ghcr.io/ludeeus/base/runtime/python-alpine:3"
     ],
     "platforms": [
         "linux/386",

@@ -6,9 +6,10 @@
         "BUILD_FROM_TAG": "3.9.1-alpine"
     },
     "tags": [
-        "ghcr.io/ludeeus/base/runtime/python-s6:3.9.1-alpine",
-        "ghcr.io/ludeeus/base/runtime/python-s6:3.9-alpine",
-        "ghcr.io/ludeeus/base/runtime/python-s6:3-alpine"
+        "ghcr.io/ludeeus/base/runtime/python-alpine-s6:latest",
+        "ghcr.io/ludeeus/base/runtime/python-alpine-s6:3.9.1",
+        "ghcr.io/ludeeus/base/runtime/python-alpine-s6:3.9",
+        "ghcr.io/ludeeus/base/runtime/python-alpine-s6:3"
     ],
     "platforms": [
         "linux/386",

@@ -4,6 +4,13 @@ on:
   pull_request:
     branches:
       - master
+  push:
+    branches:
+      - master
+  release:
+    types:
+      - published
+
 jobs:
   lint:
     runs-on: ubuntu-latest
@@ -46,12 +53,26 @@ jobs:
       - name: ❔ Should publish ${{ matrix.tag }}?
         id: should_publish
         if: steps.should_build.outputs.build == 'true'
-        run: echo "::set-output name=publish::false"
+        run: |
+          if [[ "${{ github.event_name }}" == "release" ]] || [[ "${{ github.event_name }}" == "push" ]]; then
+            echo "::set-output name=publish::true"
+          else
+            echo "::set-output name=publish::false"
+          fi
 
       - name: ➕ Additional arguments
         id: arguments
         if: steps.should_build.outputs.build == 'true'
-        run: echo "::set-output name=arguments::"
+        run: |
+          declare -a args
+          if [ "${{ steps.should_publish.outputs.publish }}" == "true" ];
+            args+=(" --push ")
+          fi
+          if [[ "${{ github.event_name }}" == "release" ]]
+            args+=(" --tag stable ")
+            args+=(" --tag $(echo ${{ github.ref }} | awk -F"/" '{print $NF}' ) ")
+          fi
+          echo "::set-output name=arguments::${args[@]}"
 
       - name: 🔓 Registry login
         if: steps.should_publish.outputs.publish == 'true'
@@ -85,12 +106,26 @@ jobs:
       - name: ❔ Should publish ${{ matrix.tag }}?
         id: should_publish
         if: steps.should_build.outputs.build == 'true'
-        run: echo "::set-output name=publish::false"
+        run: |
+          if [[ "${{ github.event_name }}" == "release" ]] || [[ "${{ github.event_name }}" == "push" ]]; then
+            echo "::set-output name=publish::true"
+          else
+            echo "::set-output name=publish::false"
+          fi
 
       - name: ➕ Additional arguments
         id: arguments
         if: steps.should_build.outputs.build == 'true'
-        run: echo "::set-output name=arguments::"
+        run: |
+          declare -a args
+          if [ "${{ steps.should_publish.outputs.publish }}" == "true" ];
+            args+=(" --push ")
+          fi
+          if [[ "${{ github.event_name }}" == "release" ]]
+            args+=(" --tag stable ")
+            args+=(" --tag $(echo ${{ github.ref }} | awk -F"/" '{print $NF}' ) ")
+          fi
+          echo "::set-output name=arguments::${args[@]}"
 
       - name: 🔓 Registry login
         if: steps.should_publish.outputs.publish == 'true'
@@ -124,12 +159,26 @@ jobs:
       - name: ❔ Should publish ${{ matrix.tag }}?
         id: should_publish
         if: steps.should_build.outputs.build == 'true'
-        run: echo "::set-output name=publish::false"
+        run: |
+          if [[ "${{ github.event_name }}" == "release" ]] || [[ "${{ github.event_name }}" == "push" ]]; then
+            echo "::set-output name=publish::true"
+          else
+            echo "::set-output name=publish::false"
+          fi
 
       - name: ➕ Additional arguments
         id: arguments
         if: steps.should_build.outputs.build == 'true'
-        run: echo "::set-output name=arguments::"
+        run: |
+          declare -a args
+          if [ "${{ steps.should_publish.outputs.publish }}" == "true" ];
+            args+=(" --push ")
+          fi
+          if [[ "${{ github.event_name }}" == "release" ]]
+            args+=(" --tag stable ")
+            args+=(" --tag $(echo ${{ github.ref }} | awk -F"/" '{print $NF}' ) ")
+          fi
+          echo "::set-output name=arguments::${args[@]}"
 
       - name: 🔓 Registry login
         if: steps.should_publish.outputs.publish == 'true'
@@ -163,12 +212,26 @@ jobs:
       - name: ❔ Should publish ${{ matrix.tag }}?
         id: should_publish
         if: steps.should_build.outputs.build == 'true'
-        run: echo "::set-output name=publish::false"
+        run: |
+          if [[ "${{ github.event_name }}" == "release" ]] || [[ "${{ github.event_name }}" == "push" ]]; then
+            echo "::set-output name=publish::true"
+          else
+            echo "::set-output name=publish::false"
+          fi
 
       - name: ➕ Additional arguments
         id: arguments
         if: steps.should_build.outputs.build == 'true'
-        run: echo "::set-output name=arguments::"
+        run: |
+          declare -a args
+          if [ "${{ steps.should_publish.outputs.publish }}" == "true" ];
+            args+=(" --push ")
+          fi
+          if [[ "${{ github.event_name }}" == "release" ]]
+            args+=(" --tag stable ")
+            args+=(" --tag $(echo ${{ github.ref }} | awk -F"/" '{print $NF}' ) ")
+          fi
+          echo "::set-output name=arguments::${args[@]}"
 
       - name: 🔓 Registry login
         if: steps.should_publish.outputs.publish == 'true'
@@ -202,12 +265,26 @@ jobs:
       - name: ❔ Should publish ${{ matrix.tag }}?
         id: should_publish
         if: steps.should_build.outputs.build == 'true'
-        run: echo "::set-output name=publish::false"
+        run: |
+          if [[ "${{ github.event_name }}" == "release" ]] || [[ "${{ github.event_name }}" == "push" ]]; then
+            echo "::set-output name=publish::true"
+          else
+            echo "::set-output name=publish::false"
+          fi
 
       - name: ➕ Additional arguments
         id: arguments
         if: steps.should_build.outputs.build == 'true'
-        run: echo "::set-output name=arguments::"
+        run: |
+          declare -a args
+          if [ "${{ steps.should_publish.outputs.publish }}" == "true" ];
+            args+=(" --push ")
+          fi
+          if [[ "${{ github.event_name }}" == "release" ]]
+            args+=(" --tag stable ")
+            args+=(" --tag $(echo ${{ github.ref }} | awk -F"/" '{print $NF}' ) ")
+          fi
+          echo "::set-output name=arguments::${args[@]}"
 
       - name: 🔓 Registry login
         if: steps.should_publish.outputs.publish == 'true'
