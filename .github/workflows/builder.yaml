@@ -72,6 +72,7 @@ jobs:
             args+=(" --tag stable ")
             args+=(" --tag $(echo ${{ github.ref }} | awk -F"/" '{print $NF}' ) ")
           fi
+          echo "${args[@]}"
           echo "::set-output name=arguments::${args[@]}"
 
       - name: 🔓 Registry login
@@ -125,6 +126,7 @@ jobs:
             args+=(" --tag stable ")
             args+=(" --tag $(echo ${{ github.ref }} | awk -F"/" '{print $NF}' ) ")
           fi
+          echo "${args[@]}"
           echo "::set-output name=arguments::${args[@]}"
 
       - name: 🔓 Registry login
@@ -178,6 +180,7 @@ jobs:
             args+=(" --tag stable ")
             args+=(" --tag $(echo ${{ github.ref }} | awk -F"/" '{print $NF}' ) ")
           fi
+          echo "${args[@]}"
           echo "::set-output name=arguments::${args[@]}"
 
       - name: 🔓 Registry login
@@ -231,6 +234,7 @@ jobs:
             args+=(" --tag stable ")
             args+=(" --tag $(echo ${{ github.ref }} | awk -F"/" '{print $NF}' ) ")
           fi
+          echo "${args[@]}"
           echo "::set-output name=arguments::${args[@]}"
 
       - name: 🔓 Registry login
@@ -284,6 +288,7 @@ jobs:
             args+=(" --tag stable ")
             args+=(" --tag $(echo ${{ github.ref }} | awk -F"/" '{print $NF}' ) ")
           fi
+          echo "${args[@]}"
           echo "::set-output name=arguments::${args[@]}"
 
       - name: 🔓 Registry login
