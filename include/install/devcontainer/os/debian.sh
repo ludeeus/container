@@ -9,3 +9,5 @@ apt-get install -y --no-install-recommends shellcheck
 
 wget -q -O - https://raw.githubusercontent.com/microsoft/vscode-dev-containers/master/script-library/common-debian.sh | bash -
 
+apt-get purge -y python3
+apt-get -y autoremove
