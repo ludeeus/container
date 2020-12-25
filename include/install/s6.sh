@@ -2,7 +2,7 @@
 
 # https://github.com/just-containers/s6-overlay
 
-echo -e "\033[0;34mRunning install script 's6'\033[0m"
+echo -e "\\033[0;34mRunning install script 's6'\\033[0m"
 
 S6_VERSION="v2.1.0.2"
 ARCH=$(uname -m)

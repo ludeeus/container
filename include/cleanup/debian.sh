@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-echo -e "\033[0;34mRunning cleanup script 'debian.sh'\033[0m"
+echo -e "\\033[0;34mRunning cleanup script 'debian.sh'\\033[0m"
 
 apt-get clean -y
 rm -fr /var/lib/apt/lists/*
