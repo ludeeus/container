@@ -1,10 +1,7 @@
 {
-    "dockerfile": "BaseRuntime.dockerfile",
+    "dockerfile": "S6.dockerfile",
     "args": {
-        "BUILD_FROM": "ghcr.io/ludeeus/base/os/alpine-s6:latest",
-        "OS_VARIANT": "alpine",
-        "INSTALL_RUNTIME": "python",
-        "RUNTIME_VERSION": "3.9.1"
+        "BUILD_FROM": "ghcr.io/ludeeus/base/runtime/python:3.9.1-alpine"
     },
     "tags": [
         "ghcr.io/ludeeus/base/runtime/python-s6:3.9.1-alpine",

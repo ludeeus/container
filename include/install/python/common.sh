@@ -13,25 +13,16 @@ mkdir -p /tmp/python-src "${PYTHON_INSTALL_PATH}"
 curl -sSL -o /tmp/python.tgz "https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERSION}.tgz"
 tar -xzf /tmp/python.tgz -C "/tmp/python-src" --strip-components=1
 
-cd /tmp/python-src || exit
+cd /tmp/python-src || exit 1
 ./configure \
     --prefix="${PYTHON_INSTALL_PATH}" \
     --build="$GNU_ARCH" \
     --enable-optimizations \
-    --enable-shared \
-    --with-lto \
-    --with-system-expat \
-    --with-system-ffi \
-    --without-ensurepip
+    --with-ensurepip=install
 
-make -j "$(nproc)" \
-  LDFLAGS="-Wl,--strip-all" \
-  CFLAGS="-fno-semantic-interposition -fno-builtin-malloc -fno-builtin-calloc -fno-builtin-realloc -fno-builtin-free" \
-  EXTRA_CFLAGS="-DTHREAD_STACK_SIZE=0x100000"
+make -j "$(nproc)"
 
 make install
-
-rm -rf /tmp/python-dl.tgz /tmp/python-src
 
 ln -sf "${PYTHON_INSTALL_PATH}"/bin/python3 /usr/bin/python
 ln -sf "${PYTHON_INSTALL_PATH}"/bin/python3 /usr/bin/python3
@@ -41,6 +32,7 @@ ln -sf "${PYTHON_INSTALL_PATH}"/bin/idle3 /usr/bin/idle
 ln -sf "${PYTHON_INSTALL_PATH}"/bin/pydoc3 /usr/bin/pydoc
 ln -sf "${PYTHON_INSTALL_PATH}"/bin/python3-config /usr/bin/python-config
 
+rm -rf /tmp/python-dl.tgz /tmp/python-src
 bash /include/cleanup/python.sh
 
 python --version

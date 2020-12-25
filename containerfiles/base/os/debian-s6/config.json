@@ -1,9 +1,7 @@
 {
-    "dockerfile": "BaseOs.dockerfile",
+    "dockerfile": "S6.dockerfile",
     "args": {
-        "BUILD_FROM": "debian:10.6-slim",
-        "OS_VARIANT": "debian",
-        "INSTALL_S6": true
+        "BUILD_FROM": "ghcr.io/ludeeus/base/os/debian:10.6"
     },
     "tags": [
         "ghcr.io/ludeeus/base/os/debian-s6:latest",

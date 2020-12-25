@@ -30,8 +30,45 @@ jobs:
       matrix:
         tag:
           - "base/os/debian"
-          - "base/os/debian-s6"
           - "base/os/alpine"
+    steps:
+      - name: 📥 Checkout the repository
+        uses: actions/checkout@v2
+
+      - name: 📃 Get changed files
+        id: changed_files
+        uses: jitterbit/get-changed-files@v1
+
+      - name: ❓ Should build ${{ matrix.tag }}?
+        id: should_build
+        run: echo "::set-output name=build::$(bash ./scripts/should_build.sh "${{ matrix.tag }}" "${{ steps.changed_files.outputs.all }}")"
+
+      - name: ❔ Should publish ${{ matrix.tag }}?
+        id: should_publish
+        if: steps.should_build.outputs.build == 'true'
+        run: echo "::set-output name=publish::false"
+
+      - name: ➕ Additional arguments
+        id: arguments
+        if: steps.should_build.outputs.build == 'true'
+        run: echo "::set-output name=arguments::"
+
+      - name: 🔓 Registry login
+        if: steps.should_publish.outputs.publish == 'true'
+        run: echo ${{ secrets.GHCR_TOKEN }} | docker login ghcr.io -u ${{ secrets.GHCR_USER }} --password-stdin
+
+      - name: 🛠️ Build ${{ matrix.tag }}
+        if: steps.should_build.outputs.build == 'true'
+        run: bash ./scripts/build.sh --container ${{ matrix.tag }} ${{ steps.arguments.outputs.arguments }}
+
+  base-os-s6:
+    name: 🔨 Build ${{ matrix.tag }}
+    needs: lint
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        tag:
+          - "base/os/debian-s6"
           - "base/os/alpine-s6"
     steps:
       - name: 📥 Checkout the repository
@@ -70,7 +107,46 @@ jobs:
     strategy:
       matrix:
         tag:
+          - "base/runtime/python-alpine"
           - "base/runtime/python-debian"
+    steps:
+      - name: 📥 Checkout the repository
+        uses: actions/checkout@v2
+
+      - name: 📃 Get changed files
+        id: changed_files
+        uses: jitterbit/get-changed-files@v1
+
+      - name: ❓ Should build ${{ matrix.tag }}?
+        id: should_build
+        run: echo "::set-output name=build::$(bash ./scripts/should_build.sh "${{ matrix.tag }}" "${{ steps.changed_files.outputs.all }}")"
+
+      - name: ❔ Should publish ${{ matrix.tag }}?
+        id: should_publish
+        if: steps.should_build.outputs.build == 'true'
+        run: echo "::set-output name=publish::false"
+
+      - name: ➕ Additional arguments
+        id: arguments
+        if: steps.should_build.outputs.build == 'true'
+        run: echo "::set-output name=arguments::"
+
+      - name: 🔓 Registry login
+        if: steps.should_publish.outputs.publish == 'true'
+        run: echo ${{ secrets.GHCR_TOKEN }} | docker login ghcr.io -u ${{ secrets.GHCR_USER }} --password-stdin
+
+      - name: 🛠️ Build ${{ matrix.tag }}
+        if: steps.should_build.outputs.build == 'true'
+        run: bash ./scripts/build.sh --container ${{ matrix.tag }} ${{ steps.arguments.outputs.arguments }}
+
+  base-runtime-s6:
+    name: 🔨 Build ${{ matrix.tag }}
+    needs: base-os-s6
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        tag:
+          - "base/runtime/python-alpine-s6"
           - "base/runtime/python-debian-s6"
     steps:
       - name: 📥 Checkout the repository
