@@ -1,0 +1,22 @@
+{
+    "dockerfile": "base/Os.dockerfile",
+    "description": "Base OS container for Alpine",
+    "args": {
+        "BUILD_FROM": "alpine",
+        "BUILD_FROM_TAG": "3.12.3",
+        "OS_VARIANT": "alpine"
+    },
+    "tags": [
+        "ghcr.io/ludeeus/base/os/alpine:latest",
+        "ghcr.io/ludeeus/base/os/alpine:3.12.3",
+        "ghcr.io/ludeeus/base/os/alpine:3.12",
+        "ghcr.io/ludeeus/base/os/alpine:3"
+    ],
+    "platforms": [
+        "linux/386",
+        "linux/amd64",
+        "linux/arm/v6",
+        "linux/arm/v7",
+        "linux/arm64"
+    ]
+}

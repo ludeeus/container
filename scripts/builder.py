@@ -19,7 +19,7 @@ def build():
 
     print(dockerfile)
 
-    return create_container(CONTAINER, context, PUBLISH)
+    # return create_container(CONTAINER, context, PUBLISH)
 
 
 if len(sys.argv) < 2:

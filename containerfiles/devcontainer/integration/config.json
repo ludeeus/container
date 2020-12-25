@@ -1,0 +1,16 @@
+{
+    "dockerfile": "Devcontainer.dockerfile",
+    "description": "Devcontainer for developing custom integrations for Home Assistant",
+    "args": {
+        "BUILD_FROM": "mcr.microsoft.com/vscode/devcontainers/python",
+        "BUILD_FROM_tag": "3.9",
+        "CONTAINER_TYPE": "integration",
+        "OS_VARIANT": "debian"
+    },
+    "tags": [
+        "ghcr.io/ludeeus/devcontainer/integration:latest"
+    ],
+    "platforms": [
+        "linux/amd64"
+    ]
+}
