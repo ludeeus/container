@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-echo -e "\033[0;34mRunning install script 'ghcli-debian.sh'\033[0m"
+echo -e "\033[0;34mRunning install script 'ghcli/debian.sh'\033[0m"
 
 apt-get update
 apt-get install -y --no-install-recommends software-properties-common
