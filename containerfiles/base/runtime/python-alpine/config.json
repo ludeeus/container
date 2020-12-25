@@ -1,10 +1,13 @@
 {
-    "dockerfile": "BaseRuntime.dockerfile",
+    "dockerfile": "base/Runtime.dockerfile",
+    "description": "Base runtime container for Python",
     "args": {
-        "BUILD_FROM": "ghcr.io/ludeeus/base/os/alpine:latest",
+        "BUILD_FROM": "ghcr.io/ludeeus/base/os/alpine",
+        "BUILD_FROM_TAG": "3.12.3",
         "OS_VARIANT": "alpine",
         "INSTALL_RUNTIME": "python",
-        "RUNTIME_VERSION": "3.9.1"
+        "RUNTIME_VERSION": "3.9.1",
+        "RUNTIME_PATH": "/usr/local/python/bin"
     },
     "tags": [
         "ghcr.io/ludeeus/base/runtime/python:3.9.1-alpine",
@@ -13,9 +16,6 @@
     ],
     "platforms": [
         "linux/386",
-        "linux/amd64",
-        "linux/arm/v6",
-        "linux/arm/v7",
-        "linux/arm64"
+        "linux/amd64"
     ]
 }

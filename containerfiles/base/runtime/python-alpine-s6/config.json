@@ -1,7 +1,9 @@
 {
     "dockerfile": "S6.dockerfile",
+    "description": "Base runtime container for Python with S6",
     "args": {
-        "BUILD_FROM": "ghcr.io/ludeeus/base/runtime/python:3.9.1-alpine"
+        "BUILD_FROM": "ghcr.io/ludeeus/base/runtime/python",
+        "BUILD_FROM_TAG": "3.9.1-alpine"
     },
     "tags": [
         "ghcr.io/ludeeus/base/runtime/python-s6:3.9.1-alpine",
@@ -10,9 +12,6 @@
     ],
     "platforms": [
         "linux/386",
-        "linux/amd64",
-        "linux/arm/v6",
-        "linux/arm/v7",
-        "linux/arm64"
+        "linux/amd64"
     ]
 }

@@ -1,10 +1,13 @@
 {
-    "dockerfile": "BaseRuntime.dockerfile",
+    "dockerfile": "base/Runtime.dockerfile",
+    "description": "Base runtime container for Python",
     "args": {
-        "BUILD_FROM": "ghcr.io/ludeeus/base/os/debian:latest",
+        "BUILD_FROM": "ghcr.io/ludeeus/base/os/debian",
+        "BUILD_FROM_TAG": "10.6",
         "OS_VARIANT": "debian",
         "INSTALL_RUNTIME": "python",
-        "RUNTIME_VERSION": "3.9.1"
+        "RUNTIME_VERSION": "3.9.1",
+        "RUNTIME_PATH": "/usr/local/python/bin"
     },
     "tags": [
         "ghcr.io/ludeeus/base/runtime/python:latest",

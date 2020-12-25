@@ -3,9 +3,6 @@
 container="$1"
 changed="$2"
 
-echo "false"
-exit
-
 if [[ "$changed" =~ $container ]]; then
     echo "true"
     exit
