@@ -13,10 +13,10 @@ mkdir -p /opt/container/makefiles
 mkdir -p /opt/container/helpers
 touch /opt/container/makefiles/dummy.mk
 
-mv /container/container.mk /opt/container/container.mk
+cp /container/container.mk /opt/container/container.mk
 cp -r /container/helpers/common /opt/container/helpers/common
 
-mv /container/container /usr/bin/container
+cp /container/container /usr/bin/container
 chmod +x /usr/bin/container
 
 if [ -n "$1" ]; then
