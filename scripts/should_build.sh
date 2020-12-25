@@ -41,7 +41,8 @@ fi
 
 
 if [[ "$container" =~ devcontainer ]]; then
-    if [[ "$changed" =~ Devcontainer.dockerfile ]]; then shouldBuild; fi
+    if [[ "$changed" =~ base/os ]]; then shouldBuild; fi
+    if [[ "$changed" =~ base/runtime ]]; then shouldBuild; fi
     if [[ "$changed" =~ include/install/container.sh ]]; then shouldBuild; fi
     if [[ "$changed" =~ include/install/ghcli.sh ]]; then shouldBuild; fi
 fi
