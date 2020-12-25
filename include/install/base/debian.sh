@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-echo -e "\033[0;34mRunning script 'base-debian.sh'\033[0m"
+echo -e "\033[0;34mRunning install script 'base-debian.sh'\033[0m"
+
+export DEBIAN_FRONTEND=noninteractive
 
 apt-get update
 apt-get install -y --no-install-recommends apt-utils
@@ -13,4 +15,4 @@ apt-get install -y --no-install-recommends \
     tar \
     unzip
 
-bash /include/cleanup-debian.sh
+bash /include/cleanup/debian.sh

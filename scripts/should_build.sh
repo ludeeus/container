@@ -40,7 +40,7 @@ if [[ "$container" =~ python ]]; then
         exit
     fi
 fi
-if [[ "$changed" =~ include/install/cleanup- ]]; then
+if [[ "$changed" =~ include/install/cleanup/ ]]; then
     echo "true"
     exit
 fi

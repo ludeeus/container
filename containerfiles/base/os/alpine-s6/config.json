@@ -1,0 +1,21 @@
+{
+    "dockerfile": "BaseOs.dockerfile",
+    "args": {
+        "BUILD_FROM": "alpine:3.12.3",
+        "OS_VARIANT": "alpine",
+        "INSTALL_S6": true
+    },
+    "tags": [
+        "ghcr.io/ludeeus/base/os/alpine-s6:latest",
+        "ghcr.io/ludeeus/base/os/alpine-s6:3.12.3",
+        "ghcr.io/ludeeus/base/os/alpine-s6:3.12",
+        "ghcr.io/ludeeus/base/os/alpine-s6:3"
+    ],
+    "platforms": [
+        "linux/386",
+        "linux/amd64",
+        "linux/arm/v6",
+        "linux/arm/v7",
+        "linux/arm64"
+    ]
+}

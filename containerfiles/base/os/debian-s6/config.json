@@ -1,5 +1,5 @@
 {
-    "dockerfile": "BaseOsDebian.dockerfile",
+    "dockerfile": "BaseOs.dockerfile",
     "args": {
         "BUILD_FROM": "debian:10.6-slim",
         "OS_VARIANT": "debian",

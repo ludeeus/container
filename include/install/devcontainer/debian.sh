@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-echo -e "\033[0;34mRunning script 'devcontainer-debian.sh'\033[0m"
+echo -e "\033[0;34mRunning install script 'devcontainer-debian.sh'\033[0m"
 
 CONTAINER_TYPE="$1"
 
@@ -13,4 +13,4 @@ apt-get install -y --no-install-recommends \
 
 bash /include/install/ghcli-debian.sh
 bash /include/install/container.sh "${CONTAINER_TYPE}"
-bash /include/cleanup-debian.sh
+bash /include/cleanup/debian.sh

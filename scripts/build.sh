@@ -53,6 +53,8 @@ if [ "$(jq -c -r .tags "./containerfiles/$container/config.json")" != "null" ]; 
     for tag in $(jq -c -r '.tags? | .[]' "./containerfiles/$container/config.json"); do
         buildCommand+=(" --tag $tag ")
     done
+else
+    buildCommand+=(" --tag ghcr.io/ludeeus/${container//@(-debian|-alpine)}:latest ")
 fi
 
 if [ "$(jq -c -r .args "./containerfiles/$container/config.json")" != "null" ]; then
@@ -73,7 +75,7 @@ else
     buildCommand+=("--file ./containerfiles/$container/Dockerfile")
 fi
 
-buildCommand+=("--output=type=image,push=${push:-'false'}")
+buildCommand+=("--output=type=image,push=${push:-false}")
 buildCommand+=("--label org.opencontainers.image.url=https://github.com/ludeeus/container/tree/master/containerfiles/$container")
 buildCommand+=("--label org.opencontainers.image.documentation=https://github.com/ludeeus/container/tree/master/containerfiles/$container")
 buildCommand+=("--label org.opencontainers.image.source=https://github.com/ludeeus/container")
@@ -84,6 +86,9 @@ echo "${buildCommand[@]}"
 
 if [ "$test" != "true" ]; then
     buildCommand+=("--platform ${platforms:-$(jq -r -c '.platforms | @csv' "./containerfiles/$container/config.json" | tr -d '"')}")
+    set +e
+    docker buildx rm builder
+    set -e
     docker buildx create --name builder --use
     docker buildx inspect --bootstrap
     # shellcheck disable=SC2068

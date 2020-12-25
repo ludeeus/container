@@ -31,6 +31,8 @@ jobs:
         tag:
           - "base/os/debian"
           - "base/os/debian-s6"
+          - "base/os/alpine"
+          - "base/os/alpine-s6"
     steps:
       - name: 📥 Checkout the repository
         uses: actions/checkout@v2

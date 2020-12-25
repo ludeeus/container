@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-echo -e "\033[0;34mRunning script 'container.sh'\033[0m"
+echo -e "\033[0;34mRunning install script 'container.sh'\033[0m"
 
 if [ -n "$(command -v apk)" ]; then
     apk add make

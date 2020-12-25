@@ -1,9 +1,10 @@
 {
-    "dockerfile": "BaseRuntimePythonDebian.dockerfile",
+    "dockerfile": "BaseRuntime.dockerfile",
     "args": {
         "BUILD_FROM": "ghcr.io/ludeeus/base/os/debian:latest",
         "OS_VARIANT": "debian",
-        "PYTHON_VERSION": "3.9.1"
+        "INSTALL_RUNTIME": "python",
+        "RUNTIME_VERSION": "3.9.1"
     },
     "tags": [
         "ghcr.io/ludeeus/base/runtime/python:latest",
