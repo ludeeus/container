@@ -1,0 +1,21 @@
+{
+    "dockerfile": "BaseRuntimePythonDebian.dockerfile",
+    "args": {
+        "BUILD_FROM": "ghcr.io/ludeeus/base/os/debian-s6:latest",
+        "OS_VARIANT": "debian",
+        "PYTHON_VERSION": "3.9.1"
+    },
+    "tags": [
+        "ghcr.io/ludeeus/base/runtime/python-s6:latest",
+        "ghcr.io/ludeeus/base/runtime/python-s6:3.9.1-debian",
+        "ghcr.io/ludeeus/base/runtime/python-s6:3.9-debian",
+        "ghcr.io/ludeeus/base/runtime/python-s6:3-debian",
+        "ghcr.io/ludeeus/base/runtime/python-s6:3.9.1",
+        "ghcr.io/ludeeus/base/runtime/python-s6:3.9",
+        "ghcr.io/ludeeus/base/runtime/python-s6:3"
+    ],
+    "platforms": [
+        "linux/386",
+        "linux/amd64"
+    ]
+}

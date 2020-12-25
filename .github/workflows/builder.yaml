@@ -22,15 +22,15 @@ jobs:
           shopt -s globstar
           cat **/*.json | jq '.'
 
-  base:
+  base-os:
     name: 🔨 Build ${{ matrix.tag }}
     needs: lint
     runs-on: ubuntu-latest
     strategy:
       matrix:
         tag:
-          - "base/debian"
-          - "base/debian-s6"
+          - "base/os/debian"
+          - "base/os/debian-s6"
     steps:
       - name: 📥 Checkout the repository
         uses: actions/checkout@v2
@@ -61,15 +61,15 @@ jobs:
         if: steps.should_build.outputs.build == 'true'
         run: bash ./scripts/build.sh --container ${{ matrix.tag }} ${{ steps.arguments.outputs.arguments }}
 
-  container:
+  base-runtime:
     name: 🔨 Build ${{ matrix.tag }}
     needs: base
     runs-on: ubuntu-latest
     strategy:
       matrix:
         tag:
-          - "container/python-debian"
-          - "container/python-debian-s6"
+          - "base/runtime/python-debian"
+          - "base/runtime/python-debian-s6"
     steps:
       - name: 📥 Checkout the repository
         uses: actions/checkout@v2

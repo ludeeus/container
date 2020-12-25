@@ -1,13 +1,13 @@
 {
-    "dockerfile": "BaseDebian.dockerfile",
+    "dockerfile": "BaseOsDebian.dockerfile",
     "args": {
         "BUILD_FROM": "debian:10.6-slim",
         "OS_VARIANT": "debian"
     },
     "tags": [
-        "ghcr.io/ludeeus/base/debian:latest",
-        "ghcr.io/ludeeus/base/debian:10.6",
-        "ghcr.io/ludeeus/base/debian:10"
+        "ghcr.io/ludeeus/base/os/debian:latest",
+        "ghcr.io/ludeeus/base/os/debian:10.6",
+        "ghcr.io/ludeeus/base/os/debian:10"
     ],
     "platforms": [
         "linux/386",
