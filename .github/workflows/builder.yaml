@@ -63,7 +63,7 @@ jobs:
 
   base-os-s6:
     name: 🔨 Build ${{ matrix.tag }}
-    needs: lint
+    needs: base-os
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -141,7 +141,7 @@ jobs:
 
   base-runtime-s6:
     name: 🔨 Build ${{ matrix.tag }}
-    needs: base-os-s6
+    needs: base-runtime
     runs-on: ubuntu-latest
     strategy:
       matrix:
