@@ -42,11 +42,11 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: ${{ steps.has_update.outputs.content }}
-          committer: GitHub <noreply@github.com>
-          author: GitHub <noreply@github.com>
+          committer: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
           base: "main"
           branch: udpates/${{ matrix.item }}
-          title: ':arrow_up: ${{ steps.has_update.outputs.content }}'
+          title: '${{ steps.has_update.outputs.content }}'
           body: ""
           labels: ${{ matrix.item }}
 
