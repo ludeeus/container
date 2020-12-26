@@ -8,8 +8,6 @@ containername=${container#*/}
 
 function shouldBuild () { echo "true" && exit;}
 
-shouldBuild
-
 if [[ "$changed" =~ $container ]]; then shouldBuild; fi
 if [[ "$changed" =~ Os.containerfile ]]; then shouldBuild; fi
 

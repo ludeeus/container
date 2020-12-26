@@ -16,7 +16,6 @@
         "3"
     ],
     "platforms": [
-        "linux/386",
         "linux/amd64"
     ]
 }
