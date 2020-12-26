@@ -4,7 +4,7 @@
 
 _This provides a minimalistic container for working with python._
 
-**Base image**: `alpine:3.12.1`  
+**Base image**: `alpine:3.12.3`  
 **Full name**: `ludeeus/container:python`  
 [View this on Docker Hub](https://hub.docker.com/r/ludeeus/container/tags?page=1&name=python)
 
@@ -30,8 +30,8 @@ Package | Version
 `libc-dev` | 0.7.2-r3
 `libffi-dev` | 3.3-r2
 `make` | 4.3-r0
-`openssh` | 8.3_p1-r0
-`openssl-dev` | 1.1.1g-r0
+`openssh` | 8.3_p1-r1
+`openssl-dev` | 1.1.1i-r0
 `py3-pip` | 20.1.1-r0
 `python3-dev` | 3.8.5-r0
 `python3` | 3.8.5-r0
@@ -50,7 +50,7 @@ Package | Version
 <summary>Generated dockerfile</summary>
 
 <pre>
-FROM alpine:3.12.1
+FROM alpine:3.12.3
 
 ENV CONTAINER_TYPE=python
 ENV DEVCONTAINER=True
@@ -66,8 +66,8 @@ RUN  \
         libc-dev=0.7.2-r3 \ 
         libffi-dev=3.3-r2 \ 
         make=4.3-r0 \ 
-        openssh=8.3_p1-r0 \ 
-        openssl-dev=1.1.1g-r0 \ 
+        openssh=8.3_p1-r1 \ 
+        openssl-dev=1.1.1i-r0 \ 
         py3-pip=20.1.1-r0 \ 
         python3-dev=3.8.5-r0 \ 
         python3=3.8.5-r0 \ 

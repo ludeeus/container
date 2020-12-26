@@ -4,7 +4,7 @@
 
 _This provides a container to run HACS actions inside._
 
-**Base image**: `alpine:3.12.1`  
+**Base image**: `alpine:3.12.3`  
 **Full name**: `ludeeus/container:hacs-action`  
 [View this on Docker Hub](https://hub.docker.com/r/ludeeus/container/tags?page=1&name=hacs-action)
 
@@ -21,8 +21,8 @@ Package | Version
 `bash` | 5.0.17-r0
 `git` | 2.26.2-r0
 `make` | 4.3-r0
-`openssh` | 8.3_p1-r0
-`openssl-dev` | 1.1.1g-r0
+`openssh` | 8.3_p1-r1
+`openssl-dev` | 1.1.1i-r0
 `py3-pip` | 20.1.1-r0
 `python3` | 3.8.5-r0
 
@@ -33,7 +33,7 @@ Package | Version
 <summary>Generated dockerfile</summary>
 
 <pre>
-FROM alpine:3.12.1
+FROM alpine:3.12.3
 
 ENV CONTAINER_TYPE=hacs-action
 
@@ -44,8 +44,8 @@ RUN  \
         bash=5.0.17-r0 \ 
         git=2.26.2-r0 \ 
         make=4.3-r0 \ 
-        openssh=8.3_p1-r0 \ 
-        openssl-dev=1.1.1g-r0 \ 
+        openssh=8.3_p1-r1 \ 
+        openssl-dev=1.1.1i-r0 \ 
         py3-pip=20.1.1-r0 \ 
         python3=3.8.5-r0 \ 
     && apk add --no-cache --virtual .build-deps  \ 

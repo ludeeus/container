@@ -4,7 +4,7 @@
 
 _This provides a container for working with V._
 
-**Base image**: `alpine:3.12.1`  
+**Base image**: `alpine:3.12.3`  
 **Full name**: `ludeeus/container:v`  
 [View this on Docker Hub](https://hub.docker.com/r/ludeeus/container/tags?page=1&name=v)
 
@@ -32,9 +32,9 @@ Package | Version
 `gcc` | 9.3.0-r2
 `git` | 2.26.2-r0
 `make` | 4.3-r0
-`musl-dev` | 1.1.24-r9
-`openssh` | 8.3_p1-r0
-`openssl-dev` | 1.1.1g-r0
+`musl-dev` | 1.1.24-r10
+`openssh` | 8.3_p1-r1
+`openssl-dev` | 1.1.1i-r0
 `sqlite-dev` | 3.32.1-r0
 `upx` | 3.96-r0
 
@@ -45,7 +45,7 @@ Package | Version
 <summary>Generated dockerfile</summary>
 
 <pre>
-FROM alpine:3.12.1
+FROM alpine:3.12.3
 
 ENV VVV=/opt/vlang
 ENV PATH=/opt/vlang:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
@@ -63,9 +63,9 @@ RUN  \
         gcc=9.3.0-r2 \ 
         git=2.26.2-r0 \ 
         make=4.3-r0 \ 
-        musl-dev=1.1.24-r9 \ 
-        openssh=8.3_p1-r0 \ 
-        openssl-dev=1.1.1g-r0 \ 
+        musl-dev=1.1.24-r10 \ 
+        openssh=8.3_p1-r1 \ 
+        openssl-dev=1.1.1i-r0 \ 
         sqlite-dev=3.32.1-r0 \ 
         upx=3.96-r0 \ 
     && chmod +x /usr/bin/container \ 

@@ -2,7 +2,7 @@
 
 [Back to overview](../index.md)
 
-**Base image**: `debian:10.6-slim`  
+**Base image**: `debian:10.7-slim`  
 **Full name**: `ludeeus/container:netdaemon-dotnet5`  
 [View this on Docker Hub](https://hub.docker.com/r/ludeeus/container/tags?page=1&name=netdaemon-dotnet5)
 
@@ -48,7 +48,7 @@ Variable | Value
 <summary>Generated dockerfile</summary>
 
 <pre>
-FROM debian:10.6-slim
+FROM debian:10.7-slim
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV DOTNET_RUNNING_IN_CONTAINER=true
