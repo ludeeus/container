@@ -7,10 +7,10 @@
         "OS_VARIANT": "alpine"
     },
     "tags": [
-        "ghcr.io/ludeeus/base/os/alpine:latest",
-        "ghcr.io/ludeeus/base/os/alpine:3.12.3",
-        "ghcr.io/ludeeus/base/os/alpine:3.12",
-        "ghcr.io/ludeeus/base/os/alpine:3"
+        "ghcr.io/ludeeus/alpine:latest",
+        "ghcr.io/ludeeus/alpine:3.12.3",
+        "ghcr.io/ludeeus/alpine:3.12",
+        "ghcr.io/ludeeus/alpine:3"
     ],
     "platforms": [
         "linux/386",
