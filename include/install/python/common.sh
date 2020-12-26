@@ -2,7 +2,7 @@
 set -e
 echo -e "\\033[0;34mRunning install script 'python/common.sh'\\033[0m"
 
-VERSION=$(jq -r .ghcli /include/install/ghcli/versions.json)
+VERSION=$(jq -r .python /include/install/python/versions.json)
 INSTALL_PATH="/usr/local/python"
 
 echo -e "\\033[0;34mInstalling Python ${VERSION} to ${INSTALL_PATH}\\033[0m"
