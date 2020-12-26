@@ -10,15 +10,6 @@ on:
   release:
     types:
       - published
-  workflow_dispatch:
-    inputs:
-      container:
-        description: 'Container to build'
-        required: true
-      publish:
-        description: 'Publish'
-        required: true
-        default: 'false'
 
 jobs:
   lint:
