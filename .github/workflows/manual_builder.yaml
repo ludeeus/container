@@ -1,0 +1,37 @@
+name: Manual Builder
+
+on:
+  workflow_dispatch:
+    inputs:
+      container:
+        description: 'Container to build'
+        required: true
+      publish:
+        description: 'Publish'
+        required: true
+        default: 'false'
+
+  build:
+    name: 🔨 Build ${{ github.event.inputs.container }}
+    needs: lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Checkout the repository
+        uses: actions/checkout@v2
+
+      - name: ➕ Additional arguments
+        id: arguments
+        run: |
+          declare -a args
+          if [ "${{ github.event.inputs.publish }}" == "true" ]; then
+            args+=(" --push ")
+          fi
+          echo "${args[@]}"
+          echo "::set-output name=arguments::${args[@]}"
+
+      - name: 🔓 Registry login
+        if: github.event.inputs.publish == 'true'
+        run: echo ${{ secrets.GHCR_TOKEN }} | docker login ghcr.io -u ${{ secrets.GHCR_USER }} --password-stdin
+
+      - name: 🛠️ Build ${{ github.event.inputs.container }}
+        run: bash ./scripts/build.sh --container ${{ github.event.inputs.container }} ${{ steps.arguments.outputs.arguments }}

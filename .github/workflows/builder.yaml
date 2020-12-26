@@ -57,7 +57,7 @@ jobs:
 
       - name: ❓ Should build ${{ matrix.tag }}?
         id: should_build
-        run: echo "::set-output name=build::$(bash ./scripts/should_build.sh "${{ matrix.tag }}" "${{ steps.changed_files.outputs.all }} ${{ github.event.inputs.container }}")"
+        run: echo "::set-output name=build::$(bash ./scripts/should_build.sh "${{ matrix.tag }}" "${{ steps.changed_files.outputs.all }}")"
 
       - name: ❔ Should publish ${{ matrix.tag }}?
         id: should_publish
@@ -74,7 +74,7 @@ jobs:
         if: steps.should_build.outputs.build == 'true'
         run: |
           declare -a args
-          if [ "${{ steps.should_publish.outputs.publish }}" == "true" ] || [ "${{ github.event.inputs.publish }}" == "true" ]; then
+          if [ "${{ steps.should_publish.outputs.publish }}" == "true" ]; then
             args+=(" --push ")
           fi
           if [[ "${{ github.event_name }}" == "release" ]]; then
@@ -111,7 +111,7 @@ jobs:
 
       - name: ❓ Should build ${{ matrix.tag }}?
         id: should_build
-        run: echo "::set-output name=build::$(bash ./scripts/should_build.sh "${{ matrix.tag }}" "${{ steps.changed_files.outputs.all }} ${{ github.event.inputs.container }}")"
+        run: echo "::set-output name=build::$(bash ./scripts/should_build.sh "${{ matrix.tag }}" "${{ steps.changed_files.outputs.all }}")"
 
       - name: ❔ Should publish ${{ matrix.tag }}?
         id: should_publish
@@ -128,7 +128,7 @@ jobs:
         if: steps.should_build.outputs.build == 'true'
         run: |
           declare -a args
-          if [ "${{ steps.should_publish.outputs.publish }}" == "true" ] || [ "${{ github.event.inputs.publish }}" == "true" ]; then
+          if [ "${{ steps.should_publish.outputs.publish }}" == "true" ]; then
             args+=(" --push ")
           fi
           if [[ "${{ github.event_name }}" == "release" ]]; then
@@ -167,7 +167,7 @@ jobs:
 
       - name: ❓ Should build ${{ matrix.tag }}?
         id: should_build
-        run: echo "::set-output name=build::$(bash ./scripts/should_build.sh "${{ matrix.tag }}" "${{ steps.changed_files.outputs.all }} ${{ github.event.inputs.container }}")"
+        run: echo "::set-output name=build::$(bash ./scripts/should_build.sh "${{ matrix.tag }}" "${{ steps.changed_files.outputs.all }}")"
 
       - name: ❔ Should publish ${{ matrix.tag }}?
         id: should_publish
@@ -184,7 +184,7 @@ jobs:
         if: steps.should_build.outputs.build == 'true'
         run: |
           declare -a args
-          if [ "${{ steps.should_publish.outputs.publish }}" == "true" ] || [ "${{ github.event.inputs.publish }}" == "true" ]; then
+          if [ "${{ steps.should_publish.outputs.publish }}" == "true" ]; then
             args+=(" --push ")
           fi
           if [[ "${{ github.event_name }}" == "release" ]]; then
@@ -223,7 +223,7 @@ jobs:
 
       - name: ❓ Should build ${{ matrix.tag }}?
         id: should_build
-        run: echo "::set-output name=build::$(bash ./scripts/should_build.sh "${{ matrix.tag }}" "${{ steps.changed_files.outputs.all }} ${{ github.event.inputs.container }}")"
+        run: echo "::set-output name=build::$(bash ./scripts/should_build.sh "${{ matrix.tag }}" "${{ steps.changed_files.outputs.all }}")"
 
       - name: ❔ Should publish ${{ matrix.tag }}?
         id: should_publish
@@ -240,7 +240,7 @@ jobs:
         if: steps.should_build.outputs.build == 'true'
         run: |
           declare -a args
-          if [ "${{ steps.should_publish.outputs.publish }}" == "true" ] || [ "${{ github.event.inputs.publish }}" == "true" ]; then
+          if [ "${{ steps.should_publish.outputs.publish }}" == "true" ]; then
             args+=(" --push ")
           fi
           if [[ "${{ github.event_name }}" == "release" ]]; then
@@ -279,7 +279,7 @@ jobs:
 
       - name: ❓ Should build ${{ matrix.tag }}?
         id: should_build
-        run: echo "::set-output name=build::$(bash ./scripts/should_build.sh "${{ matrix.tag }}" "${{ steps.changed_files.outputs.all }} ${{ github.event.inputs.container }}")"
+        run: echo "::set-output name=build::$(bash ./scripts/should_build.sh "${{ matrix.tag }}" "${{ steps.changed_files.outputs.all }}")"
 
       - name: ❔ Should publish ${{ matrix.tag }}?
         id: should_publish
@@ -296,7 +296,7 @@ jobs:
         if: steps.should_build.outputs.build == 'true'
         run: |
           declare -a args
-          if [ "${{ steps.should_publish.outputs.publish }}" == "true" ] || [ "${{ github.event.inputs.publish }}" == "true" ]; then
+          if [ "${{ steps.should_publish.outputs.publish }}" == "true" ]; then
             args+=(" --push ")
           fi
           if [[ "${{ github.event_name }}" == "release" ]]; then
@@ -332,7 +332,7 @@ jobs:
 
       - name: ❓ Should build ${{ matrix.tag }}?
         id: should_build
-        run: echo "::set-output name=build::$(bash ./scripts/should_build.sh "${{ matrix.tag }}" "${{ steps.changed_files.outputs.all }} ${{ github.event.inputs.container }}")"
+        run: echo "::set-output name=build::$(bash ./scripts/should_build.sh "${{ matrix.tag }}" "${{ steps.changed_files.outputs.all }}")"
 
       - name: ❔ Should publish ${{ matrix.tag }}?
         id: should_publish
@@ -349,7 +349,7 @@ jobs:
         if: steps.should_build.outputs.build == 'true'
         run: |
           declare -a args
-          if [ "${{ steps.should_publish.outputs.publish }}" == "true" ] || [ "${{ github.event.inputs.publish }}" == "true" ]; then
+          if [ "${{ steps.should_publish.outputs.publish }}" == "true" ]; then
             args+=(" --push ")
           fi
           if [[ "${{ github.event_name }}" == "release" ]]; then
