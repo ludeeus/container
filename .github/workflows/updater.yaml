@@ -44,7 +44,7 @@ jobs:
           commit-message: ${{ steps.has_update.outputs.content }}
           committer: GitHub <noreply@github.com>
           author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
-          signoff: false
+          base: "main"
           branch: udpates/${{ matrix.item }}
           title: ':arrow_up: ${{ steps.has_update.outputs.content }}'
           body: ""
