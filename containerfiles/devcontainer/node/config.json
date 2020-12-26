@@ -1,0 +1,19 @@
+{
+    "dockerfile": "Devcontainer.dockerfile",
+    "description": "Devcontainer for developing with NodeJS",
+    "args": {
+        "BUILD_FROM": "ghcr.io/ludeeus/base/runtime/node-debian",
+        "BUILD_FROM_TAG": "15.5.0",
+        "CONTAINER_TYPE": "node",
+        "OS_VARIANT": "debian"
+    },
+    "tags": [
+        "ghcr.io/ludeeus/devcontainer/node:latest",
+        "ghcr.io/ludeeus/devcontainer/node:3.9.1",
+        "ghcr.io/ludeeus/devcontainer/node:3.9",
+        "ghcr.io/ludeeus/devcontainer/node:3"
+    ],
+    "platforms": [
+        "linux/amd64"
+    ]
+}

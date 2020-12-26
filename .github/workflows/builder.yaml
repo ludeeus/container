@@ -144,6 +144,8 @@ jobs:
     strategy:
       matrix:
         tag:
+          - "base/runtime/node-alpine"
+          - "base/runtime/node-debian"
           - "base/runtime/python-alpine"
           - "base/runtime/python-debian"
     steps:
@@ -198,6 +200,8 @@ jobs:
     strategy:
       matrix:
         tag:
+          - "base/runtime/node-alpine-s6"
+          - "base/runtime/node-debian-s6"
           - "base/runtime/python-alpine-s6"
           - "base/runtime/python-debian-s6"
     steps:
@@ -252,8 +256,10 @@ jobs:
     strategy:
       matrix:
         tag:
-          - "devcontainer/python"
+          - "devcontainer/frontend"
           - "devcontainer/integration"
+          - "devcontainer/node"
+          - "devcontainer/python"
     steps:
       - name: 📦 Checkout the repository
         uses: actions/checkout@v2
