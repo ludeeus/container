@@ -77,7 +77,7 @@ fi
 if [ "$(jq -c -r .dockerfile "./containerfiles/$container/config.json")" != "null" ]; then
     buildCommand+=("--file ./containerfiles/$(jq -c -r .dockerfile "./containerfiles/$container/config.json")")
 else
-    buildCommand+=("--file ./containerfiles/$container/Dockerfile")
+    buildCommand+=("--file ./containerfiles/$container/Containerfile")
 fi
 
 buildCommand+=("--output=type=image,push=${push:-false}")

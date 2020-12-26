@@ -7,7 +7,7 @@ COPY ./container /container
 COPY ./include /include
 
 ARG RUNTIME_PATHS
-ENV PATH ${RUNTIME_PATHS}:$PATH
+ENV PATH ${RUNTIME_PATHS}$PATH
 
 ARG OS_VARIANT CONTAINER_TYPE
 RUN \
@@ -16,7 +16,7 @@ RUN \
     && bash /include/install/ghcli/${OS_VARIANT}.sh \
     && bash /include/install/container/${OS_VARIANT}.sh \
     && if [ -f /include/install/devcontainer/${CONTAINER_TYPE}.sh ]; then \
-        bash /include/install/devcontainer/${CONTAINER_TYPE}.sh; \
+        bash /include/install/devcontainer/${CONTAINER_TYPE}.sh ${OS_VARIANT}; \
     fi \
     && bash /include/cleanup/${OS_VARIANT}.sh \
     && bash /include/cleanup/build.sh
