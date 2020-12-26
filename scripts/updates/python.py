@@ -25,11 +25,10 @@ current = Version(install_python_version.read()["python"])
 
 request = requests.get(URL).text
 upstream = Version(request.split(">Download Python ")[2].split("<")[0])
-upstream = Version("3.9.2")
 
-# if current.equals(upstream):
-#    print(f"Nothing to do, both current and upstream is {current}")
-#    exit(0)
+if current.equals(upstream):
+    print(f"Nothing to do, both current and upstream is {current}")
+    exit(0)
 
 install_python_version.update("python", upstream.string)
 alpine_python_config.update("tags", upstream.tags)

@@ -2,10 +2,7 @@ name: ⏫ Updater
 
 on:
   schedule:
-    - cron:  '40 16 * * *'
-  pull_request:
-    branches:
-      - main
+    - cron:  '40 * * * *'
 
 jobs:
   update:
