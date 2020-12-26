@@ -1,0 +1,20 @@
+{
+    "dockerfile": "Runtime.containerfile",
+    "description": "Base runtime container for NodeJS",
+    "args": {
+        "BUILD_FROM": "ghcr.io/ludeeus/debian/base",
+        "BUILD_FROM_TAG": "10.6",
+        "OS_VARIANT": "debian",
+        "INSTALL_RUNTIME": "node",
+        "RUNTIME_PATH": "/usr/local/node/bin:/usr/local/yarn/bin"
+    },
+    "tags": [
+        "latest",
+        "15.5.0",
+        "15.5",
+        "15"
+    ],
+    "platforms": [
+        "linux/amd64"
+    ]
+}

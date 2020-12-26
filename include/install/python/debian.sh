@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+set -e
 echo -e "\\033[0;34mRunning install script 'python/debian.sh'\\033[0m"
 
 PYTHON_VERSION="$1"
@@ -19,6 +19,7 @@ apt-get -y install --no-install-recommends \
     libreadline-dev \
     libsqlite3-dev \
     wget \
+    jq \
     curl \
     llvm \
     libncurses5-dev \
@@ -27,3 +28,4 @@ apt-get -y install --no-install-recommends \
     tk-dev
 
 bash /include/install/python/common.sh "$PYTHON_VERSION"
+bash /include/cleanup/debian.sh

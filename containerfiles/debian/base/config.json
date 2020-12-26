@@ -1,0 +1,17 @@
+{
+    "dockerfile": "Os.containerfile",
+    "description": "Base OS container for Debian",
+    "args": {
+        "BUILD_FROM": "debian",
+        "BUILD_FROM_TAG": "10.6-slim",
+        "OS_VARIANT": "debian"
+    },
+    "tags": [
+        "latest",
+        "10.6",
+        "10"
+    ],
+    "platforms": [
+        "linux/amd64"
+    ]
+}

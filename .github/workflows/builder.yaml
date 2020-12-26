@@ -36,8 +36,8 @@ jobs:
     strategy:
       matrix:
         tag:
-          - "base/os/debian"
-          - "base/os/alpine"
+          - "alpine/base"
+          - "debian/base"
     steps:
       - name: 📥 Checkout the repository
         uses: actions/checkout@v2
@@ -90,8 +90,8 @@ jobs:
     strategy:
       matrix:
         tag:
-          - "base/os/debian-s6"
-          - "base/os/alpine-s6"
+          - "alpine-s6/base"
+          - "debian-s6/base"
     steps:
       - name: 📥 Checkout the repository
         uses: actions/checkout@v2
@@ -144,8 +144,10 @@ jobs:
     strategy:
       matrix:
         tag:
-          - "base/runtime/python-alpine"
-          - "base/runtime/python-debian"
+          - "alpine/node"
+          - "alpine/python"
+          - "debian/node"
+          - "debian/python"
     steps:
       - name: 📥 Checkout the repository
         uses: actions/checkout@v2
@@ -198,8 +200,10 @@ jobs:
     strategy:
       matrix:
         tag:
-          - "base/runtime/python-alpine-s6"
-          - "base/runtime/python-debian-s6"
+          - "alpine-s6/node"
+          - "alpine-s6/python"
+          - "debian-s6/node"
+          - "debian-s6/python"
     steps:
       - name: 📥 Checkout the repository
         uses: actions/checkout@v2
@@ -252,8 +256,63 @@ jobs:
     strategy:
       matrix:
         tag:
-          - "devcontainer/python"
+          - "devcontainer/frontend"
           - "devcontainer/integration"
+          - "devcontainer/node"
+          - "devcontainer/python"
+    steps:
+      - name: 📦 Checkout the repository
+        uses: actions/checkout@v2
+
+      - name: 📃 Get changed files
+        id: changed_files
+        uses: jitterbit/get-changed-files@v1
+
+      - name: ❓ Should build ${{ matrix.tag }}?
+        id: should_build
+        run: echo "::set-output name=build::$(bash ./scripts/should_build.sh "${{ matrix.tag }}" "${{ steps.changed_files.outputs.all }}")"
+
+      - name: ❔ Should publish ${{ matrix.tag }}?
+        id: should_publish
+        if: steps.should_build.outputs.build == 'true'
+        run: |
+          if [[ "${{ github.event_name }}" == "release" ]] || [[ "${{ github.event_name }}" == "push" ]]; then
+            echo "::set-output name=publish::true"
+          else
+            echo "::set-output name=publish::false"
+          fi
+
+      - name: ➕ Additional arguments
+        id: arguments
+        if: steps.should_build.outputs.build == 'true'
+        run: |
+          declare -a args
+          if [ "${{ steps.should_publish.outputs.publish }}" == "true" ]; then
+            args+=(" --push ")
+          fi
+          if [[ "${{ github.event_name }}" == "release" ]]; then
+            args+=(" --tag stable ")
+            args+=(" --tag $(echo ${{ github.ref }} | awk -F"/" '{print $NF}' ) ")
+          fi
+          echo "${args[@]}"
+          echo "::set-output name=arguments::${args[@]}"
+
+      - name: 🔓 Registry login
+        if: steps.should_publish.outputs.publish == 'true'
+        run: echo ${{ secrets.GHCR_TOKEN }} | docker login ghcr.io -u ${{ secrets.GHCR_USER }} --password-stdin
+
+      - name: 🛠️ Build ${{ matrix.tag }}
+        if: steps.should_build.outputs.build == 'true'
+        run: bash ./scripts/build.sh --container ${{ matrix.tag }} ${{ steps.arguments.outputs.arguments }}
+
+  lastrun:
+    name:  🔨 Build ${{ matrix.tag }}
+    needs: devcontainer
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        tag:
+          - "devcontainer/generic"
     steps:
       - name: 📦 Checkout the repository
         uses: actions/checkout@v2

@@ -1,0 +1,17 @@
+{
+    "dockerfile": "Devcontainer.containerfile",
+    "description": "Generic devcontainer with Python & Node",
+    "args": {
+        "BUILD_FROM": "ghcr.io/ludeeus/devcontainer/integration",
+        "BUILD_FROM_TAG": "latest",
+        "CONTAINER_TYPE": "generic",
+        "OS_VARIANT": "debian",
+        "RUNTIME_PATHS": "/usr/local/node/bin:/usr/local/yarn/bin:"
+    },
+    "tags": [
+        "latest"
+    ],
+    "platforms": [
+        "linux/amd64"
+    ]
+}
