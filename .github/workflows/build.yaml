@@ -3,7 +3,7 @@ name: Build images
 on:
   pull_request:
     branches:
-      - master
+      - main
 jobs:
   matrix:
     name: Build ${{matrix.tags}}

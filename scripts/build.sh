@@ -81,8 +81,8 @@ else
 fi
 
 buildCommand+=("--output=type=image,push=${push:-false}")
-buildCommand+=("--label org.opencontainers.image.url=https://github.com/ludeeus/container/tree/master/containerfiles/$container")
-buildCommand+=("--label org.opencontainers.image.documentation=https://github.com/ludeeus/container/tree/master/containerfiles/$container")
+buildCommand+=("--label org.opencontainers.image.url=https://github.com/ludeeus/container/tree/main/containerfiles/$container")
+buildCommand+=("--label org.opencontainers.image.documentation=https://github.com/ludeeus/container/tree/main/containerfiles/$container")
 buildCommand+=("--label org.opencontainers.image.source=https://github.com/ludeeus/container")
 buildCommand+=("--label org.opencontainers.image.title=$container")
 buildCommand+=("--label org.opencontainers.image.ref.name=$(git rev-parse HEAD)")
