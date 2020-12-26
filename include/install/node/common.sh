@@ -2,9 +2,9 @@
 set -e
 echo -e "\\033[0;34mRunning install script 'node/common.sh'\\033[0m"
 NODE_INSTALL_PATH="/usr/local/node"
-YARN_INSTALL_PATH="/usr/local/yarn"
+#YARN_INSTALL_PATH="/usr/local/yarn"
 NODE_VERSION=$(jq -r .node /include/install/node/versions.json)
-YARN_VERSION=$(jq -r .yarn /include/install/node/versions.json)
+#YARN_VERSION=$(jq -r .yarn /include/install/node/versions.json)
 
 echo -e "\\033[0;34mInstalling NodeJS ${NODE_VERSION} to ${NODE_INSTALL_PATH}\\033[0m"
 
