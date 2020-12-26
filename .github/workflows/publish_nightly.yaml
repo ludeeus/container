@@ -1,4 +1,4 @@
-name: Publish images nightly
+name: 🚀 Publish images nightly
 
 on:
   schedule:

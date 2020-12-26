@@ -1,4 +1,4 @@
-name: Builder
+name: 🛠️ Builder
 
 on:
   pull_request:

@@ -1,4 +1,4 @@
-name: Manual Builder
+name: 👷 Manual Builder
 
 on:
   workflow_dispatch:
