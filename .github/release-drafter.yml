@@ -105,3 +105,8 @@ categories:
   - title: 'Management'
     labels:
       - 'management'
+      - 'documentation'
+
+  - title: 'Documentation'
+    labels:
+      - 'documentation'
