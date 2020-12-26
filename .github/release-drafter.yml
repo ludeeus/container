@@ -73,18 +73,21 @@ categories:
       - 'debian/base'
       - 'debian/node'
       - 'node'
+      - 'devcontainer'
 
   - title: 'devcontainer/python'
     labels:
       - 'debian/base'
       - 'debian/python'
       - 'python'
+      - 'devcontainer'
 
   - title: 'devcontainer/frontend'
     labels:
       - 'debian/base'
       - 'debian/node'
       - 'frontend'
+      - 'devcontainer'
 
   - title: 'devcontainer/integration'
     labels:
@@ -92,6 +95,7 @@ categories:
       - 'debian/python'
       - 'integration'
       - 'python'
+      - 'devcontainer'
 
   - title: 'devcontainer/generic'
     labels:
@@ -101,11 +105,11 @@ categories:
       - 'frontend'
       - 'python'
       - 'integration'
+      - 'devcontainer'
 
   - title: 'Management'
     labels:
       - 'management'
-      - 'documentation'
 
   - title: 'Documentation'
     labels:
