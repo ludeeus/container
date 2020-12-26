@@ -6,10 +6,6 @@ changed="$2"
 containeros=${container%%/*}
 containername=${container#*/}
 
-echo $containeros
-echo $containername
-exit
-
 function shouldBuild () { echo "true" && exit;}
 
 if [[ "$changed" =~ $container ]]; then shouldBuild; fi
