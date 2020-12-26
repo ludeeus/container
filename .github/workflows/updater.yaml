@@ -12,6 +12,7 @@ jobs:
       matrix:
         item:
           - python
+          - debian
     steps:
       - name: 📦 Checkout the repository
         uses: actions/checkout@v2
