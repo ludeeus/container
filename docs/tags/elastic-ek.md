@@ -4,7 +4,7 @@
 
 _Elasticsearch and Kibana in the same container_
 
-**Base image**: `alpine:3.12.1`  
+**Base image**: `alpine:3.12.3`  
 **Full name**: `ludeeus/container:elastic-ek`  
 [View this on Docker Hub](https://hub.docker.com/r/ludeeus/container/tags?page=1&name=elastic-ek)
 
@@ -26,12 +26,12 @@ Variable | Value
 Package | Version 
 -- | --
 `bash` | 5.0.17-r0
-`curl` | 7.69.1-r1
+`curl` | 7.69.1-r3
 `git` | 2.26.2-r0
 `nodejs` | 12.18.4-r0
 `openjdk11` | 11.0.9_p11-r0
-`openssh` | 8.3_p1-r0
-`openssl-dev` | 1.1.1g-r0
+`openssh` | 8.3_p1-r1
+`openssl-dev` | 1.1.1i-r0
 
 ## Additional information
 
@@ -51,7 +51,7 @@ docker run --name elastic -d -p 9200:9200 -p 5601:5601 C:\es\:/data ludeeus/cont
 <summary>Generated dockerfile</summary>
 
 <pre>
-FROM alpine:3.12.1
+FROM alpine:3.12.3
 
 ENV ELASTIC_VERSION=7.8.0
 ENV CONTAINER_TYPE=elastic-ek
@@ -64,12 +64,12 @@ COPY rootfs/s6/install /s6/install
 RUN  \ 
     apk add --no-cache  \ 
         bash=5.0.17-r0 \ 
-        curl=7.69.1-r1 \ 
+        curl=7.69.1-r3 \ 
         git=2.26.2-r0 \ 
         nodejs=12.18.4-r0 \ 
         openjdk11=11.0.9_p11-r0 \ 
-        openssh=8.3_p1-r0 \ 
-        openssl-dev=1.1.1g-r0 \ 
+        openssh=8.3_p1-r1 \ 
+        openssl-dev=1.1.1i-r0 \ 
     && bash /s6/install \ 
     && rm -R /s6 \ 
     && adduser -S ekuser \ 
