@@ -6,6 +6,7 @@ NODE_VERSION="$1"
 apk update
 apk add --no-cache \
     libstdc++ \
-    jq
+    jq \
+    curl
 
 bash /include/install/node/common.sh "$NODE_VERSION"
