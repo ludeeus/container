@@ -13,7 +13,6 @@ on:
 jobs:
   build:
     name: 🔨 Build ${{ github.event.inputs.container }}
-    needs: lint
     runs-on: ubuntu-latest
     steps:
       - name: 📥 Checkout the repository
