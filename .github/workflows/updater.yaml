@@ -42,8 +42,8 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: ${{ steps.has_update.outputs.content }}
-          committer: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
-          author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          committer: Ludeeus <hi@ludeeus.dev>
+          author: Ludeeus <hi@ludeeus.dev>
           base: "main"
           branch: udpates/${{ matrix.item }}
           title: '${{ steps.has_update.outputs.content }}'
