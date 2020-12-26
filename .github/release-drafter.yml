@@ -1,0 +1,116 @@
+change-template: '- #$NUMBER $TITLE @$AUTHOR'
+sort-direction: ascending
+template: $CHANGES
+categories:
+  - title: 'alpine/base'
+    labels:
+      - 'alpine/base'
+
+  - title: 'alpine/node'
+    labels:
+      - 'alpine/node'
+      - 'node'
+
+  - title: 'alpine/python'
+    labels:
+      - 'alpine/python'
+      - 'python'
+
+  - title: 'alpine-s6/base'
+    labels:
+      - 'alpine/base'
+      - 'S6'
+
+  - title: 'alpine-s6/node'
+    labels:
+      - 'alpine/base'
+      - 'alpine/node'
+      - 'node'
+      - 'S6'
+
+  - title: 'alpine-s6/python'
+    labels:
+      - 'alpine/base'
+      - 'alpine/python'
+      - 'python'
+      - 'S6'
+
+  - title: 'debian/base'
+    labels:
+      - 'debian/base'
+
+  - title: 'debian/node'
+    labels:
+      - 'debian/node'
+      - 'node'
+
+  - title: 'debian/python'
+    labels:
+      - 'debian/python'
+      - 'python'
+
+  - title: 'debian-s6/base'
+    labels:
+      - 'debian/base'
+      - 'S6'
+
+  - title: 'debian-s6/node'
+    labels:
+      - 'debian/base'
+      - 'debian/node'
+      - 'node'
+      - 'S6'
+
+  - title: 'debian-s6/python'
+    labels:
+      - 'debian/base'
+      - 'debian/python'
+      - 'python'
+      - 'S6'
+
+  - title: 'devcontainer/node'
+    labels:
+      - 'debian/base'
+      - 'debian/node'
+      - 'node'
+      - 'devcontainer'
+
+  - title: 'devcontainer/python'
+    labels:
+      - 'debian/base'
+      - 'debian/python'
+      - 'python'
+      - 'devcontainer'
+
+  - title: 'devcontainer/frontend'
+    labels:
+      - 'debian/base'
+      - 'debian/node'
+      - 'frontend'
+      - 'devcontainer'
+
+  - title: 'devcontainer/integration'
+    labels:
+      - 'debian/base'
+      - 'debian/python'
+      - 'integration'
+      - 'python'
+      - 'devcontainer'
+
+  - title: 'devcontainer/generic'
+    labels:
+      - 'debian/base'
+      - 'debian/python'
+      - 'debian/node'
+      - 'frontend'
+      - 'python'
+      - 'integration'
+      - 'devcontainer'
+
+  - title: 'Management'
+    labels:
+      - 'management'
+
+  - title: 'Documentation'
+    labels:
+      - 'documentation'
