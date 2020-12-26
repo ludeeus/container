@@ -1,7 +1,8 @@
 change-template: '- #$NUMBER $TITLE @$AUTHOR'
 sort-direction: ascending
 template: $CHANGES
-exclude-labels: "release-drafter-ignore"
+exclude-labels:
+  - "release-drafter-ignore"
 categories:
   - title: 'alpine/base'
     labels:
