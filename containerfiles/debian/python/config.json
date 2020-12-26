@@ -6,14 +6,13 @@
         "BUILD_FROM_TAG": "10.6",
         "OS_VARIANT": "debian",
         "INSTALL_RUNTIME": "python",
-        "RUNTIME_VERSION": "3.9.1",
         "RUNTIME_PATH": "/usr/local/python/bin"
     },
     "tags": [
         "latest",
-        "3.9.1",
+        "3",
         "3.9",
-        "3"
+        "3.9.1"
     ],
     "platforms": [
         "linux/amd64"

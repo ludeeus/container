@@ -1,0 +1,54 @@
+name: ⏫ Updater
+
+on:
+  schedule:
+    - cron:  '40 * * * *'
+
+jobs:
+  update:
+    name: ✅ Check ${{ matrix.item }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        item:
+          - python
+    steps:
+      - name: 📦 Checkout the repository
+        uses: actions/checkout@v2
+
+      - name: 🏃 ${{ matrix.item }} check
+        run: python3 ./scripts/updates/${{ matrix.item }}.py
+
+      - name: ❓ ${{ matrix.item }} has an update?
+        id: has_update
+        run: |
+          if [[ -f "./commit" ]]; then
+            has_update=true
+            content=$(cat ./commit)
+          else
+            has_update=false
+            content=""
+          fi
+          echo "::set-output name=has_update::$has_update"
+          echo "::set-output name=content::$content"
+
+      - name: ✨ Create Pull Request
+        id: cpr
+        if: steps.has_update.outputs.has_update == 'true'
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.REPO_SCOPED_TOKEN }}
+          commit-message: "[auto]: ${{ steps.has_update.outputs.content }}""
+          committer: GitHub <noreply@github.com>
+          author: GitHub <noreply@github.com>
+          base: "main"
+          branch: udpates/${{ matrix.item }}
+          title: '${{ steps.has_update.outputs.content }}'
+          body: ""
+          labels: ${{ matrix.item }}
+
+      - name: ✅ Check outputs
+        if: steps.has_update.outputs.has_update == 'true'
+        run: |
+          echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
+          echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
