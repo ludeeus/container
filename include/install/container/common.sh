@@ -1,14 +1,6 @@
 #!/usr/bin/env bash
-
-echo -e "\\033[0;34mRunning install script 'container.sh'\\033[0m"
-
-if [ -n "$(command -v apk)" ]; then
-    apk add make
-else
-    apt-get update
-    apt-get install -y --no-install-recommends make
-fi
-
+set -e
+echo -e "\\033[0;34mRunning install script 'container/common'\\033[0m"
 mkdir -p /opt/container/makefiles
 mkdir -p /opt/container/helpers
 touch /opt/container/makefiles/dummy.mk

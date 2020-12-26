@@ -6,7 +6,6 @@
         "BUILD_FROM_TAG": "3.12.3",
         "OS_VARIANT": "alpine",
         "INSTALL_RUNTIME": "python",
-        "RUNTIME_VERSION": "3.9.1",
         "RUNTIME_PATH": "/usr/local/python/bin"
     },
     "tags": [

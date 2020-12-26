@@ -1,0 +1,18 @@
+{
+    "dockerfile": "S6.dockerfile",
+    "description": "Base runtime container for NodeJS with S6",
+    "args": {
+        "BUILD_FROM": "ghcr.io/ludeeus/base/runtime/node-alpine",
+        "BUILD_FROM_TAG": "15.5.0",
+        "OS_VARIANT": "alpine"
+    },
+    "tags": [
+        "ghcr.io/ludeeus/base/runtime/node-alpine-s6:latest",
+        "ghcr.io/ludeeus/base/runtime/node-alpine-s6:15.5.0",
+        "ghcr.io/ludeeus/base/runtime/node-alpine-s6:15.5",
+        "ghcr.io/ludeeus/base/runtime/node-alpine-s6:15"
+    ],
+    "platforms": [
+        "linux/amd64"
+    ]
+}

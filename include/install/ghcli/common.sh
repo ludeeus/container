@@ -1,8 +1,7 @@
 #!/usr/bin/env bash
-
-echo -e "\\033[0;34mRunning install script 'ghcli'\\033[0m"
-
-CLI_VERSION="1.4.0"
+set -e
+echo -e "\\033[0;34mRunning install script 'ghcli/common'\\033[0m"
+VERSION=$(jq -r .ghcli /include/install/ghcli/versions.json)
 ARCH=$(uname -m)
 
 if [ -n "$(command -v apk)" ]; then
@@ -24,4 +23,3 @@ rm -rf /tmp/ghcli.tar.gz /tmp/ghcli
 
 set -e
 gh --version
-set +e

@@ -6,8 +6,9 @@ COPY ./include /include
 ARG RUNTIME_PATH
 ENV PATH ${RUNTIME_PATH}:$PATH
 
-ARG INSTALL_RUNTIME RUNTIME_VERSION OS_VARIANT
+ARG INSTALL_RUNTIME OS_VARIANT
 RUN \
-    bash /include/install/${INSTALL_RUNTIME}/${OS_VARIANT}.sh "${RUNTIME_VERSION}" \
+    sh /include/init.sh \
+    && bash /include/install/${INSTALL_RUNTIME}/${OS_VARIANT}.sh \
     && bash /include/cleanup/${OS_VARIANT}.sh \
     && bash /include/cleanup/build.sh

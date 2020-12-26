@@ -3,7 +3,8 @@
     "description": "Base runtime container for Python with S6",
     "args": {
         "BUILD_FROM": "ghcr.io/ludeeus/base/runtime/python-alpine",
-        "BUILD_FROM_TAG": "3.9.1"
+        "BUILD_FROM_TAG": "3.9.1",
+        "OS_VARIANT": "alpine"
     },
     "tags": [
         "ghcr.io/ludeeus/base/runtime/python-alpine-s6:latest",

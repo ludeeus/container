@@ -1,0 +1,18 @@
+{
+    "dockerfile": "S6.dockerfile",
+    "description": "Base runtime container for Python with S6",
+    "args": {
+        "BUILD_FROM": "ghcr.io/ludeeus/base/runtime/node-debian",
+        "BUILD_FROM_TAG": "15.5.0",
+        "OS_VARIANT": "debian"
+    },
+    "tags": [
+        "ghcr.io/ludeeus/base/runtime/node-debian-s6:latest",
+        "ghcr.io/ludeeus/base/runtime/node-debian-s6:15.5.0",
+        "ghcr.io/ludeeus/base/runtime/node-debian-s6:15.5",
+        "ghcr.io/ludeeus/base/runtime/node-debian-s6:15"
+    ],
+    "platforms": [
+        "linux/amd64"
+    ]
+}
