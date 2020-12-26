@@ -1,8 +1,8 @@
 {
-    "dockerfile": "Os.containerfile",
-    "description": "Base OS container for Alpine",
+    "dockerfile": "S6.containerfile",
+    "description": "Base OS container for Alpine with S6",
     "args": {
-        "BUILD_FROM": "alpine",
+        "BUILD_FROM": "ghcr.io/ludeeus/alpine/base",
         "BUILD_FROM_TAG": "3.12.3",
         "OS_VARIANT": "alpine"
     },

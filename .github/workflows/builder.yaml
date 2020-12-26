@@ -36,8 +36,8 @@ jobs:
     strategy:
       matrix:
         tag:
-          - "base/os/debian"
-          - "base/os/alpine"
+          - "alpine/base"
+          - "debian/base"
     steps:
       - name: 📥 Checkout the repository
         uses: actions/checkout@v2
@@ -90,8 +90,8 @@ jobs:
     strategy:
       matrix:
         tag:
-          - "base/os/debian-s6"
-          - "base/os/alpine-s6"
+          - "alpine-s6/base"
+          - "debian-s6/base"
     steps:
       - name: 📥 Checkout the repository
         uses: actions/checkout@v2
@@ -144,10 +144,10 @@ jobs:
     strategy:
       matrix:
         tag:
-          - "base/runtime/node-alpine"
-          - "base/runtime/node-debian"
-          - "base/runtime/python-alpine"
-          - "base/runtime/python-debian"
+          - "alpine/node"
+          - "alpine/python"
+          - "debian/node"
+          - "debian/python"
     steps:
       - name: 📥 Checkout the repository
         uses: actions/checkout@v2
@@ -200,10 +200,10 @@ jobs:
     strategy:
       matrix:
         tag:
-          - "base/runtime/node-alpine-s6"
-          - "base/runtime/node-debian-s6"
-          - "base/runtime/python-alpine-s6"
-          - "base/runtime/python-debian-s6"
+          - "alpine-s6/node"
+          - "alpine-s6/python"
+          - "debian-s6/node"
+          - "debian-s6/python"
     steps:
       - name: 📥 Checkout the repository
         uses: actions/checkout@v2

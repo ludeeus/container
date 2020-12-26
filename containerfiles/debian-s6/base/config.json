@@ -1,18 +1,17 @@
 {
-    "dockerfile": "base/Os.dockerfile",
+    "dockerfile": "S6.containerfile",
     "description": "Base OS container for Debian with S6",
     "args": {
-        "BUILD_FROM": "debian",
-        "BUILD_FROM_TAG": "10.6-slim",
+        "BUILD_FROM": "ghcr.io/ludeeus/debian/base",
+        "BUILD_FROM_TAG": "10.6",
         "OS_VARIANT": "debian"
     },
     "tags": [
-        "ghcr.io/ludeeus/debian-s6:latest",
-        "ghcr.io/ludeeus/debian-s6:10.6",
-        "ghcr.io/ludeeus/debian-s6:10"
+        "latest",
+        "10.6",
+        "10"
     ],
     "platforms": [
-        "linux/386",
         "linux/amd64"
     ]
 }

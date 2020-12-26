@@ -1,10 +1,9 @@
 {
-    "dockerfile": "Devcontainer.containerfile",
-    "description": "Devcontainer for developing with NodeJS",
+    "dockerfile": "S6.containerfile",
+    "description": "Base runtime container for NodeJS with S6",
     "args": {
         "BUILD_FROM": "ghcr.io/ludeeus/debian/node",
         "BUILD_FROM_TAG": "15.5.0",
-        "CONTAINER_TYPE": "node",
         "OS_VARIANT": "debian"
     },
     "tags": [

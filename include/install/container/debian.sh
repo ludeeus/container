@@ -8,4 +8,4 @@ apt-get install -y --no-install-recommends \
     jq \
     make
 
-bash /include/install/container/common.sh
+bash /include/install/container/common.sh "$1"

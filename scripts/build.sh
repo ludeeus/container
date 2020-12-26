@@ -4,6 +4,7 @@ shopt -s extglob
 declare container
 declare push
 declare test
+declare tagPrefix="ghcr.io/ludeeus"
 declare platforms
 declare -a buildCommand
 
@@ -21,7 +22,7 @@ while [[ $# -gt 0 ]]; do
             shift
             ;;
         -t|--tag)
-            buildCommand+=(" --tag ghcr.io/ludeeus/${container}:$2 ")
+            buildCommand+=(" --tag ${tagPrefix}/${container}:$2 ")
             shift
             ;;
         -l|--label)
@@ -38,6 +39,10 @@ while [[ $# -gt 0 ]]; do
         --test)
             test="true"
             ;;
+        --tag-prefix)
+            tagPrefix="$2"
+            shift
+            ;;
         -p|--platfroms)
             platforms="$2"
             shift
@@ -51,7 +56,7 @@ done
 
 if [ "$(jq -c -r .tags "./containerfiles/$container/config.json")" != "null" ]; then
     for tag in $(jq -c -r '.tags? | .[]' "./containerfiles/$container/config.json"); do
-        buildCommand+=(" --tag $tag ")
+        buildCommand+=(" --tag ${tagPrefix}/${container}:$tag ")
     done
 else
     buildCommand+=(" --tag ghcr.io/ludeeus/${container//@(-debian|-alpine)}:latest ")
@@ -70,7 +75,7 @@ if [ "$(jq -c -r -e .labels "./containerfiles/$container/config.json")" != "null
 fi
 
 if [ "$(jq -c -r .dockerfile "./containerfiles/$container/config.json")" != "null" ]; then
-    buildCommand+=("--file ./containerfiles/common/$(jq -c -r .dockerfile "./containerfiles/$container/config.json")")
+    buildCommand+=("--file ./containerfiles/$(jq -c -r .dockerfile "./containerfiles/$container/config.json")")
 else
     buildCommand+=("--file ./containerfiles/$container/Dockerfile")
 fi

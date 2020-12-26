@@ -7,4 +7,4 @@ apk add --no-cache \
     jq \
     make
 
-bash /include/install/container/common.sh
+bash /include/install/container/common.sh "$1"

@@ -1,16 +1,19 @@
 {
-    "dockerfile": "Devcontainer.containerfile",
-    "description": "Devcontainer for developing custom integrations for Home Assistant",
+    "dockerfile": "S6.containerfile",
+    "description": "Base runtime container for Python with S6",
     "args": {
         "BUILD_FROM": "ghcr.io/ludeeus/debian/python",
         "BUILD_FROM_TAG": "3.9.1",
-        "CONTAINER_TYPE": "integration",
         "OS_VARIANT": "debian"
     },
     "tags": [
-        "latest"
+        "latest",
+        "3.9.1",
+        "3.9",
+        "3"
     ],
     "platforms": [
+        "linux/386",
         "linux/amd64"
     ]
 }

@@ -1,5 +1,5 @@
 {
-    "dockerfile": "base/Os.dockerfile",
+    "dockerfile": "Os.containerfile",
     "description": "Base OS container for Debian",
     "args": {
         "BUILD_FROM": "debian",
@@ -7,12 +7,11 @@
         "OS_VARIANT": "debian"
     },
     "tags": [
-        "ghcr.io/ludeeus/debian:latest",
-        "ghcr.io/ludeeus/debian:10.6",
-        "ghcr.io/ludeeus/debian:10"
+        "latest",
+        "10.6",
+        "10"
     ],
     "platforms": [
-        "linux/386",
         "linux/amd64"
     ]
 }
