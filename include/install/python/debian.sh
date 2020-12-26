@@ -19,6 +19,7 @@ apt-get -y install --no-install-recommends \
     libreadline-dev \
     libsqlite3-dev \
     wget \
+    jq \
     curl \
     llvm \
     libncurses5-dev \
