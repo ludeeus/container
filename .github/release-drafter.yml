@@ -101,3 +101,7 @@ categories:
       - 'frontend'
       - 'python'
       - 'integration'
+
+  - title: 'Management'
+    labels:
+      - 'management'
