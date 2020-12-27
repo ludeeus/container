@@ -54,7 +54,7 @@ jobs:
           branch: udpates/${{ matrix.item }}
           title: '${{ steps.has_update.outputs.content }}'
           body: ""
-          labels: ${{ steps.has_update.outputs.content }}
+          labels: ${{ steps.has_update.outputs.labels }}
 
       - name: ✅ Check outputs
         if: steps.has_update.outputs.has_update == 'true'
