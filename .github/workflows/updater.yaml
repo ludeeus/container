@@ -13,6 +13,9 @@ jobs:
         item:
           - python
           - debian
+          - alpine
+          - node
+          - yarn
     steps:
       - name: 📦 Checkout the repository
         uses: actions/checkout@v2
