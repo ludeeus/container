@@ -26,12 +26,15 @@ jobs:
           if [[ -f "./commit" ]]; then
             has_update=true
             content=$(cat ./commit)
+            labels=$(cat ./labels)
           else
             has_update=false
             content=""
+            labels=""
           fi
           echo "::set-output name=has_update::$has_update"
           echo "::set-output name=content::$content"
+          echo "::set-output name=labels::$labels"
 
       - name: ✨ Create Pull Request
         id: cpr
@@ -39,14 +42,14 @@ jobs:
         uses: peter-evans/create-pull-request@v3
         with:
           token: ${{ secrets.REPO_SCOPED_TOKEN }}
-          commit-message: "[auto]: ${{ steps.has_update.outputs.content }}"
+          commit-message: "${{ steps.has_update.outputs.content }}"
           committer: GitHub <noreply@github.com>
           author: GitHub <noreply@github.com>
           base: "main"
           branch: udpates/${{ matrix.item }}
           title: '${{ steps.has_update.outputs.content }}'
           body: ""
-          labels: ${{ matrix.item }}
+          labels: ${{ steps.has_update.outputs.content }}
 
       - name: ✅ Check outputs
         if: steps.has_update.outputs.has_update == 'true'

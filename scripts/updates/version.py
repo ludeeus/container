@@ -30,7 +30,7 @@ class Version:
             tags.append(f"{self.major}")
         if self.minor:
             tags.append(f"{self.major}.{self.minor}")
-        if self.patch:
+        if self.patch != None:
             tags.append(f"{self.major}.{self.minor}.{self.patch}")
         return tags
 
