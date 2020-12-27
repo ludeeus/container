@@ -17,6 +17,7 @@ jobs:
           - node
           - yarn
           - ghcli
+          - s6
     steps:
       - name: 📦 Checkout the repository
         uses: actions/checkout@v2
