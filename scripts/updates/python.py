@@ -45,4 +45,4 @@ with open("./commit", "w") as commit:
     commit.write(f"Update Python from {current.string} to {upstream.string}")
 
 with open("./labels", "w") as labels:
-    labels.write("python debian/python alpine/python")
+    labels.write("python,debian/python,alpine/python")

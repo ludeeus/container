@@ -49,4 +49,4 @@ with open("./commit", "w") as commit:
     commit.write(f"Update NodeJS from {current.string} to {upstream.string}")
 
 with open("./labels", "w") as labels:
-    labels.write("node debian/node alpine/node")
+    labels.write("node,debian/node,alpine/node")
