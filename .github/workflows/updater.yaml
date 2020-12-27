@@ -16,6 +16,7 @@ jobs:
           - alpine
           - node
           - yarn
+          - ghcli
     steps:
       - name: 📦 Checkout the repository
         uses: actions/checkout@v2
