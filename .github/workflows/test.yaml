@@ -21,7 +21,7 @@ jobs:
 
       - name: GH CLI
         env:
-          GITHUB_TOKEN: ${{ secrets.REPO_SCOPED_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           branch=$(date +%s)
           git fetch --unshallow
@@ -30,4 +30,4 @@ jobs:
           git add .
           git commit -m "test"
           git push --set-upstream origin "$branch"
-          gh pr create --title "test" --body "test"
+          gh pr create --fill
