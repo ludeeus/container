@@ -16,12 +16,12 @@ jobs:
       - name: Initialize git
         uses: home-assistant/actions/helpers/git-init@master
         with:
-          name: Ludeeus
-          email: hi@ludeeus
+          name: GitHub
+          email: noreply@github.com
 
       - name: GH CLI
         env:
-          GITHUB_TOKEN: ${{ secrets.GHCR_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.REPO_SCOPED_TOKEN }}
         run: |
           git checkout -b test
           echo "test" > test
