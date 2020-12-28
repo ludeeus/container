@@ -15,5 +15,8 @@ jobs:
 
       - name: GH CLI
         run: |
-          export GITHUB_TOKEN="${{ secrets.GITHUB_TOKEN }}"
-          gh issue list
+          echo "test" > test
+          git add .
+          git commit -m "test"
+          export GITHUB_TOKEN="${{ secrets.GHCR_TOKEN }}"
+          gh pr create --title "test" --body "test"
