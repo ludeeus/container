@@ -23,9 +23,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.REPO_SCOPED_TOKEN }}
         run: |
-          git checkout -b test
+          branch=$(date +%s)
+          git checkout -b "$branch"
           echo "test" > test
           git add .
           git commit -m "test"
-          git push --set-upstream origin test
+          git push --set-upstream origin "$branch"
           gh pr create --title "test" --body "test"
