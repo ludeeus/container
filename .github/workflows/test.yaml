@@ -21,8 +21,10 @@ jobs:
 
       - name: GH CLI
         run: |
+          git checkout -b test
           echo "test" > test
           git add .
           git commit -m "test"
+          git push
           export GITHUB_TOKEN="${{ secrets.GHCR_TOKEN }}"
           gh pr create --title "test" --body "test"
