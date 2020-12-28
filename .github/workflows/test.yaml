@@ -1,0 +1,33 @@
+name: TEST
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: TEST
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v2
+
+      - name: Initialize git
+        uses: home-assistant/actions/helpers/git-init@master
+        with:
+          name: GitHub
+          email: noreply@github.com
+
+      - name: GH CLI
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          branch=$(date +%s)
+          git fetch --unshallow
+          git checkout -b "$branch"
+          echo "test" > test
+          git add .
+          git commit -m "test"
+          git push --set-upstream origin "$branch"
+          gh pr create --fill
