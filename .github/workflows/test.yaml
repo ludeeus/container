@@ -24,6 +24,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.REPO_SCOPED_TOKEN }}
         run: |
           branch=$(date +%s)
+          git fetch --unshallow
           git checkout -b "$branch"
           echo "test" > test
           git add .
