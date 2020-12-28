@@ -14,12 +14,10 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Initialize git
-        if: needs.init.outputs.publish == 'true'
         uses: home-assistant/actions/helpers/git-init@master
         with:
           name: Ludeeus
           email: hi@ludeeus
-          token: ${{ secrets.GHCR_TOKEN }}
 
       - name: GH CLI
         run: |
