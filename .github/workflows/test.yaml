@@ -1,0 +1,17 @@
+name: TEST
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    name: TEST
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v2
+
+      - name: GH CLI
+        run: gh issue list
