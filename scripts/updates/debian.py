@@ -32,7 +32,7 @@ tags = [
 
 upstream = Version(tags.pop().split("-")[0])
 
-if current.equals(upstream):
+if current == upstream:
     print(f"Nothing to do, both current and upstream is {current}")
     exit(0)
 

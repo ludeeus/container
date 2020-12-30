@@ -15,7 +15,7 @@ install_s6_version = JsonFile("./include/install/s6/versions.json")
 current = Version(install_s6_version.read()["s6"])
 upstream = Version(github_release("just-containers/s6-overlay"))
 
-if current.equals(upstream):
+if current == upstream:
     print(f"Nothing to do, both current and upstream is {current}")
     exit(0)
 

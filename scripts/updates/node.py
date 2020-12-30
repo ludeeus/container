@@ -26,7 +26,7 @@ current = Version(install_node_version.read()["node"])
 request = requests.get(URL).text
 upstream = Version(request.split(" Current")[0].split("Download ")[-1])
 
-if current.equals(upstream):
+if current == upstream:
     print(f"Nothing to do, both current and upstream is {current}")
     exit(0)
 

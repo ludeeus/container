@@ -15,7 +15,7 @@ install_ghcli_version = JsonFile("./include/install/ghcli/versions.json")
 current = Version(install_ghcli_version.read()["ghcli"])
 upstream = Version(github_release("cli/cli"))
 
-if current.equals(upstream):
+if current == upstream:
     print(f"Nothing to do, both current and upstream is {current}")
     exit(0)
 

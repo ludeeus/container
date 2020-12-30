@@ -15,7 +15,7 @@ install_yarn_version = JsonFile("./include/install/node/versions.json")
 current = Version(install_yarn_version.read()["yarn"])
 upstream = Version(github_release("yarnpkg/yarn"))
 
-if current.equals(upstream):
+if current == upstream:
     print(f"Nothing to do, both current and upstream is {current}")
     exit(0)
 

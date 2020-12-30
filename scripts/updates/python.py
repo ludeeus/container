@@ -26,7 +26,7 @@ current = Version(install_python_version.read()["python"])
 request = requests.get(URL).text
 upstream = Version(request.split(">Download Python ")[2].split("<")[0])
 
-if current.equals(upstream):
+if current == upstream:
     print(f"Nothing to do, both current and upstream is {current}")
     exit(0)
 
