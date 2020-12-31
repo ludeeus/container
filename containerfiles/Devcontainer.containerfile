@@ -14,7 +14,7 @@ RUN \
     sh /include/init.sh \
     && bash /include/install/devcontainer/${OS_VARIANT}.sh \
     && bash /include/install/ghcli/${OS_VARIANT}.sh \
-    && bash /include/install/container/${OS_VARIANT}.sh \
+    && bash /include/install/container/${OS_VARIANT}.sh ${CONTAINER_TYPE} \
     && if [ -f /include/install/devcontainer/${CONTAINER_TYPE}.sh ]; then \
         bash /include/install/devcontainer/${CONTAINER_TYPE}.sh ${OS_VARIANT}; \
     fi \
