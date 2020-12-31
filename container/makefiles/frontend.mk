@@ -1,4 +1,4 @@
-start:  ## Start Home Assistant with the integration loaded
+start:  ## Start Home Assistant
 	@bash /opt/container/helpers/common/start.sh
 
 install:  ## Install Home Assistant dev in the container
