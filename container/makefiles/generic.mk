@@ -10,11 +10,5 @@ install:  ## Install Home Assistant dev in the container
 upgrade:  ## Upgrade Home Assistant to latest dev in the container
 	install
 
-run:
-	start
-
 check-config: ## Check Home Assistant config
 	@hass -c /config --script check_config
-
-init: ## Initialize the dev env
-	@bash /opt/container/helpers/integration/init.sh

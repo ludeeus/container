@@ -19,8 +19,11 @@ jobs:
           - ghcli
           - s6
     steps:
-      - name: 📦 Checkout the repository
+      - name: 📥 Checkout the repository
         uses: actions/checkout@v2
+
+      - name: 📦 Install requirements
+        run: make requirements
 
       - name: 🏃 ${{ matrix.item }} check
         run: python3 ./scripts/updates/${{ matrix.item }}.py
