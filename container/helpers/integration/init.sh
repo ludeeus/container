@@ -16,6 +16,6 @@ git clone https://github.com/custom-components/integration-blueprint.git /tmp/in
 
 rm -R /tmp/init/.git
 rm -R /tmp/init/.devcontainer
-cp -a /tmp/init/. $(GetWorkspaceName)
-cd $(GetWorkspaceName) || exit 1
+cp -a /tmp/init/. "$(GetWorkspaceName)"
+cd "$(GetWorkspaceName)" || exit 1
 git init

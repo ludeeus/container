@@ -14,10 +14,10 @@ rm -R /tmp/init > /dev/null 2>&1
 
 echo "Before you get started we need some information to set it up"
 echo
-read -p 'What IP is Home Assistant running on? ' HA_IP
-read -p 'What is the Home Assistant security token that Netdaemon should use? ' HA_LAT
-read -p 'What is your GitHub username? ' GH_USER
-read -p 'What should be the name of the project? ' PROJECT_NAME
+read -p -r 'What IP is Home Assistant running on? ' HA_IP
+read -p -r 'What is the Home Assistant security token that Netdaemon should use? ' HA_LAT
+read -p -r 'What is your GitHub username? ' GH_USER
+read -p -r 'What should be the name of the project? ' PROJECT_NAME
 
 if [ -z "$HA_IP" ];then HA_IP="127.0.0.1"; fi
 if [ -z "$HA_LAT" ];then HA_LAT="XXXXXXXX"; fi
@@ -43,6 +43,6 @@ rm -R /tmp/init/tmp
 
 rm -R /tmp/init/.git
 rm -R /tmp/init/.devcontainer
-cp -a /tmp/init/. $(GetWorkspaceName)
-cd $(GetWorkspaceName) || exit 1
+cp -a /tmp/init/. "$(GetWorkspaceName)"
+cd "$(GetWorkspaceName)" || exit 1
 git init
