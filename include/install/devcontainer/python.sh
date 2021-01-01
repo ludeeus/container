@@ -4,7 +4,8 @@ echo -e "\\033[0;34mRunning install script 'devcontainer/python.sh'\\033[0m"
 
 python3 -m pip --disable-pip-version-check install -U \
     pylint \
-    black
+    black \
+    colorlog
 
 ln -sf /usr/local/python/bin/python3 /usr/bin/python3
 ln -sf /usr/local/python/bin/python3 /usr/bin/python
