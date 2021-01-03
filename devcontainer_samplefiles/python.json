@@ -1,5 +1,5 @@
 {
-	"image": "ghcr.io/ludeeus/devcontainer/python:latest",
+	"image": "ghcr.io/ludeeus/devcontainer/python:stable",
 	"context": "..",
 	"postCreateCommand": "python3 -m pip install -r requirements.txt",
 	"extensions": [

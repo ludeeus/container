@@ -1,5 +1,5 @@
 {
-	"image": "ghcr.io/ludeeus/devcontainer/integration:latest",
+	"image": "ghcr.io/ludeeus/devcontainer/integration:stable",
 	"context": "..",
 	"appPort": [
 		"8123:8123"

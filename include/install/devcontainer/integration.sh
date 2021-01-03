@@ -13,3 +13,8 @@ apt-get install -y --no-install-recommends \
 
 
 mkdir -p /config/custom_components
+
+python3 -m pip --disable-pip-version-check install --upgrade \
+    git+git://github.com/home-assistant/home-assistant.git@dev
+
+bash /include/cleanup/python.sh
