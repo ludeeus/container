@@ -3,7 +3,7 @@
     "description": "Devcontainer for developing with NodeJS",
     "args": {
         "BUILD_FROM": "ghcr.io/ludeeus/debian/node",
-        "BUILD_FROM_TAG": "15.5.0",
+        "BUILD_FROM_TAG": "15.5.1",
         "CONTAINER_TYPE": "node",
         "OS_VARIANT": "debian"
     },
@@ -11,7 +11,7 @@
         "latest",
         "15",
         "15.5",
-        "15.5.0"
+        "15.5.1"
     ],
     "platforms": [
         "linux/amd64"
