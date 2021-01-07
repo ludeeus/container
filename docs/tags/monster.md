@@ -31,8 +31,8 @@ Package | Version
 `libc-dev` | 0.7.2-r3
 `libffi-dev` | 3.3-r2
 `make` | 4.3-r0
-`nodejs` | 12.18.4-r0
-`npm` | 12.18.4-r0
+`nodejs` | 12.20.1-r0
+`npm` | 12.20.1-r0
 `openssh` | 8.3_p1-r1
 `openssl-dev` | 1.1.1i-r0
 `py3-pip` | 20.1.1-r0
@@ -72,8 +72,8 @@ RUN  \
         libc-dev=0.7.2-r3 \ 
         libffi-dev=3.3-r2 \ 
         make=4.3-r0 \ 
-        nodejs=12.18.4-r0 \ 
-        npm=12.18.4-r0 \ 
+        nodejs=12.20.1-r0 \ 
+        npm=12.20.1-r0 \ 
         openssh=8.3_p1-r1 \ 
         openssl-dev=1.1.1i-r0 \ 
         py3-pip=20.1.1-r0 \ 
