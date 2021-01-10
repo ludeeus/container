@@ -24,8 +24,8 @@ Package | Version
 -- | --
 `bash` | 5.0.17-r0
 `git` | 2.26.2-r0
-`nodejs` | 12.18.4-r0
-`npm` | 12.18.4-r0
+`nodejs` | 12.20.1-r0
+`npm` | 12.20.1-r0
 `openssh` | 8.3_p1-r1
 `openssl-dev` | 1.1.1i-r0
 `yarn` | 1.22.4-r0
@@ -49,8 +49,8 @@ RUN  \
     apk add --no-cache  \ 
         bash=5.0.17-r0 \ 
         git=2.26.2-r0 \ 
-        nodejs=12.18.4-r0 \ 
-        npm=12.18.4-r0 \ 
+        nodejs=12.20.1-r0 \ 
+        npm=12.20.1-r0 \ 
         openssh=8.3_p1-r1 \ 
         openssl-dev=1.1.1i-r0 \ 
         yarn=1.22.4-r0 \ 
