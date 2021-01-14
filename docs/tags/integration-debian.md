@@ -44,7 +44,7 @@ Variable | Value
 Package | Version 
 -- | --
 `black` | 20.8b1
-`colorlog` | 4.6.2
+`colorlog` | 4.7.2
 `pylint` | 2.6.0
 
 
@@ -87,7 +87,7 @@ RUN  \
         wheel \ 
     && python3 -m pip install --no-cache-dir -U  \ 
         black==20.8b1 \ 
-        colorlog==4.6.2 \ 
+        colorlog==4.7.2 \ 
         pylint==2.6.0 \ 
     && chmod +x /usr/bin/container \ 
     && ln -s /usr/bin/python3 /usr/bin/python \ 
