@@ -10,11 +10,13 @@ categories:
 
   - title: 'alpine/node'
     labels:
+      - 'alpine/base'
       - 'alpine/node'
       - 'node'
 
   - title: 'alpine/python'
     labels:
+      - 'alpine/base'
       - 'alpine/python'
       - 'python'
 
@@ -43,11 +45,13 @@ categories:
 
   - title: 'debian/node'
     labels:
+      - 'debian/base'
       - 'debian/node'
       - 'node'
 
   - title: 'debian/python'
     labels:
+      - 'debian/base'
       - 'debian/python'
       - 'python'
 
