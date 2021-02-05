@@ -23,7 +23,7 @@ if current == upstream:
 install_s6_version.update("s6", upstream.string)
 
 with open("./commit", "w") as commit:
-    commit.write(f"Update GitHub CLI from {current.string} to {upstream.string}")
+    commit.write(f"Update S6 from {current.string} to {upstream.string}")
 
 with open("./labels", "w") as labels:
     labels.write("S6")
