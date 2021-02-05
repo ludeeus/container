@@ -2,6 +2,8 @@ version: 2
 updates:
 - package-ecosystem: pip
   directory: "/"
+  default_labels:
+    - dependabot
   schedule:
     interval: daily
     time: "06:00"
