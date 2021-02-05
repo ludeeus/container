@@ -3,14 +3,14 @@
     "description": "Base OS container for Alpine with S6",
     "args": {
         "BUILD_FROM": "ghcr.io/ludeeus/alpine/base",
-        "BUILD_FROM_TAG": "3.12.3",
+        "BUILD_FROM_TAG": "3.13.1",
         "OS_VARIANT": "alpine"
     },
     "tags": [
         "latest",
-        "3.12.3",
-        "3.12",
-        "3"
+        "3",
+        "3.13",
+        "3.13.1"
     ],
     "platforms": [
         "linux/amd64"
