@@ -3,7 +3,7 @@
     "description": "Base runtime container for Python",
     "args": {
         "BUILD_FROM": "ghcr.io/ludeeus/debian/base",
-        "BUILD_FROM_TAG": "10.7",
+        "BUILD_FROM_TAG": "10.8",
         "OS_VARIANT": "debian",
         "INSTALL_RUNTIME": "python",
         "RUNTIME_PATH": "/usr/local/python/bin"

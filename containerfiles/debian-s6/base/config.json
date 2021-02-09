@@ -3,13 +3,13 @@
     "description": "Base OS container for Debian with S6",
     "args": {
         "BUILD_FROM": "ghcr.io/ludeeus/debian/base",
-        "BUILD_FROM_TAG": "10.7",
+        "BUILD_FROM_TAG": "10.8",
         "OS_VARIANT": "debian"
     },
     "tags": [
         "latest",
         "10",
-        "10.7"
+        "10.8"
     ],
     "platforms": [
         "linux/amd64"
