@@ -3,13 +3,13 @@
     "description": "Base OS container for Debian",
     "args": {
         "BUILD_FROM": "debian",
-        "BUILD_FROM_TAG": "10.8-slim",
+        "BUILD_FROM_TAG": "10.9-slim",
         "OS_VARIANT": "debian"
     },
     "tags": [
         "latest",
         "10",
-        "10.8"
+        "10.9"
     ],
     "platforms": [
         "linux/amd64"
