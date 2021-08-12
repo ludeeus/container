@@ -24,7 +24,7 @@ function StartHomeAssistant {
   if test -d "$(GetWorkspaceName)custom_components"; then
     echo "Symlink the custom component directory"
 
-    if test -d "custom_components"; then
+    if test -d "/config/custom_components"; then
       rm -R /config/custom_components
     fi
 
