@@ -3,7 +3,7 @@
     "description": "Base runtime container for NodeJS",
     "args": {
         "BUILD_FROM": "ghcr.io/ludeeus/alpine/base",
-        "BUILD_FROM_TAG": "3.13.5",
+        "BUILD_FROM_TAG": "3.14.1",
         "OS_VARIANT": "alpine",
         "INSTALL_RUNTIME": "node",
         "RUNTIME_PATH": "/usr/local/node/bin:/usr/local/yarn/bin"
@@ -11,8 +11,8 @@
     "tags": [
         "latest",
         "16",
-        "16.3",
-        "16.3.0"
+        "16.6",
+        "16.6.1"
     ],
     "platforms": [
         "linux/amd64"
