@@ -47,7 +47,7 @@ jobs:
       - name: ✨ Create Pull Request
         id: cpr
         if: steps.has_update.outputs.has_update == 'true'
-        uses: peter-evans/create-pull-request@v3.10.0
+        uses: peter-evans/create-pull-request@v3.10.1
         with:
           token: ${{ secrets.REPO_SCOPED_TOKEN }}
           commit-message: "${{ steps.has_update.outputs.content }}"
