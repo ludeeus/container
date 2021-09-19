@@ -8,6 +8,8 @@ containername=${container#*/}
 
 function shouldBuild () { echo "true" && exit;}
 
+if [[ "$changed" =~ .github/workflows/builder.yaml ]]; then shouldBuild; fi
+
 if [[ "$changed" =~ $container ]]; then shouldBuild; fi
 if [[ "$changed" =~ Os.containerfile ]]; then shouldBuild; fi
 
