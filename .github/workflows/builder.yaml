@@ -84,11 +84,7 @@ jobs:
 
       - name: 🔓 Registry login
         if: steps.should_publish.outputs.publish == 'true'
-        uses: docker/login-action@v1.10.0
-        with:
-          registry: ghcr.io
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+        run: echo ${{ secrets.GHCR_TOKEN }} | docker login ghcr.io -u ${{ secrets.GHCR_USER }} --password-stdin
 
       - name: 🛠️ Build ${{ matrix.tag }}
         if: steps.should_build.outputs.build == 'true'
@@ -149,11 +145,7 @@ jobs:
 
       - name: 🔓 Registry login
         if: steps.should_publish.outputs.publish == 'true'
-        uses: docker/login-action@v1.10.0
-        with:
-          registry: ghcr.io
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+        run: echo ${{ secrets.GHCR_TOKEN }} | docker login ghcr.io -u ${{ secrets.GHCR_USER }} --password-stdin
 
       - name: 🛠️ Build ${{ matrix.tag }}
         if: steps.should_build.outputs.build == 'true'
@@ -216,11 +208,7 @@ jobs:
 
       - name: 🔓 Registry login
         if: steps.should_publish.outputs.publish == 'true'
-        uses: docker/login-action@v1.10.0
-        with:
-          registry: ghcr.io
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+        run: echo ${{ secrets.GHCR_TOKEN }} | docker login ghcr.io -u ${{ secrets.GHCR_USER }} --password-stdin
 
       - name: 🛠️ Build ${{ matrix.tag }}
         if: steps.should_build.outputs.build == 'true'
@@ -283,11 +271,7 @@ jobs:
 
       - name: 🔓 Registry login
         if: steps.should_publish.outputs.publish == 'true'
-        uses: docker/login-action@v1.10.0
-        with:
-          registry: ghcr.io
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+        run: echo ${{ secrets.GHCR_TOKEN }} | docker login ghcr.io -u ${{ secrets.GHCR_USER }} --password-stdin
 
       - name: 🛠️ Build ${{ matrix.tag }}
         if: steps.should_build.outputs.build == 'true'
@@ -350,11 +334,7 @@ jobs:
 
       - name: 🔓 Registry login
         if: steps.should_publish.outputs.publish == 'true'
-        uses: docker/login-action@v1.10.0
-        with:
-          registry: ghcr.io
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+        run: echo ${{ secrets.GHCR_TOKEN }} | docker login ghcr.io -u ${{ secrets.GHCR_USER }} --password-stdin
 
       - name: 🛠️ Build ${{ matrix.tag }}
         if: steps.should_build.outputs.build == 'true'
@@ -414,11 +394,7 @@ jobs:
 
       - name: 🔓 Registry login
         if: steps.should_publish.outputs.publish == 'true'
-        uses: docker/login-action@v1.10.0
-        with:
-          registry: ghcr.io
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+        run: echo ${{ secrets.GHCR_TOKEN }} | docker login ghcr.io -u ${{ secrets.GHCR_USER }} --password-stdin
 
       - name: 🛠️ Build ${{ matrix.tag }}
         if: steps.should_build.outputs.build == 'true'
