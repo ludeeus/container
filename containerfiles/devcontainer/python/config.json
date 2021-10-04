@@ -3,15 +3,15 @@
     "description": "Devcontainer for developing with Python",
     "args": {
         "BUILD_FROM": "ghcr.io/ludeeus/debian/python",
-        "BUILD_FROM_TAG": "3.9.7",
+        "BUILD_FROM_TAG": "3.10.0",
         "CONTAINER_TYPE": "python",
         "OS_VARIANT": "debian"
     },
     "tags": [
         "latest",
         "3",
-        "3.9",
-        "3.9.7"
+        "3.10",
+        "3.10.0"
     ],
     "platforms": [
         "linux/amd64"
