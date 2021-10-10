@@ -1,0 +1,67 @@
+name: 'ludeeus/container build action'
+inputs:
+  tag:
+    description: The image that should be built
+    required: true
+  user:
+    description: The user to be used to authenticate against ghcr.io
+    required: true
+  token:
+    description: The token to be used to authenticate against ghcr.io
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: ❓ Should build ${{ inputs.tag }}?
+      shell: bash
+      id: should_build
+      run: |
+        if [[ "${{ github.event_name }}" == "release" ]]; then
+          should_build=true
+        else
+          should_build=$(bash ./scripts/should_build.sh "${{ inputs.tag }}" "${{ steps.changed_files.outputs.all }}")
+        fi
+        echo "::set-output name=build::$should_build"
+
+    - name: ❔ Should publish ${{ inputs.tag }}?
+      shell: bash
+      id: should_publish
+      run: |
+        if [[ "${{ steps.should_build.outputs.build }}" == "true" ]]; then
+          if [[ "${{ github.event_name }}" == "release" ]] || [[ "${{ github.event_name }}" == "push" ]]; then
+            echo "::set-output name=publish::true"
+          else
+            echo "::set-output name=publish::false"
+          fi
+        fi
+
+    - name: ➕ Additional arguments
+      shell: bash
+      id: arguments
+      run: |
+        if [[ "${{ steps.should_build.outputs.build }}" == "true" ]]; then
+          declare -a args
+          if [ "${{ steps.should_publish.outputs.publish }}" == "true" ]; then
+            args+=(" --push ")
+          fi
+          if [[ "${{ github.event_name }}" == "release" ]]; then
+            args+=(" --tag stable ")
+            args+=(" --tag $(echo ${{ github.ref }} | awk -F"/" '{print $NF}' ) ")
+          fi
+          echo "${args[@]}"
+          echo "::set-output name=arguments::${args[@]}"
+        fi
+
+    - name: 🔓 Registry login
+      shell: bash
+      run: |
+        if [[ "${{ steps.should_publish.outputs.publish }}" == "true" ]]; then
+          echo ${{ inputs.token }} | docker login ghcr.io -u ${{ inputs.user }} --password-stdin
+        fi
+
+    - name: 🛠️ Build ${{ inputs.tag }}
+      shell: bash
+      run: |
+        if [[ "${{ steps.should_build.outputs.build }}" == "true" ]]; then
+          bash ./scripts/build.sh --container ${{ inputs.tag }} ${{ steps.arguments.outputs.arguments }}
+        fi
