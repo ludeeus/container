@@ -61,7 +61,6 @@ runs:
 
     - name: 🛠️ Build ${{ inputs.tag }}
       shell: bash
-      if: steps.should_build.outputs.build == 'true'
       run: |
         if [[ "${{ steps.should_build.outputs.build }}" == "true" ]]; then
           bash ./scripts/build.sh --container ${{ inputs.tag }} ${{ steps.arguments.outputs.arguments }}
