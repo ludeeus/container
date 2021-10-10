@@ -18,6 +18,7 @@ runs:
       uses: jitterbit/get-changed-files@v1
 
     - name: ❓ Should build ${{ inputs.tag }}?
+      shell: bash
       id: should_build
       run: |
         if [[ "${{ github.event_name }}" == "release" ]]; then
@@ -28,6 +29,7 @@ runs:
         echo "::set-output name=build::$should_build"
 
     - name: ❔ Should publish ${{ inputs.tag }}?
+      shell: bash
       id: should_publish
       if: steps.should_build.outputs.build == 'true'
       run: |
@@ -38,6 +40,7 @@ runs:
         fi
 
     - name: ➕ Additional arguments
+      shell: bash
       id: arguments
       if: steps.should_build.outputs.build == 'true'
       run: |
@@ -53,9 +56,11 @@ runs:
         echo "::set-output name=arguments::${args[@]}"
 
     - name: 🔓 Registry login
+      shell: bash
       if: steps.should_publish.outputs.publish == 'true'
       run: echo ${{ inputs.token }} | docker login ghcr.io -u ${{ inputs.user }} --password-stdin
 
     - name: 🛠️ Build ${{ inputs.tag }}
+      shell: bash
       if: steps.should_build.outputs.build == 'true'
       run: bash ./scripts/build.sh --container ${{ inputs.tag }} ${{ steps.arguments.outputs.arguments }}
