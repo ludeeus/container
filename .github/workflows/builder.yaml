@@ -48,7 +48,7 @@ jobs:
         uses: jitterbit/get-changed-files@v1
 
       - name: 🛠️ Run build action
-        uses: .github/build-action
+        uses: ./.github/build-action
         with:
           tag: matrix.tag
           user: secrets.GHCR_USER
@@ -73,7 +73,7 @@ jobs:
         uses: jitterbit/get-changed-files@v1
 
       - name: 🛠️ Run build action
-        uses: .github/build-action
+        uses: ./.github/build-action
         with:
           tag: matrix.tag
           user: secrets.GHCR_USER
@@ -100,7 +100,7 @@ jobs:
         uses: jitterbit/get-changed-files@v1
 
       - name: 🛠️ Run build action
-        uses: .github/build-action
+        uses: ./.github/build-action
         with:
           tag: matrix.tag
           user: secrets.GHCR_USER
@@ -127,7 +127,7 @@ jobs:
         uses: jitterbit/get-changed-files@v1
 
       - name: 🛠️ Run build action
-        uses: .github/build-action
+        uses: ./.github/build-action
         with:
           tag: matrix.tag
           user: secrets.GHCR_USER
@@ -154,7 +154,7 @@ jobs:
         uses: jitterbit/get-changed-files@v1
 
       - name: 🛠️ Run build action
-        uses: .github/build-action
+        uses: ./.github/build-action
         with:
           tag: matrix.tag
           user: secrets.GHCR_USER
@@ -178,7 +178,7 @@ jobs:
         uses: jitterbit/get-changed-files@v1
 
       - name: 🛠️ Run build action
-        uses: .github/build-action
+        uses: ./.github/build-action
         with:
           tag: matrix.tag
           user: secrets.GHCR_USER
