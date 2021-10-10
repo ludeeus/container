@@ -42,8 +42,13 @@ jobs:
       - name: 📥 Checkout the repository
         uses: actions/checkout@v2
 
+      - name: 📃 Get changed files
+        if: github.event_name != 'release'
+        id: changed_files
+        uses: jitterbit/get-changed-files@v1
+
       - name: 🛠️ Run build action
-        uses: ./.github/build-action
+        uses: .github/build-action
         with:
           tag: matrix.tag
           user: secrets.GHCR_USER
@@ -62,8 +67,13 @@ jobs:
       - name: 📥 Checkout the repository
         uses: actions/checkout@v2
 
+      - name: 📃 Get changed files
+        if: github.event_name != 'release'
+        id: changed_files
+        uses: jitterbit/get-changed-files@v1
+
       - name: 🛠️ Run build action
-        uses: ./.github/build-action
+        uses: .github/build-action
         with:
           tag: matrix.tag
           user: secrets.GHCR_USER
@@ -84,8 +94,13 @@ jobs:
       - name: 📥 Checkout the repository
         uses: actions/checkout@v2
 
+      - name: 📃 Get changed files
+        if: github.event_name != 'release'
+        id: changed_files
+        uses: jitterbit/get-changed-files@v1
+
       - name: 🛠️ Run build action
-        uses: ./.github/build-action
+        uses: .github/build-action
         with:
           tag: matrix.tag
           user: secrets.GHCR_USER
@@ -106,8 +121,13 @@ jobs:
       - name: 📥 Checkout the repository
         uses: actions/checkout@v2
 
+      - name: 📃 Get changed files
+        if: github.event_name != 'release'
+        id: changed_files
+        uses: jitterbit/get-changed-files@v1
+
       - name: 🛠️ Run build action
-        uses: ./.github/build-action
+        uses: .github/build-action
         with:
           tag: matrix.tag
           user: secrets.GHCR_USER
@@ -128,8 +148,13 @@ jobs:
       - name: 📦 Checkout the repository
         uses: actions/checkout@v2
 
+      - name: 📃 Get changed files
+        if: github.event_name != 'release'
+        id: changed_files
+        uses: jitterbit/get-changed-files@v1
+
       - name: 🛠️ Run build action
-        uses: ./.github/build-action
+        uses: .github/build-action
         with:
           tag: matrix.tag
           user: secrets.GHCR_USER
@@ -147,8 +172,13 @@ jobs:
       - name: 📦 Checkout the repository
         uses: actions/checkout@v2
 
+      - name: 📃 Get changed files
+        if: github.event_name != 'release'
+        id: changed_files
+        uses: jitterbit/get-changed-files@v1
+
       - name: 🛠️ Run build action
-        uses: ./.github/build-action
+        uses: .github/build-action
         with:
           tag: matrix.tag
           user: secrets.GHCR_USER

@@ -12,11 +12,6 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: 📃 Get changed files
-      if: github.event_name != 'release'
-      id: changed_files
-      uses: jitterbit/get-changed-files@v1
-
     - name: ❓ Should build ${{ inputs.tag }}?
       shell: bash
       id: should_build
@@ -31,36 +26,43 @@ runs:
     - name: ❔ Should publish ${{ inputs.tag }}?
       shell: bash
       id: should_publish
-      if: steps.should_build.outputs.build == 'true'
       run: |
-        if [[ "${{ github.event_name }}" == "release" ]] || [[ "${{ github.event_name }}" == "push" ]]; then
-          echo "::set-output name=publish::true"
-        else
-          echo "::set-output name=publish::false"
+        if [[ "${{ steps.should_build.outputs.build }}" == "true" ]]; then
+          if [[ "${{ github.event_name }}" == "release" ]] || [[ "${{ github.event_name }}" == "push" ]]; then
+            echo "::set-output name=publish::true"
+          else
+            echo "::set-output name=publish::false"
+          fi
         fi
 
     - name: ➕ Additional arguments
       shell: bash
       id: arguments
-      if: steps.should_build.outputs.build == 'true'
       run: |
-        declare -a args
-        if [ "${{ steps.should_publish.outputs.publish }}" == "true" ]; then
-          args+=(" --push ")
+        if [[ "${{ steps.should_build.outputs.build }}" == "true" ]]; then
+          declare -a args
+          if [ "${{ steps.should_publish.outputs.publish }}" == "true" ]; then
+            args+=(" --push ")
+          fi
+          if [[ "${{ github.event_name }}" == "release" ]]; then
+            args+=(" --tag stable ")
+            args+=(" --tag $(echo ${{ github.ref }} | awk -F"/" '{print $NF}' ) ")
+          fi
+          echo "${args[@]}"
+          echo "::set-output name=arguments::${args[@]}"
         fi
-        if [[ "${{ github.event_name }}" == "release" ]]; then
-          args+=(" --tag stable ")
-          args+=(" --tag $(echo ${{ github.ref }} | awk -F"/" '{print $NF}' ) ")
-        fi
-        echo "${args[@]}"
-        echo "::set-output name=arguments::${args[@]}"
 
     - name: 🔓 Registry login
       shell: bash
-      if: steps.should_publish.outputs.publish == 'true'
-      run: echo ${{ inputs.token }} | docker login ghcr.io -u ${{ inputs.user }} --password-stdin
+      run: |
+        if [[ "${{ steps.should_publish.outputs.publish }}" == "true" ]]; then
+          echo ${{ inputs.token }} | docker login ghcr.io -u ${{ inputs.user }} --password-stdin
+        fi
 
     - name: 🛠️ Build ${{ inputs.tag }}
       shell: bash
       if: steps.should_build.outputs.build == 'true'
-      run: bash ./scripts/build.sh --container ${{ inputs.tag }} ${{ steps.arguments.outputs.arguments }}
+      run: |
+        if [[ "${{ steps.should_build.outputs.build }}" == "true" ]]; then
+          bash ./scripts/build.sh --container ${{ inputs.tag }} ${{ steps.arguments.outputs.arguments }}
+        fi
