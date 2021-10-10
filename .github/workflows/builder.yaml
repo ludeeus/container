@@ -50,9 +50,9 @@ jobs:
       - name: 🛠️ Run build action
         uses: ./.github/build-action
         with:
-          tag: matrix.tag
-          user: secrets.GHCR_USER
-          token: secrets.GHCR_TOKEN
+          tag: ${{ matrix.tag }}
+          user: ${{ secrets.GHCR_USER }}
+          token: ${{ secrets.GHCR_TOKEN }}
 
   base-os-s6:
     name: 🔨 Build ${{ matrix.tag }}
@@ -75,9 +75,9 @@ jobs:
       - name: 🛠️ Run build action
         uses: ./.github/build-action
         with:
-          tag: matrix.tag
-          user: secrets.GHCR_USER
-          token: secrets.GHCR_TOKEN
+          tag: ${{ matrix.tag }}
+          user: ${{ secrets.GHCR_USER }}
+          token: ${{ secrets.GHCR_TOKEN }}
 
   base-runtime:
     name: 🔨 Build ${{ matrix.tag }}
@@ -102,9 +102,9 @@ jobs:
       - name: 🛠️ Run build action
         uses: ./.github/build-action
         with:
-          tag: matrix.tag
-          user: secrets.GHCR_USER
-          token: secrets.GHCR_TOKEN
+          tag: ${{ matrix.tag }}
+          user: ${{ secrets.GHCR_USER }}
+          token: ${{ secrets.GHCR_TOKEN }}
 
   base-runtime-s6:
     name: 🔨 Build ${{ matrix.tag }}
@@ -129,9 +129,9 @@ jobs:
       - name: 🛠️ Run build action
         uses: ./.github/build-action
         with:
-          tag: matrix.tag
-          user: secrets.GHCR_USER
-          token: secrets.GHCR_TOKEN
+          tag: ${{ matrix.tag }}
+          user: ${{ secrets.GHCR_USER }}
+          token: ${{ secrets.GHCR_TOKEN }}
 
   devcontainer:
     name:  🔨 Build ${{ matrix.tag }}
@@ -156,9 +156,9 @@ jobs:
       - name: 🛠️ Run build action
         uses: ./.github/build-action
         with:
-          tag: matrix.tag
-          user: secrets.GHCR_USER
-          token: secrets.GHCR_TOKEN
+          tag: ${{ matrix.tag }}
+          user: ${{ secrets.GHCR_USER }}
+          token: ${{ secrets.GHCR_TOKEN }}
 
   lastrun:
     name:  🔨 Build ${{ matrix.tag }}
@@ -180,6 +180,6 @@ jobs:
       - name: 🛠️ Run build action
         uses: ./.github/build-action
         with:
-          tag: matrix.tag
-          user: secrets.GHCR_USER
-          token: secrets.GHCR_TOKEN
+          tag: ${{ matrix.tag }}
+          user: ${{ secrets.GHCR_USER }}
+          token: ${{ secrets.GHCR_TOKEN }}
