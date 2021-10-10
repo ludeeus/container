@@ -42,6 +42,13 @@ jobs:
       - name: 📥 Checkout the repository
         uses: actions/checkout@v2
 
+      - name: 🏗 Set up build cache
+        uses: actions/cache@v2.1.6
+        with:
+          path: /tmp/.docker-cache
+          key: docker-${{ matrix.tag }}-${{ github.sha }}
+          restore-keys: docker-${{ matrix.tag }}
+
       - name: 📃 Get changed files
         if: github.event_name != 'release'
         id: changed_files
@@ -102,6 +109,13 @@ jobs:
     steps:
       - name: 📥 Checkout the repository
         uses: actions/checkout@v2
+
+      - name: 🏗 Set up build cache
+        uses: actions/cache@v2.1.6
+        with:
+          path: /tmp/.docker-cache
+          key: docker-${{ matrix.tag }}-${{ github.sha }}
+          restore-keys: docker-${{ matrix.tag }}
 
       - name: 📃 Get changed files
         if: github.event_name != 'release'
@@ -166,6 +180,13 @@ jobs:
       - name: 📥 Checkout the repository
         uses: actions/checkout@v2
 
+      - name: 🏗 Set up build cache
+        uses: actions/cache@v2.1.6
+        with:
+          path: /tmp/.docker-cache
+          key: docker-${{ matrix.tag }}-${{ github.sha }}
+          restore-keys: docker-${{ matrix.tag }}
+
       - name: 📃 Get changed files
         if: github.event_name != 'release'
         id: changed_files
@@ -228,6 +249,13 @@ jobs:
     steps:
       - name: 📥 Checkout the repository
         uses: actions/checkout@v2
+
+      - name: 🏗 Set up build cache
+        uses: actions/cache@v2.1.6
+        with:
+          path: /tmp/.docker-cache
+          key: docker-${{ matrix.tag }}-${{ github.sha }}
+          restore-keys: docker-${{ matrix.tag }}
 
       - name: 📃 Get changed files
         if: github.event_name != 'release'
@@ -292,6 +320,13 @@ jobs:
       - name: 📦 Checkout the repository
         uses: actions/checkout@v2
 
+      - name: 🏗 Set up build cache
+        uses: actions/cache@v2.1.6
+        with:
+          path: /tmp/.docker-cache
+          key: docker-${{ matrix.tag }}-${{ github.sha }}
+          restore-keys: docker-${{ matrix.tag }}
+
       - name: 📃 Get changed files
         if: github.event_name != 'release'
         id: changed_files
@@ -351,6 +386,13 @@ jobs:
     steps:
       - name: 📦 Checkout the repository
         uses: actions/checkout@v2
+
+      - name: 🏗 Set up build cache
+        uses: actions/cache@v2.1.6
+        with:
+          path: /tmp/.docker-cache
+          key: docker-${{ matrix.tag }}-${{ github.sha }}
+          restore-keys: docker-${{ matrix.tag }}
 
       - name: 📃 Get changed files
         if: github.event_name != 'release'

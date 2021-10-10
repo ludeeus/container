@@ -97,7 +97,12 @@ if [ "$test" != "true" ]; then
     docker buildx create --name builder --use
     docker buildx inspect --bootstrap
     # shellcheck disable=SC2068
-    docker buildx build . --compress ${buildCommand[@]} --label "org.opencontainers.image.description=$(jq -c -r .description ./containerfiles/"$container"/config.json)"
+    docker buildx build . \
+        --compress ${buildCommand[@]} \
+        --label "org.opencontainers.image.description=$(jq -c -r .description ./containerfiles/"$container"/config.json)" \
+        --cache-from "type=local,src=/tmp/.docker-cache" \
+        --cache-from "${tagPrefix}/${container}" \
+        --cache-to "type=local,mode=max,dest=/tmp/.docker-cache"
     docker buildx rm builder
 else
     # shellcheck disable=SC2068
