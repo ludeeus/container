@@ -3,16 +3,16 @@
     "description": "Base runtime container for NodeJS",
     "args": {
         "BUILD_FROM": "ghcr.io/ludeeus/debian/base",
-        "BUILD_FROM_TAG": "11.0",
+        "BUILD_FROM_TAG": "11.1",
         "OS_VARIANT": "debian",
         "INSTALL_RUNTIME": "node",
         "RUNTIME_PATH": "/usr/local/node/bin:/usr/local/yarn/bin"
     },
     "tags": [
         "latest",
-        "16",
-        "16.11",
-        "16.11.0"
+        "17",
+        "17.0",
+        "17.0.1"
     ],
     "platforms": [
         "linux/amd64"
