@@ -1,2 +1,2 @@
-alpine: 3.12.3
-debian: 10.7-slim
+alpine: 3.14.2
+debian: 11.1-slim

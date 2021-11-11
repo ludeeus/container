@@ -2,7 +2,7 @@
 
 [Back to overview](../index.md)
 
-**Base image**: `alpine:3.12.3`  
+**Base image**: `alpine:3.14.2`  
 **Full name**: `ludeeus/container:go`  
 [View this on Docker Hub](https://hub.docker.com/r/ludeeus/container/tags?page=1&name=go)
 
@@ -21,11 +21,11 @@ Variable | Value
 
 Package | Version 
 -- | --
-`bash` | 5.0.17-r0
-`git` | 2.26.2-r0
-`go` | 1.13.15-r0
-`openssh` | 8.3_p1-r1
-`openssl-dev` | 1.1.1i-r0
+`bash` | 5.1.4-r0
+`git` | 2.32.0-r0
+`go` | 1.16.8-r0
+`openssh` | 8.6_p1-r3
+`openssl-dev` | 1.1.1l-r0
 
 
 
@@ -34,7 +34,7 @@ Package | Version
 <summary>Generated dockerfile</summary>
 
 <pre>
-FROM alpine:3.12.3
+FROM alpine:3.14.2
 
 ENV CONTAINER_TYPE=go
 ENV DEVCONTAINER=True
@@ -43,11 +43,11 @@ COPY rootfs/common /
 
 RUN  \ 
     apk add --no-cache  \ 
-        bash=5.0.17-r0 \ 
-        git=2.26.2-r0 \ 
-        go=1.13.15-r0 \ 
-        openssh=8.3_p1-r1 \ 
-        openssl-dev=1.1.1i-r0 \ 
+        bash=5.1.4-r0 \ 
+        git=2.32.0-r0 \ 
+        go=1.16.8-r0 \ 
+        openssh=8.6_p1-r3 \ 
+        openssl-dev=1.1.1l-r0 \ 
     && chmod +x /usr/bin/container \ 
     && rm -rf /var/cache/apk/* \ 
     && rm -fr /tmp/* /var/{cache,log}/*

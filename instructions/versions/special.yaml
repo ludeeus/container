@@ -2,4 +2,4 @@ dotnetcore-runtime: 3.1.10
 dotnetcore-sdk: 3.1.404
 dotnetcore5-runtime: 5.0.0
 dotnetcore5-sdk: 5.0.100
-S6: v2.1.0.2
+S6: v2.2.0.3
