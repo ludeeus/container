@@ -34,7 +34,7 @@ Variable | Value
 
 Package | Version 
 -- | --
-`colorlog` | 4.7.2
+`colorlog` | 6.6.0
 
 
 
@@ -72,7 +72,7 @@ RUN  \
         setuptools \ 
         wheel \ 
     && python3 -m pip install --no-cache-dir -U  \ 
-        colorlog==4.7.2 \ 
+        colorlog==6.6.0 \ 
     && ln -s /usr/bin/python3 /usr/bin/python \ 
     && rm -fr /var/lib/apt/lists/* \ 
     && find /usr/local \( -type d -a -name test -o -name tests -o -name '__pycache__' \) -o \( -type f -a -name '*.pyc' -o -name '*.pyo' \) -exec rm -rf '{}' \; \ 

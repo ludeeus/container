@@ -4,7 +4,7 @@
 
 _This provides a container for working with V._
 
-**Base image**: `alpine:3.12.3`  
+**Base image**: `alpine:3.14.3`  
 **Full name**: `ludeeus/container:v`  
 [View this on Docker Hub](https://hub.docker.com/r/ludeeus/container/tags?page=1&name=v)
 
@@ -27,16 +27,16 @@ Variable | Value
 
 Package | Version 
 -- | --
-`bash` | 5.0.17-r0
-`clang` | 10.0.0-r2
-`gcc` | 9.3.0-r2
-`git` | 2.26.2-r0
+`bash` | 5.1.4-r0
+`clang` | 11.1.0-r1
+`gcc` | 10.3.1_git20210424-r2
+`git` | 2.32.0-r0
 `make` | 4.3-r0
-`musl-dev` | 1.1.24-r10
-`openssh` | 8.3_p1-r1
-`openssl-dev` | 1.1.1i-r0
-`sqlite-dev` | 3.32.1-r0
-`upx` | 3.96-r0
+`musl-dev` | 1.2.2-r3
+`openssh` | 8.6_p1-r3
+`openssl-dev` | 1.1.1l-r0
+`sqlite-dev` | 3.35.5-r0
+`upx` | 3.96-r1
 
 
 
@@ -45,7 +45,7 @@ Package | Version
 <summary>Generated dockerfile</summary>
 
 <pre>
-FROM alpine:3.12.3
+FROM alpine:3.14.3
 
 ENV VVV=/opt/vlang
 ENV PATH=/opt/vlang:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
@@ -58,16 +58,16 @@ COPY rootfs/common /
 
 RUN  \ 
     apk add --no-cache  \ 
-        bash=5.0.17-r0 \ 
-        clang=10.0.0-r2 \ 
-        gcc=9.3.0-r2 \ 
-        git=2.26.2-r0 \ 
+        bash=5.1.4-r0 \ 
+        clang=11.1.0-r1 \ 
+        gcc=10.3.1_git20210424-r2 \ 
+        git=2.32.0-r0 \ 
         make=4.3-r0 \ 
-        musl-dev=1.1.24-r10 \ 
-        openssh=8.3_p1-r1 \ 
-        openssl-dev=1.1.1i-r0 \ 
-        sqlite-dev=3.32.1-r0 \ 
-        upx=3.96-r0 \ 
+        musl-dev=1.2.2-r3 \ 
+        openssh=8.6_p1-r3 \ 
+        openssl-dev=1.1.1l-r0 \ 
+        sqlite-dev=3.35.5-r0 \ 
+        upx=3.96-r1 \ 
     && chmod +x /usr/bin/container \ 
     && mkdir -p /opt/vlang \ 
     && ln -s /opt/vlang/v /usr/bin/v \ 
