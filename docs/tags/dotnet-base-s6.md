@@ -2,7 +2,7 @@
 
 [Back to overview](../index.md)
 
-**Base image**: `debian:10.7-slim`  
+**Base image**: `debian:11.1-slim`  
 **Full name**: `ludeeus/container:dotnet-base-s6`  
 [View this on Docker Hub](https://hub.docker.com/r/ludeeus/container/tags?page=1&name=dotnet-base-s6)
 
@@ -20,7 +20,7 @@ Variable | Value
 
 ## Features
 
-- `S6 (v2.1.0.2)`
+- `S6 (v2.2.0.3)`
 - `dotnetcore-runtime (3.1.10)`
 - `dotnetcore-sdk (3.1.404)`
 
@@ -48,7 +48,7 @@ Variable | Value
 <summary>Generated dockerfile</summary>
 
 <pre>
-FROM debian:10.7-slim
+FROM debian:11.1-slim
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV DOTNET_RUNNING_IN_CONTAINER=true

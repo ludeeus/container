@@ -43,9 +43,9 @@ Variable | Value
 
 Package | Version 
 -- | --
-`black` | 20.8b1
-`colorlog` | 4.7.2
-`pylint` | 2.6.0
+`black` | 21.11b0
+`colorlog` | 6.6.0
+`pylint` | 2.11.1
 
 
 
@@ -86,9 +86,9 @@ RUN  \
         setuptools \ 
         wheel \ 
     && python3 -m pip install --no-cache-dir -U  \ 
-        black==20.8b1 \ 
-        colorlog==4.7.2 \ 
-        pylint==2.6.0 \ 
+        black==21.11b0 \ 
+        colorlog==6.6.0 \ 
+        pylint==2.11.1 \ 
     && chmod +x /usr/bin/container \ 
     && ln -s /usr/bin/python3 /usr/bin/python \ 
     && mkdir -p /config/custom_components \ 

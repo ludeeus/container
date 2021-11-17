@@ -4,7 +4,7 @@
 
 _This provides a container to run HACS actions inside._
 
-**Base image**: `alpine:3.12.3`  
+**Base image**: `alpine:3.14.3`  
 **Full name**: `ludeeus/container:hacs-action`  
 [View this on Docker Hub](https://hub.docker.com/r/ludeeus/container/tags?page=1&name=hacs-action)
 
@@ -18,13 +18,13 @@ Variable | Value
 
 Package | Version 
 -- | --
-`bash` | 5.0.17-r0
-`git` | 2.26.2-r0
+`bash` | 5.1.4-r0
+`git` | 2.32.0-r0
 `make` | 4.3-r0
-`openssh` | 8.3_p1-r1
-`openssl-dev` | 1.1.1i-r0
-`py3-pip` | 20.1.1-r0
-`python3` | 3.8.5-r0
+`openssh` | 8.6_p1-r3
+`openssl-dev` | 1.1.1l-r0
+`py3-pip` | 20.3.4-r1
+`python3` | 3.9.5-r1
 
 
 
@@ -33,7 +33,7 @@ Package | Version
 <summary>Generated dockerfile</summary>
 
 <pre>
-FROM alpine:3.12.3
+FROM alpine:3.14.3
 
 ENV CONTAINER_TYPE=hacs-action
 
@@ -41,13 +41,13 @@ ENV CONTAINER_TYPE=hacs-action
 
 RUN  \ 
     apk add --no-cache  \ 
-        bash=5.0.17-r0 \ 
-        git=2.26.2-r0 \ 
+        bash=5.1.4-r0 \ 
+        git=2.32.0-r0 \ 
         make=4.3-r0 \ 
-        openssh=8.3_p1-r1 \ 
-        openssl-dev=1.1.1i-r0 \ 
-        py3-pip=20.1.1-r0 \ 
-        python3=3.8.5-r0 \ 
+        openssh=8.6_p1-r3 \ 
+        openssl-dev=1.1.1l-r0 \ 
+        py3-pip=20.3.4-r1 \ 
+        python3=3.9.5-r1 \ 
     && apk add --no-cache --virtual .build-deps  \ 
         ffmpeg-dev \ 
         gcc \ 
