@@ -3,14 +3,14 @@
     "description": "Base runtime container for Python with S6",
     "args": {
         "BUILD_FROM": "ghcr.io/ludeeus/debian/python",
-        "BUILD_FROM_TAG": "3.10.0",
+        "BUILD_FROM_TAG": "3.10.1",
         "OS_VARIANT": "debian"
     },
     "tags": [
         "latest",
         "3",
         "3.10",
-        "3.10.0"
+        "3.10.1"
     ],
     "platforms": [
         "linux/amd64"
