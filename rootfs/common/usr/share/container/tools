@@ -7,7 +7,7 @@ function GetWorkspaceDirectory() {
 function GetWorkspaceName {
     if [[ -n "$CODESPACE_VSCODE_FOLDER" ]] && [[ "$CONTAINER_TYPE" == "integration"* ]]
     then
-        echo "$CODESPACE_VSCODE_FOLDER"
+        echo "${CODESPACE_VSCODE_FOLDER}/"
     else
         echo "$(find /workspaces -mindepth 1 -maxdepth 1 -type d)/"
     fi
