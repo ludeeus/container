@@ -24,7 +24,10 @@ tags = sorted(
     [
         x["name"]
         for x in request["results"]
-        if x["name"][0].isdigit() and x["name"] not in skip and "." in x["name"]
+        if x["name"][0].isdigit()
+        and x["name"] not in skip
+        and "." in x["name"]
+        and not Version(x["name"]).release_candidate
     ]
 )
 
