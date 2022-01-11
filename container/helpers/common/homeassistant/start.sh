@@ -34,7 +34,7 @@ fi
 echo "Start Home Assistant"
 if ! [ -x "$(command -v hass)" ]; then
   echo "Home Assistant is not installed, running installation."
-  python3 -m pip --disable-pip-version-check install --upgrade git+git://github.com/home-assistant/home-assistant.git@dev
+  python3 -m pip --disable-pip-version-check install --upgrade git+https://github.com/home-assistant/home-assistant.git@dev
 fi
 hass --script ensure_config -c /config
 hass -c /config
