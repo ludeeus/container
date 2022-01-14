@@ -14,6 +14,7 @@ apt-get install -y --no-install-recommends \
     libavfilter-dev \
     libavformat-dev \
     libavutil-dev \
+    libpcap-dev \
     libswscale-dev \
     libswresample-dev \
     zlib1g-dev
