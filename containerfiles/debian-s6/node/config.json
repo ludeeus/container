@@ -3,14 +3,14 @@
     "description": "Base runtime container for NodeJS with S6",
     "args": {
         "BUILD_FROM": "ghcr.io/ludeeus/debian/node",
-        "BUILD_FROM_TAG": "17.3.1",
+        "BUILD_FROM_TAG": "17.4.0",
         "OS_VARIANT": "debian"
     },
     "tags": [
         "latest",
         "17",
-        "17.3",
-        "17.3.1"
+        "17.4",
+        "17.4.0"
     ],
     "platforms": [
         "linux/amd64"
