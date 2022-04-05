@@ -47,14 +47,14 @@ jobs:
       - name: ✨ Create Pull Request
         id: cpr
         if: steps.has_update.outputs.has_update == 'true'
-        uses: peter-evans/create-pull-request@v3.14.0
+        uses: peter-evans/create-pull-request@v4.0.1
         with:
           token: ${{ secrets.REPO_SCOPED_TOKEN }}
           commit-message: "${{ steps.has_update.outputs.content }}"
           committer: GitHub <noreply@github.com>
           author: GitHub <noreply@github.com>
           base: "main"
-          branch: udpates/${{ matrix.item }}
+          branch: updates/${{ matrix.item }}
           title: '${{ steps.has_update.outputs.content }}'
           body: ""
           labels: ${{ steps.has_update.outputs.labels }}
