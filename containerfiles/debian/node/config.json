@@ -15,6 +15,7 @@
         "17.7.1"
     ],
     "platforms": [
-        "linux/amd64"
+        "linux/amd64",
+        "linux/arm64"
     ]
 }
