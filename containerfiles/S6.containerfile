@@ -3,8 +3,7 @@ FROM ${BUILD_FROM}:${BUILD_FROM_TAG}
 
 COPY ./include /include
 
+RUN bash /include/init.sh
 ARG OS_VARIANT
-RUN \
-    sh /include/init.sh \
-    && bash /include/install/s6/${OS_VARIANT}.sh \
-    && bash /include/cleanup/build.sh
+RUN bash /include/install/s6/${OS_VARIANT}.sh
+RUN bash /include/cleanup/build.sh
