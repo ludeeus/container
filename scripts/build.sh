@@ -22,7 +22,7 @@ while [[ $# -gt 0 ]]; do
             shift
             ;;
         --title)
-            buildCommand+=(" --label org.opencontainers.image.title='$2' ")
+            buildCommand+=(" --label 'org.opencontainers.image.title=$2' ")
             shift
             ;;
         -t|--tag)
