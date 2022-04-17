@@ -11,9 +11,6 @@ elif [ "$ARCH" == "aarch64" ]; then
     wget -q -nv -O /tmp/s6.tar.gz "https://github.com/just-containers/s6-overlay/releases/download/v${VERSION}/s6-overlay-aarch64.tar.gz";
 elif [ "$ARCH" == "x86_64" ]; then
     wget -q -nv -O /tmp/s6.tar.gz "https://github.com/just-containers/s6-overlay/releases/download/v${VERSION}/s6-overlay-amd64.tar.gz";
-else
-    echo "No target for $ARCH"
-    exit 1
 fi
 
 tar xzf /tmp/s6.tar.gz -C /

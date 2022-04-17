@@ -21,9 +21,6 @@ elif [ "$ARCH" == "x86_64" ]; then
     else
         wget -q -nv -O /tmp/nodejs.tar.xz "https://nodejs.org/download/release/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.xz";
     fi
-else
-    echo "No target for $ARCH"
-    exit 1
 fi
 
 tar -xJC "${NODE_INSTALL_PATH}" --strip-components=1 -f /tmp/nodejs.tar.xz
