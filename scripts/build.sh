@@ -3,6 +3,7 @@ set -e
 shopt -s extglob
 declare container
 declare push
+declare title
 declare tagPrefix="ghcr.io/ludeeus"
 declare platforms
 declare -a buildCommand
@@ -21,7 +22,7 @@ while [[ $# -gt 0 ]]; do
             shift
             ;;
         --title)
-            buildCommand+=(" --label org.opencontainers.image.title=\"$2\" ")
+            title="$2"
             shift
             ;;
         -t|--tag)
@@ -92,4 +93,5 @@ docker buildx build . \
     --label org.opencontainers.image.source="https://github.com/ludeeus/container" \
     --label org.opencontainers.image.ref.name="$(git rev-parse HEAD)" \
     --label org.opencontainers.image.created="$(date --utc +%FT%H:%M:%SZ)" \
+    --label org.opencontainers.image.title="$title" \
     --label "org.opencontainers.image.description=\"$(jq -c -r .description ./containerfiles/"$container"/config.json)\""
