@@ -38,6 +38,9 @@ debian_python_config.update("tags", upstream.tags)
 debian_s6_python_config.update("tags", upstream.tags)
 debian_s6_python_config.update("args.BUILD_FROM_TAG", upstream.string)
 devcontainer_integration.update("args.BUILD_FROM_TAG", upstream.string)
+devcontainer_integration.update(
+    "tags", ["latest", *[f"python-{tag}" for tag in upstream.tags if tag != "latest"]]
+)
 devcontainer_python.update("args.BUILD_FROM_TAG", upstream.string)
 devcontainer_python.update("tags", upstream.tags)
 

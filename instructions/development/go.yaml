@@ -1,3 +1,0 @@
-base: "go-base"
-features:
-    - "devcontainer"

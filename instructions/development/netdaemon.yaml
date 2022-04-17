@@ -1,5 +1,0 @@
-base: "dotnet-base"
-debian-packages:
-    - "make"
-features:
-    - "devcontainer"

@@ -16,13 +16,11 @@ jobs:
     runs-on: ubuntu-latest
     name: 📝 Lint repository files
     steps:
-      - name: 📥 Checkout the repository
+      - name: 📦 Checkout the repository
         uses: actions/checkout@v2
 
       - name: ✅ Run ShellCheck
         uses: ludeeus/action-shellcheck@master
-        with:
-          ignore: rootfs
 
       - name: ✨ Run JQ
         run: |
@@ -30,156 +28,166 @@ jobs:
           cat **/*.json | jq '.'
 
   base-os:
-    name: 🔨 Build ${{ matrix.tag }}
+    name:  🔨 ${{ matrix.type.title }}
     needs: lint
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        tag:
-          - "alpine/base"
-          - "debian/base"
+        type:
+          - title: "Base OS: Alpine"
+            container: "alpine/base"
+
+          - title: "Base OS: Debian"
+            container: "debian/base"
+
     steps:
       - name: 📥 Checkout the repository
         uses: actions/checkout@v2
 
-      - name: 📃 Get changed files
-        if: github.event_name != 'release'
-        id: changed_files
-        uses: jitterbit/get-changed-files@v1
-
       - name: 🛠️ Run build action
         uses: ./.github/build-action
         with:
-          tag: ${{ matrix.tag }}
-          user: ${{ secrets.GHCR_USER }}
-          token: ${{ secrets.GHCR_TOKEN }}
+          container: ${{ matrix.type.container }}
+          title: ${{ matrix.type.title }}
+          user: ${{ github.repository_owner }}
+          token: ${{ secrets.GITHUB_TOKEN  }}
 
   base-os-s6:
-    name: 🔨 Build ${{ matrix.tag }}
+    name:  🔨 ${{ matrix.type.title }}
     needs: base-os
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        tag:
-          - "alpine-s6/base"
-          - "debian-s6/base"
-    steps:
-      - name: 📥 Checkout the repository
-        uses: actions/checkout@v2
+        type:
+          - title: "Base OS with S6: Alpine"
+            container: "alpine-s6/base"
 
-      - name: 📃 Get changed files
-        if: github.event_name != 'release'
-        id: changed_files
-        uses: jitterbit/get-changed-files@v1
+          - title: "Base OS with S6: Debian"
+            container: "debian-s6/base"
 
-      - name: 🛠️ Run build action
-        uses: ./.github/build-action
-        with:
-          tag: ${{ matrix.tag }}
-          user: ${{ secrets.GHCR_USER }}
-          token: ${{ secrets.GHCR_TOKEN }}
-
-  base-runtime:
-    name: 🔨 Build ${{ matrix.tag }}
-    needs: base-os
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        tag:
-          - "alpine/node"
-          - "alpine/python"
-          - "debian/node"
-          - "debian/python"
-    steps:
-      - name: 📥 Checkout the repository
-        uses: actions/checkout@v2
-
-      - name: 📃 Get changed files
-        if: github.event_name != 'release'
-        id: changed_files
-        uses: jitterbit/get-changed-files@v1
-
-      - name: 🛠️ Run build action
-        uses: ./.github/build-action
-        with:
-          tag: ${{ matrix.tag }}
-          user: ${{ secrets.GHCR_USER }}
-          token: ${{ secrets.GHCR_TOKEN }}
-
-  base-runtime-s6:
-    name: 🔨 Build ${{ matrix.tag }}
-    needs: base-runtime
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        tag:
-          - "alpine-s6/node"
-          - "alpine-s6/python"
-          - "debian-s6/node"
-          - "debian-s6/python"
-    steps:
-      - name: 📥 Checkout the repository
-        uses: actions/checkout@v2
-
-      - name: 📃 Get changed files
-        if: github.event_name != 'release'
-        id: changed_files
-        uses: jitterbit/get-changed-files@v1
-
-      - name: 🛠️ Run build action
-        uses: ./.github/build-action
-        with:
-          tag: ${{ matrix.tag }}
-          user: ${{ secrets.GHCR_USER }}
-          token: ${{ secrets.GHCR_TOKEN }}
-
-  devcontainer:
-    name:  🔨 Build ${{ matrix.tag }}
-    needs: base-runtime
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        tag:
-          - "devcontainer/frontend"
-          - "devcontainer/integration"
-          - "devcontainer/node"
-          - "devcontainer/python"
     steps:
       - name: 📦 Checkout the repository
         uses: actions/checkout@v2
 
-      - name: 📃 Get changed files
-        if: github.event_name != 'release'
-        id: changed_files
-        uses: jitterbit/get-changed-files@v1
+      - name: 🛠️ Run build action
+        uses: ./.github/build-action
+        with:
+          container: ${{ matrix.type.container }}
+          title: ${{ matrix.type.title }}
+          user: ${{ github.repository_owner }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+  base-runtime:
+    name:  🔨 ${{ matrix.type.title }}
+    needs: base-os
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        type:
+          - title: "Alpine Runtime: NodeJS"
+            container: "alpine/node"
+
+          - title: "Alpine Runtime: Python"
+            container: "alpine/python"
+
+          - title: "Debian Runtime: NodeJS"
+            container: "debian/node"
+
+          - title: "Debian Runtime: Python"
+            container: "debian/python"
+
+    steps:
+      - name: 📦 Checkout the repository
+        uses: actions/checkout@v2
 
       - name: 🛠️ Run build action
         uses: ./.github/build-action
         with:
-          tag: ${{ matrix.tag }}
-          user: ${{ secrets.GHCR_USER }}
-          token: ${{ secrets.GHCR_TOKEN }}
+          container: ${{ matrix.type.container }}
+          title: ${{ matrix.type.title }}
+          user: ${{ github.repository_owner }}
+          token: ${{ secrets.GITHUB_TOKEN  }}
+
+  base-runtime-s6:
+    name:  🔨 ${{ matrix.type.title }}
+    needs: base-runtime
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        type:
+          - title: "Alpine-S6 Runtime: NodeJS"
+            container: "alpine-s6/node"
+
+          - title: "Alpine-S6 Runtime: Python"
+            container: "alpine-s6/python"
+
+          - title: "Debian-S6 Runtime: NodeJS"
+            container: "debian-s6/node"
+
+          - title: "Debian-S6 Runtime: Python"
+            container: "debian-s6/python"
+
+    steps:
+      - name: 📦 Checkout the repository
+        uses: actions/checkout@v2
+
+      - name: 🛠️ Run build action
+        uses: ./.github/build-action
+        with:
+          container: ${{ matrix.type.container }}
+          title: ${{ matrix.type.title }}
+          user: ${{ github.repository_owner }}
+          token: ${{ secrets.GITHUB_TOKEN  }}
+
+  devcontainer:
+    name:  🔨 ${{ matrix.type.title }}
+    needs: base-runtime
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        type:
+          - title: "Devcontainer: Home Assistant Custom Frontend"
+            container: "devcontainer/frontend"
+
+          - title: "Devcontainer: Home Assistant Custom Integration"
+            container: "devcontainer/integration"
+
+          - title: "Devcontainer: NodeJS"
+            container: "devcontainer/node"
+
+          - title: "Devcontainer: Python"
+            container: "devcontainer/python"
+
+    steps:
+      - name: 📦 Checkout the repository
+        uses: actions/checkout@v2
+
+      - name: 🛠️ Run build action
+        uses: ./.github/build-action
+        with:
+          container: ${{ matrix.type.container }}
+          title: ${{ matrix.type.title }}
+          user: ${{ github.repository_owner }}
+          token: ${{ secrets.GITHUB_TOKEN  }}
 
   lastrun:
-    name:  🔨 Build ${{ matrix.tag }}
+    name:  🔨 ${{ matrix.type.title }}
     needs: devcontainer
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        tag:
-          - "devcontainer/generic"
+        type:
+          - title: "Devcontainer: Generic (Python & NodeJS)"
+            container: "devcontainer/generic"
+
     steps:
       - name: 📦 Checkout the repository
         uses: actions/checkout@v2
 
-      - name: 📃 Get changed files
-        if: github.event_name != 'release'
-        id: changed_files
-        uses: jitterbit/get-changed-files@v1
-
       - name: 🛠️ Run build action
         uses: ./.github/build-action
         with:
-          tag: ${{ matrix.tag }}
-          user: ${{ secrets.GHCR_USER }}
-          token: ${{ secrets.GHCR_TOKEN }}
+          container: ${{ matrix.type.container }}
+          title: ${{ matrix.type.title }}
+          user: ${{ github.repository_owner }}
+          token: ${{ secrets.GITHUB_TOKEN  }}
