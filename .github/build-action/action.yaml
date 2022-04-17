@@ -20,24 +20,6 @@ runs:
       id: changed_files
       uses: jitterbit/get-changed-files@v1
 
-    - name: Set up QEMU
-      uses: docker/setup-qemu-action@v1.2.0
-      with:
-        platforms: amd64,arm64
-
-    - name: Set up Docker Buildx
-      id: buildx
-      uses: docker/setup-buildx-action@v1.6.0
-
-    - name: Inspect builder
-      shell: bash
-      run: |
-        echo "Name:      ${{ steps.buildx.outputs.name }}"
-        echo "Endpoint:  ${{ steps.buildx.outputs.endpoint }}"
-        echo "Status:    ${{ steps.buildx.outputs.status }}"
-        echo "Flags:     ${{ steps.buildx.outputs.flags }}"
-        echo "Platforms: ${{ steps.buildx.outputs.platforms }}"
-
     - name: ❓ Should build ${{ inputs.container }}?
       shell: bash
       id: should_build
@@ -51,32 +33,31 @@ runs:
 
     - name: ❔ Should publish ${{ inputs.container }}?
       shell: bash
+      if: steps.should_build.outputs.build == 'true'
       id: should_publish
       run: |
-        if [[ "${{ steps.should_build.outputs.build }}" == "true" ]]; then
-          if [[ "${{ github.event_name }}" == "release" ]] || [[ "${{ github.event_name }}" == "push" ]]; then
-            echo "::set-output name=publish::true"
-          else
-            echo "::set-output name=publish::false"
-          fi
+        if [[ "${{ github.event_name }}" == "release" ]] || [[ "${{ github.event_name }}" == "push" ]]; then
+          echo "::set-output name=publish::true"
+        else
+          echo "::set-output name=publish::false"
         fi
 
     - name: ➕ Additional arguments
       shell: bash
+      if: steps.should_build.outputs.build == 'true'
       id: arguments
       run: |
-        if [[ "${{ steps.should_build.outputs.build }}" == "true" ]]; then
-          declare -a args
-          if [ "${{ steps.should_publish.outputs.publish }}" == "true" ]; then
-            args+=(" --push ")
-          fi
-          if [[ "${{ github.event_name }}" == "release" ]]; then
-            args+=(" --tag stable ")
-            args+=(" --tag $(echo ${{ github.ref }} | awk -F"/" '{print $NF}' ) ")
-          fi
-          echo "${args[@]}"
-          echo "::set-output name=arguments::${args[@]}"
+        declare -a args
+        if [ "${{ steps.should_publish.outputs.publish }}" == "true" ]; then
+          args+=(" --push ")
         fi
+        if [[ "${{ github.event_name }}" == "release" ]]; then
+          args+=(" --tag stable ")
+          args+=(" --tag $(echo ${{ github.ref }} | awk -F"/" '{print $NF}' ) ")
+        fi
+        echo "${args[@]}"
+        echo "::set-output name=arguments::${args[@]}"
+
 
     - name: 🔓 Registry login
       uses: docker/login-action@v1.14.1
@@ -86,9 +67,28 @@ runs:
         username: ${{ inputs.user }}
         password: ${{ inputs.token }}
 
-    - name: 🛠️ Build ${{ inputs.container }}
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v1.2.0
+      if: steps.should_build.outputs.build == 'true'
+      with:
+        platforms: amd64,arm64
+
+    - name: Set up Docker Buildx
+      id: buildx
+      if: steps.should_build.outputs.build == 'true'
+      uses: docker/setup-buildx-action@v1.6.0
+
+    - name: Inspect builder
       shell: bash
+      if: steps.should_build.outputs.build == 'true'
       run: |
-        if [[ "${{ steps.should_build.outputs.build }}" == "true" ]]; then
-          bash ./scripts/build.sh --container "${{ inputs.container }}" --title "${{ inputs.title }}" ${{ steps.arguments.outputs.arguments }}
-        fi
+        echo "Name:      ${{ steps.buildx.outputs.name }}"
+        echo "Endpoint:  ${{ steps.buildx.outputs.endpoint }}"
+        echo "Status:    ${{ steps.buildx.outputs.status }}"
+        echo "Flags:     ${{ steps.buildx.outputs.flags }}"
+        echo "Platforms: ${{ steps.buildx.outputs.platforms }}"
+
+    - name: 🛠️ Build ${{ inputs.container }}
+      if: steps.should_build.outputs.build == 'true'
+      shell: bash
+      run: bash ./scripts/build.sh --container "${{ inputs.container }}" --title "${{ inputs.title }}" ${{ steps.arguments.outputs.arguments }}
