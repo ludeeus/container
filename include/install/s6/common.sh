@@ -5,6 +5,9 @@ echo -e "\\033[0;34mRunning install script 's6/common'\\033[0m"
 VERSION=$(jq -r .s6 /include/install/s6/versions.json)
 ARCH=$(uname -m)
 
+echo "$VERSION"
+echo "$ARCH"
+
 if [ "$ARCH" == "armv7l" ]; then
     wget -q -nv -O /tmp/s6.tar.gz "https://github.com/just-containers/s6-overlay/releases/download/v${VERSION}/s6-overlay-armhf.tar.gz";
 elif [ "$ARCH" == "aarch64" ]; then
