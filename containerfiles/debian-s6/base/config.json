@@ -1,6 +1,5 @@
 {
     "dockerfile": "S6.containerfile",
-    "title": "Base OS with S6: Debian",
     "description": "Base OS container for Debian with S6",
     "args": {
         "BUILD_FROM": "ghcr.io/ludeeus/debian/base",

@@ -1,6 +1,5 @@
 {
     "dockerfile": "S6.containerfile",
-    "title": "Debian-S6 Runtime: Python",
     "description": "Base runtime container for Python with S6",
     "args": {
         "BUILD_FROM": "ghcr.io/ludeeus/debian/python",

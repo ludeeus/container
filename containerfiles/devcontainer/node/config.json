@@ -1,6 +1,5 @@
 {
     "dockerfile": "Devcontainer.containerfile",
-    "title": "Devcontainer: NodeJS",
     "description": "Devcontainer for developing with NodeJS",
     "args": {
         "BUILD_FROM": "ghcr.io/ludeeus/debian/node",

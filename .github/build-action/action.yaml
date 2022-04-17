@@ -1,7 +1,10 @@
 name: 'ludeeus/container build action'
 inputs:
-  tag:
-    description: The image that should be built
+  container:
+    description: The container image that should be built
+    required: true
+  title:
+    description: The title of the container
     required: true
   user:
     description: The user to be used to authenticate against ghcr.io
@@ -35,18 +38,18 @@ runs:
         echo "Flags:     ${{ steps.buildx.outputs.flags }}"
         echo "Platforms: ${{ steps.buildx.outputs.platforms }}"
 
-    - name: ❓ Should build ${{ inputs.tag }}?
+    - name: ❓ Should build ${{ inputs.container }}?
       shell: bash
       id: should_build
       run: |
         if [[ "${{ github.event_name }}" == "release" ]]; then
           should_build=true
         else
-          should_build=$(bash ./scripts/should_build.sh "${{ inputs.tag }}" "${{ steps.changed_files.outputs.all }}")
+          should_build=$(bash ./scripts/should_build.sh "${{ inputs.container }}" "${{ steps.changed_files.outputs.all }}")
         fi
         echo "::set-output name=build::$should_build"
 
-    - name: ❔ Should publish ${{ inputs.tag }}?
+    - name: ❔ Should publish ${{ inputs.container }}?
       shell: bash
       id: should_publish
       run: |
@@ -83,9 +86,9 @@ runs:
         username: ${{ inputs.user }}
         password: ${{ inputs.token }}
 
-    - name: 🛠️ Build ${{ inputs.tag }}
+    - name: 🛠️ Build ${{ inputs.container }}
       shell: bash
       run: |
         if [[ "${{ steps.should_build.outputs.build }}" == "true" ]]; then
-          bash ./scripts/build.sh --container ${{ inputs.tag }} ${{ steps.arguments.outputs.arguments }}
+          bash ./scripts/build.sh --container ${{ inputs.container }} --title ${{ inputs.title }} ${{ steps.arguments.outputs.arguments }}
         fi

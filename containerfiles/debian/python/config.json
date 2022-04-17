@@ -1,6 +1,5 @@
 {
     "dockerfile": "Runtime.containerfile",
-    "title": "Debian Runtime: Python",
     "description": "Base runtime container for Python",
     "args": {
         "BUILD_FROM": "ghcr.io/ludeeus/debian/base",

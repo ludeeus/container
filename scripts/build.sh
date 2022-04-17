@@ -2,6 +2,7 @@
 set -e
 shopt -s extglob
 declare container
+declare title
 declare push
 declare test
 declare tagPrefix="ghcr.io/ludeeus"
@@ -19,6 +20,10 @@ while [[ $# -gt 0 ]]; do
     case $key in
         -c|--container)
             container="$2"
+            shift
+            ;;
+        --title)
+            buildCommand+=(" --label org.opencontainers.image.title=$2 ")
             shift
             ;;
         -t|--tag)
@@ -84,7 +89,6 @@ buildCommand+=("--output=type=image,push=${push:-false}")
 buildCommand+=("--label org.opencontainers.image.url=https://github.com/ludeeus/container/tree/main/containerfiles/$container")
 buildCommand+=("--label org.opencontainers.image.documentation=https://github.com/ludeeus/container/tree/main/containerfiles/$container")
 buildCommand+=("--label org.opencontainers.image.source=https://github.com/ludeeus/container")
-buildCommand+=("--label org.opencontainers.image.title=$(jq -c -r .title ./containerfiles/"$container"/config.json)")
 buildCommand+=("--label org.opencontainers.image.ref.name=$(git rev-parse HEAD)")
 buildCommand+=("--label org.opencontainers.image.created=$(date --utc +%FT%H:%M:%SZ)")
 echo "${buildCommand[@]}"

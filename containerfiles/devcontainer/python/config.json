@@ -1,6 +1,5 @@
 {
     "dockerfile": "Devcontainer.containerfile",
-    "title": "Devcontainer: Python",
     "description": "Devcontainer for developing with Python",
     "args": {
         "BUILD_FROM": "ghcr.io/ludeeus/debian/python",

@@ -1,6 +1,5 @@
 {
     "dockerfile": "Os.containerfile",
-    "title": "Base OS: Alpine",
     "description": "Base OS container for Alpine",
     "args": {
         "BUILD_FROM": "alpine",
