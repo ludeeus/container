@@ -84,7 +84,10 @@ fi
 echo "${buildCommand[@]}"
 
 # shellcheck disable=SC2068,SC2086
-docker buildx build . \
+docker buildx build \
+    --cache-from=type=local,src=/tmp/.buildx-cache \
+    --cache-to=type=local,mode=max,dest=/tmp/.buildx-cache-new \
+    . \
     --output=type=image,push="${push:-false}" \
     --platform ${platforms:-$(jq -r -c '.platforms | @csv' "./containerfiles/$container/config.json" | tr -d '"')} \
     --compress ${buildCommand[@]} \

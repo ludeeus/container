@@ -1,10 +1,13 @@
 ARG BUILD_FROM BUILD_FROM_TAG
 FROM ${BUILD_FROM}:${BUILD_FROM_TAG}
 
-COPY ./include /include
+COPY ./include/cleanup /include/cleanup
+
+COPY ./include/init.sh /include/init.sh
+RUN sh /include/init.sh
 
 ARG OS_VARIANT
-RUN \
-    sh /include/init.sh \
-    && sh /include/install/base/${OS_VARIANT}.sh \
-    && bash /include/cleanup/build.sh
+COPY ./include/install/base/${OS_VARIANT}.sh /include/install/base/${OS_VARIANT}.sh
+RUN sh /include/install/base/${OS_VARIANT}.sh
+
+RUN bash /include/cleanup/build.sh
