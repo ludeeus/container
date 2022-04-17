@@ -13,9 +13,6 @@ ENV PATH ${RUNTIME_PATHS}$PATH
 ARG OS_VARIANT
 RUN bash /include/install/devcontainer/${OS_VARIANT}.sh
 
-ARG OS_VARIANT
-RUN bash /include/install/ghcli/${OS_VARIANT}.sh
-
 ARG OS_VARIANT CONTAINER_TYPE
 RUN bash /include/install/container/${OS_VARIANT}.sh ${CONTAINER_TYPE} \
 
@@ -24,6 +21,9 @@ RUN \
     if [ -f /include/install/devcontainer/${CONTAINER_TYPE}.sh ]; then \
         bash /include/install/devcontainer/${CONTAINER_TYPE}.sh ${OS_VARIANT}; \
     fi \
+
+ARG OS_VARIANT
+RUN bash /include/install/ghcli/${OS_VARIANT}.sh
 
 ARG OS_VARIANT
 RUN bash /include/cleanup/${OS_VARIANT}.sh
