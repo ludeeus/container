@@ -53,11 +53,12 @@ runs:
         fi
 
     - name: 🔓 Registry login
-      shell: bash
-      run: |
-        if [[ "${{ steps.should_publish.outputs.publish }}" == "true" ]]; then
-          echo ${{ inputs.token }} | docker login ghcr.io -u ${{ inputs.user }} --password-stdin
-        fi
+      uses: docker/login-action@v1.14.1
+      if: steps.should_publish.outputs.publish == 'true'
+      with:
+        registry: ghcr.io
+        username: ${{ inputs.user }}
+        password: ${{ inputs.token }}
 
     - name: 🛠️ Build ${{ inputs.tag }}
       shell: bash
