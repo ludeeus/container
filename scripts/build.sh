@@ -2,7 +2,6 @@
 set -e
 shopt -s extglob
 declare container
-declare title
 declare push
 declare test
 declare tagPrefix="ghcr.io/ludeeus"
