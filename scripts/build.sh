@@ -3,7 +3,6 @@ set -e
 shopt -s extglob
 declare container
 declare push
-declare test
 declare tagPrefix="ghcr.io/ludeeus"
 declare platforms
 declare -a buildCommand
@@ -39,9 +38,6 @@ while [[ $# -gt 0 ]]; do
             ;;
         --push)
             push="true"
-            ;;
-        --test)
-            test="true"
             ;;
         --tag-prefix)
             tagPrefix="$2"
@@ -92,21 +88,7 @@ buildCommand+=("--label org.opencontainers.image.ref.name=$(git rev-parse HEAD)"
 buildCommand+=("--label org.opencontainers.image.created=$(date --utc +%FT%H:%M:%SZ)")
 echo "${buildCommand[@]}"
 
-if [ "$test" != "true" ]; then
-    # shellcheck disable=SC2145,SC2046
-    echo "docker build . --compress ${buildCommand[@]} --label "org.opencontainers.image.description=\"$(jq -c -r .description ./containerfiles/"$container"/config.json)\"""
-    buildCommand+=("--platform ${platforms:-$(jq -r -c '.platforms | @csv' "./containerfiles/$container/config.json" | tr -d '"')}")
-    set +e
-    docker buildx rm builder
-    set -e
-    docker buildx create --name builder --use
-    docker buildx inspect --bootstrap
-    # shellcheck disable=SC2068
-    docker buildx build . --compress ${buildCommand[@]} --label "org.opencontainers.image.description=\"$(jq -c -r .description ./containerfiles/"$container"/config.json)\""
-    docker buildx rm builder
-else
-    # shellcheck disable=SC2145
-    echo "docker build . --compress ${buildCommand[@]}"
-    # shellcheck disable=SC2068
-    docker build . --compress ${buildCommand[@]}
-fi
+docker buildx build . \
+    --platform "${platforms:-$(jq -r -c '.platforms | @csv' "./containerfiles/$container/config.json" | tr -d '"')}" \
+    --compress "${buildCommand[@]}" \
+    --label "org.opencontainers.image.description=\"$(jq -c -r .description ./containerfiles/"$container"/config.json)\""
