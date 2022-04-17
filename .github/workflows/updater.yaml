@@ -56,7 +56,7 @@ jobs:
           base: "main"
           branch: udpates/${{ matrix.item }}
           title: '${{ steps.has_update.outputs.content }}'
-          body: ""
+          body: "<!-- hidden message: Tagging @ludeeus so he get a notification -->"
           labels: ${{ steps.has_update.outputs.labels }}
 
       - name: ✅ Check outputs

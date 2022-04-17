@@ -1,7 +1,0 @@
-base: "python-base"
-description: "This provides a minimalistic container for working with python."
-features:
-    - "devcontainer"
-python-packages:
-    - "pylint"
-    - "black"

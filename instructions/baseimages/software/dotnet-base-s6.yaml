@@ -1,3 +1,0 @@
-base: "dotnet-base"
-features:
-  - S6

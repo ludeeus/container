@@ -1,4 +1,0 @@
-base: "dotnet-base"
-features:
-    - dotnetcore5-runtime
-    - dotnetcore5-sdk
