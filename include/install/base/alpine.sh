@@ -11,6 +11,8 @@ apk add --no-cache \
     bash \
     wget \
     git
-
+echo "INSTALL COMPLETE"
 update-ca-certificates
+echo "UPDATE CA COMPLETE"
 bash /include/cleanup/alpine.sh
+echo "CLEANUP COMPLETE"
