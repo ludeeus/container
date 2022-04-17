@@ -102,7 +102,7 @@ if [ "$test" != "true" ]; then
     docker buildx create --name builder --use
     docker buildx inspect --bootstrap
     # shellcheck disable=SC2068
-    docker buildx build . --compress ${buildCommand[@]} --label "org.opencontainers.image.description=$(jq -c -r .description ./containerfiles/"$container"/config.json)"
+    docker buildx build . --compress ${buildCommand[@]} --label "org.opencontainers.image.description='$(jq -c -r .description ./containerfiles/"$container"/config.json)'"
     docker buildx rm builder
 else
     # shellcheck disable=SC2145
