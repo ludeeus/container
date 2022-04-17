@@ -1,5 +1,6 @@
 {
     "dockerfile": "Os.containerfile",
+    "title": "Base OS: Debian",
     "description": "Base OS container for Debian",
     "args": {
         "BUILD_FROM": "debian",

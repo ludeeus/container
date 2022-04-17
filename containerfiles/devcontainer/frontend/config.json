@@ -1,5 +1,6 @@
 {
     "dockerfile": "Devcontainer.containerfile",
+    "title": "Devcontainer: Home Assistant custom Frontend",
     "description": "Devcontainer for developing custom frontend plugins for Home Assistant",
     "args": {
         "BUILD_FROM": "ghcr.io/ludeeus/debian/node",

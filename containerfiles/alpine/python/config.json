@@ -1,5 +1,6 @@
 {
     "dockerfile": "Runtime.containerfile",
+    "title": "Alpine Runtime: Python",
     "description": "Base runtime container for Python",
     "args": {
         "BUILD_FROM": "ghcr.io/ludeeus/alpine/base",

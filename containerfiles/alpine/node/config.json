@@ -1,5 +1,6 @@
 {
     "dockerfile": "Runtime.containerfile",
+    "title": "Alpine Runtime: NodeJS",
     "description": "Base runtime container for NodeJS",
     "args": {
         "BUILD_FROM": "ghcr.io/ludeeus/alpine/base",

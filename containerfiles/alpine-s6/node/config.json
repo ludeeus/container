@@ -1,5 +1,6 @@
 {
     "dockerfile": "S6.containerfile",
+    "title": "Alpine-S6 Runtime: NodeJS",
     "description": "Base runtime container for NodeJS with S6",
     "args": {
         "BUILD_FROM": "ghcr.io/ludeeus/alpine/node",

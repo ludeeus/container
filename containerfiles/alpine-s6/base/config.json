@@ -1,5 +1,6 @@
 {
     "dockerfile": "S6.containerfile",
+    "title": "Base OS with S6: Alpine",
     "description": "Base OS container for Alpine with S6",
     "args": {
         "BUILD_FROM": "ghcr.io/ludeeus/alpine/base",

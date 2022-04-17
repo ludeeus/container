@@ -1,5 +1,6 @@
 {
     "dockerfile": "Devcontainer.containerfile",
+    "title": "Devcontainer: Generic (Python & NodeJS)",
     "description": "Generic devcontainer with Python & Node",
     "args": {
         "BUILD_FROM": "ghcr.io/ludeeus/devcontainer/integration",

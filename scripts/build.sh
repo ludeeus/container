@@ -84,7 +84,7 @@ buildCommand+=("--output=type=image,push=${push:-false}")
 buildCommand+=("--label org.opencontainers.image.url=https://github.com/ludeeus/container/tree/main/containerfiles/$container")
 buildCommand+=("--label org.opencontainers.image.documentation=https://github.com/ludeeus/container/tree/main/containerfiles/$container")
 buildCommand+=("--label org.opencontainers.image.source=https://github.com/ludeeus/container")
-buildCommand+=("--label org.opencontainers.image.title=$container")
+buildCommand+=("--label org.opencontainers.image.title=$(jq -c -r .title ./containerfiles/"$container"/config.json)")
 buildCommand+=("--label org.opencontainers.image.ref.name=$(git rev-parse HEAD)")
 buildCommand+=("--label org.opencontainers.image.created=$(date --utc +%FT%H:%M:%SZ)")
 echo "${buildCommand[@]}"
