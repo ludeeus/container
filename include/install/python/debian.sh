@@ -20,12 +20,12 @@ apt-get -y install --no-install-recommends \
     libsqlite3-dev \
     wget \
     jq \
-    curl \
     llvm \
     libncurses5-dev \
     libncursesw5-dev \
     xz-utils \
-    tk-dev
+    tk-dev \
+    liblzma-dev
 
 bash /include/install/python/common.sh "$PYTHON_VERSION"
 bash /include/cleanup/debian.sh
