@@ -12,6 +12,11 @@ inputs:
 runs:
   using: "composite"
   steps:
+    - name: 📃 Get changed files
+      if: github.event_name != 'release'
+      id: changed_files
+      uses: jitterbit/get-changed-files@v1
+
     - name: ❓ Should build ${{ inputs.tag }}?
       shell: bash
       id: should_build
