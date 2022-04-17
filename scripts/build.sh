@@ -94,7 +94,7 @@ echo "${buildCommand[@]}"
 
 if [ "$test" != "true" ]; then
     # shellcheck disable=SC2145
-    echo "docker build . --compress ${buildCommand[@]}"
+    echo "docker build . --compress ${buildCommand[@]} --label "org.opencontainers.image.description=$(jq -c -r .description ./containerfiles/"$container"/config.json)"
     buildCommand+=("--platform ${platforms:-$(jq -r -c '.platforms | @csv' "./containerfiles/$container/config.json" | tr -d '"')}")
     set +e
     docker buildx rm builder
