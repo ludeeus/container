@@ -6,30 +6,31 @@ help: ## Shows help message.
 	@echo
 
 init: requirements
+	bash include
 
-requirements:
+requirements: ## Install dev requirements
 	python3 -m pip install --upgrade setuptools wheel
 	python3 -m pip install -r requirements.txt
 
-update-all: update-alpine update-debian update-ghcli update-node update-python update-s6 update-yarn
+update-all: update-alpine update-debian update-ghcli update-node update-python update-s6 update-yarn ## Update all packages
 
-update-alpine:
+update-alpine: ## Update Alpine
 	python3 scripts/updates/alpine.py
 
-update-debian:
+update-debian: ## Update Debian
 	python3 scripts/updates/debian.py
 
-update-ghcli:
+update-ghcli: ## Update GitHub-CLI
 	python3 scripts/updates/ghcli.py
 
-update-node:
+update-node: ## Update NodeJS
 	python3 scripts/updates/node.py
 
-update-python:
+update-python: ## Update Python
 	python3 scripts/updates/python.py
 
-update-s6:
+update-s6: ## Update S6
 	python3 scripts/updates/s6.py
 
-update-yarn:
+update-yarn: ## Update Yarn
 	python3 scripts/updates/yarn.py
