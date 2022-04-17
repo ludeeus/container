@@ -22,7 +22,7 @@ while [[ $# -gt 0 ]]; do
             shift
             ;;
         --title)
-            buildCommand+=(" --label 'org.opencontainers.image.title=$2' ")
+            buildCommand+=(" --label org.opencontainers.image.title='$2' ")
             shift
             ;;
         -t|--tag)
@@ -94,7 +94,7 @@ echo "${buildCommand[@]}"
 
 if [ "$test" != "true" ]; then
     # shellcheck disable=SC2145,SC2046
-    echo "docker build . --compress ${buildCommand[@]} --label "org.opencontainers.image.description=$(jq -c -r .description ./containerfiles/"$container"/config.json)""
+    echo "docker build . --compress ${buildCommand[@]} --label "org.opencontainers.image.description='$(jq -c -r .description ./containerfiles/"$container"/config.json)'""
     buildCommand+=("--platform ${platforms:-$(jq -r -c '.platforms | @csv' "./containerfiles/$container/config.json" | tr -d '"')}")
     set +e
     docker buildx rm builder
