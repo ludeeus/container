@@ -11,6 +11,9 @@ on:
     types:
       - published
 
+permissions:
+  packages: write
+
 jobs:
   lint:
     runs-on: ubuntu-latest
@@ -49,8 +52,8 @@ jobs:
         uses: ./.github/build-action
         with:
           tag: ${{ matrix.tag }}
-          user: ${{ secrets.GHCR_USER }}
-          token: ${{ secrets.GHCR_TOKEN }}
+          user: ${{ github.repository_owner }}
+          token: ${{ secrets.GITHUB_TOKEN  }}
 
   base-os-s6:
     name: 🔨 Build ${{ matrix.tag }}
@@ -74,8 +77,8 @@ jobs:
         uses: ./.github/build-action
         with:
           tag: ${{ matrix.tag }}
-          user: ${{ secrets.GHCR_USER }}
-          token: ${{ secrets.GHCR_TOKEN }}
+          user: ${{ github.repository_owner }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
   base-runtime:
     name: 🔨 Build ${{ matrix.tag }}
@@ -101,8 +104,8 @@ jobs:
         uses: ./.github/build-action
         with:
           tag: ${{ matrix.tag }}
-          user: ${{ secrets.GHCR_USER }}
-          token: ${{ secrets.GHCR_TOKEN }}
+          user: ${{ github.repository_owner }}
+          token: ${{ secrets.GITHUB_TOKEN  }}
 
   base-runtime-s6:
     name: 🔨 Build ${{ matrix.tag }}
@@ -128,8 +131,8 @@ jobs:
         uses: ./.github/build-action
         with:
           tag: ${{ matrix.tag }}
-          user: ${{ secrets.GHCR_USER }}
-          token: ${{ secrets.GHCR_TOKEN }}
+          user: ${{ github.repository_owner }}
+          token: ${{ secrets.GITHUB_TOKEN  }}
 
   devcontainer:
     name:  🔨 Build ${{ matrix.tag }}
@@ -155,8 +158,8 @@ jobs:
         uses: ./.github/build-action
         with:
           tag: ${{ matrix.tag }}
-          user: ${{ secrets.GHCR_USER }}
-          token: ${{ secrets.GHCR_TOKEN }}
+          user: ${{ github.repository_owner }}
+          token: ${{ secrets.GITHUB_TOKEN  }}
 
   lastrun:
     name:  🔨 Build ${{ matrix.tag }}
@@ -179,5 +182,5 @@ jobs:
         uses: ./.github/build-action
         with:
           tag: ${{ matrix.tag }}
-          user: ${{ secrets.GHCR_USER }}
-          token: ${{ secrets.GHCR_TOKEN }}
+          user: ${{ github.repository_owner }}
+          token: ${{ secrets.GITHUB_TOKEN  }}
