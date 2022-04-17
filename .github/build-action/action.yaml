@@ -90,5 +90,5 @@ runs:
       shell: bash
       run: |
         if [[ "${{ steps.should_build.outputs.build }}" == "true" ]]; then
-          bash ./scripts/build.sh --container ${{ inputs.container }} --title ${{ inputs.title }} ${{ steps.arguments.outputs.arguments }}
+          bash ./scripts/build.sh --container ${{ inputs.container }} --title "${{ inputs.title }}" ${{ steps.arguments.outputs.arguments }}
         fi
