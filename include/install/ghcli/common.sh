@@ -10,6 +10,9 @@ elif [ "$ARCH" == "aarch64" ]; then
     wget -q -nv -O /tmp/ghcli.tar.gz "https://github.com/cli/cli/releases/download/v${VERSION}/gh_${VERSION}_linux_arm64.tar.gz";
 elif [ "$ARCH" == "x86_64" ]; then
     wget -q -nv -O /tmp/ghcli.tar.gz "https://github.com/cli/cli/releases/download/v${VERSION}/gh_${VERSION}_linux_amd64.tar.gz";
+else
+    echo "No target for $ARCH"
+    exit 1
 fi
 
 mkdir -p /tmp/ghcli
