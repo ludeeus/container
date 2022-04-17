@@ -17,6 +17,11 @@ runs:
       id: changed_files
       uses: jitterbit/get-changed-files@v1
 
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v1.2.0
+      with:
+        platforms: amd64,arm64
+
     - name: Set up Docker Buildx
       id: buildx
       uses: docker/setup-buildx-action@v1.6.0
