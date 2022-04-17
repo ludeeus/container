@@ -7,7 +7,7 @@ COPY ./include/init.sh /include/init.sh
 RUN sh /include/init.sh
 
 ARG OS_VARIANT
-COPY ./include/base/${OS_VARIANT}.sh /include/base/${OS_VARIANT}.sh
+COPY ./include/install/base/${OS_VARIANT}.sh /include/install/base/${OS_VARIANT}.sh
 RUN sh /include/install/base/${OS_VARIANT}.sh
 
 RUN bash /include/cleanup/build.sh
