@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     name: 📝 Lint repository files
     steps:
-      - name: 📥 Checkout the repository
+      - name: 📦 Checkout the repository
         uses: actions/checkout@v2
 
       - name: ✅ Run ShellCheck
@@ -40,11 +40,6 @@ jobs:
       - name: 📥 Checkout the repository
         uses: actions/checkout@v2
 
-      - name: 📃 Get changed files
-        if: github.event_name != 'release'
-        id: changed_files
-        uses: jitterbit/get-changed-files@v1
-
       - name: 🛠️ Run build action
         uses: ./.github/build-action
         with:
@@ -62,13 +57,8 @@ jobs:
           - "alpine-s6/base"
           - "debian-s6/base"
     steps:
-      - name: 📥 Checkout the repository
+      - name: 📦 Checkout the repository
         uses: actions/checkout@v2
-
-      - name: 📃 Get changed files
-        if: github.event_name != 'release'
-        id: changed_files
-        uses: jitterbit/get-changed-files@v1
 
       - name: 🛠️ Run build action
         uses: ./.github/build-action
@@ -89,13 +79,8 @@ jobs:
           - "debian/node"
           - "debian/python"
     steps:
-      - name: 📥 Checkout the repository
+      - name: 📦 Checkout the repository
         uses: actions/checkout@v2
-
-      - name: 📃 Get changed files
-        if: github.event_name != 'release'
-        id: changed_files
-        uses: jitterbit/get-changed-files@v1
 
       - name: 🛠️ Run build action
         uses: ./.github/build-action
@@ -116,13 +101,8 @@ jobs:
           - "debian-s6/node"
           - "debian-s6/python"
     steps:
-      - name: 📥 Checkout the repository
+      - name: 📦 Checkout the repository
         uses: actions/checkout@v2
-
-      - name: 📃 Get changed files
-        if: github.event_name != 'release'
-        id: changed_files
-        uses: jitterbit/get-changed-files@v1
 
       - name: 🛠️ Run build action
         uses: ./.github/build-action
@@ -146,11 +126,6 @@ jobs:
       - name: 📦 Checkout the repository
         uses: actions/checkout@v2
 
-      - name: 📃 Get changed files
-        if: github.event_name != 'release'
-        id: changed_files
-        uses: jitterbit/get-changed-files@v1
-
       - name: 🛠️ Run build action
         uses: ./.github/build-action
         with:
@@ -169,11 +144,6 @@ jobs:
     steps:
       - name: 📦 Checkout the repository
         uses: actions/checkout@v2
-
-      - name: 📃 Get changed files
-        if: github.event_name != 'release'
-        id: changed_files
-        uses: jitterbit/get-changed-files@v1
 
       - name: 🛠️ Run build action
         uses: ./.github/build-action
