@@ -1,7 +1,0 @@
-#!/usr/bin/with-contenv bash
-
-echo "Starting Kibana"
-s6-sleep 20
-cd /usr/local/kibana/bin || exit 1
-
-exec ./kibana --allow-root

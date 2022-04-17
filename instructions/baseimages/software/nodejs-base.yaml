@@ -1,5 +1,0 @@
-base: "alpine-base"
-alpine-packages:
-    - "nodejs"
-    - "npm"
-    - "yarn"

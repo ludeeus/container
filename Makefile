@@ -11,8 +11,12 @@ requirements:
 	python3 -m pip install --upgrade setuptools wheel
 	python3 -m pip install -r requirements.txt
 
-documentation: ## Generate documentation
-	python3 -m scripts.documentation
-
-update: ## Update files
-	python3 -m scripts.update
+update:
+	python3 scripts/updates/alpine.py
+	python3 scripts/updates/debian.py
+	python3 scripts/updates/ghcli.py
+	python3 scripts/updates/github.py
+	python3 scripts/updates/node.py
+	python3 scripts/updates/python.py
+	python3 scripts/updates/s6.py
+	python3 scripts/updates/yarn.py

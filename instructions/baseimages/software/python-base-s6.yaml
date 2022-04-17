@@ -1,3 +1,0 @@
-base: "python-base"
-features:
-  - S6

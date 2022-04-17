@@ -1,6 +1,0 @@
-base: "alpine"
-alpine-packages:
-    - "openssl-dev"
-    - "openssh"
-    - "bash"
-    - "git"

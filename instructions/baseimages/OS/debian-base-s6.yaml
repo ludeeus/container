@@ -1,3 +1,0 @@
-base: "debian-base"
-features:
-  - S6

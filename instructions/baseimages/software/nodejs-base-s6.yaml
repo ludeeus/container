@@ -1,3 +1,0 @@
-base: "nodejs-base"
-features:
-  - S6

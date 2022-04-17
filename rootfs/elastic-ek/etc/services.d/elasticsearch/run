@@ -1,7 +1,0 @@
-#!/usr/bin/with-contenv bash
-
-echo "Starting Elasticsearch"
-
-cd /usr/local/elasticsearch/bin || exit 1
-
-exec s6-setuidgid ekuser ./elasticsearch
