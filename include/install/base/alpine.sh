@@ -12,4 +12,5 @@ apk add --no-cache \
     wget \
     git
 
+update-ca-certificates
 bash /include/cleanup/alpine.sh
