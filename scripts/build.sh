@@ -93,6 +93,7 @@ buildCommand+=("--label org.opencontainers.image.created=$(date --utc +%FT%H:%M:
 echo "${buildCommand[@]}"
 
 if [ "$test" != "true" ]; then
+    # shellcheck disable=SC2145
     echo "docker build . --compress ${buildCommand[@]}"
     buildCommand+=("--platform ${platforms:-$(jq -r -c '.platforms | @csv' "./containerfiles/$container/config.json" | tr -d '"')}")
     set +e
@@ -104,7 +105,8 @@ if [ "$test" != "true" ]; then
     docker buildx build . --compress ${buildCommand[@]} --label "org.opencontainers.image.description=$(jq -c -r .description ./containerfiles/"$container"/config.json)"
     docker buildx rm builder
 else
-    # shellcheck disable=SC2068
+    # shellcheck disable=SC2145
     echo "docker build . --compress ${buildCommand[@]}"
+    # shellcheck disable=SC2068
     docker build . --compress ${buildCommand[@]}
 fi
