@@ -80,15 +80,16 @@ else
     buildCommand+=("--file ./containerfiles/$container/Containerfile")
 fi
 
-buildCommand+=("--output=type=image,push=${push:-false}")
-buildCommand+=("--label org.opencontainers.image.url=https://github.com/ludeeus/container/tree/main/containerfiles/$container")
-buildCommand+=("--label org.opencontainers.image.documentation=https://github.com/ludeeus/container/tree/main/containerfiles/$container")
-buildCommand+=("--label org.opencontainers.image.source=https://github.com/ludeeus/container")
-buildCommand+=("--label org.opencontainers.image.ref.name=$(git rev-parse HEAD)")
-buildCommand+=("--label org.opencontainers.image.created=$(date --utc +%FT%H:%M:%SZ)")
 echo "${buildCommand[@]}"
 
+# shellcheck disable=SC2068,SC2086
 docker buildx build . \
-    --platform "${platforms:-$(jq -r -c '.platforms | @csv' "./containerfiles/$container/config.json" | tr -d '"')}" \
-    --compress "${buildCommand[@]}" \
+    --output=type=image,push="${push:-false}" \
+    --platform ${platforms:-$(jq -r -c '.platforms | @csv' "./containerfiles/$container/config.json" | tr -d '"')} \
+    --compress ${buildCommand[@]} \
+    --label org.opencontainers.image.url="https://github.com/ludeeus/container/tree/main/containerfiles/$container" \
+    --label org.opencontainers.image.documentation="https://github.com/ludeeus/container/tree/main/containerfiles/$container" \
+    --label org.opencontainers.image.source="https://github.com/ludeeus/container" \
+    --label org.opencontainers.image.ref.name="$(git rev-parse HEAD)" \
+    --label org.opencontainers.image.created="$(date --utc +%FT%H:%M:%SZ)" \
     --label "org.opencontainers.image.description=\"$(jq -c -r .description ./containerfiles/"$container"/config.json)\""
