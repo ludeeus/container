@@ -17,7 +17,7 @@ jobs:
     name: 📝 Lint repository files
     steps:
       - name: 📦 Checkout the repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: ✅ Run ShellCheck
         uses: ludeeus/action-shellcheck@master
@@ -42,7 +42,7 @@ jobs:
 
     steps:
       - name: 📥 Checkout the repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: 🛠️ Run build action
         uses: ./.github/build-action
@@ -67,7 +67,7 @@ jobs:
 
     steps:
       - name: 📦 Checkout the repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: 🛠️ Run build action
         uses: ./.github/build-action
@@ -98,7 +98,7 @@ jobs:
 
     steps:
       - name: 📦 Checkout the repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: 🛠️ Run build action
         uses: ./.github/build-action
@@ -129,7 +129,7 @@ jobs:
 
     steps:
       - name: 📦 Checkout the repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: 🛠️ Run build action
         uses: ./.github/build-action
@@ -160,7 +160,7 @@ jobs:
 
     steps:
       - name: 📦 Checkout the repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: 🛠️ Run build action
         uses: ./.github/build-action
@@ -182,7 +182,7 @@ jobs:
 
     steps:
       - name: 📦 Checkout the repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: 🛠️ Run build action
         uses: ./.github/build-action
