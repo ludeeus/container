@@ -3,14 +3,14 @@
     "description": "Base runtime container for NodeJS with S6",
     "args": {
         "BUILD_FROM": "ghcr.io/ludeeus/alpine/node",
-        "BUILD_FROM_TAG": "17.7.1",
+        "BUILD_FROM_TAG": "17.9.0",
         "OS_VARIANT": "alpine"
     },
     "tags": [
         "latest",
         "17",
-        "17.7",
-        "17.7.1"
+        "17.9",
+        "17.9.0"
     ],
     "platforms": [
         "linux/amd64"
