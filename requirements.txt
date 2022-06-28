@@ -1,4 +1,4 @@
 requests==2.28.0
 ruamel.yaml==0.17.21
 alpinepkgs==1.1.5
-awesomeversion==22.5.2
+awesomeversion==22.6.0
