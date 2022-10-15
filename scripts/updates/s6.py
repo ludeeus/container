@@ -1,29 +1,4 @@
 """Update s6."""
-from typing import TYPE_CHECKING
-import requests
+from github import update_with_github_release
 
-from version import Version
-from jsonfile import JsonFile
-from github import github_release
-
-if TYPE_CHECKING:
-    from .version import Version
-    from .jsonfile import JsonFile
-
-install_s6_version = JsonFile("./include/install/s6/versions.json")
-
-current = Version(install_s6_version.read()["s6"])
-upstream = Version(github_release("just-containers/s6-overlay"))
-
-if current == upstream:
-    print(f"Nothing to do, both current and upstream is {current}")
-    exit(0)
-
-
-install_s6_version.update("s6", upstream.string)
-
-with open("./commit", "w") as commit:
-    commit.write(f"Update S6 from {current.string} to {upstream.string}")
-
-with open("./labels", "w") as labels:
-    labels.write("S6")
+update_with_github_release("S6", "s6", "just-containers/s6-overlay", "S6")
