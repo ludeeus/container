@@ -1,3 +1,5 @@
 #!/usr/bin/env bash
 
+printf "\033[31m%s\n%s\033[0m \n\n" "This devcontainer is deprecated, plaese replace it." "https://github.com/ludeeus/container#deprecated"
+
 make --file /opt/container/container.mk "${*:-"help"}"
